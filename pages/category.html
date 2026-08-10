@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC TECH STORE - الأقسام</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        #available-products, #out-of-stock-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            justify-items: center;
+        }
+        .product-card {
+            background: rgba(20, 20, 22, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .product-card:hover {
+            border-color: rgba(232, 121, 249, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(232, 121, 249, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- الهيدر المطابق للرئيسية -->
+<header class="main-header" dir="ltr">
+    <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
+        <a href="../index.html" class="logo-area" style="text-decoration: none; color: #38bdf8; font-weight: bold; font-size: 16px;">
+            ⚡ Epic Store
+        </a>
+        <div class="search-container" style="display: flex; align-items: center; position: relative;">
+            <button id="searchIcon" class="search-btn" onclick="openSearch()" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeypress="handleSearch(event)" style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
+        </div>
+    </div>
+    <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+       <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+    <a href="category.html?cat=laptops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
+    <a href="category.html?cat=desktops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
+    <a href="category.html?cat=accessories" class="active" style="text-decoration: none; color: #38bdf8; font-size: 15px; font-weight: 600;">Accessories</a>
+    <a href="category.html?cat=monitors" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
+    <a href="category.html?cat=bundles" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
+    <a href="category.html?cat=workstations" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
+    </nav>
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="theme-slider"><span id="themeIcon">☀️</span></span>
+        </label>
+    </div>
+</header>
+
+<!-- عنوان القسم بنمط النيون الفخم -->
+<div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
+    <h1 id="category-main-title" class="neon-logo" style="font-size: 36px; text-align: center;">DEPARTMENT</h1>
+</div>
+
+<main style="width: 95%; max-width: 1500px; margin: 0 auto; padding: 20px;">
+
+    <!-- 1. المنتجات المتاحة -->
+    <section class="category-showcase" style="margin-bottom: 60px; display: flex; flex-direction: column; align-items: center;">
+        <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+            <h2 style="font-family: 'Cinzel Decorative', cursive; color: #38bdf8; font-size: 28px; text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); letter-spacing: 1px;">
+                ✨ AVAILABLE PRODUCTS ✨
+            </h2>
+            <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">المنتجات المتوفرة وجاهزة للشحن الفوري</p>
+        </div>
+
+        <div id="available-products">
+            <!-- المنتجات المتاحة -->
+        </div>
+    </section>
+
+    <!-- 2. المنتجات التي نفدت الكمية -->
+    <section class="category-showcase" style="margin-bottom: 60px; opacity: 0.75; display: flex; flex-direction: column; align-items: center;">
+        <div style="text-align: center; margin-bottom: 40px; width: 100%;">
+            <h2 style="font-family: 'Cinzel Decorative', cursive; color: #f87171; font-size: 28px; text-shadow: 0 0 15px rgba(248, 113, 113, 0.4); letter-spacing: 1px;">
+                ❌ OUT OF STOCK ❌
+            </h2>
+            <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">منتجات نفدت كميتها مؤقتاً</p>
+        </div>
+
+        <div id="out-of-stock-products">
+            <!-- المنتجات غير المتوفرة -->
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" dir="ltr">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>EPIC-TECH</h3>
+            <p>Your trusted destination for everything PC...</p>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <p>📞 01017229055</p>
+            <a href="#">Facebook Page</a>
+        </div>
+    </div>
+</footer>
+
+<!-- زر التواصل العائم -->
+<div class="fab-container">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="main-fab">
+        <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt="Call"></span>
+        <span class="fab-icon-close">×</span>
+    </label>
+    <div class="fab-sub-buttons">
+        <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" class="fab-btn facebook-btn" title="فيسبوك">
+            <img src="../assets/images/Facebook.webp" alt="Facebook">
+        </a>
+        <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
+            <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    function openSearch() {
+        const input = document.getElementById('searchInput');
+        if (input.style.display === 'none' || input.style.display === '') {
+            input.style.display = 'block';
+            input.focus();
+        } else {
+            input.style.display = 'none';
+        }
+    }
+
+    // قاعدة بيانات المنتجات كاملة
+    const productsDB = [
+        // --- الكيبوردات (Keyboards) ---
+        { name: "Razer Huntsman V3 Pro", price: 4999, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard2-1.jpg" },
+        { name: "Razer Huntsman V2 Analog", price: 2750, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard4-1.jpg" },
+        { name: "Razer Huntsman Elite", price: 2250, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard13-1.jpg" },
+        { name: "Razer BlackWidow V4 Pro", price: 4500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard1-1.jpg" },
+        { name: "razer blackwidow v4 75", price: 3750, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard3-1.jpg" },
+        { name: "Razer BlackWidow V3 TKL", price: 1850, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard11-1.jpg" },
+        { name: "ASUS ROG Claymore II Wireless", price: 2950, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard5-1.jpg" },
+        { name: "ASUS ROG Falchion Wireless", price: 3500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard10-1.jpg" },
+        { name: "ASUS ROG Falchion Ace", price: 1750, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard9-1.jpg" },
+        { name: "ASUS ROG Flare II", price: 2850, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard12-1.jpg" },
+        { name: "Logitech G915", price: 3500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard6-1.jpg" },
+        { name: "Logitech G815", price: 2750, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard7-1.jpg" },
+        { name: "HYTE Keeb TKL", price: 1999, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard8-1.jpg" },
+        { name: "HyperX Alloy Rise 75", price: 3500, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard14-1.jpg" },
+        { name: "SteelSeries Apex Pro", price: 2999, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard15-1.jpg" },
+        { name: "ASUS ROG Scope TKL", price: 2500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard16-1.jpg" },
+        { name: "ASUS ROG Falchion RX Low Profile", price: 5000, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard17-1.jpg" },
+        { name: "ASUS ROG Scope NX Wireless", price: 2500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard18-1.jpg" },
+        { name: "ASUS ROG Scope II 96", price: 5500, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard19-1.jpg" },
+        { name: "ASUS ROG Azoth", price: 7500, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard20-1.jpg" },
+        { name: "ASUS TUF K3", price: 850, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard21-1.jpg" },
+        { name: "Corsair K100", price: 4000, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard22-1.jpg" },
+        { name: "Razer Huntsman V3 Pro TKL White", price: 4500, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard23-1.jpg" },
+        { name: "Razer BlackWidow V4 x", price: 2500, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard24-1.jpg" },
+
+        // --- الماوسات (Mouses) ---
+        { name: "Razer Basilisk V3", price: 1550, category: "mouses", inStock: false, img: "../assets/images/products/maous1.png" },
+        { name: "Razer Basilisk V3 White Edition", price: 1650, category: "mouses", inStock: false, img: "../assets/images/products/maous2.png" },
+        { name: "Razer Basilisk V2", price: 999, category: "mouses", inStock: false, img: "../assets/images/products/maous3.png" },
+        { name: "Razer Basilisk Ultimate", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous4.png" },
+        { name: "Razer Viper V2 Pro", price: 1550, category: "mouses", inStock: false, img: "../assets/images/products/maous5.png" },
+        { name: "ASUS ROG Chakram Wireless", price: 1950, category: "mouses", inStock: true, img: "../assets/images/products/maous6.png" },
+        { name: "ASUS ROG Keris", price: 1350, category: "mouses", inStock: true, img: "../assets/images/products/maous7.png" },
+        { name: "ASUS TUF M3", price: 550, category: "mouses", inStock: true, img: "../assets/images/products/maous18.png" },
+        { name: "ASUS TUF M3 Gen II", price: 600, category: "mouses", inStock: true, img: "../assets/images/products/maous9.png" },
+        { name: "SteelSeries Aerox 5", price: 1200, category: "mouses", inStock: true, img: "../assets/images/products/maous10.png" },
+        { name: "SteelSeries Aerox 9", price: 1550, category: "mouses", inStock: true, img: "../assets/images/products/maous11.png" },
+        { name: "Logitech G502 Hero", price: 999, category: "mouses", inStock: false, img: "../assets/images/products/maous12.png" },
+        { name: "Corsair M75 Air Wireless", price: 1450, category: "mouses", inStock: false, img: "../assets/images/products/maous13.png" },
+        { name: "Logicool G703 Lightspeed", price: 999, category: "mouses", inStock: false, img: "../assets/images/products/maous43.png" },
+        { name: "Alienware 510M", price: 950, category: "mouses", inStock: false, img: "../assets/images/products/maous45.png" },
+        { name: "Logitech G705", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous44.png" },
+        { name: "ASUS TUF M4 Air", price: 999, category: "mouses", inStock: true, img: "../assets/images/products/maous14.png" },
+        { name: "Dell MS900", price: 1500, category: "mouses", inStock: false, img: "../assets/images/products/maous15.png" },
+        { name: "Logitech G900", price: 1200, category: "mouses", inStock: false, img: "../assets/images/products/maous36.png" },
+        { name: "Glorious Model D Wireless", price: 1200, category: "mouses", inStock: false, img: "../assets/images/products/maous38.png" },
+        { name: "Glorious Model O2 Pro", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous39.png" },
+        { name: "Alienware M720", price: 1500, category: "mouses", inStock: false, img: "../assets/images/products/maous40.png" },
+        { name: "Logitech G600", price: 1250, category: "mouses", inStock: false, img: "../assets/images/products/maous37.png" },
+        { name: "Glorious Model I2", price: 1450, category: "mouses", inStock: false, img: "../assets/images/products/maous41.png" },
+        { name: "Razer Naga Trinity", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous42.png" },
+        { name: "Razer Cobra Pro", price: 2200, category: "mouses", inStock: false, img: "../assets/images/products/maous24.png" },
+        { name: "Glorious Model O", price: 1200, category: "mouses", inStock: false, img: "../assets/images/products/maous25.png" },
+        { name: "Glorious Model O2", price: 1500, category: "mouses", inStock: false, img: "../assets/images/products/maous26.png" },
+        { name: "SteelSeries Rival 5", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous27.png" },
+        { name: "SteelSeries Rival 600", price: 1200, category: "mouses", inStock: false, img: "../assets/images/products/maous28.png" },
+        { name: "Razer Mamba Elite", price: 950, category: "mouses", inStock: false, img: "../assets/images/products/maous29.png" },
+        { name: "Razer DeathAdder V2", price: 999, category: "mouses", inStock: false, img: "../assets/images/products/maous30.png" },
+        { name: "Razer DeathAdder V3 Wired", price: 1850, category: "mouses", inStock: false, img: "../assets/images/products/maous31.png" },
+        { name: "ASUS ROG Spatha X", price: 1500, category: "mouses", inStock: false, img: "../assets/images/products/maous32.png" },
+        { name: "Alienware M610M", price: 1350, category: "mouses", inStock: false, img: "../assets/images/products/maous33.png" },
+        { name: "ASUS ROG Impact III", price: 950, category: "mouses", inStock: true, img: "../assets/images/products/maous16.png" },
+        { name: "ASUS ROG Gladius III", price: 999, category: "mouses", inStock: true, img: "../assets/images/products/maous17.png" },
+        { name: "ASUS ROG Gladius II Core", price: 800, category: "mouses", inStock: true, img: "../assets/images/products/maous19.png" },
+        { name: "ASUS ROG Impact II Wireless", price: 1250, category: "mouses", inStock: true, img: "../assets/images/products/maous20.png" },
+        { name: "ASUS ROG Impact II", price: 700, category: "mouses", inStock: true, img: "../assets/images/products/maous21.png" },
+        { name: "ASUS ROG Gladius III Aimpoint", price: 2200, category: "mouses", inStock: false, img: "../assets/images/products/maous34.png" },
+        { name: "ASUS ROG Impact III Wireless", price: 1250, category: "mouses", inStock: true, img: "../assets/images/products/maous20.png" },
+        { name: "ASUS ROG Harpe Ace Aim Lab", price: 2000, category: "mouses", inStock: false, img: "../assets/images/products/maous35.png" },
+        { name: "ASUS TUF M4 Wireless", price: 1250, category: "mouses", inStock: true, img: "../assets/images/products/maous22.png" },
+        { name: "Razer Viper Ultimate", price: 1250, category: "mouses", inStock: true, img: "../assets/images/products/maous3.png" },
+        { name: "Razer Viper 8k hz", price: 1250, category: "mouses", inStock: false, img: "../assets/images/products/maous23.png" },
+
+        // --- السماعات (Headsets) ---
+        { name: "Razer BlackShark V2", price: 1500, category: "headsets", inStock: false, img: "../assets/images/products/headset3.png" },
+        { name: "Razer Kraken X Lite", price: 999, category: "headsets", inStock: true, img: "../assets/images/products/headset4.png" },
+        { name: "Logitech G733", price: 4500, category: "headsets", inStock: true, img: "../assets/images/products/headset1.png" },
+        { name: "SteelSeries Arctis Nova 3", price: 3500, category: "headsets", inStock: false, img: "../assets/images/products/headset5.png" },
+        { name: "Corsair HS60 Haptic", price: 2500, category: "headsets", inStock: false, img: "../assets/images/products/headset6.png" },
+        { name: "Astro A50 Gen 3", price: 4500, category: "headsets", inStock: true, img: "../assets/images/products/headset2.png" }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat') || 'keyboards';
+
+    document.getElementById('category-main-title').innerText = cat.toUpperCase();
+
+    let currentProductsList = (cat === 'accessories') 
+        ? productsDB.filter(p => p.category === 'keyboards' || p.category === 'mouses' || p.category === 'headsets')
+        : productsDB.filter(p => p.category === cat);
+
+    const availableContainer = document.getElementById('available-products');
+    const outOfStockContainer = document.getElementById('out-of-stock-products');
+
+    function renderProducts(productsToRender) {
+        availableContainer.innerHTML = '';
+        outOfStockContainer.innerHTML = '';
+
+        productsToRender.forEach(product => {
+            let cardHTML = '';
+            if (product.inStock) {
+                cardHTML = `
+                    <a href="product.html?name=${product.name}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                    <div class="product-card" style="width: 100%;">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="${product.img}" class="product-img" onerror="this.src='../assets/images/keyboard-main.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <p>${product.name}</p>
+                            <span>${product.price} EGP</span>
+                            <button onclick="event.preventDefault(); addToCart('${product.name}', ${product.price})" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                                إضافة للسلة 🛒
+                            </button>
+                        </div>
+                    </div>
+                    </a>
+                `;
+                availableContainer.innerHTML += cardHTML;
+            } else {
+                cardHTML = `
+                    <a href="product.html?name=${product.name}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+                    <div class="product-card" style="width: 100%;">
+                        <span class="stock-badge out-of-stock">Out of Stock</span>
+                        <div class="img-container">
+                            <img src="${product.img}" class="product-img" style="opacity: 0.5;" onerror="this.src='../assets/images/keyboard-main.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <p>${product.name}</p>
+                            <span style="text-decoration: line-through; color: #888;">${product.price} EGP</span>
+                            <button onclick="event.preventDefault();" disabled style="background: rgba(255, 255, 255, 0.02); color: #666; border: 1px solid rgba(255, 255, 255, 0.05); cursor: not-allowed; margin-top: 10px; padding: 6px 15px; border-radius: 20px; font-size: 13px;">
+                                غير متوفر ❌
+                            </button>
+                        </div>
+                    </div>
+                    </a>
+                `;
+                outOfStockContainer.innerHTML += cardHTML;
+            }
+        });
+
+        if(availableContainer.innerHTML === '') availableContainer.innerHTML = '<p style="color: #94a3b8; grid-column: 1/-1; text-align: center;">لا توجد منتجات متوفرة حالياً.</p>';
+        if(outOfStockContainer.innerHTML === '') outOfStockContainer.innerHTML = '<p style="color: #94a3b8; grid-column: 1/-1; text-align: center;">لا توجد منتجات نفدت كميتها.</p>';
+    }
+
+    renderProducts(currentProductsList);
+
+    function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let existing = cart.find(item => item.name === name);
+        if(existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        let totalItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
+        alert(`تم إضافة "${name}" إلى السلة بنجاح! ✔️\nإجمالي المنتجات في السلة: ${totalItemsCount}`);
+    }
+
+    function handleSearch(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            const searchResult = currentProductsList.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                (p.specs && p.specs.toLowerCase().includes(query))
+            );
+
+            renderProducts(searchResult);
+            document.getElementById('category-main-title').innerText = "نتائج البحث: " + query;
+        }
+    }
+</script>
+
+</body>
+</html>

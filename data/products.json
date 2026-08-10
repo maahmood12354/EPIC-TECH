@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "ROG Strix Laptop",
+    "category": "laptops",
+    "price": 45000,
+    "brand": "ASUS",
+    "status": "In Stock",
+    "condition": "New",
+    "connection": "Wireless",
+    "image": "assets/images/laptop1.png",
+    "description": "لابتوب ألعاب قوي بمعالج حديث."
+  },
+  {
+    "id": 2,
+    "name": "Gaming Mouse RGB",
+    "category": "accessories",
+    "price": 1200,
+    "brand": "Logitech",
+    "status": "In Stock",
+    "condition": "New",
+    "connection": "Wired",
+    "image": "assets/images/mouse1.png",
+    "description": "ماوس احترافي مع إضاءة RGB."
+  }
+]

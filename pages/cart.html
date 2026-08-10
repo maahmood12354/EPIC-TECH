@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات | Epic Store</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<!-- نفس الهيدر المطابق للرئيسية -->
+<header class="main-header" dir="ltr">
+    <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
+        <a href="../index.html" class="logo-area" style="text-decoration: none; color: #38bdf8; font-weight: bold; font-size: 16px;">
+            ⚡ Epic Store
+        </a>
+        <div class="search-container" style="display: flex; align-items: center; position: relative;">
+            <button id="searchIcon" class="search-btn" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search..." style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(256,256,256,0.2); border-radius: 20px; padding: 5px 10px; color: #fff; outline: none; margin-left: 5px;">
+        </div>
+    </div>
+    <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+        <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+    </nav>
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="theme-slider"><span id="themeIcon">☀️</span></span>
+        </label>
+    </div>
+</header>
+
+<!-- عنوان النيون الفخم -->
+<div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
+    <h1 class="neon-logo" style="font-size: 32px; text-align: center;">SHOPPING CART</h1>
+</div>
+
+<main style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    
+    <!-- محتوى المنتجات في السلة -->
+    <div id="cart-items-container" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+        <!-- المنتجات بتنزل هنا أوتوماتيك -->
+    </div>
+
+    <!-- إجمالي السلة وزر التأكيد الزجاجي -->
+    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 20px; backdrop-filter: blur(15px); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h3 id="total-price" style="color: #4ade80; margin-bottom: 20px; font-size: 24px; font-weight: bold;">الإجمالي: 0 ج.م</h3>
+        <button onclick="checkoutOrder()" style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; border: none; padding: 12px 35px; border-radius: 25px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(6,182,212,0.4);">
+            تأكيد وإتمام الطلب 🚀
+        </button>
+    </div>
+</main>
+
+<!-- زر التواصل العائم -->
+<div class="fab-container">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="main-fab">
+        <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt="Call"></span>
+        <span class="fab-icon-close">×</span>
+    </label>
+    <div class="fab-sub-buttons">
+        <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" class="fab-btn facebook-btn" title="فيسبوك">
+            <img src="../assets/images/Facebook.webp" alt="Facebook">
+        </a>
+        <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
+            <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
+        </a>
+    </div>
+</div>
+
+<script src="../assets/js/modules/cart.js"></script>
+<script>
+    function checkoutOrder() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert('سلة المشتريات فارغة! أضف منتجات أولاً قبل إتمام الطلب.');
+            return;
+        }
+        window.location.href = 'checkout.html';
+    }
+</script>
+</body>
+</html>

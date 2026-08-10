@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الطلب | Epic Store</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<!-- نفس الهيدر المطابق للرئيسية -->
+<header class="main-header" dir="ltr">
+    <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
+        <a href="../index.html" class="logo-area" style="text-decoration: none; color: #38bdf8; font-weight: bold; font-size: 16px;">
+            ⚡ Epic Store
+        </a>
+        <div class="search-container" style="display: flex; align-items: center; position: relative;">
+            <button id="searchIcon" class="search-btn" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search..." style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(256,256,256,0.2); border-radius: 20px; padding: 5px 10px; color: #fff; outline: none; margin-left: 5px;">
+        </div>
+    </div>
+    <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+        <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+    </nav>
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="theme-slider"><span id="themeIcon">☀️</span></span>
+        </label>
+    </div>
+</header>
+
+<!-- عنوان النيون الفخم -->
+<div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
+    <h1 class="neon-logo" style="font-size: 32px; text-align: center;">CHECKOUT</h1>
+</div>
+
+<main style="max-width: 650px; margin: 0 auto; padding: 20px 20px 60px 20px;">
+    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 35px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        
+        <h2 style="color: #38bdf8; text-align: center; margin-bottom: 25px; font-family: Tahoma, sans-serif;">بيانات الشحن وتأكيد الطلب 🛒</h2>
+
+        <form id="checkout-form" onsubmit="submitOrder(event)">
+            
+            <!-- الاسم -->
+            <div style="margin-bottom: 18px;">
+                <label style="display: block; margin-bottom: 8px; color: #aaa; font-size: 14px;">الاسم الكريم:</label>
+                <input type="text" id="cust-name" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;">
+            </div>
+
+            <!-- رقم التليفون -->
+            <div style="margin-bottom: 18px;">
+                <label style="display: block; margin-bottom: 8px; color: #aaa; font-size: 14px;">رقم الهاتف:</label>
+                <input type="tel" id="cust-phone" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;">
+            </div>
+
+            <!-- رقم احتياطي -->
+            <div style="margin-bottom: 18px;">
+                <label style="display: block; margin-bottom: 8px; color: #aaa; font-size: 14px;">رقم هاتف احتياطي:</label>
+                <input type="tel" id="cust-alt-phone" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;">
+            </div>
+
+            <!-- العنوان بالتفصيل -->
+            <div style="margin-bottom: 18px;">
+                <label style="display: block; margin-bottom: 8px; color: #aaa; font-size: 14px;">العنوان بالتفصيل:</label>
+                <textarea id="cust-address" required rows="3" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;"></textarea>
+            </div>
+
+            <!-- نظام الشحن -->
+            <div style="margin-bottom: 22px; background: rgba(255,255,255,0.02); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <label style="display: block; margin-bottom: 12px; color: #38bdf8; font-weight: bold; font-size: 15px;">اختر نظام الشحن:</label>
+                
+                <div style="margin-bottom: 12px;">
+                    <input type="radio" id="ship-egypt" name="shipping" value="البريد المصري" required onchange="updateShippingInfo()">
+                    <label for="ship-egypt" style="cursor: pointer; font-size: 14px;"> البريد المصري (100 ج.م) - يتم دفع قيمة المنتج والشحن مقدمًا بالكامل.</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="ship-boraq" name="shipping" value="شحن البراق" required onchange="updateShippingInfo()">
+                    <label for="ship-boraq" style="cursor: pointer; font-size: 14px;"> شحن البراق (يبدأ من 185 ج.م) - يتم دفع الشحن فقط لتأكيد الطلب ودفع سعر المنتج عند الاستلام.</label>
+                </div>
+
+                <!-- تنبيه البراق -->
+                <p id="boraq-note" style="color: #f87171; font-size: 13px; margin-top: 12px; display: none; line-height: 1.5;">
+                    ⚠️ تنبيه: مبلغ شحن البراق قد يزيد حسب المكان، وشحن البراق على مسئوليتك الشخصية.
+                </p>
+            </div>
+
+            <!-- ملاحظات إضافية -->
+            <div style="margin-bottom: 22px;">
+                <label style="display: block; margin-bottom: 8px; color: #aaa; font-size: 14px;">أي ملاحظات إضافية:</label>
+                <textarea id="cust-notes" rows="2" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;"></textarea>
+            </div>
+
+            <!-- زر التأكيد -->
+            <button type="submit" style="width: 100%; background: #22c55e; color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(34,197,94,0.3);">
+                تأكيد الطلب وإرسال البيانات للواتساب 🚀
+            </button>
+        </form>
+    </div>
+</main>
+
+<!-- زر التواصل العائم -->
+<div class="fab-container">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="main-fab">
+        <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt="Call"></span>
+        <span class="fab-icon-close">×</span>
+    </label>
+    <div class="fab-sub-buttons">
+        <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" class="fab-btn facebook-btn" title="فيسبوك">
+            <img src="../assets/images/Facebook.webp" alt="Facebook">
+        </a>
+        <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
+            <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
+        </a>
+    </div>
+</div>
+
+<script>
+    function updateShippingInfo() {
+        const isBoraq = document.getElementById('ship-boraq').checked;
+        const boragNote = document.getElementById('boraq-note');
+        if (isBoraq) {
+            boragNote.style.display = 'block';
+        } else {
+            boragNote.style.display = 'none';
+        }
+    }
+
+    function submitOrder(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('cust-name').value;
+        const phone = document.getElementById('cust-phone').value;
+        const altPhone = document.getElementById('cust-alt-phone').value;
+        const address = document.getElementById('cust-address').value;
+        const shippingMethod = document.querySelector('input[name="shipping"]:checked').value;
+        const notes = document.getElementById('cust-notes').value;
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert('السلة فارغة!');
+            return;
+        }
+
+        let totalPrice = cart.reduce((sum, item) => sum + (Number(item.price) * (item.quantity || 1)), 0);
+
+        alert('تم تسجيل طلبك بنجاح! جاري تحويلك للواتساب لإتمام التواصل...');
+        
+        let cartDetails = cart.map(i => `- ${i.name} (${i.price} EGP)`).join('%0A');
+        const myWhatsAppNumber = "201017229055";
+
+        let message = `السلام عليكم، أريد تأكيد طلب جديد:%0A` +
+                      `*الاسم:* ${name}%0A` +
+                      `*الهاتف:* ${phone}%0A` +
+                      `*هاتف احتياطي:* ${altPhone || 'لا يوجد'}%0A` +
+                      `*العنوان:* ${address}%0A` +
+                      `*طريقة الشحن:* ${shippingMethod}%0A` +
+                      `*المنتجات:*%0A${cartDetails}%0A` +
+                      `*إجمالي المنتجات:* ${totalPrice} EGP%0A` +
+                      `*ملاحظات:* ${notes || 'لا يوجد'}`;
+
+        localStorage.removeItem('cart');
+        window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
+        window.location.href = '../index.html';
+    }
+</script>
+
+</body>
+</html>

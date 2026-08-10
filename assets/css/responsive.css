@@ -1,0 +1,52 @@
+/* 11. Responsive Design */
+
+/* للأجهزة اللوحية (Tablets) */
+@media (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* للموبايلات (Mobile Phones) */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 20px;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr; /* عرض كارد واحد في السطر */
+        padding: 20px;
+    }
+
+    .logo-name h1 {
+        font-size: 18px;
+    }
+
+    /* تكبير حجم أزرار الـ FAB للموبايل لتسهيل الضغط عليها */
+    .main-fab {
+        width: 50px;
+        height: 50px;
+    }
+}.floating-whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+    background-color: #128c7e;
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
