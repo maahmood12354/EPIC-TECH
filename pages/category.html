@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPIC TECH STORE - الأقسام</title>
-
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -40,9 +40,9 @@
 <!-- الهيدر المطابق للرئيسية -->
 <header class="main-header" dir="ltr">
     <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-        <a href="../index.html" class="logo-area" style="text-decoration: none; color: #38bdf8; font-weight: bold; font-size: 16px;">
-            ⚡ Epic Store
-        </a>
+        <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
+    <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+</a>
         <div class="search-container" style="display: flex; align-items: center; position: relative;">
             <button id="searchIcon" class="search-btn" onclick="openSearch()" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
             <input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeypress="handleSearch(event)" style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
