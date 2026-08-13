@@ -203,29 +203,85 @@
     </footer>
 
     <!-- سكريبت الألعاب -->
+<!-- سكريبت الألعاب -->
     <script>
-        // 1. قاعدة بيانات الألعاب (ضيف هنا الـ 1000 لعبة براحتك)
+        // 1. قاعدة بيانات الألعاب (اكتب الاسم والمساحة بس)
         const gamesDB = [
-            { id: 1, name: "Grand Theft Auto V", size: 110, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg" },
-            { id: 2, name: "Forza Horizon 5", size: 130, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg" },
-            { id: 3, name: "PUBG Battlegrounds", size: 40, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg" },
-            { id: 4, name: "Euro Truck Sim 2", size: 20, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg" },
-            { id: 5, name: "Red Dead Redemption 2", size: 150, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg" },
-            { id: 6, name: "Cyberpunk 2077", size: 70, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg" }
-            // تقدر تنسخ السطر وتغير الاسم والمساحة والصورة براحتك
+            // --- من الصورة الأولى ---
+            { id: 1, name: "A Plague Tale Requiem", size: 48.2 },
+            { id: 2, name: "A Plague Tale Innocence", size: 41.5 },
+            { id: 3, name: "Alan Wake 2", size: 82.0 },
+            { id: 4, name: "Assassin's Creed Unity", size: 49.3 },
+            { id: 5, name: "Assassin's Creed 3 Remastered", size: 28.5 },
+            { id: 6, name: "Assassin's Creed Brotherhood", size: 5.80 },
+            { id: 7, name: "Assassin's Creed 1", size: 6.63 },
+            { id: 8, name: "Atlas Fallen", size: 27.1 },
+            { id: 9, name: "Battlefield 1", size: 30.8 },
+            { id: 10, name: "Battlefield 3", size: 11.3 },
+            { id: 11, name: "Battlefield V", size: 50.3 },
+            { id: 12, name: "Call of Duty Black Ops 2", size: 12.4 },
+            { id: 13, name: "Call of Duty Ghosts", size: 28.9 },
+            { id: 14, name: "Call of Duty Infinite Warfare", size: 70.3 },
+            { id: 15, name: "Call of Duty Advanced Warfare", size: 45.1 },
+            { id: 16, name: "Control Ultimate Edition", size: 42.0 },
+            { id: 17, name: "Crysis 2", size: 7.60 },
+            { id: 18, name: "Crysis Remastered", size: 22.0 },
+            { id: 19, name: "Crysis WARHEAD", size: 5.56 },
+            { id: 20, name: "Cyberpunk 2077", size: 70.0 },
+            { id: 21, name: "Dark Souls III", size: 18.6 },
+            { id: 22, name: "Death Stranding", size: 51.4 },
+            { id: 23, name: "Devil May Cry 4 Special Edition", size: 24.8 },
+            { id: 24, name: "Devil May Cry 5", size: 37.4 },
+            { id: 25, name: "Dishonored Death of the Outsider", size: 30.8 },
+
+            // --- من الصورة التانية والثالثة ---
+            { id: 26, name: "Far Cry 3", size: 7.76 },
+            { id: 27, name: "Far Cry Primal", size: 16.6 },
+            { id: 28, name: "Forza Horizon 5", size: 97.5 },
+            { id: 29, name: "Gears 5", size: 64.4 },
+            { id: 30, name: "Gears of War 4", size: 55.7 },
+            { id: 31, name: "Horizon Zero Dawn", size: 70.2 },
+            { id: 32, name: "Injustice 2", size: 49.6 },
+            { id: 33, name: "Just Cause 2", size: 4.01 },
+            { id: 34, name: "Just Cause 3", size: 51.2 },
+            { id: 35, name: "Just Cause 4", size: 53.8 },
+            { id: 36, name: "Little Nightmares", size: 9.23 },
+            { id: 37, name: "Little Nightmares II", size: 8.99 },
+            { id: 38, name: "Mafia II", size: 5.79 },
+            { id: 39, name: "Marvel's Spider-Man Remastered", size: 66.4 },
+            { id: 40, name: "Metro 2033 Redux", size: 8.06 },
+            { id: 41, name: "Metro Exodus", size: 78.0 },
+            { id: 42, name: "Need For Speed Heat", size: 30.1 },
+            { id: 43, name: "Need For Speed Payback", size: 27.7 },
+            { id: 44, name: "Outlast 2", size: 24.9 },
+            { id: 45, name: "Resident Evil 5 Gold Edition", size: 20.2 },
+            { id: 46, name: "Resident Evil HD", size: 12.2 },
+            { id: 47, name: "Resident Evil Revelations 1", size: 7.99 },
+            { id: 48, name: "Sniper Elite 3", size: 19.7 },
+            { id: 49, name: "Sniper Elite 4", size: 62.4 },
+            { id: 50, name: "Sniper Ghost Warrior 2", size: 6.24 },
+            { id: 51, name: "Sniper Ghost Warrior 3", size: 44.2 },
+            { id: 52, name: "Star Wars Jedi Fallen Order", size: 54.4 },
+            
+            // --- تقدر تكمل بقية الألعاب بنفس الطريقة ---
+            // { id: 53, name: "اسم اللعبة", size: المساحة },
         ];
 
         let selectedGames = []; // السلة الخاصة بالألعاب
 
-        // 2. دالة رسم الألعاب في الشاشة
+        // 2. دالة رسم الألعاب في الشاشة مع توليد الصور أوتوماتيك
         function renderGames(gamesArray) {
             const container = document.getElementById('gamesContainer');
             container.innerHTML = '';
             
             gamesArray.forEach(game => {
+                // الكود ده بيصنع صورة أوتوماتيك مكتوب عليها اسم اللعبة بألوان الموقع
+                // ولو اللعبة متسجل ليها رابط صورة حقيقي، هيستخدمه
+                const imgUrl = game.image ? game.image : `https://placehold.co/300x400/0f172a/38bdf8?text=${encodeURIComponent(game.name)}`;
+                
                 container.innerHTML += `
                     <div class="game-card">
-                        <img src="${game.image}" alt="${game.name}">
+                        <img src="${imgUrl}" alt="${game.name}" loading="lazy">
                         <h4>${game.name}</h4>
                         <p>المساحة: ${game.size} GB</p>
                         <button class="add-game-btn" onclick="addToGamesCart('${game.name}', ${game.size})">➕ إضافة للسلة</button>
@@ -236,7 +292,6 @@
 
         // 3. دالة إضافة اللعبة
         function addToGamesCart(name, size) {
-            // التأكد إن اللعبة مش متضافة قبل كده
             const exists = selectedGames.find(g => g.name === name);
             if (exists) {
                 alert('اللعبة دي موجودة في السلة بالفعل!');
@@ -253,7 +308,7 @@
             updateCartUI();
         }
 
-        // 5. تحديث شكل سلة الألعاب والمساحة
+        // 5. تحديث شكل سلة الألعاب والمساحة (الرقم هيطلعلك بدقة برمجية عالية)
         function updateCartUI() {
             const listContainer = document.getElementById('selectedGamesList');
             const totalElement = document.getElementById('totalSize');
@@ -271,16 +326,17 @@
                 totalSize += game.size;
                 listContainer.innerHTML += `
                     <div class="cart-item">
-                        <span>${game.name}</span>
+                        <span style="font-size: 12px; font-weight: bold;">${game.name}</span>
                         <div>
-                            <span style="color: #38bdf8; font-size: 12px; margin-right: 10px;">${game.size}GB</span>
+                            <span style="color: #38bdf8; font-size: 12px; margin-right: 5px;">${game.size}GB</span>
                             <button class="remove-btn" onclick="removeFromGamesCart('${game.name}')">X</button>
                         </div>
                     </div>
                 `;
             });
 
-            totalElement.innerText = totalSize;
+            // تقريب الرقم الإجمالي لعلامتين عشريتين عشان يبقى شكله نظيف
+            totalElement.innerText = totalSize.toFixed(2);
         }
 
         // 6. دالة البحث في الألعاب
@@ -301,9 +357,8 @@
 
             const name = document.getElementById('customerName').value;
             const totalSpace = document.getElementById('totalSize').innerText;
-            const storePhone = "201017229055"; // رقمك
+            const storePhone = "201017229055"; 
             
-            // تجميع أسماء الألعاب تحت بعض
             const gamesListText = selectedGames.map(g => `🎮 ${g.name} (${g.size}GB)`).join('%0A');
             
             const message = `أهلاً EPIC TECH، محتاج أحمل الألعاب دي:%0A%0A👤 الاسم: ${name}%0A📦 إجمالي المساحة: ${totalSpace} GB%0A%0Aالألعاب المطلوبة:%0A${gamesListText}`;
@@ -314,5 +369,5 @@
         // تشغيل رسم الألعاب أول ما الصفحة تفتح
         renderGames(gamesDB);
     </script>
-</body>
+    </body>
 </html>
