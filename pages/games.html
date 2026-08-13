@@ -173,15 +173,22 @@
 
         <div class="games-layout">
             <!-- الجزء اليمين: شبكة الألعاب -->
+            <!-- الجزء اليمين: شبكة الألعاب -->
             <div>
                 <div class="games-grid" id="gamesContainer">
                     <!-- الألعاب هتترسم هنا أوتوماتيك بالجافاسكريبت -->
+                </div>
+                
+                <!-- زرار عرض المزيد (بره شبكة الألعاب وتحتها) -->
+                <div id="loadMoreContainer" style="text-align: center; margin-top: 30px; display: none; width: 100%;">
+                    <button onclick="loadMoreGames()" style="background: #0f172a; color: #38bdf8; border: 1px solid #38bdf8; padding: 12px 40px; font-size: 18px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold;">عرض المزيد ⬇️</button>
                 </div>
             </div>
 
             <!-- الجزء الشمال: سلة الألعاب الخاصة -->
             <div class="games-cart">
                 <h3 style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px;">سلة الألعاب 📥</h3>
+                
                 
                 <div id="selectedGamesList" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;">
                     <p style="color: #94a3b8; text-align: center; font-size: 14px;">لم يتم اختيار ألعاب بعد.</p>
@@ -1109,17 +1116,44 @@
 
             // حط أسماء ألعابك كلها هنا عادي جداً
 
-        let selectedGames = []; 
+let selectedGames = []; 
+        let currentLimit = 40; // عدد الألعاب اللي هتظهر في الشاشة مرة واحدة
+        let filteredGamesForRender = []; // قائمة الألعاب بعد البحث والترتيب
 
-        // 2. دالة رسم الألعاب في الشاشة (بصور مؤقتة)
-        function renderGames(gamesArray) {
-            const container = document.getElementById('gamesContainer');
-            container.innerHTML = '';
+        // 1. دالة البحث والترتيب (الفلتر الذكي)
+        function filterAndSortGames() {
+            currentLimit = 40; // تصفير العدد لـ 40 مع كل بحث جديد
+            const searchTerm = document.getElementById('gameSearch').value.toLowerCase();
+            const sortValue = document.getElementById('gameSort').value;
             
-            gamesArray.forEach(game => {
+            // الفلترة
+            filteredGamesForRender = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
+            
+            // الترتيب
+            if (sortValue === "nameAsc") {
+                filteredGamesForRender.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortValue === "nameDesc") {
+                filteredGamesForRender.sort((a, b) => b.name.localeCompare(a.name));
+            } else if (sortValue === "sizeAsc") {
+                filteredGamesForRender.sort((a, b) => a.size - b.size);
+            } else if (sortValue === "sizeDesc") {
+                filteredGamesForRender.sort((a, b) => b.size - a.size);
+            }
+            
+            renderGamesWithLimit();
+        }
+
+        // 2. دالة الرسم بنظام التحميل التدريجي (عشان الموقع يبقى طلقة)
+        function renderGamesWithLimit() {
+            const container = document.getElementById('gamesContainer');
+            container.innerHTML = ''; 
+            
+            // بناخد أول 40 لعبة بس
+            const gamesToShow = filteredGamesForRender.slice(0, currentLimit);
+            
+            gamesToShow.forEach(game => {
                 const imgId = `img-${game.id}`;
-                // صورة مؤقتة مكتوب عليها جاري التحميل
-                const loadingImg = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent('جاري جلب الغلاف...')}`;
+                const loadingImg = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent('جاري التحميل...')}`;
                 
                 container.innerHTML += `
                     <div class="game-card">
@@ -1131,75 +1165,77 @@
                 `;
             });
 
-            // بنشغل السكريبت اللي بيجيب الصور من ستيم بالدور
-            fetchImagesSafely(gamesArray);
+            // إظهار أو إخفاء زرار عرض المزيد
+            const loadMoreBtn = document.getElementById('loadMoreContainer');
+            if (currentLimit < filteredGamesForRender.length) {
+                loadMoreBtn.style.display = 'block';
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+
+            // نجيب صور ستيم للـ 40 لعبة دول بس
+            fetchImagesSafely(gamesToShow);
         }
 
-        // 3. الدالة السحرية (بتجيب الصور واحدة واحدة عشان ستيم ميعملش بلوك)
+        // 3. دالة تشغيل زرار "عرض المزيد"
+        function loadMoreGames() {
+            currentLimit += 40; // بيزود 40 لعبة كمان على الشاشة
+            renderGamesWithLimit();
+        }
+
+        // 4. الدالة السحرية للصور من ستيم
         async function fetchImagesSafely(gamesArray) {
             for (let game of gamesArray) {
                 const imgElement = document.getElementById(`img-${game.id}`);
-                if (!imgElement) continue;
+                // لو الصورة متحدثة قبل كده مش هيحملها تاني
+                if (!imgElement || !imgElement.src.includes('placehold.co')) continue;
 
                 try {
-                    // بيبحث في النت عن اللعبة
                     const response = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(game.name)}&limit=1`);
                     const data = await response.json();
                     
                     if (data && data.length > 0) {
                         if (data[0].steamAppID) {
-                            // بيسحب الغلاف الأصلي من سيرفرات ستيم
                             imgElement.src = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${data[0].steamAppID}/header.jpg`;
                         } else if (data[0].thumb) {
-                            // لو ملهاش غلاف في ستيم، بيجيب أي غلاف ليها من النت
                             imgElement.src = data[0].thumb;
                         } else {
                             imgElement.src = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent(game.name)}`;
                         }
                     } else {
-                        // لو اللعبة مش موجودة عالنت أصلاً، هيكتب اسمها
                         imgElement.src = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent(game.name)}`;
                     }
                 } catch (error) {
                     imgElement.src = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent(game.name)}`;
                 }
                 
-                // التركة هنا: بننيم الكود نص ثانية قبل ما يجيب الصورة اللي بعدها عشان السيرفر ميطردناش
-                await new Promise(resolve => setTimeout(resolve, 600));
+                await new Promise(resolve => setTimeout(resolve, 500)); // تأخير نص ثانية
             }
         }
 
-        // 4. دالة إضافة اللعبة للسلة
+        // باقي دوال السلة زي ما هي
         function addToGamesCart(name, size) {
             const exists = selectedGames.find(g => g.name === name);
-            if (exists) {
-                alert('اللعبة دي موجودة في السلة بالفعل!');
-                return;
-            }
+            if (exists) { alert('اللعبة دي موجودة في السلة بالفعل!'); return; }
             selectedGames.push({ name, size });
             updateCartUI();
         }
 
-        // 5. دالة حذف اللعبة من السلة
         function removeFromGamesCart(name) {
             selectedGames = selectedGames.filter(g => g.name !== name);
             updateCartUI();
         }
 
-        // 6. تحديث شكل السلة والمساحة
         function updateCartUI() {
             const listContainer = document.getElementById('selectedGamesList');
             const totalElement = document.getElementById('totalSize');
-            
             if (selectedGames.length === 0) {
                 listContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; font-size: 14px;">لم يتم اختيار ألعاب بعد.</p>';
                 totalElement.innerText = '0';
                 return;
             }
-
             listContainer.innerHTML = '';
             let totalSize = 0;
-
             selectedGames.forEach(game => {
                 totalSize += game.size;
                 listContainer.innerHTML += `
@@ -1215,37 +1251,9 @@
             totalElement.innerText = totalSize.toFixed(2);
         }
 
-        // 7. دالة البحث
-// 7. دالة البحث والترتيب (الفلتر الذكي)
-        function filterAndSortGames() {
-            const searchTerm = document.getElementById('gameSearch').value.toLowerCase();
-            const sortValue = document.getElementById('gameSort').value;
-            
-            // أولاً: فلترة الألعاب حسب الاسم اللي العميل بيبحث عنه
-            let resultGames = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
-            
-            // ثانياً: ترتيب الألعاب حسب اختيار العميل من القائمة
-            if (sortValue === "nameAsc") {
-                resultGames.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (sortValue === "nameDesc") {
-                resultGames.sort((a, b) => b.name.localeCompare(a.name));
-            } else if (sortValue === "sizeAsc") {
-                resultGames.sort((a, b) => a.size - b.size);
-            } else if (sortValue === "sizeDesc") {
-                resultGames.sort((a, b) => b.size - a.size);
-            }
-            
-            // عرض النتيجة النهائية بعد الفلترة والترتيب
-            renderGames(resultGames);
-        }  
-
-        // 8. إرسال الطلب واتساب
         document.getElementById('gameOrderForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            if (selectedGames.length === 0) {
-                alert('لازم تختار لعبة واحدة على الأقل قبل الطلب!');
-                return;
-            }
+            if (selectedGames.length === 0) { alert('لازم تختار لعبة واحدة على الأقل قبل الطلب!'); return; }
             const name = document.getElementById('customerName').value;
             const totalSpace = document.getElementById('totalSize').innerText;
             const storePhone = "201017229055"; 
@@ -1254,8 +1262,8 @@
             window.open(`https://wa.me/${storePhone}?text=${message}`, '_blank');
         });
 
-        // تشغيل الموقع ورسم الألعاب أول ما الصفحة تفتح
-        renderGames(gamesDB);
+        // أول ما الصفحة تفتح، بنشغل الفلتر اللي بدوره هيعرض أول 40 لعبة
+        filterAndSortGames();
     </script>
 </body>
 </html>
