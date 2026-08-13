@@ -1129,52 +1129,63 @@ input:checked + .slider:before { transform: translateX(26px); }
     max-width: 1200px;
     margin: 0 auto 40px auto;
 }
-/* --- تظبيط الموقع والشاشات الصغيرة للموبايل --- */
+/* --- تعديل وتظبيط الهيدر والشاشات الصغيرة للموبايل --- */
 @media screen and (max-width: 768px) {
-    /* 1. تصغير الهيدر العام ليتناسب مع شاشات الهواتف */
+    /* جعل الهيدر ثابت أو مرن في مكانه وبدون تداخل */
     header.main-header, .glass-header {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        border-radius: 0 0 15px 15px !important;
+        padding: 10px !important;
         flex-direction: column !important;
-        padding: 10px 15px !important;
-        border-radius: 20px !important;
-        gap: 10px !important;
-        width: 95% !important;
-        margin: 10px auto !important;
+        gap: 8px !important;
+        background: rgba(15, 23, 42, 0.85) !important;
+        backdrop-filter: blur(12px) !important;
+        z-index: 1000 !important;
     }
 
-    /* 2. ترتيب روابط الهيدر فوق بعضها أو بشكل أفقي مصغر بدون زحمة */
+    /* ضبط حجم اللوجو */
+    .brand-logo, .brand-container img {
+        height: 35px !important;
+    }
+
+    .brand-name {
+        font-size: 1.1rem !important;
+    }
+
+    /* ترتيب روابط القائمة بجانب بعضها بشكل منظم ومتناسق */
     .nav-links {
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 8px !important;
-    }
-
-    .nav-links a {
-        font-size: 13px !important;
-        padding: 4px 8px !important;
-    }
-
-    /* 3. تصغير العناوين الرئيسية عشان متكبرش زيادة عن اللزوم على الموبايل */
-    h1 {
-        font-size: 2rem !important;
-    }
-
-    /* 4. ضبط شبكة الألعاب والمنتجات لتظهر عمود واحد أو عمودين بانتظام */
-    .games-grid, .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
-        gap: 10px !important;
-        padding: 10px !important;
-    }
-
-    /* 5. ضبط كروت المنتجات والصيانة على الموبايل */
-    .game-card, .product-card, .glass-container {
-        padding: 15px !important;
-        margin: 5px auto !important;
+        gap: 6px !important;
         width: 100% !important;
     }
 
-    /* 6. منع خروج النصوص وتداخلها */
+    .nav-links a {
+        font-size: 12px !important;
+        padding: 3px 6px !important;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+
+    /* إبعاد المحتوى عن الهيدر عشان ميتغطش عليه */
     body {
-        font-size: 14px !important;
+        padding-top: 0 !important;
+    }
+
+    /* ضبط الكروت والشبكة على الموبايل لتكون واضحة */
+    .games-grid, .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 5px !important;
+    }
+
+    .game-card, .product-card, .glass-container {
+        padding: 10px !important;
+        margin: 5px auto !important;
+        width: 100% !important;
     }
 }
