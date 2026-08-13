@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     
     <style>
+        /* إيقاف ألوان الـ RGB وأنيميشن الخلفية في هذه الصفحة فقط */
+        body, html {
+            background-color: #0f172a !important; /* لون كحلي ثابت فخم */
+            background-image: none !important;
+            animation: none !important;
+            transition: none !important;
+        }
+
+        /* إيقاف أي تأثيرات إضاءة متضافة كطبقة تانية في الخلفية */
+        body::before, body::after, main::before, main::after {
+            display: none !important;
+            animation: none !important;
+            background: none !important;
+            opacity: 0 !important;
+        }
         /* تنسيقات مكتبة الألعاب */
         .games-layout {
             display: grid;
