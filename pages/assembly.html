@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPIC TECH - النظافة والصيانة المنزلية</title>
+    <title>EPIC TECH - تجميع الأجهزة</title>
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../assets/css/style.css">
     
@@ -32,6 +32,10 @@
             color: #cbd5e1;
             font-size: 16px;
             font-weight: bold;
+        }
+        textarea.epic-input {
+            resize: vertical;
+            min-height: 100px;
         }
     </style>
 </head>
@@ -71,13 +75,13 @@
         </div>
     </header>
 
-    <!-- محتوى صفحة الصيانة -->
+    <!-- محتوى صفحة التجميع -->
     <main style="padding: 50px 20px; color: white; min-height: 70vh;">
         <div style="max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 10px; font-size: 2.5rem;">النظافة والصيانة المنزلية 🛠️</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">سجل بياناتك وهنوصلك لحد باب البيت عشان نرجع جهازك جديد.</p>
+            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 10px; font-size: 2.5rem;">تجميع الأجهزة الاحترافية ⚙️</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">اختر نوع التجميعة وسجل بياناتك وهنتواصل معاك فوراً.</p>
             
-            <form id="maintenanceForm" style="background: rgba(26, 26, 46, 0.8); padding: 40px; border-radius: 12px; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">
+            <form id="assemblyForm" style="background: rgba(26, 26, 46, 0.8); padding: 40px; border-radius: 12px; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">
                 
                 <label class="epic-label">الاسم بالكامل</label>
                 <input type="text" id="clientName" class="epic-input" placeholder="اكتب اسمك ثلاثي" required>
@@ -85,19 +89,18 @@
                 <label class="epic-label">رقم الموبايل</label>
                 <input type="tel" id="clientPhone" class="epic-input" placeholder="010XXXXXXXX" required>
 
-                <label class="epic-label">العنوان بالتفصيل</label>
-                <input type="text" id="clientAddress" class="epic-input" placeholder="المحافظة، المنطقة، الشارع، رقم العمارة" required>
-
-                <label class="epic-label">نوع الخدمة المطلوبة</label>
-                <select id="serviceType" class="epic-input" required style="cursor: pointer;">
-                    <option value="" disabled selected>اختر الخدمة...</option>
-                    <option value="تنظيف كيسة بالكامل (طرد أتربة)">تنظيف كيسة بالكامل (طرد أتربة)</option>
-                    <option value="تغيير معجون حراري (Thermal Paste) + تنظيف">تغيير معجون حراري (Thermal Paste) + تنظيف</option>
-                    <option value="تنظيف وتزييت مراوح التبريد">تنظيف وتزييت مراوح التبريد</option>
-                    <option value="فحص وصيانة شاملة">فحص وصيانة شاملة</option>
+                <label class="epic-label">نوع التجميعة المطلوبة</label>
+                <select id="assemblyType" class="epic-input" required style="cursor: pointer;">
+                    <option value="" disabled selected>اختر طلبك من هنا...</option>
+                    <option value="تجميع كيسة كاملة بقطع من المتجر (EPIC TECH)">تجميع كيسة كاملة بقطع من المتجر (EPIC TECH)</option>
+                    <option value="تجميع كيسة بقطع شاريها من بره المتجر">تجميع كيسة بقطع شاريها من بره المتجر</option>
+                    <option value="ترتيب كابلات (Cable Management) لكيسة قديمة">ترتيب كابلات (Cable Management) لكيسة قديمة</option>
                 </select>
 
-                <div style="margin-top: 30px; text-align: center;">
+                <label class="epic-label">ملاحظات إضافية (اختياري)</label>
+                <textarea id="extraNotes" class="epic-input" placeholder="لو شاري قطع من بره، اكتب أسمائها هنا.. أو لو عندك طلب معين."></textarea>
+
+                <div style="margin-top: 20px; text-align: center;">
                     <button type="submit" style="background: #38bdf8; color: #000; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; transition: 0.3s; width: 100%;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                         إرسال الطلب عبر واتساب 💬
                     </button>
@@ -143,22 +146,19 @@
 
     <!-- سكريبت تحويل الطلب لواتساب -->
     <script>
-        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // منع الصفحة إنها تعمل ريفرش
+        document.getElementById('assemblyForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
             
-            // تجميع البيانات
             const name = document.getElementById('clientName').value;
             const phone = document.getElementById('clientPhone').value;
-            const address = document.getElementById('clientAddress').value;
-            const service = document.getElementById('serviceType').value;
+            const type = document.getElementById('assemblyType').value;
+            const notes = document.getElementById('extraNotes').value || "لا توجد ملاحظات إضافية";
             
-            // رقم الواتساب بتاعك (بدون الـ +)
+            // رقم الواتساب بتاعك
             const storePhone = "201017229055"; 
             
-            // الرسالة اللي هتوصلك
-            const message = `أهلاً EPIC TECH، محتاج أطلب خدمة صيانة منزلية:%0A%0A👤 الاسم: ${name}%0A📱 رقم الموبايل: ${phone}%0A📍 العنوان: ${address}%0A🛠️ الخدمة المطلوبة: ${service}`;
+            const message = `أهلاً EPIC TECH، محتاج أطلب خدمة تجميع أجهزة:%0A%0A👤 الاسم: ${name}%0A📱 رقم الموبايل: ${phone}%0A⚙️ الطلب: ${type}%0A📝 ملاحظات: ${notes}`;
             
-            // فتح واتساب
             const whatsappUrl = `https://wa.me/${storePhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
         });
