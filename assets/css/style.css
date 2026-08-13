@@ -1129,63 +1129,97 @@ input:checked + .slider:before { transform: translateX(26px); }
     max-width: 1200px;
     margin: 0 auto 40px auto;
 }
-/* --- تعديل وتظبيط الهيدر والشاشات الصغيرة للموبايل --- */
+/* --- تظبيط الهيدر والشاشات الصغيرة للموبايل بشكل نهائي واحترافي --- */
 @media screen and (max-width: 768px) {
-    /* جعل الهيدر ثابت أو مرن في مكانه وبدون تداخل */
+    
+    /* 1. جعل الهيدر خفيف، صغير، وغير عائم بشكل مزعج */
     header.main-header, .glass-header {
         position: relative !important;
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 0 20px 0 !important;
-        border-radius: 0 0 15px 15px !important;
-        padding: 10px !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        background: rgba(15, 23, 42, 0.85) !important;
+        margin: 5px auto 15px auto !important;
+        border-radius: 12px !important;
+        padding: 8px 12px !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background: rgba(15, 23, 42, 0.9) !important;
         backdrop-filter: blur(12px) !important;
-        z-index: 1000 !important;
+        z-index: 100 !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
-    /* ضبط حجم اللوجو */
+    /* تصغير اللوجو والاسم في الهيدر للموبايل */
     .brand-logo, .brand-container img {
-        height: 35px !important;
+        height: 30px !important;
     }
 
     .brand-name {
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
     }
 
-    /* ترتيب روابط القائمة بجانب بعضها بشكل منظم ومتناسق */
+    /* تصغير روابط القائمة في الهيدر لترتيبها جنب بعض بدون زحمة */
     .nav-links {
         display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 6px !important;
-        width: 100% !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 8px !important;
+        padding-bottom: 3px;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none; /* إخفاء شريط التمرير */
     }
 
     .nav-links a {
-        font-size: 12px !important;
-        padding: 3px 6px !important;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 4px;
+        font-size: 11px !important;
+        padding: 2px 5px !important;
+        white-space: nowrap;
     }
 
-    /* إبعاد المحتوى عن الهيدر عشان ميتغطش عليه */
-    body {
-        padding-top: 0 !important;
-    }
-
-    /* ضبط الكروت والشبكة على الموبايل لتكون واضحة */
+    /* 2. تنظيم عرض الأقسام والمنتجات تحت بعضها (عمود واحد أو عمودين بانتظام) */
     .games-grid, .products-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* عمودين متساوين */
+        gap: 10px !important;
         padding: 5px !important;
     }
 
+    /* كروت الأقسام والمنتجات لتكون صورة القسم فوق والتفريعات تحتها */
     .game-card, .product-card, .glass-container {
-        padding: 10px !important;
-        margin: 5px auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 12px !important;
+        margin: 5px 0 !important;
         width: 100% !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+    }
+
+    /* تصغير الصور داخل الكروت لتظهر بشكل ممتاز ومضبوط */
+    .game-card img, .product-card img {
+        width: 100% !important;
+        height: 110px !important;
+        object-fit: cover !important;
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    /* تنسيق النصوص وأسماء الأقسام */
+    .game-card h4, .product-card h3, .product-card h4 {
+        font-size: 13px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* زر الإضافة للسلة أو العرض ليناسب الموبايل */
+    .add-game-btn, .product-card button {
+        padding: 6px 10px !important;
+        font-size: 12px !important;
+        width: 100% !important;
+        margin-top: 5px !important;
     }
 }
