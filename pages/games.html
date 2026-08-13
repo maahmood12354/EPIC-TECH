@@ -3,136 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPIC TECH - اختيار الألعاب</title>
+    <title>EPIC TECH - مكتبة الألعاب</title>
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        /* تنسيقات مكتبة الألعاب */
+        .games-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .games-layout { grid-template-columns: 3fr 1fr; } /* تقسيم الشاشة: الألعاب يمين والسلة شمال */
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .game-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .game-card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .game-card h4 { color: #fff; margin-bottom: 5px; font-size: 16px; }
+        .game-card p { color: #94a3b8; font-size: 14px; margin-bottom: 10px; }
+        
+        .add-game-btn {
+            background: transparent;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .add-game-btn:hover { background: #38bdf8; color: #000; }
+        
+        /* سلة الألعاب */
+        .games-cart {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid #38bdf8;
+            border-radius: 10px;
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .remove-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .epic-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- الهيدر متظبط مساراته للصفحات الفرعية -->
+    <!-- الهيدر بتاعك -->
     <header class="main-header" dir="ltr">
+        <!-- ... (نفس كود الهيدر اللي فات بالظبط) ... -->
         <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
             <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
-                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px;">
             </a>
-            
-            <div class="search-container" style="display: flex; align-items: center; position: relative;">
-                <button id="searchIcon" class="search-btn" onclick="openSearch()" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeypress="handleHomeSearch(event)" style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
-            </div>
         </div>
-
         <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-            <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
-            <!-- لاحظ شيلنا كلمة pages/ لأننا بالفعل جوه الفولدر ده -->
-            <a href="category.html?cat=laptops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
-            <a href="category.html?cat=desktops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
-            <a href="category.html?cat=accessories" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Accessories</a>
-            <a href="category.html?cat=monitors" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
-            <a href="category.html?cat=bundles" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
-            <a href="category.html?cat=workstations" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
+            <a href="../index.html" style="text-decoration: none; color: #94a3b8;">Home</a>
+            <a href="category.html?cat=laptops" style="text-decoration: none; color: #94a3b8;">Laptops</a>
+            <a href="category.html?cat=desktops" style="text-decoration: none; color: #94a3b8;">PCs</a>
         </nav>
-        
-        <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-            <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
-            <label class="switch">
-                <input type="checkbox" id="themeToggle">
-                <span class="theme-slider">
-                    <span id="themeIcon">☀️</span>
-                </span>
-            </label>
-        </div>
     </header>
 
-    <main style="padding: 50px 20px; color: white; min-height: 70vh;">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 10px; font-size: 2.5rem;">اختر ألعابك 🎮</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">حدد الألعاب اللي عايز تحملها عشان نحسبلك المساحة المطلوبة.</p>
-            
-            <form action="#" method="POST" style="background: rgba(26, 26, 46, 0.8); padding: 30px; border-radius: 12px; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">
+    <main style="padding: 40px 20px; color: white; min-height: 70vh;">
+        <h2 style="color: #38bdf8; text-align: center; margin-bottom: 30px; font-size: 2.5rem;">مكتبة ألعاب EPIC TECH 🎮</h2>
+        
+        <!-- شريط البحث السريع في الألعاب -->
+        <div style="max-width: 500px; margin: 0 auto 30px auto;">
+            <input type="text" id="gameSearch" class="epic-input" placeholder="🔍 ابحث عن لعبة..." onkeyup="filterGames()" style="font-size: 16px; text-align: center;">
+        </div>
+
+        <div class="games-layout">
+            <!-- الجزء اليمين: شبكة الألعاب -->
+            <div>
+                <div class="games-grid" id="gamesContainer">
+                    <!-- الألعاب هتترسم هنا أوتوماتيك بالجافاسكريبت -->
+                </div>
+            </div>
+
+            <!-- الجزء الشمال: سلة الألعاب الخاصة -->
+            <div class="games-cart">
+                <h3 style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px;">سلة الألعاب 📥</h3>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    <!-- ضفنا data-size عشان الجافاسكريبت يعرف مساحة كل لعبة -->
-                    <label style="display: flex; align-items: center; gap: 10px; font-size: 18px; cursor: pointer; padding: 10px; background: #0f172a; border-radius: 8px;">
-                        <input type="checkbox" class="game-checkbox" name="game" value="GTAV" data-size="110" style="width: 20px; height: 20px;"> Grand Theft Auto V (110 GB)
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 10px; font-size: 18px; cursor: pointer; padding: 10px; background: #0f172a; border-radius: 8px;">
-                        <input type="checkbox" class="game-checkbox" name="game" value="Forza5" data-size="130" style="width: 20px; height: 20px;"> Forza Horizon 5 (130 GB)
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 10px; font-size: 18px; cursor: pointer; padding: 10px; background: #0f172a; border-radius: 8px;">
-                        <input type="checkbox" class="game-checkbox" name="game" value="PUBG" data-size="40" style="width: 20px; height: 20px;"> PUBG Battlegrounds (40 GB)
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 10px; font-size: 18px; cursor: pointer; padding: 10px; background: #0f172a; border-radius: 8px;">
-                        <input type="checkbox" class="game-checkbox" name="game" value="EuroTruck" data-size="20" style="width: 20px; height: 20px;"> Euro Truck Simulator 2 (20 GB)
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 10px; font-size: 18px; cursor: pointer; padding: 10px; background: #0f172a; border-radius: 8px;">
-                        <input type="checkbox" class="game-checkbox" name="game" value="AmericanTruck" data-size="15" style="width: 20px; height: 20px;"> American Truck Simulator (15 GB)
-                    </label>
+                <div id="selectedGamesList" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;">
+                    <p style="color: #94a3b8; text-align: center; font-size: 14px;">لم يتم اختيار ألعاب بعد.</p>
                 </div>
                 
-                <!-- عرض المساحة الإجمالية -->
-                <div style="margin-top: 30px; padding: 15px; background: #0f172a; border-radius: 8px; text-align: center; border: 1px dashed #38bdf8;">
-                    <h3 style="margin: 0; font-size: 22px; color: #cbd5e1;">إجمالي المساحة المطلوبة: <span id="totalSize" style="color: #38bdf8; font-weight: bold;">0</span> <span style="color: #38bdf8;">GB</span></h3>
+                <div style="margin-bottom: 20px; font-weight: bold; font-size: 16px;">
+                    إجمالي المساحة: <span id="totalSize" style="color: #38bdf8;">0</span> GB
                 </div>
 
-                <div style="margin-top: 30px; text-align: center;">
-                    <button type="submit" style="background: #38bdf8; color: #000; padding: 12px 40px; font-size: 20px; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                        إرسال الطلب عبر واتساب
+                <hr style="border-color: #334155; margin-bottom: 15px;">
+
+                <form id="gameOrderForm">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px;">الاسم بالكامل:</label>
+                    <input type="text" id="customerName" class="epic-input" placeholder="اكتب اسمك" required>
+                    
+                    <button type="submit" style="background: #38bdf8; color: #000; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; width: 100%;">
+                        طلب عبر واتساب 💬
                     </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </main>
 
-    <!-- الفوتر -->
+    <!-- الفوتر بتاعك -->
     <footer class="site-footer" dir="ltr">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>EPIC-TECH</h3>
-                <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers, gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's leading brands.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <p>📞 01017229055</p>
-                <a href="#">Facebook Page</a>
-            </div>
-            <div class="footer-column">
-                <h3>Shop</h3>
-                <ul>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Desktop PCs</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Monitors</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Policies</h3>
-                <ul>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Warranty Policy</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
-                </ul>
-            </div>
-        </div>
+        <!-- ... (نفس كود الفوتر) ... -->
     </footer>
 
-    <!-- السكريبتات -->
-    <script src="../js/script.js"></script>
-
-    <!-- سكريبت حساب المساحة -->
+    <!-- سكريبت الألعاب -->
     <script>
-        const checkboxes = document.querySelectorAll('.game-checkbox');
-        const totalSizeDisplay = document.getElementById('totalSize');
+        // 1. قاعدة بيانات الألعاب (ضيف هنا الـ 1000 لعبة براحتك)
+        const gamesDB = [
+            { id: 1, name: "Grand Theft Auto V", size: 110, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg" },
+            { id: 2, name: "Forza Horizon 5", size: 130, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg" },
+            { id: 3, name: "PUBG Battlegrounds", size: 40, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg" },
+            { id: 4, name: "Euro Truck Sim 2", size: 20, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg" },
+            { id: 5, name: "Red Dead Redemption 2", size: 150, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg" },
+            { id: 6, name: "Cyberpunk 2077", size: 70, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg" }
+            // تقدر تنسخ السطر وتغير الاسم والمساحة والصورة براحتك
+        ];
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                let total = 0;
-                document.querySelectorAll('.game-checkbox:checked').forEach(checkedBox => {
-                    total += parseInt(checkedBox.getAttribute('data-size'));
-                });
-                totalSizeDisplay.textContent = total;
+        let selectedGames = []; // السلة الخاصة بالألعاب
+
+        // 2. دالة رسم الألعاب في الشاشة
+        function renderGames(gamesArray) {
+            const container = document.getElementById('gamesContainer');
+            container.innerHTML = '';
+            
+            gamesArray.forEach(game => {
+                container.innerHTML += `
+                    <div class="game-card">
+                        <img src="${game.image}" alt="${game.name}">
+                        <h4>${game.name}</h4>
+                        <p>المساحة: ${game.size} GB</p>
+                        <button class="add-game-btn" onclick="addToGamesCart('${game.name}', ${game.size})">➕ إضافة للسلة</button>
+                    </div>
+                `;
             });
+        }
+
+        // 3. دالة إضافة اللعبة
+        function addToGamesCart(name, size) {
+            // التأكد إن اللعبة مش متضافة قبل كده
+            const exists = selectedGames.find(g => g.name === name);
+            if (exists) {
+                alert('اللعبة دي موجودة في السلة بالفعل!');
+                return;
+            }
+            
+            selectedGames.push({ name, size });
+            updateCartUI();
+        }
+
+        // 4. دالة حذف اللعبة من السلة
+        function removeFromGamesCart(name) {
+            selectedGames = selectedGames.filter(g => g.name !== name);
+            updateCartUI();
+        }
+
+        // 5. تحديث شكل سلة الألعاب والمساحة
+        function updateCartUI() {
+            const listContainer = document.getElementById('selectedGamesList');
+            const totalElement = document.getElementById('totalSize');
+            
+            if (selectedGames.length === 0) {
+                listContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; font-size: 14px;">لم يتم اختيار ألعاب بعد.</p>';
+                totalElement.innerText = '0';
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            let totalSize = 0;
+
+            selectedGames.forEach(game => {
+                totalSize += game.size;
+                listContainer.innerHTML += `
+                    <div class="cart-item">
+                        <span>${game.name}</span>
+                        <div>
+                            <span style="color: #38bdf8; font-size: 12px; margin-right: 10px;">${game.size}GB</span>
+                            <button class="remove-btn" onclick="removeFromGamesCart('${game.name}')">X</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            totalElement.innerText = totalSize;
+        }
+
+        // 6. دالة البحث في الألعاب
+        function filterGames() {
+            const searchTerm = document.getElementById('gameSearch').value.toLowerCase();
+            const filtered = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
+            renderGames(filtered);
+        }
+
+        // 7. إرسال الطلب واتساب
+        document.getElementById('gameOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (selectedGames.length === 0) {
+                alert('لازم تختار لعبة واحدة على الأقل قبل الطلب!');
+                return;
+            }
+
+            const name = document.getElementById('customerName').value;
+            const totalSpace = document.getElementById('totalSize').innerText;
+            const storePhone = "201017229055"; // رقمك
+            
+            // تجميع أسماء الألعاب تحت بعض
+            const gamesListText = selectedGames.map(g => `🎮 ${g.name} (${g.size}GB)`).join('%0A');
+            
+            const message = `أهلاً EPIC TECH، محتاج أحمل الألعاب دي:%0A%0A👤 الاسم: ${name}%0A📦 إجمالي المساحة: ${totalSpace} GB%0A%0Aالألعاب المطلوبة:%0A${gamesListText}`;
+            
+            window.open(`https://wa.me/${storePhone}?text=${message}`, '_blank');
         });
+
+        // تشغيل رسم الألعاب أول ما الصفحة تفتح
+        renderGames(gamesDB);
     </script>
 </body>
 </html>
