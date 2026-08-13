@@ -26,18 +26,26 @@
             gap: 15px;
         }
         
+/* تنسيقات كروت الألعاب (تأثير الزجاج الشفاف المعزول عن الـ RGB) */
         .game-card {
-            background: #0f172a;
-            border: 1px solid #334155;
+            background: rgba(0, 0, 0, 0.4) !important; /* خلفية سوداء شفافة */
+            backdrop-filter: blur(10px) !important; /* تأثير الزجاج */
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important; /* إطار أبيض خفيف جداً */
             border-radius: 10px;
             padding: 10px;
             text-align: center;
             transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; /* ظل أسود عادي بدون ألوان */
+            animation: none !important; /* إيقاف أي أنيميشن ألوان */
         }
+
         .game-card:hover {
-            border-color: #38bdf8;
+            border-color: rgba(255, 255, 255, 0.3) !important;
             transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.6) !important;
         }
+
         .game-card img {
             width: 100%;
             height: 250px;
@@ -45,51 +53,64 @@
             border-radius: 8px;
             margin-bottom: 10px;
         }
-        .game-card h4 { color: #fff; margin-bottom: 5px; font-size: 16px; }
-        .game-card p { color: #94a3b8; font-size: 14px; margin-bottom: 10px; }
+        .game-card h4 { color: #fff !important; margin-bottom: 5px; font-size: 16px; text-shadow: none !important; }
+        .game-card p { color: #94a3b8 !important; font-size: 14px; margin-bottom: 10px; text-shadow: none !important; }
         
         .add-game-btn {
-            background: transparent;
-            color: #38bdf8;
-            border: 1px solid #38bdf8;
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
             font-weight: bold;
             transition: 0.3s;
+            box-shadow: none !important;
         }
-        .add-game-btn:hover { background: #38bdf8; color: #000; }
+        .add-game-btn:hover { 
+            background: #fff !important; 
+            color: #000 !important; 
+        }
         
-        /* سلة الألعاب */
+        /* تنسيقات سلة الألعاب (شفافة ومعزولة) */
         .games-cart {
-            background: rgba(26, 26, 46, 0.9);
-            border: 1px solid #38bdf8;
+            background: rgba(0, 0, 0, 0.4) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             border-radius: 10px;
             padding: 20px;
             position: sticky;
             top: 20px;
             height: fit-content;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+            animation: none !important;
         }
+
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0f172a;
+            background: rgba(255, 255, 255, 0.05) !important; /* شفافية خفيفة لعناصر السلة */
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
             font-size: 14px;
+            color: white !important;
+            box-shadow: none !important;
         }
+
         .remove-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
+            background: rgba(239, 68, 68, 0.8) !important;
+            color: white !important;
+            border: none !important;
             padding: 5px 10px;
             border-radius: 3px;
             cursor: pointer;
-        }
-        
+            box-shadow: none !important;
+        }        
         .epic-input {
             width: 100%;
             padding: 10px;
