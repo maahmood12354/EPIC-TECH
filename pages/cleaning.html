@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<طلب lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC TECH - حجز خدمة الصيانة</title>
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body, html {
+            background-color: #0f172a !important;
+            background-image: none !important;
+            color: white;
+            font-family: Tahoma, sans-serif;
+        }
+        .service-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .step-box {
+            margin-bottom: 25px;
+        }
+        .step-box label {
+            display: block;
+            margin-bottom: 8px;
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .epic-input {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+        .epic-input:focus {
+            border-color: #38bdf8;
+        }
+        .hidden {
+            display: none;
+        }
+        .submit-btn {
+            background: #38bdf8;
+            color: #000;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header class="main-header" dir="ltr">
+        <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
+            <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
+                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px;">
+            </a>
+        </div>
+        <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+            <a href="../index.html" style="text-decoration: none; color: #94a3b8;">Home</a>
+            <a href="games.html" style="text-decoration: none; color: #94a3b8;">Games</a>
+        </nav>
+    </header>
+
+    <main style="padding: 20px;">
+        <div class="service-container">
+            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 25px;">حجز خدمة الصيانة والتنظيف 🛠️</h2>
+            
+            <form id="maintenanceForm">
+                
+                <!-- 1. اختيار نوع العميل -->
+                <div class="step-box">
+                    <label>اختر نوع العميل:</label>
+                    <select id="clientType" class="epic-input" required onchange="handleClientType()">
+                        <option value="">-- اختار --</option>
+                        <option value="فرد">فرد (منزل)</option>
+                        <option value="سايبر">سايبر (Gaming Cafe)</option>
+                        <option value="شركة">شركة</option>
+                    </select>
+                </div>
+
+                <!-- 2. نوع الخدمة الأساسية -->
+                <div class="step-box">
+                    <label>اختر نوع الخدمة:</label>
+                    <select id="serviceType" class="epic-input" required onchange="handleServiceType()">
+                        <option value="">-- اختار الخدمة --</option>
+                        <option value="تنظيف فقط">تنظيف للجهاز فقط</option>
+                        <option value="تنظيف وتغيير معجون">تنظيف وتغيير معجون</option>
+                        <option value="تسطيب ويندوز واصلاح مشاكل">تسطيب ويندوز واصلاح مشاكل النظام</option>
+                    </select>
+                </div>
+
+                <!-- 3. فرع المعجون (يظهر فقط لو اختار تنظيف وتغيير معجون) -->
+                <div class="step-box hidden" id="pasteSection">
+                    <label>تغيير معجون لـ:</label>
+                    <select id="pasteTarget" class="epic-input" onchange="handlePasteTarget()">
+                        <option value="">-- اختار --</option>
+                        <option value="المعالج (CPU)">المعالج (CPU) فقط</option>
+                        <option value="كارت الشاشة (GPU)">كارت الشاشة (GPU) فقط</option>
+                        <option value="الاتنين مع بعض (CPU & GPU)">الاتنين مع بعض (المعالج وكارت الشاشة)</option>
+                    </select>
+                </div>
+
+                <!-- 4. فرع الثرمال باد (يظهر لو اختار كارت الشاشة أو الاتنين) -->
+                <div class="step-box hidden" id="thermalSection">
+                    <label>خيارات الثرمال باد (Thermal Pads):</label>
+                    <select id="thermalTarget" class="epic-input">
+                        <option value="بدون ثرمال باد">بدون</option>
+                        <option value="لكارت الشاشة فقط">لكارت الشاشة فقط</option>
+                        <option value="لكارت الشاشة والبورده">لكارت الشاشة والبورده</option>
+                    </select>
+                </div>
+
+                <!-- بيانات العميل والزرار -->
+                <div class="step-box">
+                    <label>الاسم بالكامل:</label>
+                    <input type="text" id="custName" class="epic-input" placeholder="اكتب اسمك" required>
+                </div>
+
+                <div class="step-box">
+                    <label>العنوان / رقم الهاتف:</label>
+                    <input type="text" id="custDetails" class="epic-input" placeholder="اكتب عنوانك ورقمك للتواصل" required>
+                </div>
+
+                <button type="submit" class="submit-btn">إرسال طلب الصيانة عبر واتساب 💬</button>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // إظهار وإخفاء الخيارات حسب اختيارات العميل
+        function handleClientType() {
+            // ممكن تخصص حاجات هنا قدام لو حابب
+        }
+
+        function handleServiceType() {
+            const service = document.getElementById('serviceType').value;
+            const pasteSec = document.getElementById('pasteSection');
+            const thermalSec = document.getElementById('thermalSection');
+
+            if (service === "تنظيف وتغيير معجون") {
+                pasteSec.classList.remove('hidden');
+            } else {
+                pasteSec.classList.add('hidden');
+                thermalSec.classList.add('hidden');
+                document.getElementById('pasteTarget').value = "";
+            }
+        }
+
+        function handlePasteTarget() {
+            const pasteTarget = document.getElementById('pasteTarget').value;
+            const thermalSec = document.getElementById('thermalSection');
+
+            // لو اختار كارت الشاشة أو الاتنين مع بعض، بنفتحله خيار الثرمال باد
+            if (pasteTarget.includes("كارت الشاشة")) {
+                thermalSec.classList.remove('hidden');
+            } else {
+                thermalSec.classList.add('hidden');
+            }
+        }
+
+        // إرسال البيانات للواتساب تنسيق احترافي
+        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const clientType = document.getElementById('clientType').value;
+            const serviceType = document.getElementById('serviceType').value;
+            const pasteTarget = document.getElementById('pasteTarget').value;
+            const thermalTarget = document.getElementById('thermalTarget').value;
+            const name = document.getElementById('custName').value;
+            const details = document.getElementById('custDetails').value;
+            
+            const storePhone = "201017229055"; // رقمك
+
+            let message = `🛠️ طلب خدمة صيانة جديد - EPIC TECH:%0A%0A`;
+            message += `👤 نوع العميل: ${clientType}%0A`;
+            message += `🔧 الخدمة المطلوبة: ${serviceType}%0A`;
+
+            if (serviceType === "تنظيف وتغيير معجون") {
+                message += `🧪 تغيير معجون لـ: ${pasteTarget}%0A`;
+                if (pasteTarget.includes("كارت الشاشة")) {
+                    message += `🧱 الثرمال باد: ${thermalTarget}%0A`;
+                }
+            }
+
+            message += `%0A📝 اسم العميل: ${name}%0A📍 العنوان ورقم التواصل: ${details}`;
+
+            window.open(`https://wa.me/${storePhone}?text=${message}`, '_blank');
+        });
+    </script>
+</body>
+</html>
