@@ -1,145 +1,265 @@
 <!DOCTYPE html>
-<طلب lang="ar" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPIC TECH - حجز خدمة الصيانة</title>
+    <title>EPIC TECH - حجز خدمات الصيانة والتنظيف</title>
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
-    <link rel="stylesheet" href="../assets/css/style.css">
     
     <style>
-        body, html {
-            background-color: #0f172a !important;
-            background-image: none !important;
-            color: white;
-            font-family: Tahoma, sans-serif;
+        /* إعدادات الخلفية العامة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .service-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a 60%, #020617);
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        /* 1. هيدر زجاجي شفاف مع اللوجو واسم المحل */
+        .glass-header {
+            width: 90%;
+            max-width: 1100px;
+            margin: 25px auto 10px;
+            padding: 14px 28px;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
-        .step-box {
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            height: 42px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #38bdf8;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* 2. استمارة الصيانة الزجاجية (Frosted Glass Card) */
+        .glass-container {
+            max-width: 600px;
+            width: 90%;
+            margin: 30px auto 50px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-header {
+            text-align: center;
             margin-bottom: 25px;
         }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-header p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* الحقول والقوائم */
+        .step-box {
+            margin-bottom: 20px;
+        }
+
         .step-box label {
             display: block;
             margin-bottom: 8px;
-            color: #38bdf8;
-            font-weight: bold;
-            font-size: 16px;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 14.5px;
         }
-        .epic-input {
+
+        .glass-input {
             width: 100%;
-            padding: 12px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            color: white;
-            border-radius: 6px;
+            padding: 13px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            border-radius: 10px;
             outline: none;
-            font-size: 15px;
+            font-size: 14.5px;
+            transition: 0.3s;
         }
-        .epic-input:focus {
+
+        .glass-input:focus {
             border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+            background: rgba(15, 23, 42, 0.8);
         }
+
+        .glass-input option {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
         .hidden {
             display: none;
         }
+
+        /* زر إرسال الواتساب */
         .submit-btn {
             background: #38bdf8;
-            color: #000;
+            color: #04121d;
             padding: 14px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
             cursor: pointer;
             border: none;
             width: 100%;
-            transition: 0.3s;
+            margin-top: 10px;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
         }
+
         .submit-btn:hover {
-            background: #0ea5e9;
+            background: #7dd3fc;
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
-    <header class="main-header" dir="ltr">
-        <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-            <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
-                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px;">
-            </a>
-        </div>
-        <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-            <a href="../index.html" style="text-decoration: none; color: #94a3b8;">Home</a>
-            <a href="games.html" style="text-decoration: none; color: #94a3b8;">Games</a>
+    <!-- الهيدر الزجاجي -->
+    <header class="glass-header" dir="ltr">
+        <a href="../index.html" class="brand-container">
+            <img src="../assets/images/favicon.png" alt="EPIC TECH Logo" class="brand-logo">
+            <span class="brand-name">EPIC TECH</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="games.html">Games</a>
         </nav>
     </header>
 
-    <main style="padding: 20px;">
-        <div class="service-container">
-            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 25px;">حجز خدمة الصيانة والتنظيف 🛠️</h2>
+    <!-- الاستمارة الزجاجية الشفافة -->
+    <main>
+        <div class="glass-container">
+            <div class="form-header">
+                <h2><span>🛠️</span> حجز خدمة الصيانة</h2>
+                <p>صيانة وتنظيف احترافي لأعلى أداء وتبريد</p>
+            </div>
             
             <form id="maintenanceForm">
                 
-                <!-- 1. اختيار نوع العميل -->
+                <!-- 1. نوع العميل -->
                 <div class="step-box">
                     <label>اختر نوع العميل:</label>
-                    <select id="clientType" class="epic-input" required onchange="handleClientType()">
-                        <option value="">-- اختار --</option>
-                        <option value="فرد">فرد (منزل)</option>
+                    <select id="clientType" class="glass-input" required onchange="handleClientType()">
+                        <option value="">-- اختار نوع العميل --</option>
+                        <option value="فرد">فرد (جهاز شخصي)</option>
                         <option value="سايبر">سايبر (Gaming Cafe)</option>
-                        <option value="شركة">شركة</option>
+                        <option value="شركة">شركة / مكتب</option>
                     </select>
+                </div>
+
+                <!-- 1. مكمل: عدد الأجهزة (يظهر فقط لو سايبر أو شركة) -->
+                <div class="step-box hidden" id="devicesCountSection">
+                    <label>عدد الأجهزة المطلوب صيانتها:</label>
+                    <input type="number" id="devicesCount" class="glass-input" placeholder="مثال: 10" min="1">
                 </div>
 
                 <!-- 2. نوع الخدمة الأساسية -->
                 <div class="step-box">
                     <label>اختر نوع الخدمة:</label>
-                    <select id="serviceType" class="epic-input" required onchange="handleServiceType()">
-                        <option value="">-- اختار الخدمة --</option>
-                        <option value="تنظيف فقط">تنظيف للجهاز فقط</option>
-                        <option value="تنظيف وتغيير معجون">تنظيف وتغيير معجون</option>
+                    <select id="serviceType" class="glass-input" required onchange="handleServiceType()">
+                        <option value="">-- اختار الخدمة المطلوبة --</option>
+                        <option value="تنظيف لجهاز فقط">تنظيف شامل للجهاز فقط</option>
+                        <option value="تنظيف وتغيير معجون">تنظيف وتغيير معجون حراري</option>
                         <option value="تسطيب ويندوز واصلاح مشاكل">تسطيب ويندوز واصلاح مشاكل النظام</option>
                     </select>
                 </div>
 
-                <!-- 3. فرع المعجون (يظهر فقط لو اختار تنظيف وتغيير معجون) -->
+                <!-- 3. تفاصيل المعجون (تظهر لو اختار تنظيف وتغيير معجون) -->
                 <div class="step-box hidden" id="pasteSection">
                     <label>تغيير معجون لـ:</label>
-                    <select id="pasteTarget" class="epic-input" onchange="handlePasteTarget()">
-                        <option value="">-- اختار --</option>
+                    <select id="pasteTarget" class="glass-input" onchange="handlePasteTarget()">
+                        <option value="">-- اختار القطعة --</option>
                         <option value="المعالج (CPU)">المعالج (CPU) فقط</option>
                         <option value="كارت الشاشة (GPU)">كارت الشاشة (GPU) فقط</option>
-                        <option value="الاتنين مع بعض (CPU & GPU)">الاتنين مع بعض (المعالج وكارت الشاشة)</option>
+                        <option value="المعالج وكارت الشاشة معاً">المعالج وكارت الشاشة (الاتنين معاً)</option>
                     </select>
                 </div>
 
-                <!-- 4. فرع الثرمال باد (يظهر لو اختار كارت الشاشة أو الاتنين) -->
+                <!-- 4. تفاصيل الثرمال باد (تظهر لو اختار كارت أو الاتنين) -->
                 <div class="step-box hidden" id="thermalSection">
                     <label>خيارات الثرمال باد (Thermal Pads):</label>
-                    <select id="thermalTarget" class="epic-input">
-                        <option value="بدون ثرمال باد">بدون</option>
+                    <select id="thermalTarget" class="glass-input">
+                        <option value="بدون ثرمال باد">بدون ثرمال باد</option>
                         <option value="لكارت الشاشة فقط">لكارت الشاشة فقط</option>
                         <option value="لكارت الشاشة والبورده">لكارت الشاشة والبورده</option>
                     </select>
                 </div>
 
-                <!-- بيانات العميل والزرار -->
+                <!-- بيانات العميل -->
                 <div class="step-box">
                     <label>الاسم بالكامل:</label>
-                    <input type="text" id="custName" class="epic-input" placeholder="اكتب اسمك" required>
+                    <input type="text" id="custName" class="glass-input" placeholder="اكتب اسمك الكريم" required>
                 </div>
 
                 <div class="step-box">
                     <label>العنوان / رقم الهاتف:</label>
-                    <input type="text" id="custDetails" class="epic-input" placeholder="اكتب عنوانك ورقمك للتواصل" required>
+                    <input type="text" id="custDetails" class="glass-input" placeholder="العنوان بالتفصيل ورقم هاتفك" required>
                 </div>
 
                 <button type="submit" class="submit-btn">إرسال طلب الصيانة عبر واتساب 💬</button>
@@ -148,12 +268,27 @@
         </div>
     </main>
 
+    <!-- الفوتر البسيط -->
+    <footer style="text-align: center; padding: 20px; color: #64748b; font-size: 13px;">
+        &copy; EPIC TECH - جميع الحقوق محفوظة
+    </footer>
+
+    <!-- سكريبت التفاعل والواتساب -->
     <script>
-        // إظهار وإخفاء الخيارات حسب اختيارات العميل
+        // إظهار حقل عدد الأجهزة لو العميل سايبر أو شركة
         function handleClientType() {
-            // ممكن تخصص حاجات هنا قدام لو حابب
+            const clientType = document.getElementById('clientType').value;
+            const devicesSec = document.getElementById('devicesCountSection');
+
+            if (clientType === "سايبر" || clientType === "شركة") {
+                devicesSec.classList.remove('hidden');
+            } else {
+                devicesSec.classList.add('hidden');
+                document.getElementById('devicesCount').value = "";
+            }
         }
 
+        // إظهار حقول المعجون لو تم اختياره
         function handleServiceType() {
             const service = document.getElementById('serviceType').value;
             const pasteSec = document.getElementById('pasteSection');
@@ -165,41 +300,49 @@
                 pasteSec.classList.add('hidden');
                 thermalSec.classList.add('hidden');
                 document.getElementById('pasteTarget').value = "";
+                document.getElementById('thermalTarget').value = "بدون ثرمال باد";
             }
         }
 
+        // إظهار حقل الثرمال باد عند اختيار كارت الشاشة أو الاثنين
         function handlePasteTarget() {
             const pasteTarget = document.getElementById('pasteTarget').value;
             const thermalSec = document.getElementById('thermalSection');
 
-            // لو اختار كارت الشاشة أو الاتنين مع بعض، بنفتحله خيار الثرمال باد
-            if (pasteTarget.includes("كارت الشاشة")) {
+            if (pasteTarget === "كارت الشاشة (GPU)" || pasteTarget === "المعالج وكارت الشاشة معاً") {
                 thermalSec.classList.remove('hidden');
             } else {
                 thermalSec.classList.add('hidden');
+                document.getElementById('thermalTarget').value = "بدون ثرمال باد";
             }
         }
 
-        // إرسال البيانات للواتساب تنسيق احترافي
+        // إرسال الطلب بتنسيق مرتب للواتساب
         document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const clientType = document.getElementById('clientType').value;
+            const devicesCount = document.getElementById('devicesCount').value;
             const serviceType = document.getElementById('serviceType').value;
             const pasteTarget = document.getElementById('pasteTarget').value;
             const thermalTarget = document.getElementById('thermalTarget').value;
             const name = document.getElementById('custName').value;
             const details = document.getElementById('custDetails').value;
             
-            const storePhone = "201017229055"; // رقمك
+            const storePhone = "201017229055";
 
             let message = `🛠️ طلب خدمة صيانة جديد - EPIC TECH:%0A%0A`;
             message += `👤 نوع العميل: ${clientType}%0A`;
+            
+            if (clientType === "سايبر" || clientType === "شركة") {
+                message += `🖥️ عدد الأجهزة: ${devicesCount} جهاز%0A`;
+            }
+
             message += `🔧 الخدمة المطلوبة: ${serviceType}%0A`;
 
             if (serviceType === "تنظيف وتغيير معجون") {
                 message += `🧪 تغيير معجون لـ: ${pasteTarget}%0A`;
-                if (pasteTarget.includes("كارت الشاشة")) {
+                if (pasteTarget === "كارت الشاشة (GPU)" || pasteTarget === "المعالج وكارت الشاشة معاً") {
                     message += `🧱 الثرمال باد: ${thermalTarget}%0A`;
                 }
             }
