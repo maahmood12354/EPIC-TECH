@@ -1216,11 +1216,28 @@
         }
 
         // 7. دالة البحث
-        function filterGames() {
+// 7. دالة البحث والترتيب (الفلتر الذكي)
+        function filterAndSortGames() {
             const searchTerm = document.getElementById('gameSearch').value.toLowerCase();
-            const filtered = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
-            renderGames(filtered);
-        }
+            const sortValue = document.getElementById('gameSort').value;
+            
+            // أولاً: فلترة الألعاب حسب الاسم اللي العميل بيبحث عنه
+            let resultGames = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
+            
+            // ثانياً: ترتيب الألعاب حسب اختيار العميل من القائمة
+            if (sortValue === "nameAsc") {
+                resultGames.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortValue === "nameDesc") {
+                resultGames.sort((a, b) => b.name.localeCompare(a.name));
+            } else if (sortValue === "sizeAsc") {
+                resultGames.sort((a, b) => a.size - b.size);
+            } else if (sortValue === "sizeDesc") {
+                resultGames.sort((a, b) => b.size - a.size);
+            }
+            
+            // عرض النتيجة النهائية بعد الفلترة والترتيب
+            renderGames(resultGames);
+        }  
 
         // 8. إرسال الطلب واتساب
         document.getElementById('gameOrderForm').addEventListener('submit', function(e) {
