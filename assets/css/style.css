@@ -1129,3 +1129,52 @@ input:checked + .slider:before { transform: translateX(26px); }
     max-width: 1200px;
     margin: 0 auto 40px auto;
 }
+/* --- تظبيط الموقع والشاشات الصغيرة للموبايل --- */
+@media screen and (max-width: 768px) {
+    /* 1. تصغير الهيدر العام ليتناسب مع شاشات الهواتف */
+    header.main-header, .glass-header {
+        flex-direction: column !important;
+        padding: 10px 15px !important;
+        border-radius: 20px !important;
+        gap: 10px !important;
+        width: 95% !important;
+        margin: 10px auto !important;
+    }
+
+    /* 2. ترتيب روابط الهيدر فوق بعضها أو بشكل أفقي مصغر بدون زحمة */
+    .nav-links {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+
+    .nav-links a {
+        font-size: 13px !important;
+        padding: 4px 8px !important;
+    }
+
+    /* 3. تصغير العناوين الرئيسية عشان متكبرش زيادة عن اللزوم على الموبايل */
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    /* 4. ضبط شبكة الألعاب والمنتجات لتظهر عمود واحد أو عمودين بانتظام */
+    .games-grid, .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+
+    /* 5. ضبط كروت المنتجات والصيانة على الموبايل */
+    .game-card, .product-card, .glass-container {
+        padding: 15px !important;
+        margin: 5px auto !important;
+        width: 100% !important;
+    }
+
+    /* 6. منع خروج النصوص وتداخلها */
+    body {
+        font-size: 14px !important;
+    }
+}
