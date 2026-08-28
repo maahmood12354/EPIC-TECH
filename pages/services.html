@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPIC TECH - النظافة والصيانة المنزلية</title>
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../assets/css/style.css">
-    
+
     <!-- ستايل إضافي للفورم عشان يبقى شكله فخم -->
     <style>
         .epic-input {
@@ -22,10 +23,12 @@
             outline: none;
             transition: 0.3s;
         }
+
         .epic-input:focus {
             border-color: #38bdf8;
             box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
         }
+
         .epic-label {
             display: block;
             margin-bottom: 8px;
@@ -35,31 +38,45 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- الهيدر -->
     <header class="main-header" dir="ltr">
         <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-            <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
-                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <a href="../index.html" class="logo-area"
+                style="text-decoration: none; display: flex; align-items: center;">
+                <img src="../assets/images/favicon.png" alt="EPIC TECH"
+                    style="height: 45px; width: auto; border-radius: 8px; transition: 0.3s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
             </a>
-            
+
             <div class="search-container" style="display: flex; align-items: center; position: relative;">
-                <button id="searchIcon" class="search-btn" onclick="openSearch()" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeypress="handleHomeSearch(event)" style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
+                <button id="searchIcon" class="search-btn" onclick="openSearch()"
+                    style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..."
+                    onkeypress="handleHomeSearch(event)"
+                    style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
             </div>
         </div>
 
         <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-            <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
-            <a href="category.html?cat=laptops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
-            <a href="category.html?cat=desktops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
-            <a href="category.html?cat=accessories" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Accessories</a>
-            <a href="category.html?cat=monitors" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
-            <a href="category.html?cat=bundles" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
-            <a href="category.html?cat=workstations" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
+            <a href="../index.html"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+            <a href="category.html?cat=laptops"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
+            <a href="category.html?cat=desktops"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
+            <a href="category.html?cat=accessories"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Accessories</a>
+            <a href="category.html?cat=monitors"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
+            <a href="category.html?cat=bundles"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
+            <a href="category.html?cat=workstations"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
         </nav>
-        
+
         <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
             <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
             <label class="switch">
@@ -74,11 +91,14 @@
     <!-- محتوى صفحة الصيانة -->
     <main style="padding: 50px 20px; color: white; min-height: 70vh;">
         <div style="max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 10px; font-size: 2.5rem;">النظافة والصيانة المنزلية 🛠️</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">سجل بياناتك وهنوصلك لحد باب البيت عشان نرجع جهازك جديد.</p>
-            
-            <form id="maintenanceForm" style="background: rgba(26, 26, 46, 0.8); padding: 40px; border-radius: 12px; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">
-                
+            <h2 style="color: #38bdf8; text-align: center; margin-bottom: 10px; font-size: 2.5rem;">النظافة والصيانة
+                المنزلية 🛠️</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">سجل بياناتك وهنوصلك لحد
+                باب البيت عشان نرجع جهازك جديد.</p>
+
+            <form id="maintenanceForm"
+                style="background: rgba(26, 26, 46, 0.8); padding: 40px; border-radius: 12px; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">
+
                 <label class="epic-label">الاسم بالكامل</label>
                 <input type="text" id="clientName" class="epic-input" placeholder="اكتب اسمك ثلاثي" required>
 
@@ -86,19 +106,23 @@
                 <input type="tel" id="clientPhone" class="epic-input" placeholder="010XXXXXXXX" required>
 
                 <label class="epic-label">العنوان بالتفصيل</label>
-                <input type="text" id="clientAddress" class="epic-input" placeholder="المحافظة، المنطقة، الشارع، رقم العمارة" required>
+                <input type="text" id="clientAddress" class="epic-input"
+                    placeholder="المحافظة، المنطقة، الشارع، رقم العمارة" required>
 
                 <label class="epic-label">نوع الخدمة المطلوبة</label>
                 <select id="serviceType" class="epic-input" required style="cursor: pointer;">
                     <option value="" disabled selected>اختر الخدمة...</option>
                     <option value="تنظيف كيسة بالكامل (طرد أتربة)">تنظيف كيسة بالكامل (طرد أتربة)</option>
-                    <option value="تغيير معجون حراري (Thermal Paste) + تنظيف">تغيير معجون حراري (Thermal Paste) + تنظيف</option>
+                    <option value="تغيير معجون حراري (Thermal Paste) + تنظيف">تغيير معجون حراري (Thermal Paste) + تنظيف
+                    </option>
                     <option value="تنظيف وتزييت مراوح التبريد">تنظيف وتزييت مراوح التبريد</option>
                     <option value="فحص وصيانة شاملة">فحص وصيانة شاملة</option>
                 </select>
 
                 <div style="margin-top: 30px; text-align: center;">
-                    <button type="submit" style="background: #38bdf8; color: #000; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; transition: 0.3s; width: 100%;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <button type="submit"
+                        style="background: #38bdf8; color: #000; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; transition: 0.3s; width: 100%;"
+                        onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                         إرسال الطلب عبر واتساب 💬
                     </button>
                 </div>
@@ -111,7 +135,9 @@
         <div class="footer-content">
             <div class="footer-column">
                 <h3>EPIC-TECH</h3>
-                <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers, gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's leading brands.</p>
+                <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers,
+                    gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's
+                    leading brands.</p>
             </div>
             <div class="footer-column">
                 <h3>Contact</h3>
@@ -143,25 +169,26 @@
 
     <!-- سكريبت تحويل الطلب لواتساب -->
     <script>
-        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+        document.getElementById('maintenanceForm').addEventListener('submit', function (e) {
             e.preventDefault(); // منع الصفحة إنها تعمل ريفرش
-            
+
             // تجميع البيانات
             const name = document.getElementById('clientName').value;
             const phone = document.getElementById('clientPhone').value;
             const address = document.getElementById('clientAddress').value;
             const service = document.getElementById('serviceType').value;
-            
+
             // رقم الواتساب بتاعك (بدون الـ +)
-            const storePhone = "201017229055"; 
-            
+            const storePhone = "201017229055";
+
             // الرسالة اللي هتوصلك
             const message = `أهلاً EPIC TECH، محتاج أطلب خدمة صيانة منزلية:%0A%0A👤 الاسم: ${name}%0A📱 رقم الموبايل: ${phone}%0A📍 العنوان: ${address}%0A🛠️ الخدمة المطلوبة: ${service}`;
-            
+
             // فتح واتساب
             const whatsappUrl = `https://wa.me/${storePhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
         });
     </script>
 </body>
+
 </html>

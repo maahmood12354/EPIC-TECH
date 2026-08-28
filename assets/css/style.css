@@ -1,37 +1,49 @@
-:root { --primary-color: #ff6a00; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-/* خلفية النيون المتحركة (RGB Background) */
-/* 1. الخلفية الأساسية (النيون المتحرك) */
+:root {
+    --primary-color: #ff6a00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= الخلفية الأساسية (النيون المتحرك) ================= */
 body {
-    background-color: #0a0a0a; /* شلت الـ !important عشان الـ gradient ياخد راحته */
+    background-color: #0a0a0a;
     color: #ffffff;
-    padding-top: 150px; /* دي مساحة "حجز" تحت الهيدر العايم */
-    background-image: 
+    padding-top: 150px;
+    /* مساحة "حجز" تحت الهيدر العايم */
+    background-image:
         radial-gradient(circle at 50% 100%, rgba(255, 106, 0, 0.2), transparent 60%),
         radial-gradient(circle at 0% 50%, rgba(255, 0, 0, 0.1), transparent 40%),
         radial-gradient(circle at 100% 50%, rgba(0, 0, 255, 0.1), transparent 40%);
     background-attachment: fixed;
-    /* تأكد إن الأنيميشن ده موجود في ملف الـ CSS */
-    animation: keyboard-wave 10s ease-in-out infinite; 
+    /* أنيميشن keyboard-wave (hue-rotate) اتشالت من هنا لأنها كانت بتغيّر ألوان
+       كل حاجة جوه الصفحة (أزرار، بادچات، وصور المنتجات نفسها) بشكل غير دقيق.
+       الـ filter مبيتلغيش من عنصر ابن لو حطيته على أب، فمفيش طريقة نستثني
+       صفحة المنتج منها غير إننا نشيلها من هنا خالص. الـ keyframes لسه موجودة
+       تحت لو حبيت تطبقها لاحقًا على عنصر ديكوري منفصل بعيد عن المحتوى الحقيقي. */
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden; /* إضافة مهمة: بتمنع ظهور شريط سكرول أفقي يمين وشمال */
+    overflow-x: hidden;
+    /* بتمنع ظهور شريط سكرول أفقي */
 }
 
-/* 2. طبقة القزاز - اتأكدت من الخصائص كاملة */
+/* طبقة القزاز */
 .background-glass-layer {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.01);
-    z-index: 0; /* ورا المحتوى */
+    z-index: 0;
     pointer-events: none;
 }
 
-/* 3. لمبة النيون */
+/* لمبة النيون تحت الفوتر */
 .footer-neon-light {
     position: fixed;
     bottom: 0;
@@ -39,45 +51,71 @@ body {
     width: 100%;
     height: 300px;
     background: linear-gradient(to top, rgba(255, 69, 0, 0.3) 0%, rgba(255, 106, 0, 0.1) 50%, transparent 100%);
-    z-index: 1; /* فوق القزازة */
+    z-index: 1;
     pointer-events: none;
     animation: sunset-pulse 8s infinite alternate;
 }
 
-/* ضروري: التأكد إن الكلام يظهر فوق كل ده */
-h1, h2, h3, p, .category-card {
+/* ضروري: التأكد إن الكلام يظهر فوق كل الطبقات */
+h1,
+h2,
+h3,
+p,
+.category-card {
     position: relative;
     z-index: 10;
 }
-/* حركة تنفس لون الغروب */
+
 @keyframes sunset-pulse {
-    0% { filter: hue-rotate(0deg); opacity: 0.5; }
-    50% { filter: hue-rotate(45deg); opacity: 0.8; } /* بيدي تغيير ألوان خفيف */
-    100% { filter: hue-rotate(0deg); opacity: 0.5; }
+    0% {
+        filter: hue-rotate(0deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        filter: hue-rotate(45deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        filter: hue-rotate(0deg);
+        opacity: 0.5;
+    }
 }
-/* حركة الموجه (تغير ألوان زي الكيبورد) */
+
 @keyframes keyboard-wave {
-    0% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(90deg); } /* بيقلب الألوان تدريجياً */
-    100% { filter: hue-rotate(0deg); }
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(90deg);
+    }
+
+    100% {
+        filter: hue-rotate(0deg);
+    }
 }
-/* الشبكة: تخليهم صف واحد بالعرض */
+
+/* ================= الشبكة الرئيسية للتصنيفات (نسخة واحدة مدموجة) ================= */
 .categories-grid {
+    position: relative;
+    z-index: 10;
     display: flex;
-    justify-content: space-between; /* توزيع مسافات متساوي */
-    align-items: stretch;           /* عشان كلهم يبقوا نفس الطول */
-    gap: 15px;                      /* مسافة صغيرة بين الكروت */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
     padding: 20px;
-    width: 100%;                    /* عرض الصفحة بالكامل */
-    max-width: 100%;                /* السماح بالتمدد */
-    overflow-x: auto;               /* سكرول للموبايل */
+    margin-top: 50px;
+    width: 100%;
     background: radial-gradient(circle at center, rgba(255, 106, 0, 0.05), transparent 70%);
-    flex-direction: row-reverse;
 }
-/* الكرت - التصميم النهائي */
+
+/* الكرت */
 .category-card {
-    flex: 1; 
-    aspect-ratio: 1 / 1; 
+    flex: 1;
+    aspect-ratio: 1 / 1;
     min-width: 150px;
     padding: 20px;
     text-align: center;
@@ -93,55 +131,39 @@ h1, h2, h3, p, .category-card {
     justify-content: center;
     transition: 0.4s ease-in-out;
 }
-/* التأثير لما الماوس يجي على القزازة */
+
 .category-card:hover {
     background: rgba(255, 255, 255, 0.1) !important;
-    transform: translateY(-10px); /* ضفت الفاصلة المنقوطة هنا */
-    border: 1px solid rgba(255, 255, 255, 0.4); 
+    transform: translateY(-10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
-/* الصور - كبيرة وتملأ الكارت */
+
 .category-card img {
-    width: 100%;          /* الصورة تاخد 60% من عرض المربع */
+    width: 100%;
     height: auto;
     object-fit: contain;
     margin-bottom: 15px;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
 }
-/* عشان العنوان يبقى تحت الصورة مباشرة وشكله متناسق */
+
 .category-card h3 {
     font-size: 16px;
     color: #fff;
     text-transform: uppercase;
 }
-/* تنسيق سكشن العرض الجديد */
+
+/* ================= سكشن عرض التصنيف (بانر + منتجات) ================= */
 .category-showcase {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     gap: 20px;
     padding: 20px;
-    /* احذف سطر direction: ltr نهائياً */
-    flex-direction: row; 
-    /* إذا كنت تريد البانر دائماً على اليمين في العربي، استخدم التالي: */
-    justify-content: flex-start; 
 }
 
-/* لضمان بقاء البانر على اليمين والمنتجات على اليسار في العربي: */
+/* البانر: order:2 عشان يفضل على اليمين في RTL */
 .main-category-banner {
-    order: 2; /* سيكون الثاني في الترتيب (على اليمين في RTL) */
-    flex: 0 0 250px;
-    /* ... باقي التنسيقات */
-}
-
-.products-grid {
-    order: 1; /* سيكون الأول في الترتيب (على اليسار في RTL) */
-    flex: 1;
-    /* ... باقي التنسيقات */
-}
-.site-footer {
-    padding: 40px 20px;
-    background: #111;
-}
-
-.main-category-banner {
+    order: 2;
     flex: 0 0 600px;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 40px;
@@ -154,34 +176,39 @@ h1, h2, h3, p, .category-card {
 }
 
 .main-category-banner img {
-    width: 100%;           
+    width: 100%;
     max-width: 600px;
     height: 400px;
-    object-fit: contain;   
+    object-fit: contain;
     margin-bottom: 30px;
     transition: transform 0.3s ease;
 }
 
 .main-category-banner h2 {
-    font-size: 2rem;       /* كبّرنا الخط عشان يتناسب مع ضخامة الصورة */
+    font-size: 2rem;
     margin-bottom: 20px;
     color: white;
 }
+
 .view-all-btn {
-    margin-top: auto;      /* الزرار ينزل في آخر البطاقة غصب عنه */
+    margin-top: auto;
     padding: 12px 40px;
     background: var(--primary-color);
     color: white;
     border-radius: 25px;
 }
+
+/* المنتجات: order:1 عشان تفضل على الشمال في RTL، وشبكة داخلية بـ 4 أعمدة */
 .products-grid {
-    flex: 1; /* المنتجات تاخد باقي مساحة الشاشة */
+    order: 1;
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 أعمدة للمنتجات */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 .product-card {
+    position: relative;
     height: 300px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
@@ -190,10 +217,14 @@ h1, h2, h3, p, .category-card {
     flex-direction: column;
 }
 
-/* ده المسؤول عن مكان الصورة ومساحتها جوه الكارت */
+.product-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
 .img-container {
     width: 100%;
-    height: 300px; /* دي المساحة اللي الصورة هتتحشر فيها، زودها لو عايزها أكبر */
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,28 +232,159 @@ h1, h2, h3, p, .category-card {
     margin-bottom: 5px;
 }
 
-/* ده اللي بيكبر الصورة نفسها */
 .product-img {
-    width: 100%;       /* الصورة هتاخد عرض الكارت بالكامل */
-    height: 100%;      /* الصورة هتاخد ارتفاع الـ img-container بالكامل */
-    object-fit: contain; /* عشان الصورة تفضل كاملة ومبكسلش */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transform: scale(1.50);
     transition: transform 0.4s ease-out;
 }
 
-.product-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-5px);
-}
 .product-card:hover .product-img {
     transform: scale(1.8);
 }
+
 .product-info {
-    text-align: center;  /* ده اللي هيخلي الكلام في النص بالظبط */
-    margin-top: 10px;    /* مسافة بسيطة بين الصورة والكلام */
-    padding: 0 10px;     /* عشان الكلام ميبقاش لازق في الجناب */
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 10px;
 }
 
+.stock-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stock-badge.in-stock {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.stock-badge.out-of-stock {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* زرار View All / زرار التصنيف */
+.view-all-btn,
+.category-btn {
+    display: inline-block;
+    background: rgba(30, 30, 32, 0.8);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-family: 'Cinzel Decorative', cursive, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 28px;
+    border-radius: 30px;
+    border: 1px solid rgba(232, 121, 249, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.view-all-btn:hover,
+.category-btn:hover {
+    background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(56, 189, 248, 0.2));
+    border-color: #e879f9;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(232, 121, 249, 0.4);
+    transform: translateY(-2px);
+}
+
+/* زرار إضافة للسلة داخل الكارت (كلاس بديل لو استخدمته في صفحات تانية) */
+.add-to-cart-card-btn {
+    background: rgba(30, 30, 32, 0.8) !important;
+    backdrop-filter: blur(10px);
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(232, 121, 249, 0.3) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.add-to-cart-card-btn:hover {
+    background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(56, 189, 248, 0.2)) !important;
+    border-color: #e879f9 !important;
+    box-shadow: 0 0 15px rgba(232, 121, 249, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ================= الفوتر ================= */
+.site-footer {
+    padding: 40px 20px;
+    background: #111;
+}
+
+.footer-content {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 30px;
+    padding: 60px 5%;
+    width: 100%;
+    margin: 0;
+    direction: ltr;
+    border-top: 1px solid #333;
+    text-align: left;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+    border-left: 1px solid #333;
+    padding-left: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.footer-column:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+}
+
+.footer-column h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-column p,
+.footer-column li a {
+    color: #a0a0a0;
+    font-size: 14px;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+/* ================= السلايدر (Swiper) ================= */
 .swiper-slide-active {
     transform: scale(1);
 }
@@ -241,8 +403,9 @@ h1, h2, h3, p, .category-card {
 
 .swiper-wrapper {
     display: flex;
+    padding: 20px 0;
+    /* مساحة عشان الظل ميتغطيش */
 }
-
 
 .swiper-slide {
     display: flex;
@@ -251,118 +414,118 @@ h1, h2, h3, p, .category-card {
     height: 200px;
 }
 
+.swiper-wrapper>div {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    cursor: pointer;
+}
 
+.swiper-wrapper>div:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
+    z-index: 999 !important;
+}
+
+/* حاوية الآراء الزجاجية */
+.testimonials-hero {
+    width: 90%;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+}
+
+.testimonials-container {
+    display: flex !important;
+    width: 100%;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px;
+    height: calc((100% - 20px) / 2) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.client-img {
+    width: 95% !important;
+    height: 95% !important;
+    object-fit: contain !important;
+    display: block;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px !important;
+    display: block;
+    width: 100%;
+    color: white;
+}
+
+/* ================= main ================= */
 main {
     display: flex;
     flex-direction: column;
-    gap: 40px; /* مسافة بين السكاشن */
-    overflow: hidden; 
+    gap: 40px;
+    overflow: hidden;
 }
 
-    /* الهيدر والقزاز (نسخة ثابتة) */
+/* ================= الهيدر العايم ================= */
 .main-header {
-    position: sticky !important; /* دي اللي هتخليه يطفو ويتحرك مع الصفحة ككتلة واحدة */
-    top: 20px !important; /* المسافة اللي هيلزق عندها وهو نازل */
+    position: sticky !important;
+    top: 20px !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin: 0 auto; /* بتخليه في النص أوتوماتيك بدون مشاكل */
+    margin: 0 auto;
     transition: all 0.3s ease;
-    /* شيلنا الـ left والـ transform عشان ميعكسوش الحركة */
-    width: 95%; 
-    max-width: 1200px; 
+    width: 95%;
+    max-width: 1200px;
     z-index: 1000;
     padding: 15px 40px;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px); 
+    backdrop-filter: blur(20px);
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    direction: ltr !important;       
+    direction: ltr !important;
 }
 
-/* شكل الهيدر لما تنزل بالصفحة (بيتحرك لفوق ويصغر) */
-/* الهيدر وهو بيتحرك مع الصفحة - هيفضل شفاف ضبابي من غير ما يغير لونه */
 .main-header.scrolled {
-    top: 20px !important; /* يفضل في مكانه من فوق أو 15px زي ما تحب */
-    background: rgba(255, 255, 255, 0.05) !important; /* نفس الشفافية الأصلية بالضبط من غير أي تغميق */
+    top: 20px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    transform: none !important; /* عشان يفضل متحرك بسلاسة مع الـ sticky من غير ما يتحرك يمين أو شمال */
+    transform: none !important;
 }
 
-@media (max-width: 768px) {
-    .categories-grid { 
-        flex-direction: column; 
-        align-items: center; 
-    }
-    .main-header { 
-        padding: 10px 20px; 
-        border-radius: 20px; 
-    }
-    .neon-logo { 
-        font-size: 50px; 
-    }
-    /* دمجنا كود الموبايل بتاع الـ FAB هنا عشان يشتغل صح */
-    .fab-container { 
-        right: 15px; 
-        bottom: 20px; 
-    }
-    .categories-grid { 
-        margin-top: 20px; 
-    }
-}
 .header-left {
     display: flex;
     align-items: center;
     gap: 15px;
-    direction: ltr; /* اتجاه العناصر من الشمال */
+    direction: ltr;
 }
 
 .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
-    direction: ltr; /* اتجاه العناصر من الشمال */
-}
-/* الـ Switch الأساسي */
-.switch {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    width: 50px;
-    height: 25px;
-    cursor: pointer;
-    border: none !important;    /* إجبارياً شيل أي بوردر */
-    outline: none !important;   /* شيل أي تحديد */
-    background: transparent !important; /* تأكد إن مفيش خلفية للـ label */
-    padding: 0 !important;
-    margin: 0 !important;
-}
-.switch input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    direction: ltr;
 }
 
- /* الفريم المشترك (الخلفية) */
-.switch { display: inline-flex; position: relative; width: 50px; height: 25px; cursor: pointer; }
-/* مثال لتغيير الألوان عند تفعيل الوضع النهاري */
-.light-mode {
-    background-color: #f0f0f0 !important;
-    color: #000000 !important;
-}
-
-.light-mode .category-card {
-    background: rgba(0, 0, 0, 0.05) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    color: #000;
-}
+/* ================= زرار السلة ================= */
 .cart-btn {
-    background: rgba(255, 255, 255, 0.1); 
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
     width: 40px;
     height: 40px;
@@ -374,7 +537,7 @@ main {
     backdrop-filter: blur(5px);
     cursor: pointer;
     text-decoration: none;
-    font-size: 18px; /* حجم الأيقونة */
+    font-size: 18px;
 }
 
 .cart-btn:hover {
@@ -382,34 +545,101 @@ main {
     box-shadow: 0 0 10px rgba(255, 106, 0, 0.3);
 }
 
-/* 1. تنسيق زرار اللغة */
-.lang-slider {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.3);
+/* ================= خانة البحث =================
+   ملاحظة: قبل كده كانت width:0/opacity:0 بشكل افتراضي، وبتتفتح
+   بس بالـ hover، وده كان بيتعارض مع الـ JS اللي بيفتحها بالـ display
+   عند الدوس. دلوقتي display:none هو مصدر الحقيقة الوحيد للإخفاء/الإظهار،
+   ولما الـ JS يحط display:block هتظهر بعرضها الطبيعي على طول من غير
+   الحاجة لأي hover. */
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
 }
-.lang-slider:before {
-    position: absolute; content: "";
-    height: 17px; width: 17px; left: 4px; bottom: 3px;
-    background-color: white; border-radius: 50%;
-    transition: 0.4s;
-}
-input#langToggle:checked + .lang-slider:before { transform: translateX(26px); }
 
-/* 2. تنسيق زرار الثيم */
+.search-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.4s;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.search-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 106, 0, 0.3);
+}
+
+.search-input {
+    display: none;
+    /* الحالة الافتراضية: مقفولة. الـ JS بيحول لـ block/none */
+    width: 150px;
+    height: 35px;
+    opacity: 1;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0 10px;
+    border-radius: 20px;
+    position: absolute;
+    left: 45px;
+}
+
+/* ================= زرار تبديل الثيم (الوضع الليلي/النهاري) ================= */
+.switch {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    cursor: pointer;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
 .theme-slider {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     overflow: hidden;
 }
-/* الفريم بتاع الثيم */
+
 .theme-slider:before {
-    position: absolute; content: "";
-    height: 17px; width: 17px; left: 4px; bottom: 3px;
-    background-color: white; border-radius: 50%;
-    transition: 0.4s; z-index: 1;
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+    z-index: 1;
 }
+
 #themeIcon {
     position: absolute;
     top: 50%;
@@ -426,109 +656,81 @@ input#langToggle:checked + .lang-slider:before { transform: translateX(26px); }
     transition: 0.4s;
     z-index: 2;
     pointer-events: none;
-   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    /* احذف سطر الـ filter بالكامل عشان الألوان ترجع */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
-/* الحركة */
-input#themeToggle:checked + .theme-slider:before { transform: translateX(26px); }
-input#themeToggle:checked + .theme-slider #themeIcon { left: 32px; }
 
-/* حالة الغروب والظهور */
+input#themeToggle:checked+.theme-slider:before {
+    transform: translateX(26px);
+}
+
+input#themeToggle:checked+.theme-slider #themeIcon {
+    left: 32px;
+}
+
 .theme-changing {
     transform: translateY(150%) !important;
     opacity: 0;
 }
+
+/* زرار تبديل اللغة (لو هتضيفه لاحقًا) */
+.lang-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.lang-slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input#langToggle:checked+.lang-slider:before {
+    transform: translateX(26px);
+}
+
 .lang-switch-container {
     display: flex;
-    align-items: center; /* دي أهم حاجة: بتخليهم كلهم على خط واحد في النص */
-    gap: 10px;          /* مسافة صغيرة بين النص والزرار */
+    align-items: center;
+    gap: 10px;
     color: #fff;
     font-family: sans-serif;
     font-weight: bold;
 }
 
-/* عشان نضمن إن الـ AR والـ EN واخدين نفس حجم الخط واللون */
 .lang-label {
     font-size: 14px;
     cursor: pointer;
-    user-select: none; /* عشان ميتحددش بالماوس كأنه نص عادي */
+    user-select: none;
 }
 
-
-/* التفعيل (لما تدوس عليها) */
-input:checked + .slider { background-color: var(--primary-color); }
-input:checked + .slider:before { transform: translateX(26px); }
-
-.search-container {
-    display: flex;
-    align-items: center;
-    position: relative;
+/* الوضع النهاري */
+.light-mode {
+    background-color: #f0f0f0 !important;
+    color: #000000 !important;
 }
 
-.search-btn {
-    background: rgba(255, 255, 255, 0.1); /* نفس خلفية الأزرار التانية */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* نفس الحدود */
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.4s;
-    backdrop-filter: blur(5px); /* نفس تأثير القزاز */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px; /* مسافة بسيطة بين العدسة والمدخل */
-}
-.search-input {
-    width: 0;
-    opacity: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 0;
-    border-radius: 20px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* حركة أنعم شوية */
-    position: absolute;
-    left: 45px; /* زودتها لـ 45 عشان تطلع بره مساحة العدسة (40px) */
-    height: 35px; /* خليتها 35px عشان تبقى متناسقة مع ارتفاع الزرار */
-    padding-left: 10px; /* مسافة عشان الكلام ميبقاش لازق في الطرف */
+.light-mode .category-card {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #000;
 }
 
-/* التمدد لما يتفعل (بالـ JS أو hover) */
-.search-input.active {
-    width: 150px; /* العرض لما يفتح */
-    opacity: 1;
-    padding: 0 10px;
-}
-.search-container:hover .search-input {
-    width: 150px;
-    opacity: 1;
-    padding: 0 10px;
-}
-.search-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(255, 106, 0, 0.3); /* توهج خفيف باللون البرتقالي */
-}
-
-/* 1. الخلفيات (كل واحدة لوحدها عشان الارتفاع) */
-.background-glass-layer {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.footer-neon-light {
-    position: fixed;
-    bottom: 0; left: 0; width: 100%; height: 300px; /* طولها 300px بس عشان تبقى تحت */
-    z-index: 1;
-    pointer-events: none;
-}
-
+/* ================= اللوجو (النيون) ================= */
 .hero-logo-container {
     width: 100%;
-    text-align: center; /* ده اللي بيجيب الشعار في النص */
+    text-align: center;
     margin-top: 100px;
     padding-bottom: 50px;
     position: relative;
@@ -548,195 +750,54 @@ input:checked + .slider:before { transform: translateX(26px); }
     filter: blur(0.5px);
 }
 
-/* استخدام Pseudo-element عشان يعمل "الإطار" الملون اللي بيلف */
 .neon-logo::after {
-    content: "EPIC TECH"; /* اكتب نفس الاسم هنا */
+    content: "EPIC TECH";
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; /* عشان يفضل ورا الحروف */
+    z-index: -1;
     background: linear-gradient(90deg, #ff0000, #ff6a00, #00ff00, #0000ff, #ff0000);
     background-size: 400% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    
-    /* الحركة الدوارة */
     animation: rgb-rotate 6s linear infinite;
-    
-    /* إضاءة الإطار نفسه */
-    filter: blur(5px); /* ده اللي بيخليه يبان زي ضوء الكيبورد */
+    filter: blur(5px);
 }
 
 @keyframes rgb-rotate {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 400% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 400% 50%;
+    }
 }
 
-/* 3. الشبكة (هنلغي الـ 70vh عشان متعملش مسافات غريبة) */
-.categories-grid {
-    position: relative;
-    z-index: 10;
-    margin-top: 50px; 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* دي أهم حاجة عشان الكروت تنزل سطر جديد لو الشاشة صغرت */
-    gap: 30px;
-    padding: 20px;
-}/* 3. الزرار العايم (FAB) - مستقل في الزاوية */
-
-.footer-content {
-    display: grid !important;
-    /* هنخلي الأعمدة تاخد مساحتها الطبيعية عشان الكلام ميمسحش */
-    grid-template-columns: 2fr 1fr 1fr 1fr; 
-    gap: 30px;
-    padding: 60px 5%;
-    width: 100%;
-    margin: 0;
-    direction: ltr;
-    border-top: 1px solid #333;
-    text-align: left;
-}
-
-.footer-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: left;
-    border-left: 1px solid #333;
-    padding-left: 20px;
-    /* بنسمح للكلمات الطويلة إنها تنزل سطر جديد بدل ما تختفي */
-    word-wrap: break-word; 
-    overflow-wrap: break-word;
-}
-
-/* بنشيل الخط من أول عمود عشان البداية تبقى من أول الشاشة */
-.footer-column:first-child {
-    border-left: none;
-    padding-left: 0;
-}
-
-/* التأكد من ظهور الليستس */
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-column li {
-    margin-bottom: 8px;
-}
-
-.footer-column h3 {
-    color: #ffffff;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.footer-column p, .footer-column li a {
-    color: #a0a0a0;
-    font-size: 14px;
-    line-height: 1.6;
-    text-decoration: none;
-}
-
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* 1. تنسيق الحاوية الكبيرة (المربع الزجاجي) */
-/* 1. الحاوية الكبيرة (المربع الزجاجي) */
-.testimonials-hero {
-    width: 90%;
-    margin: 50px auto;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
-}
-
-/* 2. الشبكة (اللي شايلة المربعات) */
-.testimonials-container {
-    display: flex !important; /* دي اللي بتخليهم جنب بعض */
-    width: 100%;
-}
-
-/* 3. المربع الواحد (اللي بيشيل الصورة) */
-/* 1. رجعنا المربع لحجمه الأصلي */
-.testimonial-card {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 20px;
-    /* الحسبة دي بتخلي المربع ياخد طول مظبوط بالظبط ليكونوا صفين */
-    height: calc((100% - 20px) / 2) !important; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-/* تنسيق الصورة جوه المربع عشان تظهر كاملة ونظيفة */
-.client-img {
-    width: 95% !important;
-    height: 95% !important;
-    object-fit: contain !important;
-    display: block;
-    margin: auto;
-}
-
-
-.section-title {
-    text-align: center;
-    margin-bottom: 30px !important;
-    display: block;
-    width: 100%;
-    color: white;
-} /* <-- القوس ده كان ناقص */
-
-/* ده عشان يضمن إن السلايدر يسمح بظهور التكبير خارج حدوده */
-.swiper-wrapper {
-    padding: 20px 0; /* مساحة عشان الظل ميتغطي عليه */
-}
-
-/* بنستهدف أي ديف بيتحط جوه الـ swiper-wrapper */
-.swiper-wrapper > div {
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-    cursor: pointer;
-}
-
-/* الحركة عند مرور الماوس */
-.swiper-wrapper > div:hover {
-    transform: scale(1.05) !important; /* تكبير */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important; /* ظل عميق */
-    z-index: 999 !important; /* عشان يجي فوق أي حاجة تانية */
-}
-/* تنسيق سيكشن الخدمات الإضافية */
+/* ================= قسم خدمات إضافية (المستخدم فعليًا في index.html) ================= */
 .features-section {
     padding: 50px 20px;
     text-align: center;
     background: transparent;
 }
 
-.features-title-container {
+.features-header {
     margin-bottom: 40px;
 }
 
-.features-title-container .section-title {
+.main-section-title {
     color: #fff;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-.features-title-container .section-subtitle {
-    color: #aaa;
-    font-size: 14px;
+.main-section-subtitle {
+    color: #b0b0b0;
+    font-size: 16px;
 }
 
-/* تكبير حجم الخطوط والأيقونات عشان تكون واضحة ومقروءة جداً */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -764,66 +825,46 @@ input:checked + .slider:before { transform: translateX(26px); }
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
 }
 
-/* الأيقونة بحجم أكبر واضح */
 .feature-icon {
-    font-size: 65px; 
+    font-size: 65px;
     margin-bottom: 25px;
 }
 
-/* عنوان الكارت: حجم كبير وبارز جداً */
 .feature-card h3 {
     color: #ffffff;
-    font-size: 26px; /* كبرنا الخط عشان يكون واضح وصريح */
+    font-size: 26px;
     font-weight: bold;
     margin-bottom: 18px;
     letter-spacing: 0.5px;
 }
 
-/* وصف الكارت: خط واضح ومريح للعين وكبير */
 .feature-card p {
-    color: #d1d1d1; /* لون أفتح شوية عشان وضوح القراءة */
-    font-size: 18px; /* كبرنا وصف الخدمة جداً */
+    color: #d1d1d1;
+    font-size: 18px;
     line-height: 1.8;
 }
-/* ================= إعدادات قسم مميزات المتجر (اللي فوق) ================= */
+
+/* قسم بديل بنفس فكرة الخدمات (سيبته لو مستخدم في صفحة تانية) */
 .store-features-section {
     padding: 80px 20px;
     text-align: center;
     width: 100%;
 }
 
-.features-header {
-    margin-bottom: 50px;
-}
-
-.main-section-title {
-    color: #fff;
-    font-size: 38px; /* كبرنا العنوان الرئيسي */
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.main-section-subtitle {
-    color: #b0b0b0;
-    font-size: 16px;
-}
-
-/* تكبير الشبكة وعرضها عشان تاخد راحتها */
 .store-features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 35px;
-    max-width: 1700px; /* توسيع العرض الأقصى */
-    width: 95%; /* تملأ عرض الصفحة تقريباً */
+    max-width: 1700px;
+    width: 95%;
     margin: 0 auto;
 }
 
-/* تكبير كروت المميزات وتضخيمها */
 .store-feature-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 25px;
-    padding: 45px 35px; /* كبرنا الحشو الداخلي للكارت */
+    padding: 45px 35px;
     text-align: right;
     transition: all 0.3s ease;
 }
@@ -835,36 +876,32 @@ input:checked + .slider:before { transform: translateX(26px); }
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-/* تكبير الأيقونات */
 .store-icon {
     font-size: 45px;
     margin-bottom: 20px;
 }
 
-/* تكبير خط العناوين فوق */
 .store-feature-card h3 {
     color: #fff;
-    font-size: 24px; /* خط كبير وواضح */
+    font-size: 24px;
     font-weight: bold;
     margin-bottom: 12px;
 }
 
-/* تكبير خط الوصف فوق */
 .store-feature-card p {
     color: #d1d1d1;
-    font-size: 17px; /* وصف كبير ومريح للقراءة */
+    font-size: 17px;
     line-height: 1.7;
 }
 
-
-/* ================= إعدادات قسم الأرقام المميزة (اللي تحت - بعرض الصفحة) ================= */
+/* ================= قسم الأرقام المميزة ================= */
 .stats-section {
     padding: 60px 40px;
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 30px;
-    max-width: 1700px; /* خلينا ياخد نفس عرض الكروت اللي فوق بالضبط */
-    width: 95%; /* مفروش بعرض الشاشة */
+    max-width: 1700px;
+    width: 95%;
     margin: 50px auto;
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -875,7 +912,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     justify-content: center;
     gap: 20px;
     color: #00ff66;
-    font-size: 28px; /* عنوان أضخم وأوضح */
+    font-size: 28px;
     margin-bottom: 45px;
     font-weight: bold;
 }
@@ -886,60 +923,61 @@ input:checked + .slider:before { transform: translateX(26px); }
     font-size: 24px;
 }
 
-/* شبكة أرقام مميزة عريضة */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 35px;
 }
 
-/* كروت الأرقام بحجم ضخم وبارز */
 .stat-card {
     background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
     border-radius: 25px;
     padding: 50px 20px;
-    transition: all 0.3s ease;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
 }
 
 .stat-card:hover {
-    border-color: #00ff66;
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 255, 102, 0.15);
+    border-color: #a855f7 !important;
+    box-shadow:
+        -20px 0 35px rgba(56, 189, 248, 0.35),
+        /* خيال سماوي من الشمال */
+        20px 0 35px rgba(236, 72, 153, 0.35),
+        /* خيال زهري من اليمين */
+        0 0 40px rgba(168, 85, 247, 0.6) !important;
+    /* خيال بنفسجي من النص */
+    transform: translateY(-5px);
 }
 
-/* تكبير الأرقام نفسها */
 .stat-number {
-    color: #00ff66;
-    font-size: 48px; /* رقم ضخم وبارز جداً */
+    font-size: 48px;
     font-weight: bold;
     margin-bottom: 12px;
 }
 
-/* تكبير الكلام اللي تحت الرقم */
 .stat-text {
     color: #fff;
-    font-size: 21px; /* خط كبير وواضح جداً */
+    font-size: 21px;
     font-weight: 500;
 }
-/* -- الحل الجذري للثبات العايم وتجاوز أي Overflow -- */
+
+/* ================= الزرار العايم (FAB) ================= */
 .fab-container {
     position: fixed !important;
+    /* تم حذف تعريف position: sticky المكرر اللي كان بيلغي ده */
     bottom: 40px !important;
     right: 60px !important;
     top: auto !important;
     left: auto !important;
     z-index: 2147483647 !important;
     transform: none !important;
-    position: sticky !important;
 }
-
 
 .menu-toggle {
     display: none !important;
 }
 
-/* الزرار الرئيسي */
 .main-fab {
     width: 75px !important;
     height: 75px !important;
@@ -980,17 +1018,16 @@ input:checked + .slider:before { transform: translateX(26px); }
     font-size: 32px !important;
 }
 
-.menu-toggle:checked ~ .main-fab .fab-icon-plus {
+.menu-toggle:checked~.main-fab .fab-icon-plus {
     opacity: 0 !important;
     transform: rotate(90deg) !important;
 }
 
-.menu-toggle:checked ~ .main-fab .fab-icon-close {
+.menu-toggle:checked~.main-fab .fab-icon-close {
     opacity: 1 !important;
     transform: rotate(0deg) !important;
 }
 
-/* القائمة الفرعية (الدواير) */
 .fab-sub-buttons {
     position: absolute !important;
     bottom: 85px !important;
@@ -1004,13 +1041,12 @@ input:checked + .slider:before { transform: translateX(26px); }
     transition: all 0.3s ease !important;
 }
 
-.menu-toggle:checked ~ .fab-sub-buttons {
+.menu-toggle:checked~.fab-sub-buttons {
     pointer-events: auto !important;
     opacity: 1 !important;
     transform: scale(1) translateY(0) !important;
 }
 
-/* شكل الدواير الفرعية وصورها */
 .fab-btn {
     width: 50px !important;
     height: 50px !important;
@@ -1033,7 +1069,6 @@ input:checked + .slider:before { transform: translateX(26px); }
     transform: scale(1.1) !important;
 }
 
-/* الألوان */
 .facebook-btn {
     background-color: #1877f2 !important;
 }
@@ -1042,90 +1077,456 @@ input:checked + .slider:before { transform: translateX(26px); }
     background-color: #25d366 !important;
 }
 
-.menu-toggle:checked ~ .main-fab {
+.menu-toggle:checked~.main-fab {
     background-color: #dc3545 !important;
 }
 
-.product-card {
-    position: relative;
-}
-
-.stock-badge {
+/* شبكة عرض المنتجات حسب التوفر (لو مستخدمة في category.html) */
+/* ================= بادچ عدد المنتجات فوق أيقونة السلة ================= */
+.cart-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #ff6a00;
+    color: #fff;
+    font-size: 11px;
     font-weight: bold;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 6px rgba(255, 106, 0, 0.6);
+    direction: ltr;
 }
 
-.stock-badge.in-stock {
+/* ================= Toast Notification (بديل الـ alert) ================= */
+#toastContainer {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(20, 20, 22, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    min-width: 260px;
+    max-width: 90vw;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.35s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast .toast-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
     background: rgba(34, 197, 94, 0.2);
     color: #4ade80;
-    border: 1px solid rgba(34, 197, 94, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
 }
 
-.stock-badge.out-of-stock {
+.toast.toast-error {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.toast.toast-error .toast-icon {
     background: rgba(239, 68, 68, 0.2);
     color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.4);
 }
-/* ستايل زرار View All الاحترافي لمتجر EPIC TECH */
- .view-all-btn, .category-btn {
-            display: inline-block;
-            background: rgba(30, 30, 32, 0.8);
-            backdrop-filter: blur(10px);
-            color: #fff;
-            font-family: 'Cinzel Decorative', cursive, sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 10px 28px;
-            border-radius: 30px;
-            border: 1px solid rgba(232, 121, 249, 0.3); /* إطار بينك خفيف من هوية المتجر */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            letter-spacing: 1px;
-        }
 
-.view-all-btn:hover, .category-btn:hover {
-            background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(56, 189, 248, 0.2));
-            border-color: #e879f9; /* يتحول للون البينك النيون عند الهوفر */
-            color: #fff;
-            box-shadow: 0 0 20px rgba(232, 121, 249, 0.4);
-            transform: translateY(-2px);
-        }
-        /* ستايل زرار إضافة للسلة في كروت المنتجات */
- .add-to-cart-card-btn {
-            background: rgba(30, 30, 32, 0.8) !important;
-            backdrop-filter: blur(10px);
-            color: #fff !important;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 6px 18px;
-            border-radius: 20px;
-            border: 1px solid rgba(232, 121, 249, 0.3) !important; /* إطار بينك ناعم زي View All */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
- .add-to-cart-card-btn:hover {
-            background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(56, 189, 248, 0.2)) !important;
-            border-color: #e879f9 !important; /* ينور بينك عند الهوفر */
-            box-shadow: 0 0 15px rgba(232, 121, 249, 0.4);
-            transform: translateY(-2px);
-        }
+.toast .toast-text {
+    flex: 1;
+    line-height: 1.5;
+}
 
-#available-products, #out-of-stock-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
+.toast .toast-text strong {
+    color: #fff;
+}
+
+
+/* ================= الموبايل ================= */
+@media (max-width: 768px) {
+    .categories-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-header {
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .neon-logo {
+        font-size: 50px;
+    }
+
+    .fab-container {
+        right: 15px;
+        bottom: 20px;
+    }
+
+    .categories-grid {
+        margin-top: 20px;
+    }
+}
+
+/* 1. لفافة السلة */
+.neon-cart-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    /* كبرنا المساحة شوية عشان النيون يبان */
+    height: 48px;
+    cursor: pointer;
+}
+
+/* 2. تصميم أيقونة السلة نفسها (رسمة نيون) */
+.neon-cart-icon {
+    stroke: #fff;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+    /* توهج النيون الأبيض */
+    transition: filter 0.3s ease;
+}
+
+.neon-cart-wrapper:hover .neon-cart-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+    /* توهج أقوى عند الهوفر */
+}
+
+/* 3. تصميم البادج (الرقم 0) */
+.neon-cart-badge {
+    position: absolute;
+    top: 6px;
+    /* ظبطنا مكانه جوه النيون */
+    right: 6px;
+    background: #fff;
+    /* لون الرقم أبيض */
+    color: #121212;
+    /* لون الخلفية غامق عشان يظهر الرقم */
+    font-size: 10px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #fff;
+    /* نيون للرقم نفسه */
+}
+
+/* إزالة الدايرة الخلفية والحدود من زرار السلة في الهيدر */
+.cart-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* الحالة الأساسية: كلام أبيض مع توهج نيون أبيض خفيف وثابت */
+.nav-links a {
+    color: #ffffff !important;
+    text-shadow:
+        0 0 4px rgba(255, 255, 255, 0.6),
+        0 0 8px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* حالة الهوفر أو الصفحة المفتوحة: يقلب نيون أزرق فخم زي كروت المنتجات */
+.nav-links a:hover,
+.nav-links a.active {
+    color: #38bdf8 !important;
+    text-shadow:
+        0 0 5px rgba(56, 189, 248, 0.8),
+        0 0 12px rgba(56, 189, 248, 0.6),
+        0 0 18px rgba(56, 189, 248, 0.4) !important;
+    transform: translateY(-2px);
+    /* حركة خفيفة لفوق زي كروت المنتجات */
+}
+
+/* 1. تعريف المتغير اللي هيخلي الألوان تلف لوحدها */
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* 2. الإطار الملون (ثابت مكانه مقصوص على الحواف، والألوان بتجري جواه) */
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* بيغطي الكارت بالظبط من غير ما يطلع براه */
+    border-radius: 40px;
+    /* نفس انحناء الكارت بالمللي */
+    padding: 2px;
+    /* سمك خط النيون الملون */
+    background: conic-gradient(from var(--angle),
+            transparent 0deg,
+            transparent 260deg,
+            #38bdf8 300deg,
+            /* سماوي */
+            #a855f7 330deg,
+            /* بنفسجي */
+            #ec4899 360deg
+            /* وردي */
+        ) border-box;
+    /* الماسك ده بيقص النص ويسيب الإطار بس */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    /* مخفي لحين الماوس */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    /* فوق الكارت عشان الإطار يفضل بره الصورة */
+    animation: spin-colors 3s linear infinite;
+}
+
+/* 3. إظهار الإطار لما تقف بالماوس */
+.category-card:hover::before {
+    opacity: 1;
+}
+
+/* محتوى الكارت */
+.category-card>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. أنيميشن دوران الألوان (بدل ما نلف العنصر، بنلف الألوان نفسها) */
+@keyframes spin-colors {
+    to {
+        --angle: 360deg;
+    }
+}
+
+/* الإطار الملون لكروت المنتجات - نفس فكرة كروت التصنيفات */
+.product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: conic-gradient(from var(--angle),
+            transparent 0deg,
+            transparent 260deg,
+            #38bdf8 300deg,
+            /* سماوي */
+            #a855f7 330deg,
+            /* بنفسجي */
+            #ec4899 360deg
+            /* وردي */
+        ) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    animation: spin-colors 3s linear infinite;
+}
+
+.product-card:hover::before {
+    opacity: 1;
+}
+
+/* زرار السلة النيون (الكبسولة الداكنة ببوردر بنفسجي/وردي) */
+.neon-cart-btn {
+    background: rgba(30, 30, 35, 0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid #a23b7a !important;
+    border-radius: 30px !important;
+    padding: 8px 20px !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    margin-top: 15px;
+}
+
+.neon-cart-btn:hover {
+    background: #a23b7a !important;
+    color: #ffffff !important;
+    border-color: #d946ef !important;
+    box-shadow: 0 0 15px rgba(162, 59, 122, 0.6), 0 0 30px rgba(162, 59, 122, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+/* تلوين كلمة "أرقام مميزة" وأرقام الإحصائيات بتدرج الـ 3 ألوان */
+.neon-magic-text,
+.stat-number,
+h2:has(+ .stats-container) {
+    background: linear-gradient(to right, #38bdf8, #a855f7, #ec4899) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    text-shadow: none !important;
+    filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4)) !important;
+}
+
+/* تنظيف البوكسات العامة من أي إطار أو خيال قديم */
+.stat-box,
+.feature-box,
+.box,
+.stats-container>div {
+    border: 1px solid rgba(168, 85, 247, 0.2) !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover,
+.feature-box:hover,
+.box:hover,
+.stats-container>div:hover {
+    border-color: #a855f7 !important;
+    box-shadow:
+        -10px 0 25px rgba(56, 189, 248, 0.3),
+        10px 0 25px rgba(236, 72, 153, 0.3),
+        0 0 30px rgba(168, 85, 247, 0.5) !important;
+    transform: translateY(-5px);
+}
+
+/* 1. تجهيز كارت الخدمات ليكون زجاجي وفخم */
+.feature-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.3s ease;
+    z-index: 0;
+    text-decoration: none;
+    /* عشان الكارت عبارة عن لينك */
+    display: block;
+}
+
+/* 2. الإطار النيون اللي بيلف على الحواف */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    /* سمك خط النيون */
+    background: conic-gradient(from var(--angle),
+            transparent 0deg,
+            transparent 260deg,
+            #38bdf8 300deg,
+            /* أزرق */
+            #a855f7 330deg,
+            /* بنفسجي */
+            #ec4899 360deg
+            /* زهري */
+        ) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    /* مخفي في العادي */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    animation: spin-colors 3s linear infinite;
+}
+
+/* 3. تشغيل النيون لما تقف بالماوس */
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+/* 4. حماية المحتوى عشان يفضل باين فوق النيون */
+.feature-card>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* 1. تصميم كارت آراء العملاء الأساسي (شفاف وزجاجي) */
+.testimonial-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease !important;
+    z-index: 1;
+}
+
+/* 2. الخيال السحري بـ 3 ألوان بيظهر لما تقف بالماوس */
+.testimonial-card:hover {
+    border-color: #a855f7 !important;
+    box-shadow:
+        -20px 0 35px rgba(56, 189, 248, 0.4),
+        20px 0 35px rgba(236, 72, 153, 0.4),
+        0 0 40px rgba(168, 85, 247, 0.6) !important;
+    transform: translateY(-5px);
+}
+
+/* 3. الخط النيون اللي بيلف حوالين الكارت */
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: conic-gradient(from var(--angle),
+            transparent 0deg,
+            transparent 260deg,
+            #38bdf8 300deg,
+            #a855f7 330deg,
+            #ec4899 360deg) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    animation: spin-colors 3s linear infinite;
+}
+
+.testimonial-card:hover::before {
+    opacity: 1;
+}
+
+.testimonial-card>* {
+    position: relative;
+    z-index: 1;
 }

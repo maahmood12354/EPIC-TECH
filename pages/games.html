@@ -1,224 +1,522 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EPIC TECH - مكتبة الألعاب</title>
+    <title>مكتبة الألعاب | Epic Tech Store</title>
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <!-- ربط ملف الستايل الأساسي عشان ياخد نفس شكل وأنيميشن الرئيسية بالظبط -->
     <link rel="stylesheet" href="../assets/css/style.css">
-    
+
     <style>
-        /* إيقاف ألوان الـ RGB وأنيميشن الخلفية في هذه الصفحة فقط */
-        body, html {
-            background-color: #0f172a !important; /* لون كحلي ثابت فخم */
-            background-image: none !important;
-            animation: none !important;
-            transition: none !important;
+        /* 1. حلول إجبارية لمشكلة السكرول والتثبيت */
+        body,
+        html,
+        main {
+            overflow: visible !important;
+            /* إجبار المتصفح يسمح بحركة السلة */
         }
 
-        /* إيقاف أي تأثيرات إضاءة متضافة كطبقة تانية في الخلفية */
-        body::before, body::after, main::before, main::after {
-            display: none !important;
-            animation: none !important;
-            background: none !important;
-            opacity: 0 !important;
+        body {
+            /* نفس الخلفية بتاعتك */
+            background: radial-gradient(circle at 50% 20%, rgba(60, 30, 20, 0.4), rgba(15, 23, 42, 0.9) 60%, #020617);
+            background-color: #050508;
+
+            /* دول السطور الجديدة اللي هتثبت الخلفية */
+            background-attachment: fixed !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        /* تنسيقات مكتبة الألعاب */
+
+        /* 2. تنسيق الهيكل العام للصفحة */
         .games-layout {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 1200px;
+            gap: 25px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
+            align-items: flex-start !important;
+            /* السر عشان السلة متتمطش وتلزق */
         }
-        @media (min-width: 768px) {
-            .games-layout { grid-template-columns: 3fr 1fr; } /* تقسيم الشاشة: الألعاب يمين والسلة شمال */
+
+        @media (min-width: 1024px) {
+            .games-layout {
+                grid-template-columns: 3fr 1fr;
+            }
         }
-        
+
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            gap: 20px;
         }
-        
-/* تنسيقات كروت الألعاب (تأثير الزجاج الشفاف المعزول عن الـ RGB) */
+
+
         .game-card {
-            background: rgba(0, 0, 0, 0.4) !important; /* خلفية سوداء شفافة */
-            backdrop-filter: blur(10px) !important; /* تأثير الزجاج */
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important; /* إطار أبيض خفيف جداً */
-            border-radius: 10px;
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+            padding: 15px;
             text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; /* ظل أسود عادي بدون ألوان */
-            animation: none !important; /* إيقاف أي أنيميشن ألوان */
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .game-card:hover {
-            border-color: rgba(255, 255, 255, 0.3) !important;
+            border-color: #a855f7;
             transform: translateY(-5px);
-            background: rgba(0, 0, 0, 0.6) !important;
+            box-shadow:
+                -20px 0 40px rgba(56, 189, 248, 0.25),
+                20px 0 40px rgba(236, 72, 153, 0.25),
+                0 0 50px rgba(168, 85, 247, 0.4);
         }
 
         .game-card img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            border-radius: 14px;
+            margin-bottom: 12px;
         }
-        .game-card h4 { color: #fff !important; margin-bottom: 5px; font-size: 16px; text-shadow: none !important; }
-        .game-card p { color: #94a3b8 !important; font-size: 14px; margin-bottom: 10px; text-shadow: none !important; }
-        
+
+        .game-card h4 {
+            color: #ffffff;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-family: 'Cinzel Decorative', serif, sans-serif;
+        }
+
+        .game-card p {
+            background: linear-gradient(to right, #38bdf8, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
         .add-game-btn {
-            background: rgba(255, 255, 255, 0.05) !important;
-            color: #fff !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            padding: 8px 15px;
-            border-radius: 5px;
+            background: rgba(30, 30, 35, 0.9);
+            color: #ffffff;
+            border: 1px solid #a23b7a;
+            padding: 10px 15px;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
             font-weight: bold;
-            transition: 0.3s;
-            box-shadow: none !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        .add-game-btn:hover { 
-            background: #fff !important; 
-            color: #000 !important; 
+
+        .add-game-btn:hover {
+            background: #a23b7a;
+            border-color: #d946ef;
+            box-shadow: 0 0 15px rgba(162, 59, 122, 0.6), 0 0 30px rgba(162, 59, 122, 0.3);
+            transform: translateY(-2px);
         }
-        
-        /* تنسيقات سلة الألعاب (شفافة ومعزولة) */
+
+
         .games-cart {
-            background: rgba(0, 0, 0, 0.4) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 10px;
-            padding: 20px;
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
-            animation: none !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+            backdrop-filter: blur(25px) !important;
+            -webkit-backdrop-filter: blur(25px) !important;
+            border: 1px solid rgba(168, 85, 247, 0.3) !important;
+            border-radius: 20px !important;
+            padding: 25px !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.4) !important;
+            transition: all 0.4s ease !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.02) !important;
+
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 100px !important;
+            align-self: flex-start !important;
+            height: max-content !important;
+        }
+
+        .games-cart:hover {
+            border-color: #a855f7 !important;
+            box-shadow:
+                -20px 0 40px rgba(56, 189, 248, 0.3),
+                20px 0 40px rgba(236, 72, 153, 0.3),
+                0 0 50px rgba(168, 85, 247, 0.4) !important;
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.05) !important; /* شفافية خفيفة لعناصر السلة */
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            padding: 10px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px;
             margin-bottom: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 14px;
-            color: white !important;
-            box-shadow: none !important;
+            color: white;
         }
 
         .remove-btn {
-            background: rgba(239, 68, 68, 0.8) !important;
-            color: white !important;
-            border: none !important;
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
             padding: 5px 10px;
-            border-radius: 3px;
+            border-radius: 6px;
             cursor: pointer;
-            box-shadow: none !important;
-        }        
+            transition: 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #ef4444;
+        }
+
         .epic-input {
             width: 100%;
-            padding: 10px;
+            padding: 14px 16px;
             margin-bottom: 15px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            color: white;
-            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+            border-radius: 12px;
             outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .epic-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .epic-input option {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .submit-btn {
+            background: rgba(30, 30, 35, 0.9);
+            color: #ffffff;
+            border: 1px solid #a23b7a;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: #a23b7a;
+            border-color: #d946ef;
+            box-shadow: 0 0 15px rgba(162, 59, 122, 0.6), 0 0 30px rgba(162, 59, 122, 0.3);
+            transform: translateY(-2px);
+        }
+
+
+        header,
+        .main-header {
+            background: transparent !important;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        .header-search-bar {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 15px 8px 35px;
+            color: white;
+            outline: none;
+            width: 250px;
+            transition: 0.3s;
+        }
+
+        .header-search-bar:focus {
+            border-color: #38bdf8;
+            width: 300px;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- الهيدر بتاعك -->
-    <header class="main-header" dir="ltr">
-        <!-- ... (نفس كود الهيدر اللي فات بالظبط) ... -->
-        <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-            <a href="../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
-                <img src="../assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px;">
+    <!-- الهيدر الثابت الموحد -->
+    <header class="main-header" dir="ltr"
+        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 30px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 1000;">
+        <div class="header-left" style="display: flex; align-items: center; gap: 20px;">
+            <a href="../index.html" class="logo-area"
+                style="text-decoration: none; display: flex; align-items: center;">
+                <img src="../assets/images/favicon.png" alt="EPIC TECH"
+                    style="height: 40px; width: auto; border-radius: 8px;">
             </a>
+
+            <!-- زرار البحث اتنقل هنا في الهيدر -->
+            <div class="search-container" style="display: flex; align-items: center; position: relative;">
+                <span
+                    style="position: absolute; left: 12px; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="gameSearch" class="header-search-bar" placeholder="ابحث عن لعبة..."
+                    onkeyup="filterAndSortGames()" dir="rtl">
+            </div>
         </div>
-        <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-            <a href="../index.html" style="text-decoration: none; color: #94a3b8;">Home</a>
-            <a href="category.html?cat=laptops" style="text-decoration: none; color: #94a3b8;">Laptops</a>
-            <a href="category.html?cat=desktops" style="text-decoration: none; color: #94a3b8;">PCs</a>
+
+        <!-- روابط الأقسام (إنجليزي فقط وبدون إيموجي) -->
+        <nav class="nav-links" style="display: flex; gap: 20px; align-items: center;">
+            <a href="../index.html"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+            <a href="cleaning.html"
+                style="text-decoration: none; color: #38bdf8; font-size: 15px; font-weight: 600;">Cleaning</a>
+            <a href="assembly.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PC
+                Assembly</a>
+            <a href="games.html"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Games</a>
         </nav>
-    </header>
 
-    <main style="padding: 40px 20px; color: white; min-height: 70vh;">
-        <h2 style="color: #38bdf8; text-align: center; margin-bottom: 30px; font-size: 2.5rem;">مكتبة ألعاب EPIC TECH 🎮</h2>
-        
-        <!-- شريط البحث السريع في الألعاب -->
-        <div style="display: flex; gap: 15px; max-width: 800px; margin: 0 auto 30px auto; flex-wrap: wrap;">
-            <input type="text" id="gameSearch" class="epic-input" placeholder="🔍 ابحث عن لعبة..." onkeyup="filterAndSortGames()" style="flex: 2; min-width: 250px; text-align: right;">
-
-            <select id="gameSort" class="epic-input" onchange="filterAndSortGames()" style="flex: 1; min-width: 200px; cursor: pointer; text-align: center;">
+        <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+            <!-- ترتيب الألعاب جنب السلة -->
+            <select id="gameSort" class="epic-input" onchange="filterAndSortGames()"
+                style="width: auto; margin-bottom: 0; padding: 8px 15px; border-radius: 20px;">
                 <option value="default">الترتيب الافتراضي</option>
                 <option value="nameAsc">🔤 أبجدي (A - Z)</option>
                 <option value="nameDesc">🔤 أبجدي (Z - A)</option>
-                <option value="sizeAsc">📉 المساحة (الأصغر للأكبر)</option>
-                <option value="sizeDesc">📈 المساحة (الأكبر للأصغر)</option>
+                <option value="sizeAsc">📉 المساحة (الأصغر)</option>
+                <option value="sizeDesc">📈 المساحة (الأكبر)</option>
             </select>
+
+            <a href="cart.html" class="cart-btn"
+                style="position: relative; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent;">
+                <!-- رسمة نيون سلة تسوق بيضاء ومضيئة -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span id="cartBadge"
+                    style="position: absolute; top: -5px; right: -5px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main style="padding: 30px 0 60px 0; flex: 1;">
+        <div class="hero-logo-container" style="margin-bottom: 40px;">
+            <h1 class="neon-logo" style="font-size: 32px; text-align: center;">EPIC GAMES</h1>
         </div>
 
         <div class="games-layout">
-            <!-- الجزء اليمين: شبكة الألعاب -->
             <!-- الجزء اليمين: شبكة الألعاب -->
             <div>
                 <div class="games-grid" id="gamesContainer">
                     <!-- الألعاب هتترسم هنا أوتوماتيك بالجافاسكريبت -->
                 </div>
-                
-                <!-- زرار عرض المزيد (بره شبكة الألعاب وتحتها) -->
+
                 <div id="loadMoreContainer" style="text-align: center; margin-top: 30px; display: none; width: 100%;">
-                    <button onclick="loadMoreGames()" style="background: #0f172a; color: #38bdf8; border: 1px solid #38bdf8; padding: 12px 40px; font-size: 18px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold;">عرض المزيد ⬇️</button>
+                    <button onclick="loadMoreGames()" class="add-game-btn"
+                        style="width: auto; padding: 12px 40px; font-size: 16px;">SHOW MORE⬇️</button>
                 </div>
             </div>
 
-            <!-- الجزء الشمال: سلة الألعاب الخاصة -->
+            <!-- الجزء الشمال: سلة الألعاب الخاصة (Sticky) -->
             <div class="games-cart">
-                <h3 style="color: #38bdf8; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px;">سلة الألعاب 📥</h3>
-                
-                
-                <div id="selectedGamesList" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;">
+                <h3
+                    style="color: #c238f8; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                    GAME CART
+ </h3>
+
+                <div id="selectedGamesList"
+                    style="max-height: 280px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px;">
                     <p style="color: #94a3b8; text-align: center; font-size: 14px;">لم يتم اختيار ألعاب بعد.</p>
                 </div>
-                
-                <div style="margin-bottom: 20px; font-weight: bold; font-size: 16px;">
-                    إجمالي المساحة: <span id="totalSize" style="color: #38bdf8;">0</span> GB
+
+                <div
+                    style="margin-bottom: 20px; font-weight: bold; font-size: 16px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+                    إجمالي المساحة: <span id="totalSize" style="color: #38bdf8; font-size: 18px;">0</span> GB
                 </div>
 
-                <hr style="border-color: #334155; margin-bottom: 15px;">
+                <hr style="border-color: rgba(255,255,255,0.05); margin-bottom: 20px;">
 
                 <form id="gameOrderForm">
-                    <label style="display: block; margin-bottom: 5px; font-size: 14px;">الاسم بالكامل:</label>
-                    <input type="text" id="customerName" class="epic-input" placeholder="اكتب اسمك" required>
-                    
-                    <button type="submit" style="background: #38bdf8; color: #000; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; width: 100%;">
-                        طلب عبر واتساب 💬
+                    <label style="display: block; margin-bottom: 8px; font-size: 14px; color: #cbd5e1;">الاسم
+                        بالكامل:</label>
+                    <input type="text" id="customerName" class="epic-input" placeholder="اسمك الكريم" required>
+
+                    <label style="display: block; margin-bottom: 8px; font-size: 14px; color: #cbd5e1;">رقم
+                        الهاتف:</label>
+                    <input type="tel" id="customerPhone" class="epic-input" placeholder="رقم الموبايل" required>
+
+                    <label style="display: block; margin-bottom: 8px; font-size: 14px; color: #cbd5e1;">العنوان /
+                        ملاحظات:</label>
+                    <input type="text" id="customerAddress" class="epic-input" placeholder="العنوان أو أي ملاحظة"
+                        required>
+
+                    <button type="submit" class="submit-btn">
+                       CONFIRM GAMES🚀
                     </button>
                 </form>
             </div>
         </div>
     </main>
-
-    <!-- الفوتر بتاعك -->
+    <!-- الفوتر -->
     <footer class="site-footer" dir="ltr">
-        <!-- ... (نفس كود الفوتر) ... -->
-    </footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <a href="../index.html" style="text-decoration: none; display: inline-block; margin-bottom: 15px;">
+                    <img src="../assets/images/favicon.png" alt="EPIC TECH"
+                        style="height: 45px; width: auto; border-radius: 8px; transition: transform 0.3s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+                <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers,
+                    gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's
+                    leading brands.</p>
+            </div>
 
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    <a href="tel:01017229055" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                        onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">01017229055</a>
+                </p>
+                <p style="display: flex; align-items: center; gap: 10px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank"
+                        rel="noopener noreferrer" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                        onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Facebook
+                        Page</a>
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="2" y1="20" x2="22" y2="20"></line>
+                        </svg>
+                        <a href="category.html?cat=laptops"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Laptops</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="2" width="12" height="20" rx="2" ry="2"></rect>
+                            <line x1="10" y1="6" x2="14" y2="6"></line>
+                            <line x1="10" y1="10" x2="14" y2="10"></line>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        <a href="category.html?cat=desktops"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Desktop
+                            PCs</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="7"></rect>
+                            <line x1="12" y1="6" x2="12" y2="10"></line>
+                        </svg>
+                        <a href="category.html?cat=accessories"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'"
+                            onmouseout="this.style.color='#cbd5e1'">Accessories</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <a href="category.html?cat=monitors"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'"
+                            onmouseout="this.style.color='#cbd5e1'">Monitors</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Policies</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <line x1="10" y1="9" x2="8" y2="9"></line>
+                        </svg>
+                        <a href="terms.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Terms of
+                            Use</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                        <a href="warranty.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Warranty
+                            Policy</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                        <a href="shipping.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Shipping
+                            Policy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <!-- سكريبت الألعاب -->
-<!-- سكريبت الألعاب السحري (جلب صور ستيم بالدور) -->
+    <!-- سكريبت الألعاب السحري (جلب صور ستيم بالدور) -->
     <script>
         // 1. قاعدة بيانات الألعاب (اكتب الاسم والمساحة بس)
         const gamesDB = [
@@ -1112,23 +1410,25 @@
             { id: 888, name: "Yakuza Like a Dragon 2021", size: 45.0 },
             { id: 889, name: "Zombie Army 4 Dead War", size: 60.0 }
         ];
-            
 
-            // حط أسماء ألعابك كلها هنا عادي جداً
 
-let selectedGames = []; 
+        // حط أسماء ألعابك كلها هنا عادي جداً
+
+        let selectedGames = [];
         let currentLimit = 40; // عدد الألعاب اللي هتظهر في الشاشة مرة واحدة
         let filteredGamesForRender = []; // قائمة الألعاب بعد البحث والترتيب
+        let currentlyRenderedCount = 0; // متتبع لعدد الألعاب اللي اترسمت فعلاً
 
         // 1. دالة البحث والترتيب (الفلتر الذكي)
         function filterAndSortGames() {
             currentLimit = 40; // تصفير العدد لـ 40 مع كل بحث جديد
+            currentlyRenderedCount = 0; // تصفير العداد عشان نرسم من الأول
             const searchTerm = document.getElementById('gameSearch').value.toLowerCase();
             const sortValue = document.getElementById('gameSort').value;
-            
+
             // الفلترة
             filteredGamesForRender = gamesDB.filter(game => game.name.toLowerCase().includes(searchTerm));
-            
+
             // الترتيب
             if (sortValue === "nameAsc") {
                 filteredGamesForRender.sort((a, b) => a.name.localeCompare(b.name));
@@ -1139,31 +1439,41 @@ let selectedGames = [];
             } else if (sortValue === "sizeDesc") {
                 filteredGamesForRender.sort((a, b) => b.size - a.size);
             }
-            
+
+            // تفريغ الشاشة قبل رسم نتايج البحث الجديدة
+            document.getElementById('gamesContainer').innerHTML = '';
+
             renderGamesWithLimit();
         }
 
-        // 2. دالة الرسم بنظام التحميل التدريجي (عشان الموقع يبقى طلقة)
+        // 2. دالة الرسم بنظام التحميل التدريجي (بدون مسح القديم)
         function renderGamesWithLimit() {
             const container = document.getElementById('gamesContainer');
-            container.innerHTML = ''; 
-            
-            // بناخد أول 40 لعبة بس
-            const gamesToShow = filteredGamesForRender.slice(0, currentLimit);
-            
+
+            // بناخد الألعاب الجديدة بس اللي لسه ماتقسمتش بناءً على المتتبع
+            const gamesToShow = filteredGamesForRender.slice(currentlyRenderedCount, currentLimit);
+
+            let newGamesHtml = ''; // مجمع للأكواد الجديدة
+
             gamesToShow.forEach(game => {
                 const imgId = `img-${game.id}`;
                 const loadingImg = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent('جاري التحميل...')}`;
-                
-                container.innerHTML += `
+
+                newGamesHtml += `
                     <div class="game-card">
-                        <img id="${imgId}" src="${loadingImg}" alt="${game.name}" style="object-fit: cover;">
+                        <img id="${imgId}" src="${loadingImg}" alt="${game.name}" style="object-fit: cover;" onerror="this.src='../assets/images/favicon.png'">
                         <h4>${game.name}</h4>
                         <p>المساحة: ${game.size} GB</p>
                         <button class="add-game-btn" onclick="addToGamesCart('${game.name}', ${game.size})">➕ إضافة للسلة</button>
                     </div>
                 `;
             });
+
+            // إضافة الألعاب الجديدة "تحت" القديمة بدون مسح
+            container.insertAdjacentHTML('beforeend', newGamesHtml);
+
+            // تحديث العداد
+            currentlyRenderedCount = currentLimit;
 
             // إظهار أو إخفاء زرار عرض المزيد
             const loadMoreBtn = document.getElementById('loadMoreContainer');
@@ -1173,7 +1483,7 @@ let selectedGames = [];
                 loadMoreBtn.style.display = 'none';
             }
 
-            // نجيب صور ستيم للـ 40 لعبة دول بس
+            // نجيب صور ستيم للألعاب "الجديدة فقط" اللي اترسمت
             fetchImagesSafely(gamesToShow);
         }
 
@@ -1183,7 +1493,7 @@ let selectedGames = [];
             renderGamesWithLimit();
         }
 
-        // 4. الدالة السحرية للصور من ستيم
+        // 4. الدالة السحرية للصور من ستيم (تفضل زي ما هي)
         async function fetchImagesSafely(gamesArray) {
             for (let game of gamesArray) {
                 const imgElement = document.getElementById(`img-${game.id}`);
@@ -1193,7 +1503,7 @@ let selectedGames = [];
                 try {
                     const response = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(game.name)}&limit=1`);
                     const data = await response.json();
-                    
+
                     if (data && data.length > 0) {
                         if (data[0].steamAppID) {
                             imgElement.src = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${data[0].steamAppID}/header.jpg`;
@@ -1208,12 +1518,12 @@ let selectedGames = [];
                 } catch (error) {
                     imgElement.src = `https://placehold.co/300x150/0f172a/38bdf8?text=${encodeURIComponent(game.name)}`;
                 }
-                
+
                 await new Promise(resolve => setTimeout(resolve, 500)); // تأخير نص ثانية
             }
         }
 
-        // باقي دوال السلة زي ما هي
+        // 5. باقي دوال السلة (اتحدثت عشان تقرأ الموبايل والعنوان)
         function addToGamesCart(name, size) {
             const exists = selectedGames.find(g => g.name === name);
             if (exists) { alert('اللعبة دي موجودة في السلة بالفعل!'); return; }
@@ -1251,19 +1561,26 @@ let selectedGames = [];
             totalElement.innerText = totalSize.toFixed(2);
         }
 
-        document.getElementById('gameOrderForm').addEventListener('submit', function(e) {
+        // 6. زرار إرسال الواتساب بالتحديث الجديد
+        document.getElementById('gameOrderForm').addEventListener('submit', function (e) {
             e.preventDefault();
             if (selectedGames.length === 0) { alert('لازم تختار لعبة واحدة على الأقل قبل الطلب!'); return; }
+
             const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
             const totalSpace = document.getElementById('totalSize').innerText;
-            const storePhone = "201017229055"; 
+            const storePhone = "201017229055";
+
             const gamesListText = selectedGames.map(g => `🎮 ${g.name} (${g.size}GB)`).join('%0A');
-            const message = `أهلاً EPIC TECH، محتاج أحمل الألعاب دي:%0A%0A👤 الاسم: ${name}%0A📦 إجمالي المساحة: ${totalSpace} GB%0A%0Aالألعاب المطلوبة:%0A${gamesListText}`;
+            const message = `أهلاً EPIC TECH، محتاج أحمل الألعاب دي:%0A%0A👤 الاسم: ${name}%0A📞 الهاتف: ${phone}%0A📍 العنوان/ملاحظات: ${address}%0A📦 إجمالي المساحة: ${totalSpace} GB%0A%0Aالألعاب المطلوبة:%0A${gamesListText}`;
+
             window.open(`https://wa.me/${storePhone}?text=${message}`, '_blank');
         });
 
-        // أول ما الصفحة تفتح، بنشغل الفلتر اللي بدوره هيعرض أول 40 لعبة
+        // تشغيل الفلتر أول مرة
         filterAndSortGames();
     </script>
 </body>
+
 </html>

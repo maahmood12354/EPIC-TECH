@@ -1,578 +1,1023 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPIC TECH STORE</title>
-     <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <meta name="description"
+        content="EPIC TECH STORE - متجرك الموثوق لكل ما يخص أجهزة الكمبيوتر: لابتوبات، أجهزة مكتبية، اكسسوارات، شاشات، وقطع جيمنج مستوردة من أفضل الماركات العالمية.">
+    <meta property="og:title" content="EPIC TECH STORE">
+    <meta property="og:description"
+        content="متجرك الموثوق لكل ما يخص أجهزة الكمبيوتر: لابتوبات، أجهزة مكتبية، اكسسوارات، شاشات، وقطع جيمنج.">
+    <meta property="og:image" content="assets/images/favicon.png">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!--
+        ملاحظة: الكلاسات دي كانت متكررة كـ inline style في كل عنصر (كارت منتج / زرار / ...).
+        اتنقلوا هنا كخطوة أولى، والأفضل تنقلهم لملف assets/css/style.css نفسه بعدين.
+    -->
+    <style>
+        body {
+            /* نفس الخلفية بتاعتك */
+            background: radial-gradient(circle at 50% 20%, rgba(60, 30, 20, 0.4), rgba(15, 23, 42, 0.9) 60%, #020617);
+            background-color: #050508;
+
+            /* دول السطور الجديدة اللي هتثبت الخلفية */
+            background-attachment: fixed !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-input {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            outline: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .nav-link.active {
+            color: #38bdf8;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .quick-categories {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0 30px 0;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        .quick-cat-btn {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 25px;
+            border-radius: 15px;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .category-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .product-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .add-to-cart-btn {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+        }
+
+        /* تنسيق قسم السوشيال ميديا في الفوتر */
+        .footer-social-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer-social-container h3 {
+            color: #fff;
+            /* لون الخط */
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .social-icons-neon {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            /* المسافة بين الأيقونات */
+        }
+
+        /* تنسيق الأيقونات الأساسي (الدوائر) */
+        .neon-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ألوان الخلفية لكل تطبيق (بدون تأثير نيون في الحالة العادية) */
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .whatsapp {
+            background-color: #25d366;
+        }
+
+        .tiktok {
+            background-color: #000000;
+        }
+
+        /* --- تأثير النيون المضيء عند الـ Hover --- */
+
+        /* تأثير الفيسبوك (أزرق) */
+        .facebook:hover {
+            box-shadow: 0 0 15px #3b5998,
+                0 0 30px #3b5998,
+                0 0 45px #3b5998;
+            transform: scale(1.1);
+            /* بيكبر سنة لما تقف عليه */
+        }
+
+        /* تأثير الواتساب (أخضر) */
+        .whatsapp:hover {
+            box-shadow: 0 0 15px #25d366,
+                0 0 30px #25d366,
+                0 0 45px #25d366;
+            transform: scale(1.1);
+        }
+
+        /* تأثير التيك توك (أبيض مع تأثير خفيف أزرق وأحمر) */
+        .tiktok:hover {
+            box-shadow: -2px -2px 15px #00f2fe,
+                2px 2px 15px #fe0979,
+                0 0 30px #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* تنسيق حقوق الملكية */
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            /* خط خفيف شفاف يفصل الفوتر */
+            color: #a0a0a0;
+            /* لون رمادي فاتح مريح للعين */
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            width: 100%;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="main-header" dir="ltr">
-    <!-- الجزء الشمال: زر البحث + اسم المتجر -->
-    <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-        <a href="index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center;">
-            <img src="assets/images/favicon.png" alt="EPIC TECH" style="height: 45px; width: auto; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-</a>
-        
-        
-        </a>
+    <header class="main-header" dir="ltr">
+        <!-- الجزء الشمال: زر البحث + اسم المتجر -->
+        <div class="header-left flex-row">
+            <a href="./index.html" class="logo-area logo-link">
+                <img src="./assets/images/favicon.png" alt="EPIC TECH logo" class="logo-img">
+            </a>
+            <div class="search-container">
+                <button id="searchIcon" class="search-btn" onclick="openSearch()" aria-label="فتح البحث">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <!-- خانة البحث -->
+                <!-- خانة البحث بعد التعديل -->
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..."
+                    aria-label="ابحث عن منتج" onkeypress="handleHomeSearch(event)">
+            </div>
+        </div> <!-- القفلة المظبوطة اهي -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        <!-- زر وخانة البحث -->
-        <div class="search-container" style="display: flex; align-items: center; position: relative;">
-            <button id="searchIcon" class="search-btn" onclick="openSearch()" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
-           <input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeypress="handleHomeSearch(event)" style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 5px 10px; border-radius: 15px; outline: none;">
-        </div>
-    </div>
+        <!-- الأقسام في النص -->
+        <nav class="nav-links" aria-label="الأقسام الرئيسية">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="pages/category.html?cat=laptops" class="nav-link">Laptops</a>
+            <a href="pages/category.html?cat=pcs" class="nav-link">PCs</a>
+            <a href="pages/category.html?cat=accessories" class="nav-link">Accessories</a>
+            <a href="pages/category.html?cat=monitors" class="nav-link">Monitors</a>
+            <a href="pages/category.html?cat=bundles" class="nav-link">Bundles</a>
+            <a href="pages/category.html?cat=workstations" class="nav-link">Workstations</a>
+        </nav>
 
-    <!-- الأقسام في النص -->
-<nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-    <a href="index.html" class="active" style="text-decoration: none; color: #38bdf8; font-size: 15px; font-weight: 600;">Home</a>
-    <a href="pages/category.html?cat=laptops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
-    <a href="pages/category.html?cat=desktops" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
-    <a href="pages/category.html?cat=accessories" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Accessories</a>
-    <a href="pages/category.html?cat=monitors" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
-    <a href="pages/category.html?cat=bundles" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
-    <a href="pages/category.html?cat=workstations" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
-</nav>
-    <!-- الجزء اليمين: زر السلة وزر الثيم -->
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <a href="pages/cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
+        <!-- الجزء اليمين: زر السلة وزر الثيم -->
+        <div class="header-right"
+            style="display: flex; align-items: center; gap: 25px; flex-shrink: 0; margin-left: 10px;">
 
-        <label class="switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="theme-slider">
-                <span id="themeIcon">☀️</span>
+            <!-- زر السلة بالعداد -->
+            <!-- زر السلة النيون الجديد والمنضبط -->
+            <a href="pages/cart.html" class="cart-btn"
+                style="position: relative; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span id="cartBadge"
+                    style="position: absolute; top: -4px; right: -6px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
+            </a>
+            <!-- زر الثيم -->
+
             </span>
+            </label>
+
+        </div>
+    </header>
+
+    <div class="hero-logo-container">
+        <h1 class="neon-logo">EPIC TECH</h1>
+    </div>
+
+    <main>
+
+        <!-- قسم الأقسام السريعة (الزجاجية) اللي بتودي لصفحة الأقسام -->
+        <div class="categories-section quick-categories">
+            <a href="pages/category.html?cat=keyboards" class="quick-cat-btn">⌨️ لوحات المفاتيح (Keyboards)</a>
+            <a href="pages/category.html?cat=headsets" class="quick-cat-btn">🎧 السماعات (Headsets)</a>
+            <a href="pages/category.html?cat=mouses" class="quick-cat-btn">🖱️ الماوسات (Mouses)</a>
+            <a href="pages/games.html" class="quick-cat-btn">🎮 الألعاب (GAMES)</a>
+            <a href="pages/assembly.html" class="quick-cat-btn">تركيب تجميعات🖥️</a>
+            <a href="pages/cleaning.html" class="quick-cat-btn">🧹 التنظيف (CLEANING)</a>
+        </div>
+
+        <!-- 1. التصنيفات الـ 6 (مربوطة بصفحات الأقسام بالكامل) -->
+        <section class="categories-grid">
+            <a href="pages/category.html?cat=laptops" class="category-card category-card-link">
+                <img src="assets/images/laptop.png" alt="لابتوبات" loading="lazy">
+                <h3>LAPTOPS</h3>
+            </a>
+
+            <a href="pages/category.html?cat=pcs" class="category-card category-card-link">
+                <img src="assets/images/desktop.png" alt="أجهزة مكتبية" loading="lazy">
+                <h3>PCS</h3>
+            </a>
+
+            <a href="pages/category.html?cat=accessories" class="category-card category-card-link">
+                <img src="assets/images/accessory.png" alt="اكسسوارات" loading="lazy">
+                <h3>ACCESSORIES</h3>
+            </a>
+
+            <a href="pages/category.html?cat=monitors" class="category-card category-card-link">
+                <img src="assets/images/monitor.png" alt="شاشات" loading="lazy">
+                <h3>MONITORS</h3>
+            </a>
+
+            <a href="pages/category.html?cat=bundles" class="category-card category-card-link">
+                <img src="assets/images/components.png" alt="تجميعات PC" loading="lazy">
+                <h3>PC BUNDLES</h3>
+            </a>
+
+            <a href="pages/category.html?cat=workstations" class="category-card category-card-link">
+                <img src="assets/images/workstation.png" alt="ورك ستيشنز" loading="lazy">
+                <h3>WORKSTATIONS</h3>
+            </a>
+        </section>
+
+        <!-- 1. قسم الكيبوردات (Keyboards) -->
+        <section class="category-showcase">
+            <div class="main-category-banner">
+                <img src="assets/images/keyboard-main.jpg" alt="لوحات المفاتيح">
+                <h2>Keyboards</h2>
+                <a href="pages/category.html?cat=keyboards" class="view-all-btn">View All</a>
+            </div>
+
+            <div class="products-grid">
+                <!-- 1. Razer Huntsman V2 Analog -->
+                <a href="pages/product.html?name=Razer%20Huntsman%20V2%20Analog" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard4-1.jpg" class="product-img"
+                                alt="Razer Huntsman V2 Analog" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Razer Huntsman V2 Analog</p>
+                            <span>2,750 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Razer Huntsman V2 Analog"
+                                data-price="2750">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 2. Razer BlackWidow V4 Pro -->
+                <a href="pages/product.html?name=Razer%20BlackWidow%20V4%20Pro" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard1-1.jpg" class="product-img"
+                                alt="Razer BlackWidow V4 Pro" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Razer BlackWidow V4 Pro</p>
+                            <span>4,500 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Razer BlackWidow V4 Pro"
+                                data-price="4500">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 3. razer blackwidow v4 75 -->
+                <a href="pages/product.html?name=razer%20blackwidow%20v4%2075" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard3-1.jpg" class="product-img"
+                                alt="razer blackwidow v4 75" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>razer blackwidow v4 75</p>
+                            <span>3,750 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="razer blackwidow v4 75"
+                                data-price="3750">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 4. ASUS ROG Claymore II Wireless -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Claymore%20II%20Wireless" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard5-1.jpg" class="product-img"
+                                alt="ASUS ROG Claymore II Wireless" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Claymore II Wireless</p>
+                            <span>2,950 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Claymore II Wireless"
+                                data-price="2950">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 5. ASUS ROG Falchion Wireless -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Falchion%20Wireless" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard10-1.jpg" class="product-img"
+                                alt="ASUS ROG Falchion Wireless" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Falchion Wireless</p>
+                            <span>3,500 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Falchion Wireless"
+                                data-price="3500">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 6. Logitech G915 -->
+                <a href="pages/product.html?name=Logitech%20G915" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard6-1.jpg" class="product-img" alt="Logitech G915"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Logitech G915</p>
+                            <span>3,500 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Logitech G915"
+                                data-price="3500">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 7. Logitech G815 -->
+                <a href="pages/product.html?name=Logitech%20G815" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard7-1.jpg" class="product-img" alt="Logitech G815"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Logitech G815</p>
+                            <span>2,750 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Logitech G815"
+                                data-price="2750">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 8. HYTE Keeb TKL -->
+                <a href="pages/product.html?name=HYTE%20Keeb%20TKL" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/keyboard8-1.jpg" class="product-img" alt="HYTE Keeb TKL"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>HYTE Keeb TKL</p>
+                            <span>1,999 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="HYTE Keeb TKL"
+                                data-price="1999">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. قسم الماوسات (Mouses) -->
+        <section class="category-showcase">
+            <div class="main-category-banner">
+                <img src="assets/images/mouse-main.jpg" alt="ماوسات"
+                    onerror="this.src='assets/images/keyboard-main.jpg'">
+                <h2>Mouses</h2>
+                <a href="pages/category.html?cat=mouses" class="view-all-btn">View All</a>
+            </div>
+
+            <div class="products-grid">
+                <!-- 1. ASUS ROG Chakram Wireless -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Chakram%20Wireless" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous6.png" class="product-img"
+                                alt="ASUS ROG Chakram Wireless" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Chakram Wireless</p>
+                            <span>1,950 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Chakram Wireless"
+                                data-price="1950">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 2. ASUS ROG Keris -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Keris" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous7.png" class="product-img" alt="ASUS ROG Keris"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Keris</p>
+                            <span>1,350 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Keris"
+                                data-price="1350">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 3. ASUS TUF M3 -->
+                <a href="pages/product.html?name=ASUS%20TUF%20M3" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous18.png" class="product-img" alt="ASUS TUF M3"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS TUF M3</p>
+                            <span>550 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS TUF M3" data-price="550">ADD
+                                TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 4. SteelSeries Aerox 5 -->
+                <a href="pages/product.html?name=SteelSeries%20Aerox%205" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous10.png" class="product-img" alt="SteelSeries Aerox 5"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>SteelSeries Aerox 5</p>
+                            <span>1,200 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="SteelSeries Aerox 5"
+                                data-price="1200">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 5. SteelSeries Aerox 9 -->
+                <a href="pages/product.html?name=SteelSeries%20Aerox%209" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous11.png" class="product-img" alt="SteelSeries Aerox 9"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>SteelSeries Aerox 9</p>
+                            <span>1,550 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="SteelSeries Aerox 9"
+                                data-price="1550">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 6. ASUS TUF M4 Air -->
+                <a href="pages/product.html?name=ASUS%20TUF%20M4%20Air" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous14.png" class="product-img" alt="ASUS TUF M4 Air"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS TUF M4 Air</p>
+                            <span>999 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS TUF M4 Air"
+                                data-price="999">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 7. ASUS ROG Impact III -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Impact%20III" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous16.png" class="product-img" alt="ASUS ROG Impact III"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Impact III</p>
+                            <span>950 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Impact III"
+                                data-price="950">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 8. ASUS ROG Gladius III -->
+                <a href="pages/product.html?name=ASUS%20ROG%20Gladius%20III" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/maous17.png" class="product-img" alt="ASUS ROG Gladius III"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>ASUS ROG Gladius III</p>
+                            <span>999 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="ASUS ROG Gladius III"
+                                data-price="999">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. قسم السماعات (Headsets) -->
+        <section class="category-showcase">
+            <div class="main-category-banner">
+                <img src="assets/images/headset-main.jpg" alt="سماعات"
+                    onerror="this.src='assets/images/keyboard-main.jpg'">
+                <h2>Headsets</h2>
+                <a href="pages/category.html?cat=headsets" class="view-all-btn">View All</a>
+            </div>
+
+            <div class="products-grid">
+                <!-- 1. Logitech G733 -->
+                <a href="pages/product.html?name=Logitech%20G733" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/headset1.png" class="product-img" alt="Logitech G733"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Logitech G733</p>
+                            <span>4,500 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Logitech G733"
+                                data-price="4500">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 2. Astro A50 Gen 3 -->
+                <a href="pages/product.html?name=Astro%20A50%20Gen%203" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/headset2.png" class="product-img" alt="Astro A50 Gen 3"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Astro A50 Gen 3</p>
+                            <span>4,500 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Astro A50 Gen 3"
+                                data-price="4500">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 3. Razer Kraken X Lite -->
+                <a href="pages/product.html?name=Razer%20Kraken%20X%20Lite" class="product-card-link">
+                    <div class="product-card">
+                        <span class="stock-badge in-stock">In Stock</span>
+                        <div class="img-container">
+                            <img src="assets/images/products/headset4.png" class="product-img" alt="Razer Kraken X Lite"
+                                loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <p>Razer Kraken X Lite</p>
+                            <span>999 EGP</span>
+                            <button class="add-to-cart-btn neon-cart-btn" data-name="Razer Kraken X Lite"
+                                data-price="999">ADD TO CART 🛒</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- قسم خدمات إضافية -->
+        <section class="features-section">
+            <div class="features-header">
+                <h2 class="main-section-title">خدمات إضافية</h2>
+                <p class="main-section-subtitle">خدمات احترافية لحد عندك</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- 1. بطاقة النظافة وتغيير المعجون -->
+                <a href="pages/cleaning.html" class="feature-card feature-card-link">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>تنظيف وتغيير معجون الـ PC</h3>
+                    <p>خدمة منزلية احترافية لتنظيف جهازك وتغيير المعجون الحراري لأفضل أداء درجات حرارة.</p>
+                </a>
+
+                <!-- 2. بطاقة تركيب التجميعات -->
+                <a href="pages/assembly.html" class="feature-card feature-card-link">
+                    <div class="feature-icon">💻</div>
+                    <h3>تركيب التجميعات والأنظمة</h3>
+                    <p>تركيب التجميعات في البيت أو المحل باحترافية تامة، مع تثبيت وتفعيل كل أنواع الأنظمة والتعريفات.
+                    </p>
+                </a>
+
+                <!-- 3. بطاقة بيع الألعاب -->
+                <a href="pages/games.html" class="feature-card feature-card-link">
+                    <div class="feature-icon">🎮</div>
+                    <h3>بيع ألعاب منفردة</h3>
+                    <p>متاح بيع وتوفير الألعاب المنفردة بأقل سعر وأسهل طريقة تحميل لتستمتع بأقوى الألعاب.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- قسم الأرقام المميزة -->
+        <section class="stats-section">
+            <div class="stats-divider-title">
+                <h2 class="neon-magic-text">- أرقام مميزة -</h2>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2000+</div>
+                    <div class="stat-text">طلب</div>
+                    <div class="neon-magic-box"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">999+</div>
+                    <div class="stat-text">عملية ناجحة</div>
+                    <div class="neon-magic-box"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-text">عميل راضي</div>
+                    <div class="neon-magic-box"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. آراء العملاء -->
+        <section class="testimonials-hero">
+            <h2 class="section-title">آراء عملائنا المميزين</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="testimonialSlider"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" dir="ltr">
+        <div class="footer-content">
+
+            <div class="footer-column">
+                <!-- اللوجو بيرجع للرئيسية -->
+                <!-- اللوجو بيرجع للرئيسية -->
+                <a href="./index.html" style="text-decoration: none; display: inline-block; margin-bottom: 15px;">
+                    <img src="./assets/images/favicon.png" alt="EPIC TECH"
+                        style="height: 45px; width: auto; border-radius: 8px; transition: transform 0.3s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+                <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers,
+                    gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's
+                    leading brands.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    <a href="tel:01017229055" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                        onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">01017229055</a>
+                </p>
+                <p style="display: flex; align-items: center; gap: 10px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank"
+                        rel="noopener noreferrer" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                        onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Facebook
+                        Page</a>
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="2" y1="20" x2="22" y2="20"></line>
+                        </svg>
+                        <a href="pages/category.html?cat=laptops"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Laptops</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="2" width="12" height="20" rx="2" ry="2"></rect>
+                            <line x1="10" y1="6" x2="14" y2="6"></line>
+                            <line x1="10" y1="10" x2="14" y2="10"></line>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        <a href="pages/category.html?cat=desktops"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Desktop
+                            PCs</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="7"></rect>
+                            <line x1="12" y1="6" x2="12" y2="10"></line>
+                        </svg>
+                        <a href="pages/category.html?cat=accessories"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'"
+                            onmouseout="this.style.color='#cbd5e1'">Accessories</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <a href="pages/category.html?cat=monitors"
+                            style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'"
+                            onmouseout="this.style.color='#cbd5e1'">Monitors</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Policies</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <line x1="10" y1="9" x2="8" y2="9"></line>
+                        </svg>
+                        <a href="pages/terms.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Terms of
+                            Use</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                        <a href="pages/warranty.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Warranty
+                            Policy</a>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                        <a href="pages/shipping.html" style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
+                            onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Shipping
+                            Policy</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-social-container">
+                <h3>Subscribe us</h3>
+                <div class="social-icons-neon">
+                    <!-- رابط الفيسبوك -->
+                    <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank"
+                        class="neon-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <!-- رابط الواتساب -->
+                    <a href="https://wa.me/201017229055" target="_blank" class="neon-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                    <!-- رابط التيك توك -->
+                    <a href="https://www.tiktok.com/@epictechet" target="_blank" class="neon-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 EPIC TECH. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" crossorigin="anonymous"></script>
+    <!-- ربط ملف الجافاسكريبت الأساسي والنظيف -->
+    <script src="assets/js/main.js?v=2"></script>
+    <script>
+        function openSearch() {
+            const input = document.getElementById('searchInput');
+            const isHidden = input.style.display === 'none' || input.style.display === '';
+            input.style.display = isHidden ? 'block' : 'none';
+            if (isHidden) input.focus();
+        }
+
+        // فلترة لايف: بتخفي أي كارت منتج مش مطابق للنص وانت بتكتب
+        function filterProducts(query) {
+            const searchTerm = query.trim().toLowerCase();
+            const productLinks = document.querySelectorAll('.product-card-link');
+
+            productLinks.forEach(link => {
+                const text = link.innerText.toLowerCase();
+                link.style.display = (searchTerm === '' || text.includes(searchTerm)) ? '' : 'none';
+            });
+        }
+
+        function handleHomeSearch(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const query = document.getElementById('searchInput').value.trim();
+                if (query !== '') {
+                    window.location.href = `pages/category.html?search=${encodeURIComponent(query)}`;
+                }
+            }
+        }
+
+
+    </script>
+
+    <!-- القائمة العايمة -->
+    <div class="fab-container">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="main-fab" aria-label="فتح قائمة التواصل">
+            <span class="fab-icon-plus"><img src="assets/images/headset.png" alt=""></span>
+            <span class="fab-icon-close">×</span>
         </label>
-    </div>
-</header>
 
-<div class="hero-logo-container">
-    <h1 class="neon-logo">EPIC TECH</h1>
-</div>
-
-<main>
-
-    <!-- قسم الأقسام السريعة (الزجاجية) اللي بتودي لصفحة الأقسام -->
-    <div class="categories-section" style="display: flex; gap: 15px; justify-content: center; margin: 20px 0 30px 0; flex-wrap: wrap; padding: 0 15px;">
-        <a href="pages/category.html?cat=keyboards" style="background: rgba(255, 255, 255, 0.05); padding: 12px 25px; border-radius: 15px; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); font-weight: bold; transition: 0.3s;">⌨️ لوحات المفاتيح (Keyboards)</a>
-        
-        <a href="pages/category.html?cat=headsets" style="background: rgba(255, 255, 255, 0.05); padding: 12px 25px; border-radius: 15px; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); font-weight: bold; transition: 0.3s;">🎧 السماعات (Headsets)</a>
-        
-        <a href="pages/category.html?cat=mouses" style="background: rgba(255, 255, 255, 0.05); padding: 12px 25px; border-radius: 15px; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); font-weight: bold; transition: 0.3s;">🖱️ الماوسات (Mouses)</a>
-    </div>
-
-    <!-- 1. التصنيفات -->
-<!-- 1. التصنيفات الـ 6 (مربوطة بصفحات الأقسام بالكامل) -->
-    <section class="categories-grid">
-        <!-- 1. Laptops -->
-        <a href="pages/category.html?cat=laptops" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/laptop.png" alt="Laptops">
-            <h3>LAPTOPS</h3>
-        </a>
-
-        <!-- 2. Desktop PCs -->
-        <a href="pages/category.html?cat=desktops" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/desktop.png" alt="Desktop PCs">
-            <h3>DESKTOP PCS</h3>
-        </a>
-
-        <!-- 3. Accessories -->
-        <a href="pages/category.html?cat=accessories" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/accessory.png" alt="Accessories">
-            <h3>ACCESSORIES</h3>
-        </a>
-
-        <!-- 4. Monitors -->
-        <a href="pages/category.html?cat=monitors" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/monitor.png" alt="Monitors">
-            <h3>MONITORS</h3>
-        </a>
-
-        <!-- 5. PC Bundles -->
-        <a href="pages/category.html?cat=bundles" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/components.png" alt="PC Bundles">
-            <h3>PC BUNDLES</h3>
-        </a>
-
-        <!-- 6. Workstations -->
-        <a href="pages/category.html?cat=workstations" class="category-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-            <img src="assets/images/workstation.png" alt="Workstations">
-            <h3>WORKSTATIONS</h3>
-        </a>
-    </section>
-     <!-- قسم لوحات المفاتيح (Keyboards) - المنتجات المتوفرة فقط -->
-<!-- 1. قسم الكيبوردات (Keyboards) -->
-    <section class="category-showcase">
-        <div class="main-category-banner">
-            <img src="assets/images/keyboard-main.jpg" alt="Keyboards">
-            <h2>Keyboards</h2>
-            <a href="pages/category.html?cat=keyboards" class="view-all-btn">View All</a>
-        </div>
-
-        <div class="products-grid">
-            <!-- 1. Razer Huntsman V2 Analog -->
-            <a href="pages/product.html?name=Razer%20Huntsman%20V2%20Analog" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard4-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Razer Huntsman V2 Analog</p>
-                    <span>2,750 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Razer Huntsman V2 Analog', 2750)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
+        <div class="fab-sub-buttons">
+            <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" rel="noopener noreferrer"
+                class="fab-btn facebook-btn" title="فيسبوك">
+                <img src="assets/images/Facebook.webp" alt="Facebook">
             </a>
-
-            <!-- 2. Razer BlackWidow V4 Pro -->
-            <a href="pages/product.html?name=Razer%20BlackWidow%20V4%20Pro" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard1-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Razer BlackWidow V4 Pro</p>
-                    <span>4,500 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Razer BlackWidow V4 Pro', 4500)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
+            <a href="https://wa.me/201017229055" target="_blank" rel="noopener noreferrer" class="fab-btn whatsapp-btn"
+                title="واتساب">
+                <img src="assets/images/WhatsApp.png" alt="WhatsApp">
             </a>
-
-            <!-- 3. razer blackwidow v4 75 -->
-            <a href="pages/product.html?name=razer%20blackwidow%20v4%2075" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard3-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>razer blackwidow v4 75</p>
-                    <span>3,750 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('razer blackwidow v4 75', 3750)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 4. ASUS ROG Claymore II Wireless -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Claymore%20II%20Wireless" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard5-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Claymore II Wireless</p>
-                    <span>2,950 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Claymore II Wireless', 2950)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 5. ASUS ROG Falchion Wireless -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Falchion%20Wireless" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard10-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Falchion Wireless</p>
-                    <span>3,500 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Falchion Wireless', 3500)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 6. Logitech G915 -->
-            <a href="pages/product.html?name=Logitech%20G915" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard6-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Logitech G915</p>
-                    <span>3,500 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Logitech G915', 3500)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 7. Logitech G815 -->
-            <a href="pages/product.html?name=Logitech%20G815" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard7-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Logitech G815</p>
-                    <span>2,750 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Logitech G815', 2750)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 8. HYTE Keeb TKL -->
-            <a href="pages/product.html?name=HYTE%20Keeb%20TKL" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/keyboard8-1.jpg" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>HYTE Keeb TKL</p>
-                    <span>1,999 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('HYTE Keeb TKL', 1999)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- 2. قسم الماوسات (Mouses) -->
-    <section class="category-showcase">
-        <div class="main-category-banner">
-            <img src="assets/images/mouse-main.jpg" alt="Mouses" onerror="this.src='assets/images/keyboard-main.jpg'">
-            <h2>Mouses</h2>
-            <a href="pages/category.html?cat=mouses" class="view-all-btn">View All</a>
-        </div>
-
-        <div class="products-grid">
-            <!-- 1. ASUS ROG Chakram Wireless -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Chakram%20Wireless" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous6.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Chakram Wireless</p>
-                    <span>1,950 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Chakram Wireless', 1950)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 2. ASUS ROG Keris -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Keris" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous7.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Keris</p>
-                    <span>1,350 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Keris', 1350)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 3. ASUS TUF M3 -->
-            <a href="pages/product.html?name=ASUS%20TUF%20M3" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous18.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS TUF M3</p>
-                    <span>550 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS TUF M3', 550)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 4. SteelSeries Aerox 5 -->
-            <a href="pages/product.html?name=SteelSeries%20Aerox%205" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous10.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>SteelSeries Aerox 5</p>
-                    <span>1,200 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('SteelSeries Aerox 5', 1200)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 5. SteelSeries Aerox 9 -->
-            <a href="pages/product.html?name=SteelSeries%20Aerox%209" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous11.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>SteelSeries Aerox 9</p>
-                    <span>1,550 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('SteelSeries Aerox 9', 1550)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 6. ASUS TUF M4 Air -->
-            <a href="pages/product.html?name=ASUS%20TUF%20M4%20Air" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous14.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS TUF M4 Air</p>
-                    <span>999 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS TUF M4 Air', 999)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 7. ASUS ROG Impact III -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Impact%20III" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous16.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Impact III</p>
-                    <span>950 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Impact III', 950)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 8. ASUS ROG Gladius III -->
-            <a href="pages/product.html?name=ASUS%20ROG%20Gladius%20III" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/maous17.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>ASUS ROG Gladius III</p>
-                    <span>999 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('ASUS ROG Gladius III', 999)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- 3. قسم السماعات (Headsets) -->
-    <section class="category-showcase">
-        <div class="main-category-banner">
-            <img src="assets/images/headset-main.jpg" alt="Headsets" onerror="this.src='assets/images/keyboard-main.jpg'">
-            <h2>Headsets</h2>
-            <a href="pages/category.html?cat=headsets" class="view-all-btn">View All</a>
-        </div>
-
-        <div class="products-grid">
-            <!-- 1. Logitech G733 -->
-            <a href="pages/product.html?name=Logitech%20G733" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/headset1.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Logitech G733</p>
-                    <span>4,500 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Logitech G733', 4500)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 2. Astro A50 Gen 3 -->
-            <a href="pages/product.html?name=Astro%20A50%20Gen%203" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/headset2.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Astro A50 Gen 3</p>
-                    <span>4,500 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Astro A50 Gen 3', 4500)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-
-            <!-- 3. Razer Kraken X Lite -->
-            <a href="pages/product.html?name=Razer%20Kraken%20X%20Lite" style="text-decoration: none; color: inherit; display: block;">
-            <div class="product-card">
-                <span class="stock-badge in-stock">In Stock</span>
-                <div class="img-container">
-                    <img src="assets/images/products/headset4.png" class="product-img">
-                </div>
-                <div class="product-info">
-                    <p>Razer Kraken X Lite</p>
-                    <span>999 EGP</span>
-                    <button onclick="event.preventDefault(); addToCart('Razer Kraken X Lite', 999)" style="margin-top: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 13px;">إضافة للسلة 🛒</button>
-                </div>
-            </div>
-            </a>
-        </div>
-    </section>
-
- 
-<!-- قسم خدمات إضافية -->
-<section class="features-section">
-    <div class="features-header">
-        <h2 class="main-section-title">خدمات إضافية</h2>
-        <p class="main-section-subtitle">خدمات احترافية لحد عندك</p>
-    </div>
-
-    <div class="features-grid">
-        <!-- 1. بطاقة النظافة وتغيير المعجون (يمين) -->
-        <a href="pages/cleaning.html" class="feature-card" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
-            <div class="feature-icon">🛠️</div>
-            <h3>تنظيف وتغيير معجون الـ PC</h3>
-            <p>خدمة منزلية احترافية لتنظيف جهازك وتغيير المعجون الحراري لأفضل أداء درجات حرارة.</p>
-        </a>
-
-        <!-- 2. بطاقة تركيب التجميعات (في النص) -->
-        <a href="pages/assembly.html" class="feature-card" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
-            <div class="feature-icon">💻</div>
-            <h3>تركيب التجميعات والأنظمة</h3>
-            <p>تركيب التجميعات في البيت أو المحل باحترافية تامة، مع تثبيت وتفعيل كل أنواع الأنظمة والتعريفات.</p>
-        </a>
-
-        <!-- 3. بطاقة بيع الألعاب (شمال) -->
-        <a href="pages/games.html" class="feature-card" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
-            <div class="feature-icon">🎮</div>
-            <h3>بيع ألعاب منفردة</h3>
-            <p>متاح بيع وتوفير الألعاب المنفردة بأقل سعر وأسهل طريقة تحميل لتستمتع بأقوى الألعاب.</p>
-        </a>
-    </div>
-</section>
-    <!-- قسم الأرقام المميزة -->
-    <section class="stats-section">
-        <div class="stats-divider-title">
-            <span>---</span> <h2>أرقام مميزة</h2> <span>---</span>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">2000+</div>
-                <div class="stat-text">طلب</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">999+</div>
-                <div class="stat-text">عملية ناجحة</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">1000+</div>
-                <div class="stat-text">عميل راضي</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. آراء العملاء -->
-    <section class="testimonials-hero">
-        <h2 class="section-title">آراء عملائنا المميزين</h2>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="testimonialSlider"></div>
-        </div>
-    </section>
-
-</main>
-
-<footer class="site-footer" dir="ltr">
-    <div class="footer-content">
-        <div class="footer-column">
-            <h3>EPIC-TECH</h3>
-            <p>Your trusted destination for everything PC. We specialize in imported laptops, desktop computers, gaming PCs, workstations, monitors, computer components, and gaming accessories from the world's leading brands.</p>
-        </div>
-        <div class="footer-column">
-            <h3>Contact</h3>
-            <p>📞 01017229055</p>
-            <a href="#">Facebook Page</a>
-        </div>
-        <div class="footer-column">
-            <h3>Shop</h3>
-            <ul>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Desktop PCs</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Monitors</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Policies</h3>
-            <ul>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Warranty Policy</a></li>
-                <li><a href="#">Shipping Policy</a></li>
-            </ul>
         </div>
     </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script>
-function openSearch() {
-    const input = document.getElementById('searchInput');
-    if (input.style.display === 'none' || input.style.display === '') {
-        input.style.display = 'block';
-        input.focus();
-    } else {
-        input.style.display = 'none';
-    }
-}
-
-function filterProducts(query) {
-    const searchTerm = query.toLowerCase();
-    const productCards = document.querySelectorAll('.product-card');
-    
-    productCards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(searchTerm)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-function handleHomeSearch(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        const query = document.getElementById('searchInput').value.trim();
-        if (query !== '') {
-            window.location.href = `pages/category.html?search=${encodeURIComponent(query)}`;
-        }
-    }
-}
-</script>
-
-<!-- القائمة العايمة -->
-<div class="fab-container">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="main-fab">
-        <span class="fab-icon-plus"><img src="assets/images/headset.png" alt="Call"></span>
-        <span class="fab-icon-close">×</span>
-    </label>
-
-    <div class="fab-sub-buttons">
-        <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" class="fab-btn facebook-btn" title="فيسبوك">
-            <img src="assets/images/Facebook.webp" alt="Facebook">
-        </a>
-        <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
-            <img src="assets/images/WhatsApp.png" alt="WhatsApp">
-        </a>
-    </div>
-</div>
 
 </body>
+
 </html>

@@ -1,63 +1,207 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================
+// ملف main.js الشامل (السلة + البحث + الثيم)
+// ==========================================
 
-    // 1. منطق الثيم
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        if(themeToggle) themeToggle.checked = true;
-        if(themeIcon) themeIcon.textContent = '🌙';
+// 1. دالة إضافة المنتج للسلة
+window.addToCart = function (productName, price) {
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('epic_cart')) || [];
+        if (!Array.isArray(cart)) cart = [];
+    } catch (e) {
+        cart = [];
+    }
+
+    let existingItem = cart.find(item => item.name === productName);
+    if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
     } else {
-        if(themeIcon) themeIcon.textContent = '☀️';
+        cart.push({ name: productName, price: Number(price), quantity: 1 });
     }
 
-    if(themeToggle) {
-        themeToggle.addEventListener('change', () => {
-            const isLight = themeToggle.checked;
-            document.body.classList.toggle('light-mode', isLight);
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            themeIcon.textContent = isLight ? '🌙' : '☀️';
-        });
+    localStorage.setItem('epic_cart', JSON.stringify(cart));
+    if (window.updateCartBadge) window.updateCartBadge();
+    if (window.showToast) window.showToast(`تم إضافة "${productName}" إلى السلة بنجاح 🛒`);
+};
+
+// 2. تحديث عداد السلة في الهيدر
+window.updateCartBadge = function () {
+    const badge = document.getElementById('cartBadge');
+    if (!badge) return;
+
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('epic_cart')) || [];
+        if (!Array.isArray(cart)) cart = [];
+    } catch (e) {
+        cart = [];
     }
 
-    // 2. منطق Swiper للمنتجات
-    document.querySelectorAll('.productSwiper').forEach(function(el) {
-        new Swiper(el, {
-            loop: true,
-            navigation: {
-                nextEl: el.querySelector('.swiper-button-next'),
-                prevEl: el.querySelector('.swiper-button-prev'),
-            },
-        });
+    let totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
+    badge.textContent = totalItems;
+
+    badge.style.transform = 'scale(1.4)';
+    setTimeout(() => badge.style.transform = 'scale(1)', 200);
+};
+
+// 3. الإشعار الزجاجي الشفاف
+window.showToast = function (message) {
+    let toast = document.getElementById('epicToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'epicToast';
+        toast.style.cssText = `
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(56, 189, 248, 0.95); color: #04121d; padding: 12px 24px;
+            border-radius: 30px; font-weight: bold; font-size: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 0; z-index: 999999; backdrop-filter: blur(10px); text-align: center;
+        `;
+        document.body.appendChild(toast);
+    }
+    toast.innerText = message;
+    setTimeout(() => { toast.style.transform = 'translateX(-50%) translateY(0)'; toast.style.opacity = '1'; }, 10);
+    setTimeout(() => { toast.style.transform = 'translateX(-50%) translateY(100px)'; toast.style.opacity = '0'; }, 2500);
+};
+
+// 4. فتح وإغلاق خانة البحث
+function openSearch() {
+    const input = document.getElementById('searchInput');
+    if (!input) return;
+    const isHidden = input.style.display === 'none' || input.style.display === '';
+    input.style.display = isHidden ? 'block' : 'none';
+    if (isHidden) input.focus();
+}
+window.openSearch = openSearch;
+
+// 5. فلترة لايف للمنتجات أثناء الكتابة
+function filterProducts(query) {
+    const searchTerm = query.trim().toLowerCase();
+    const productLinks = document.querySelectorAll('.product-card-link');
+
+    productLinks.forEach(link => {
+        const text = link.innerText.toLowerCase();
+        link.style.display = (searchTerm === '' || text.includes(searchTerm)) ? '' : 'none';
+    });
+}
+window.filterProducts = filterProducts;
+
+// 6. البحث عند الضغط على Enter
+function handleHomeSearch(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const query = document.getElementById('searchInput').value.trim();
+        if (query !== '') {
+            window.location.href = `pages/category.html?search=${encodeURIComponent(query)}`;
+        }
+    }
+}
+window.handleHomeSearch = handleHomeSearch;
+
+// 7. تشغيل الأحداث بعد تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.updateCartBadge) window.updateCartBadge();
+    if (document.getElementById('cart-items-container') && window.loadCartItems) {
+        window.loadCartItems();
+    }
+});
+
+// 8. التقاط ضغطات زرار السلة في الكروت أوتوماتيك
+document.addEventListener('click', function (event) {
+    const btn = event.target.closest('.add-to-cart-btn');
+    if (!btn) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const name = btn.dataset.name;
+    const price = Number(btn.dataset.price);
+
+    if (name && !isNaN(price)) {
+        window.addToCart(name, price);
+    }
+});
+window.loadCartItems = function () {
+    let cartContainer = document.getElementById('cart-items-container');
+    let totalPriceElement = document.getElementById('total-price');
+
+    if (!cartContainer) return;
+
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('epic_cart')) || [];
+    } catch (e) {
+        cart = [];
+    }
+
+    if (!cart || cart.length === 0) {
+        cartContainer.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">سلة المشتريات فارغة حالياً 🛒</p>';
+        if (totalPriceElement) totalPriceElement.innerText = 'الإجمالي: 0 ج.م';
+        return;
+    }
+
+    let html = '';
+    let grandTotal = 0;
+
+    cart.forEach((item, index) => {
+        let itemPrice = Number(item.price) || 0;
+        let itemQty = Number(item.quantity) || 1;
+        grandTotal += itemPrice * itemQty;
+
+        html += `
+            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 18px 25px; margin-bottom: 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); direction: rtl; color: #fff;">
+                <div>
+                    <h4 style="margin: 0 0 6px 0; color: #38bdf8; font-size: 16px;">${item.name}</h4>
+                    <p style="margin: 0; color: #aaa; font-size: 14px;">السعر: ${itemPrice} EGP | الكمية: ${itemQty}</p>
+                </div>
+                <button onclick="window.removeItem(${index})" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;">حذف 🗑️</button>
+            </div>
+        `;
     });
 
-    // 3. منطق آراء العملاء (بالتصميم القديم والـ Grid الأصلي)
-    function initSwiper() {
-        const container = document.getElementById('testimonialSlider');
-        if (!container) return;
-        
-        // تفريغ الكونتير أولاً لمنع التكرار
-        container.innerHTML = '';
+    cartContainer.innerHTML = html;
+    if (totalPriceElement) {
+        totalPriceElement.innerText = 'الإجمالي: ' + grandTotal + ' ج.م';
+    }
+};
 
-        for (let i = 1; i <= 32; i++) {
-            const slide = document.createElement('div');
-            slide.className = 'swiper-slide testimonial-card';
-            slide.innerHTML = `<img src="assets/images/clients/clients${i}.png" class="client-img" alt="Client ${i}">`;
-            container.appendChild(slide);
-        }
+window.removeItem = function (index) {
+    let cart = JSON.parse(localStorage.getItem('epic_cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('epic_cart', JSON.stringify(cart));
+    if (window.loadCartItems) window.loadCartItems();
+    if (window.updateCartBadge) window.updateCartBadge();
+};
+// ==========================================
+// تشغيل سلايدر آراء العملاء أوتوماتيك
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('testimonialSlider');
+    if (!container) return;
 
-        // تشغيل السلايدر بنفس إعداداتك القديمة تماماً
-        setTimeout(() => {
+    // تفريغ الكونتير لمنع التكرار
+    container.innerHTML = '';
+
+    // رسم الـ 32 صورة للعملاء
+    for (let i = 1; i <= 32; i++) {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide testimonial-card';
+        slide.innerHTML = `<img src="assets/images/clients/clients${i}.png" class="client-img" alt="Client ${i}" onerror="this.parentElement.style.display='none'">`;
+        container.appendChild(slide);
+    }
+
+    // تفعيل مكتبة Swiper بنفس إعداداتك الأصلية
+    setTimeout(() => {
+        if (typeof Swiper !== 'undefined') {
             new Swiper(".mySwiper", {
-                slidesPerView: 4, 
+                slidesPerView: 4,
                 spaceBetween: 20,
                 grid: { rows: 2, fill: 'row' },
                 loop: true,
-                autoplay: { 
-                    delay: 3000, 
-                    disableOnInteraction: false 
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
                 },
                 breakpoints: {
                     0: { slidesPerView: 1, grid: { rows: 1 } },
@@ -65,113 +209,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     1024: { slidesPerView: 4, grid: { rows: 2 } }
                 }
             });
-        }, 100);
-    }
-    initSwiper();
-
-    // 4. منطق البحث
-    const searchBtn = document.getElementById('searchIcon');
-    const searchInput = document.getElementById('searchInput');
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', () => searchInput.classList.toggle('active'));
-    }
-
-}); // قفلة الـ DOMContentLoaded الصح
-
-// منطق الـ Scroll للهيدر
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.main-header');
-    if (header) header.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// دالة بتشتغل لما العميل يضغط على زرار "شراء" لأي منتج
-async function buyProduct(productName, productPrice) {
-    const customerName = prompt("أدخل اسمك الكريم:");
-    if (!customerName) return;
-    
-    const phone = prompt("أدخل رقم هاتفك للتواصل:");
-    if (!phone) return;
-
-    const address = prompt("أدخل عنوان الاستلام بالتفصيل:");
-    if (!address) return;
-
-    const orderData = {
-        customerName: customerName,
-        phone: phone,
-        address: address,
-        productName: productName,
-        price: productPrice
-    };
-
-    try {
-        const res = await fetch('http://localhost:5000/api/orders', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderData)
-        });
-
-        if (res.ok) {
-            alert('تم تسجيل طلبك بنجاح! جاري تحويلك للواتساب لإتمام التواصل... 🚀');
-
-            const myWhatsAppNumber = "201017229055";
-
-            const message = `السلام عليكم، أريد طلب هذا المنتج:%0A` +
-                            `- المنتج: ${productName}%0A` +
-                            `- السعر: ${productPrice} ج.م%0A` +
-                            `- الاسم: ${customerName}%0A` +
-                            `- الهاتف: ${phone}%0A` +
-                            `- العنوان: ${address}`;
-
-            window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
-        } else {
-            alert('حدث خطأ أثناء تسجيل الطلب، حاول مرة أخرى.');
         }
-    } catch (err) {
-        alert('تعذر الاتصال بالسيرفر، تأكد أن السيرفر يعمل!');
+    }, 100);
+});
+// ==========================================
+// دالة البحث الشامل من أي صفحة في الموقع
+// ==========================================
+window.handleHomeSearch = function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const query = document.getElementById('searchInput').value.trim();
+
+        if (query !== '') {
+            // بنتحقق إحنا في الرئيسية بره ولا جوه فولدر pages
+            const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || !window.location.pathname.includes('pages');
+
+            // التوجيه لصفحة النتائج الشاملة (category.html) اللي إحنا برمجناها
+            if (isHomePage) {
+                window.location.href = `pages/category.html?search=${encodeURIComponent(query)}`;
+            } else {
+                window.location.href = `category.html?search=${encodeURIComponent(query)}`;
+            }
+        }
     }
-}
+};
 
-// دالة إضافة المنتج للسلة مع الإشعار الزجاجي الواضح
-function addToCart(productName, productPrice) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    cart.push({
-        name: productName,
-        price: productPrice,
-        quantity: 1
-    });
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // إنشاء رسالة نجاح صغيرة تظهر فوق زرار الإضافة فوراً
-    showInlineMessage(event.target, `تمت الإضافة بنجاح ✔️`);
-}
-
-function showInlineMessage(buttonElement, message) {
-    // لو فيه رسالة قديمة موجودة امسحها
-    const parent = buttonElement.parentElement;
-    const oldMsg = parent.querySelector('.success-msg');
-    if (oldMsg) oldMsg.remove();
-
-    // عمل عنصر النص الجديد
-    const msg = document.createElement('div');
-    msg.className = 'success-msg';
-    msg.innerText = message;
-    
-    Object.assign(msg.style, {
-        color: '#4ade80',
-        fontSize: '13px',
-        fontWeight: 'bold',
-        marginTop: '8px',
-        textAlign: 'center',
-        transition: 'opacity 0.3s'
-    });
-
-    parent.appendChild(msg);
-
-    // إخفاء الرسالة بعد ثانيتين
-    setTimeout(() => {
-        msg.style.opacity = '0';
-        setTimeout(() => msg.remove(), 300);
-    }, 2000);
-}
+// تعطيل دالة الفلترة القديمة المحدودة عشان متعملش عطل في الرئيسية
+window.filterProducts = function (query) {
+    return;
+};

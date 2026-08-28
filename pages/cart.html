@@ -1,87 +1,194 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سلة المشتريات | Epic Store</title>
-
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+<style>
+    main {
+        overflow: visible !important;
+        padding: 40px 20px 80px 20px !important;
+    }
+
+    body {
+        /* نفس الخلفية بتاعتك */
+        background: radial-gradient(circle at 50% 20%, rgba(60, 30, 20, 0.4), rgba(15, 23, 42, 0.9) 60%, #020617);
+        background-color: #050508;
+
+        /* دول السطور الجديدة اللي هتثبت الخلفية */
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+
+        color: #f8fafc;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .policy-box {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(168, 85, 247, 0.3) !important;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px auto 40px auto !important;
+        width: 92%;
+        backdrop-filter: blur(15px);
+        color: #ffffff !important;
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.4) !important;
+        transition: all 0.4s ease !important;
+        line-height: 1.8;
+        position: relative;
+    }
+
+    .policy-box:hover {
+        border-color: #a855f7 !important;
+        box-shadow:
+            -30px 0 50px rgba(56, 189, 248, 0.35),
+            30px 0 50px rgba(236, 72, 153, 0.35),
+            0 0 60px rgba(168, 85, 247, 0.5) !important;
+        transform: translateY(-5px);
+    }
+
+    .policy-box h2 {
+        color: #d946ef !important;
+        text-shadow: 0 0 8px rgba(217, 70, 239, 0.6) !important;
+        font-size: 24px;
+    }
+
+    .policy-box strong {
+        color: #a855f7 !important;
+        text-shadow: 0 0 5px rgba(168, 85, 247, 0.6) !important;
+    }
+</style>
 
 <body>
 
-<!-- نفس الهيدر المطابق للرئيسية -->
-<header class="main-header" dir="ltr">
-    <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
-        <a href="../index.html" class="logo-area" style="text-decoration: none; color: #38bdf8; font-weight: bold; font-size: 16px;">
-            ⚡ Epic Store
-        </a>
-        <div class="search-container" style="display: flex; align-items: center; position: relative;">
-            <button id="searchIcon" class="search-btn" style="background: transparent; border: none; cursor: pointer; font-size: 16px;">🔍</button>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search..." style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(256,256,256,0.2); border-radius: 20px; padding: 5px 10px; color: #fff; outline: none; margin-left: 5px;">
+    <!-- نفس الهيدر المطابق للرئيسية -->
+    <header class="main-header" dir="ltr">
+        <!-- الجزء الأيسر (اللوجو والبحث) -->
+        <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
+            <a href="../index.html" class="logo-area"
+                style="text-decoration: none; display: flex; align-items: center;">
+                <img src="../assets/images/favicon.png" alt="EPIC TECH"
+                    style="height: 45px; width: auto; border-radius: 8px;">
+            </a>
+            <div class="search-container" style="display: flex; align-items: center; position: relative;">
+                <button id="searchIcon" class="search-btn"
+                    style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..."
+                    style="display: none; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(256,256,256,0.2); border-radius: 20px; padding: 5px 10px; color: #fff; outline: none; margin-left: 5px;">
+            </div>
+        </div>
+
+        <!-- روابط الأقسام في المنتصف -->
+        <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+            <a href="../index.html"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
+            <a href="category.html?cat=laptops"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Laptops</a>
+            <a href="category.html?cat=desktops"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">PCs</a>
+            <a href="category.html?cat=accessories"
+                style="text-decoration: none; color: #38bdf8; font-size: 15px; font-weight: 600;">Accessories</a>
+            <a href="category.html?cat=monitors"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Monitors</a>
+            <a href="category.html?cat=bundles"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Bundles</a>
+            <a href="category.html?cat=workstations"
+                style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Workstations</a>
+        </nav>
+
+        <!-- الجزء الأيمن (السلة بالعداد وزر الثيم) -->
+        <div class="header-right"
+            style="display: flex; align-items: center; gap: 25px; flex-shrink: 0; margin-left: 10px;">
+            <!-- زر السلة بالعداد (شكل نيون فخم) -->
+            <a href="cart.html" class="cart-btn"
+                style="position: relative; text-decoration: none; font-size: 22px; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                <!-- رسمة نيون سلة تسوق بيضاء ومضيئة -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span id="cartBadge"
+                    style="position: absolute; top: -4px; right: -6px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
+            </a>
+
+        </div>
+    </header>
+
+    <!-- عنوان النيون الفخم -->
+    <div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
+        <h1 class="neon-logo" style="font-size: 32px; text-align: center;">SHOPPING CART</h1>
+    </div>
+
+    <main style="max-width: 900px; margin: 0 auto; padding: 20px;">
+
+        <!-- محتوى المنتجات في السلة -->
+        <div id="cart-items-container" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+            <!-- المنتجات بتنزل هنا أوتوماتيك -->
+        </div>
+
+        <!-- إجمالي السلة وزر التأكيد الزجاجي -->
+        <div
+            style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 20px; backdrop-filter: blur(15px); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h3 id="total-price" style="color: #4ade80; margin-bottom: 20px; font-size: 24px; font-weight: bold;">
+                الإجمالي: 0 ج.م</h3>
+            <button onclick="checkoutOrder()" class="neon-cart-btn"
+                style="width: 100%; margin-top: 15px; padding: 12px 20px !important; font-size: 15px !important;">
+                CONFIRM ORDER 🚀
+            </button>
+        </div>
+    </main>
+
+    <!-- زر التواصل العائم -->
+    <div class="fab-container">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="main-fab">
+            <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt="Call"></span>
+            <span class="fab-icon-close">×</span>
+        </label>
+        <div class="fab-sub-buttons">
+            <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank"
+                class="fab-btn facebook-btn" title="فيسبوك">
+                <img src="../assets/images/Facebook.webp" alt="Facebook">
+            </a>
+            <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
+                <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
+            </a>
         </div>
     </div>
-    <nav class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-        <a href="../index.html" style="text-decoration: none; color: #94a3b8; font-size: 15px; font-weight: 600;">Home</a>
-    </nav>
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <a href="cart.html" class="cart-btn" style="text-decoration: none; font-size: 18px;">🛒</a>
-        <label class="switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="theme-slider"><span id="themeIcon">☀️</span></span>
-        </label>
-    </div>
-</header>
 
-<!-- عنوان النيون الفخم -->
-<div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
-    <h1 class="neon-logo" style="font-size: 32px; text-align: center;">SHOPPING CART</h1>
-</div>
+    <!-- بنربط بالملف الأساسي المجمع بتاعنا -->
+    <script src="../assets/js/main.js"></script>
 
-<main style="max-width: 900px; margin: 0 auto; padding: 20px;">
-    
-    <!-- محتوى المنتجات في السلة -->
-    <div id="cart-items-container" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
-        <!-- المنتجات بتنزل هنا أوتوماتيك -->
-    </div>
+    <script>
+        function checkoutOrder() {
+            // بنقرأ من السلة الجديدة اللي اسمها epic_cart
+            let cart = JSON.parse(localStorage.getItem('epic_cart')) || JSON.parse(localStorage.getItem('cart')) || [];
 
-    <!-- إجمالي السلة وزر التأكيد الزجاجي -->
-    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 20px; backdrop-filter: blur(15px); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <h3 id="total-price" style="color: #4ade80; margin-bottom: 20px; font-size: 24px; font-weight: bold;">الإجمالي: 0 ج.م</h3>
-        <button onclick="checkoutOrder()" style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; border: none; padding: 12px 35px; border-radius: 25px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(6,182,212,0.4);">
-            تأكيد وإتمام الطلب 🚀
-        </button>
-    </div>
-</main>
-
-<!-- زر التواصل العائم -->
-<div class="fab-container">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="main-fab">
-        <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt="Call"></span>
-        <span class="fab-icon-close">×</span>
-    </label>
-    <div class="fab-sub-buttons">
-        <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" class="fab-btn facebook-btn" title="فيسبوك">
-            <img src="../assets/images/Facebook.webp" alt="Facebook">
-        </a>
-        <a href="https://wa.me/201017229055" target="_blank" class="fab-btn whatsapp-btn" title="واتساب">
-            <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
-        </a>
-    </div>
-</div>
-
-<script src="../assets/js/modules/cart.js"></script>
-<script>
-    function checkoutOrder() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            alert('سلة المشتريات فارغة! أضف منتجات أولاً قبل إتمام الطلب.');
-            return;
+            if (cart.length === 0) {
+                alert('سلة المشتريات فارغة! أضف منتجات أولاً قبل إتمام الطلب.');
+                return;
+            }
+            window.location.href = 'checkout.html';
         }
-        window.location.href = 'checkout.html';
-    }
-</script>
+    </script>
 </body>
+
 </html>
