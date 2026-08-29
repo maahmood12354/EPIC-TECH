@@ -126,7 +126,6 @@
     <div class="hero-logo-container" style="margin-top: 30px; margin-bottom: 20px;">
         <h1 class="neon-logo" style="font-size: 32px; text-align: center;">CHECKOUT</h1>
     </div>
-
     <main style="max-width: 650px; margin: 0 auto; padding: 20px 20px 60px 20px;">
         <div
             style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 35px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
@@ -191,8 +190,23 @@
                         style="color: #f87171; font-size: 12px; margin-top: 8px; line-height: 1.5; display: none;">
                         ⚠️ تنبيه شحن البراق:<br>
                         - الشحن قابل للزيادة حسب المكان.<br>
-                        - الشحن على مسؤولية العميل.
+                        - الشحن على مسؤولية العميل.<br>
+                        - المندوب لا يسلم لباب المنزل بل لأقرب نقطة التقاء.
                     </p>
+                </div>
+
+                <!-- مربع الموافقة على الشروط والأحكام -->
+                <div
+                    style="margin-bottom: 22px; display: flex; align-items: flex-start; gap: 10px; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+                    <input type="checkbox" id="terms-agree" required
+                        style="width: 18px; height: 18px; cursor: pointer; margin-top: 2px;">
+                    <label for="terms-agree" style="color: #ccc; font-size: 13px; line-height: 1.5; cursor: pointer;">
+                        لقد قرأت ووافقت على <a href="terms.html" style="color: #38bdf8; text-decoration: underline;"
+                            target="_blank">شروط الاستخدام</a>، و<a href="shipping.html"
+                            style="color: #38bdf8; text-decoration: underline;" target="_blank">سياسة الشحن</a>، و<a
+                            href="warranty.html" style="color: #38bdf8; text-decoration: underline;"
+                            target="_blank">سياسة الضمان</a> لمتجر EPIC TECH.
+                    </label>
                 </div>
 
                 <button type="submit" class="neon-cart-btn"
@@ -279,7 +293,8 @@
                     `*طريقة الشحن:* ${shippingMethod}%0A` +
                     `*المنتجات:*%0A${cartDetails}%0A` +
                     `*إجمالي المنتجات:* ${totalPrice} EGP%0A` +
-                    `*ملاحظات العميل:* ${notes || 'لا يوجد'}`;
+                    `*ملاحظات العميل:* ${notes || 'لا يوجد'}%0A` +
+                    `*أوافق على الشروط والأحكام وسياسات المتجر* ✓`;
 
                 localStorage.removeItem('epic_cart');
                 localStorage.removeItem('cart');
