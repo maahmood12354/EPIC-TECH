@@ -182,6 +182,37 @@
             justify-content: center;
             box-shadow: 0 0 5px #fff;
         }
+
+        /* الموبايل: عمودين جنب بعض بدل عمود واحد */
+        @media (max-width: 600px) {
+
+            #available-products,
+            #out-of-stock-products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-card {
+                padding: 10px;
+                width: 100%;
+            }
+
+            .product-card .add-to-cart-btn,
+            .product-card .neon-cart-btn {
+                width: 100%;
+                font-size: 12px;
+                padding: 8px 10px !important;
+            }
+
+            .product-card .img-container {
+                height: 130px;
+            }
+
+            .product-card p,
+            .product-info p {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -606,7 +637,7 @@
             { name: "ViewSonic VX27G10", price: 6750, oldPrice: 7800, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx27g10.png", images: ["../assets/images/products/monitor-viewsonic-vx27g10.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 240Hz<br>جودة الشاشة: FHD" },
             { name: "ViewSonic VX27G81-2K", price: 10000, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx27g81.png", images: ["../assets/images/products/monitor-viewsonic-vx27g81.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 210Hz<br>جودة الشاشة: 2K" },
             { name: "GIGABYTE GS25F2", price: 7800, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-gigabyte-gs25f2.png", images: ["../assets/images/products/monitor-gigabyte-gs25f2.png"], specs: "حجم الشاشة: 24.5 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: Super Speed IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 1ms" },
-
+            // --- (Workstations - Used) محطات العمل المستعملة ---
             { name: "HP 600 G1 Desktop (i3 4th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-600-g1-desk-i3.jpg", images: ["../assets/images/products/hp-600-g1-desk-i3.jpg"], specs: "الموديل: HP 600 G1 (ديسك)<br>المعالج: Intel Core i3 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
             { name: "HP 600 G1 Desktop (i5 4th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-600-g1-desk-i5.jpg", images: ["../assets/images/products/hp-600-g1-desk-i5.jpg"], specs: "الموديل: HP 600 G1 (ديسك)<br>المعالج: Intel Core i5 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
             { name: "HP 800 G1 Tower (i5 4th)", price: 3500, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-800-g1-tower-i5.jpg", images: ["../assets/images/products/hp-800-g1-tower-i5.jpg"], specs: "الموديل: HP 800 G1 (تاور)<br>المعالج: Intel Core i5 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
@@ -816,6 +847,7 @@
             { name: "ZBOOK FIRE FLY 14 G7 TOUCH I7 10TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-77.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-77.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G7  TOUCH<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
             { name: "ZBOOK FIRE FLY 14 G8 I7 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g8-78.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g8-78.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G8<br>المعالج: I7 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
             { name: "ZBOOK FIRE FLY 14 G8 I5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g8-79.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g8-79.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G8<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
+            //cables
             { name: "Seagate 7200RPM HDD", price: 750, oldPrice: null, rating: 5, reviewsCount: 10, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hdd-seagate-7200.jpg", images: ["../assets/images/products/hdd-seagate-7200.jpg"], specs: "Type: Seagate 7200 RPM HDD<br>Condition: Used (Excellent)<br>Warranty: 1 Month<br>Bonus: Pre-loaded Games<br>Health & Performance: 100%" },
             { name: "DisplayPort Cable", price: 150, oldPrice: null, rating: 5, reviewsCount: 15, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-displayport.jpg", images: ["../assets/images/products/cable-displayport.jpg"], specs: "Type: High-Quality DisplayPort<br>Usage: High Refresh Rate connection<br>Condition: New" },
             { name: "HDMI Cable", price: 100, oldPrice: null, rating: 4.5, reviewsCount: 20, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-hdmi.jpg", images: ["../assets/images/products/cable-hdmi.jpg"], specs: "Type: High-Speed HDMI<br>Support: High-Resolution Audio & Video<br>Condition: New" },

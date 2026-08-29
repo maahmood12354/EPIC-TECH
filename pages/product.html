@@ -690,8 +690,52 @@
                 flex-direction: column;
             }
 
+            /* الجاليري وكارت المعلومات كانوا لسه عرض 50% وارتفاع ثابت 520px
+               حتى بعد ما وقفوا فوق بعض، فكانوا بيتعصروا في نص الشاشة.
+               دلوقتي بياخدوا عرض كامل وارتفاع بيتحدد بالمحتوى نفسه */
+            .product-hero-gallery,
+            .product-hero-info {
+                width: 100%;
+                height: auto;
+            }
+
+            .product-hero-img {
+                min-height: 260px;
+            }
+
+            .thumb-row {
+                justify-content: center;
+            }
+
+            /* زرار Add to Cart: كان بيلف كلمة كلمة لوحدها لأن الفليكس ماكانش
+               بيسمح للنص والسعر يتلفوا مع بعض كسطر واحد */
+            .add-to-cart-main-btn {
+                flex-wrap: wrap;
+                text-align: center;
+                line-height: 1.4;
+                padding: 14px 16px;
+            }
+
             .related-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-hero-info h1 {
+                font-size: 21px;
+            }
+
+            .price-current {
+                font-size: 22px;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+            }
+
+            .trust-badge {
+                min-width: 0;
             }
         }
 
