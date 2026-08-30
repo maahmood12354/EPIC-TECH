@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- الصفحة الرئيسية -->
   <url>
     <loc>https://epictech.vip/</loc>
     <changefreq>weekly</changefreq>
@@ -10,19 +12,51 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- صفحات الألعاب والتجهيز والصيانة -->
   <url>
-    <loc>https://epictech.vip/warranty.html</loc>
+    <loc>https://epictech.vip/pages/assembly.html</loc>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://epictech.vip/pages/cleaning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://epictech.vip/pages/games.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- صفحات المنتجات والأقسام -->
+  <url>
+    <loc>https://epictech.vip/pages/category.html</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://epictech.vip/shipping.html</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://epictech.vip/pages/product.html</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- صفحات السياسات والشروط -->
+  <url>
+    <loc>https://epictech.vip/pages/warranty.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://epictech.vip/terms.html</loc>
+    <loc>https://epictech.vip/pages/shipping.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://epictech.vip/pages/terms.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
