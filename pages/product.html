@@ -4,6 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- تحديد الثيم قبل التحميل عشان مفيش وميض -->
+    <script>
+        try {
+            document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+
     <title>تفاصيل المنتج | EPIC TECH</title>
 
     <meta name="description"
@@ -19,6 +29,7 @@
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/animations.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
@@ -29,7 +40,6 @@
             align-items: center;
             gap: 15px;
         }
-
 
         body {
             /* نفس الخلفية بتاعتك */
@@ -46,7 +56,6 @@
             display: flex;
             flex-direction: column;
         }
-
 
         .logo-link {
             text-decoration: none;
@@ -164,14 +173,12 @@
             display: flex;
             gap: 30px;
             align-items: center;
-            /* بنخلي الترتيب في المنتصف عشان مايمطوش بعض */
         }
 
         /* 2. كارت الصور (اليمين) - ارتفاع ثابت */
         .product-hero-gallery {
             width: 50%;
             height: 520px;
-            /* ثبتنا الارتفاع بالمللي */
             background: rgba(145, 9, 150, 0);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(170, 53, 131, 0.281);
@@ -182,11 +189,10 @@
             justify-content: space-between;
         }
 
-        /* 3. كارت المعلومات (الشمال) - نفس الارتفاع الثابت ومثبت مكانه */
+        /* 3. كارت المعلومات (الشمال) - نفس الارتفاع الثابت */
         .product-hero-info {
             width: 50%;
             height: 520px;
-            /* نفس الارتفاع الثابت بالتمام والكمال عشان يبقوا نسخة بعض */
             background: rgba(255, 255, 255, 0.048);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(170, 53, 131, 0.281);
@@ -196,7 +202,6 @@
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
-            /* عشان لو المحتوى زاد شوية، يفضل الكارت ثابت وميتحركش برادته */
         }
 
         .product-hero-img {
@@ -242,7 +247,6 @@
         }
 
         /* ---- عمود المعلومات ---- */
-
         .info-top-row {
             display: flex;
             justify-content: space-between;
@@ -255,7 +259,6 @@
             font-weight: bold;
             padding: 5px 14px;
             border-radius: 20px;
-            /* ألوان النيون الجديدة */
             background: rgba(168, 85, 247, 0.1) !important;
             color: #d946ef !important;
             border: 1px solid rgba(217, 70, 239, 0.4) !important;
@@ -293,7 +296,6 @@
         .price-current {
             font-size: 26px;
             font-weight: bold;
-            /* تدرج الـ 3 ألوان الفخم (أزرق - بنفسجي - زهري) */
             background: linear-gradient(to right, #38bdf8, #a855f7, #ec4899) !important;
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
@@ -427,7 +429,6 @@
             cursor: pointer;
             transition: all 0.3s ease !important;
             text-transform: uppercase;
-            /* تصميم الكبسولة النيون */
             background: rgba(30, 30, 35, 0.9) !important;
             color: #ffffff !important;
             border: 1px solid #a23b7a !important;
@@ -534,17 +535,14 @@
             opacity: 0.5;
         }
 
-        /* 1. بنجهز المربع عشان يستقبل الأنيميشن */
+        /* إطار الصورة المصغرة النشطة (بيلف بالثلاث ألوان) */
         .thumb-btn.active {
             position: relative;
             overflow: hidden;
             border: none !important;
-            /* بنلغي الإطار القديم */
             padding: 2px;
-            /* سمك الإطار الملون */
         }
 
-        /* 2. الخط اللي بيلف بالثلاث ألوان (بنفسجي، أزرق، زهري) */
         .thumb-btn.active::before {
             content: '';
             position: absolute;
@@ -552,34 +550,26 @@
             left: -100%;
             width: 300%;
             height: 300%;
-            /* تدرج متصل بين البنفسجي، الأزرق، والزهري من غير أي لون برتقالي */
             background: conic-gradient(#9333ea, #3b82f6, #ec4899, #9333ea);
             animation: spin-border 2s linear infinite;
             z-index: 0;
         }
 
-        /* 3. دي الخلفية اللي بتغطي النص وتسيب الأطراف بس تنور */
         .thumb-btn.active::after {
             content: '';
             position: absolute;
             inset: 2px;
-            /* سمك الإطار */
             background: rgba(25, 25, 30, 1);
-            /* لون خلفية المربع الغامقة */
             border-radius: 10px;
-            /* نفس لفة حواف المربع الأصلي */
             z-index: 1;
         }
 
-        /* 4. بنخلي الصورة تطلع فوق الأنيميشن */
         .thumb-btn.active img {
             position: relative;
             z-index: 2;
             border-radius: 8px;
-            /* عشان حواف الصورة تمشي مع الإطار */
         }
 
-        /* 5. الدوران الكامل بدون أي تقطيع */
         @keyframes spin-border {
             0% {
                 transform: rotate(0deg);
@@ -589,7 +579,6 @@
                 transform: rotate(360deg);
             }
         }
-
 
         .specs-panel {
             margin-top: 15px;
@@ -666,13 +655,11 @@
             margin-bottom: 20px;
         }
 
-        /* تصميم زرار إضافة للسلة الجديد (نفس ستايل View All الفخم) */
+        /* تصميم زرار إضافة للسلة (نفس ستايل View All الفخم) */
         .product-card .add-to-cart-btn {
             background: rgba(30, 30, 35, 0.8) !important;
             border: 1px solid rgba(170, 53, 131, 0.5) !important;
-            /* إطار بنفسجي رقيق */
             border-radius: 30px !important;
-            /* شكل الكبسولة المنحنية */
             padding: 8px 18px !important;
             color: #fff !important;
             font-family: inherit;
@@ -687,10 +674,8 @@
             gap: 6px;
         }
 
-        /* تأثير الوقوف بالماوس (:hover) نفس إضاءة View All */
         .product-card .add-to-cart-btn:hover {
             border-color: rgba(232, 121, 249, 0.9) !important;
-            /* إطار بنفسجي مضيء أفتح */
             box-shadow: 0 0 20px rgba(170, 53, 131, 0.5), inset 0 0 10px rgba(170, 53, 131, 0.2) !important;
             transform: translateY(-2px);
         }
@@ -700,9 +685,6 @@
                 flex-direction: column;
             }
 
-            /* الجاليري وكارت المعلومات كانوا لسه عرض 50% وارتفاع ثابت 520px
-               حتى بعد ما وقفوا فوق بعض، فكانوا بيتعصروا في نص الشاشة.
-               دلوقتي بياخدوا عرض كامل وارتفاع بيتحدد بالمحتوى نفسه */
             .product-hero-gallery,
             .product-hero-info {
                 width: 100%;
@@ -717,8 +699,6 @@
                 justify-content: center;
             }
 
-            /* زرار Add to Cart: كان بيلف كلمة كلمة لوحدها لأن الفليكس ماكانش
-               بيسمح للنص والسعر يتلفوا مع بعض كسطر واحد */
             .add-to-cart-main-btn {
                 flex-wrap: wrap;
                 text-align: center;
@@ -757,7 +737,6 @@
 
         .footer-social-container h3 {
             color: #fff;
-            /* لون الخط */
             font-size: 24px;
             margin-bottom: 20px;
             font-family: Arial, sans-serif;
@@ -767,10 +746,8 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            /* المسافة بين الأيقونات */
         }
 
-        /* تنسيق الأيقونات الأساسي (الدوائر) */
         .neon-icon {
             display: flex;
             justify-content: center;
@@ -786,7 +763,6 @@
             z-index: 1;
         }
 
-        /* ألوان الخلفية لكل تطبيق (بدون تأثير نيون في الحالة العادية) */
         .facebook {
             background-color: #3b5998;
         }
@@ -799,42 +775,27 @@
             background-color: #000000;
         }
 
-        /* --- تأثير النيون المضيء عند الـ Hover --- */
-
-        /* تأثير الفيسبوك (أزرق) */
         .facebook:hover {
-            box-shadow: 0 0 15px #3b5998,
-                0 0 30px #3b5998,
-                0 0 45px #3b5998;
+            box-shadow: 0 0 15px #3b5998, 0 0 30px #3b5998, 0 0 45px #3b5998;
             transform: scale(1.1);
-            /* بيكبر سنة لما تقف عليه */
         }
 
-        /* تأثير الواتساب (أخضر) */
         .whatsapp:hover {
-            box-shadow: 0 0 15px #25d366,
-                0 0 30px #25d366,
-                0 0 45px #25d366;
+            box-shadow: 0 0 15px #25d366, 0 0 30px #25d366, 0 0 45px #25d366;
             transform: scale(1.1);
         }
 
-        /* تأثير التيك توك (أبيض مع تأثير خفيف أزرق وأحمر) */
         .tiktok:hover {
-            box-shadow: -2px -2px 15px #00f2fe,
-                2px 2px 15px #fe0979,
-                0 0 30px #ffffff;
+            box-shadow: -2px -2px 15px #00f2fe, 2px 2px 15px #fe0979, 0 0 30px #ffffff;
             transform: scale(1.1);
         }
 
-        /* تنسيق حقوق الملكية */
         .footer-bottom {
             text-align: center;
             padding: 20px 0;
             margin-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            /* خط خفيف شفاف يفصل الفوتر */
             color: #a0a0a0;
-            /* لون رمادي فاتح مريح للعين */
             font-size: 15px;
             font-family: Arial, sans-serif;
             width: 100%;
@@ -842,6 +803,203 @@
 
         .footer-bottom p {
             margin: 0;
+        }
+
+        /* ===== زر الثيم ===== */
+        .theme-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .theme-btn svg {
+            stroke: #ffffff;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, .8));
+            transition: transform .4s ease;
+        }
+
+        .theme-btn:hover svg {
+            transform: rotate(25deg) scale(1.1);
+        }
+
+        .theme-btn .icon-moon {
+            display: none;
+        }
+
+        html[data-theme="light"] .theme-btn .icon-sun {
+            display: none;
+        }
+
+        html[data-theme="light"] .theme-btn .icon-moon {
+            display: block;
+        }
+
+        /* ===== الوضع النهاري (أبيض هادي) ===== */
+        html[data-theme="light"] {
+            --l-text: #1e293b;
+            --l-muted: #475569;
+            --l-accent: #0369a1;
+            --l-card: #f8fafc;
+            --l-border: rgba(15, 23, 42, .12);
+        }
+
+        html[data-theme="light"] body {
+            background: radial-gradient(circle at 50% 15%, #f3f5f8, #e9edf2 60%, #dde3ea) !important;
+            background-color: #e9edf2 !important;
+            background-attachment: fixed !important;
+            color: var(--l-text) !important;
+        }
+
+        /* كل النصوص تبقى غامقة (الاستثناءات جوا :where عشان ماتزودش الأولوية) */
+        html[data-theme="light"] :is(h1, h2, h3, h4, h5, h6, p, li, label, small, strong,
+            .nav-link, .product-info p, .product-info span, .section-title, .view-all-btn,
+            .add-to-cart-btn, .breadcrumb, .breadcrumb a, .breadcrumb span.current,
+            .section-label, .price-old, .rating-row .count, .trust-badge .title,
+            .trust-badge .sub, .tab-btn, .qty-btn, #qtyValue, .color-btn,
+            .not-found-box p):where(:not(.stock-badge, #cartBadge, .stock-pill, .save-badge, .category-pill)) {
+            color: var(--l-text) !important;
+            text-shadow: none !important;
+        }
+
+        html[data-theme="light"] .site-footer a:not(.neon-icon) {
+            color: var(--l-text) !important;
+        }
+
+        html[data-theme="light"] .nav-link.active,
+        html[data-theme="light"] .breadcrumb a:hover {
+            color: var(--l-accent) !important;
+        }
+
+        html[data-theme="light"] :is(.price-old, .rating-row .count, .trust-badge .sub, .breadcrumb, .site-footer p) {
+            color: var(--l-muted) !important;
+        }
+
+        html[data-theme="light"] .rating-row {
+            color: #d97706;
+        }
+
+        /* الهيدر */
+        html[data-theme="light"] .main-header {
+            background: rgba(255, 255, 255, .7) !important;
+            border: 1px solid var(--l-border) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, .08) !important;
+        }
+
+        html[data-theme="light"] .main-header svg,
+        html[data-theme="light"] .theme-btn svg {
+            stroke: #0f172a !important;
+            filter: drop-shadow(0 0 3px rgba(3, 105, 161, .3)) !important;
+        }
+
+        html[data-theme="light"] .search-input {
+            background: rgba(15, 23, 42, .06) !important;
+            border-color: var(--l-border) !important;
+            color: var(--l-text) !important;
+        }
+
+        /* الكروت */
+        html[data-theme="light"] :is(.product-card, .product-hero-gallery, .product-hero-info,
+            .price-box, .trust-badge, .tabs-row, .specs-panel, .not-found-box) {
+            background: var(--l-card) !important;
+            border: 1px solid var(--l-border) !important;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, .08) !important;
+        }
+
+        html[data-theme="light"] .product-hero-img {
+            background: #ffffff !important;
+        }
+
+        html[data-theme="light"] .product-hero-img img {
+            filter: drop-shadow(0 4px 12px rgba(15, 23, 42, .18));
+        }
+
+        html[data-theme="light"] .specs-list li:nth-child(even) {
+            background: rgba(15, 23, 42, .03);
+        }
+
+        html[data-theme="light"] .specs-list li,
+        html[data-theme="light"] .specs-panel h3 {
+            border-bottom-color: var(--l-border) !important;
+        }
+
+        /* الصور المصغرة */
+        html[data-theme="light"] .thumb-btn {
+            background: #ffffff;
+            border-color: var(--l-border);
+        }
+
+        html[data-theme="light"] .thumb-btn.active::after {
+            background: #ffffff;
+        }
+
+        /* الأزرار */
+        html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn, .color-btn) {
+            background: rgba(3, 105, 161, .08) !important;
+            border: 1px solid rgba(3, 105, 161, .45) !important;
+        }
+
+        html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn):hover {
+            background: rgba(3, 105, 161, .18) !important;
+        }
+
+        /* التابات واللون النشط (لازم يجوا بعد قاعدة النصوص) */
+        html[data-theme="light"] .tab-btn.active {
+            background: rgba(3, 105, 161, .12) !important;
+            color: var(--l-accent) !important;
+        }
+
+        html[data-theme="light"] .color-btn.active {
+            background: var(--l-accent) !important;
+            border-color: var(--l-accent) !important;
+            color: #ffffff !important;
+        }
+
+        html[data-theme="light"] .add-to-cart-main-btn {
+            background: #ffffff !important;
+            color: var(--l-text) !important;
+            border: 1px solid #a23b7a !important;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, .1);
+        }
+
+        html[data-theme="light"] .add-to-cart-main-btn:hover {
+            background: #a23b7a !important;
+            color: #ffffff !important;
+        }
+
+        /* شارات الحالة */
+        html[data-theme="light"] :is(.stock-badge.in-stock, .stock-pill.stock-in, .save-badge) {
+            color: #047857 !important;
+            background: rgba(16, 185, 129, .15) !important;
+            border: 1px solid rgba(16, 185, 129, .5) !important;
+        }
+
+        html[data-theme="light"] .stock-pill.stock-out,
+        html[data-theme="light"] .out-of-stock-note {
+            color: #b91c1c !important;
+            background: rgba(239, 68, 68, .1) !important;
+            border: 1px solid rgba(239, 68, 68, .4) !important;
+        }
+
+        /* الفوتر */
+        html[data-theme="light"] .site-footer {
+            background: #dde3ea !important;
+            border-top: 1px solid var(--l-border) !important;
+        }
+
+        html[data-theme="light"] .footer-social-container h3 {
+            color: var(--l-text) !important;
+        }
+
+        html[data-theme="light"] .footer-bottom {
+            color: var(--l-muted) !important;
+            border-top-color: var(--l-border) !important;
         }
     </style>
 </head>
@@ -873,18 +1031,15 @@
                     </svg>
                 </button>
                 <!-- خانة البحث -->
-                <!-- خانة البحث بعد التعديل -->
                 <input type="text" id="searchInput" class="search-input" placeholder="Search..."
                     aria-label="ابحث عن منتج" onkeypress="handleHomeSearch(event)">
             </div>
-        </div> <!-- القفلة المظبوطة اهي -->
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        </div>
 
         <nav class="nav-links" aria-label="الأقسام الرئيسية">
             <a href="../index.html" class="nav-link">Home</a>
             <a href="category.html?cat=laptops" class="nav-link">Laptops</a>
-            <a href="category.html?cat=desktops" class="nav-link">PCs</a>
+            <a href="category.html?cat=pcs" class="nav-link">PCs</a>
             <a href="category.html?cat=accessories" class="nav-link">Accessories</a>
             <a href="category.html?cat=monitors" class="nav-link">Monitors</a>
             <a href="category.html?cat=bundles" class="nav-link">Bundles</a>
@@ -898,7 +1053,6 @@
             <!-- زر السلة بالعداد (شكل نيون فخم) -->
             <a href="cart.html" class="cart-btn"
                 style="position: relative; text-decoration: none; font-size: 22px; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
-                <!-- رسمة نيون سلة تسوق بيضاء ومضيئة -->
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round"
                     style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
@@ -910,7 +1064,27 @@
                     style="position: absolute; top: -4px; right: -6px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
             </a>
 
-
+            <!-- زر الثيم -->
+            <button id="themeToggle" class="theme-btn" type="button" aria-label="تغيير الثيم" title="نهاري / ليلي">
+                <!-- شمس (بتظهر في الوضع الليلي) -->
+                <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- قمر (بيظهر في الوضع النهاري) -->
+                <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
 
         </div>
     </header>
@@ -999,7 +1173,7 @@
                             <line x1="10" y1="10" x2="14" y2="10"></line>
                             <line x1="12" y1="18" x2="12.01" y2="18"></line>
                         </svg>
-                        <a href="category.html?cat=desktops"
+                        <a href="category.html?cat=pcs"
                             style="color: #cbd5e1; text-decoration: none; transition: 0.3s;"
                             onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#cbd5e1'">Desktop
                             PCs</a>
@@ -1095,448 +1269,32 @@
         <div class="footer-bottom">
             <p>Copyright &copy; 2026 EPIC TECH. All rights reserved.</p>
         </div>
-
-        </div>
     </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- قاعدة بيانات المنتجات (ملف واحد مشترك بين index و category و product) -->
+    <script src="../assets/js/products-data.js"></script>
     <script src="../assets/js/main.js"></script>
 
     <script>
         /* ============================================================
-           الصفحة دي مستقلة بذاتها ومعندهاش تعارض مع products.js / cart.js /
-           main.js اللي عندك، لأنها بتحمل نسخة من بيانات المنتجات وبتاعة
-           "إضافة للسلة" جواها. لما تبعتلي محتوى products.js و cart.js هعمل
-           نسخة نهائية توحّد المصدر بدل ما البيانات تتكرر في مكانين.
-        
            حقول اختيارية تقدر تضيفها لأي منتج والصفحة هتعرضها تلقائيًا:
            rating (رقم من 1-5), reviewsCount (عدد), oldPrice (سعر قبل الخصم),
            colors (array أسماء ألوان), stockQty (رقم الكمية المتبقية)
            ============================================================ */
-        const productsDB = [
-            // --- الكيبوردات (Keyboards) ---
-            { name: "Razer Huntsman V3 Pro", price: 4999, oldPrice: 5499, rating: 5, reviewsCount: 34, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard2-1.jpg", images: ["../assets/images/products/keyboard2-1.jpg", "../assets/images/products/keyboard2-2.jpg", "../assets/images/products/keyboard2-3.jpg", "../assets/images/products/keyboard2-4.jpg"], specs: "Razer Analog Optical Switches Gen-2<br>Rapid Trigger & Snap Tap<br>Adjustable Actuation (0.1mm - 4.0mm)<br>1000Hz Polling Rate<br>Multi-Function Digital Dial<br>Aircraft-Grade Aluminum Top Plate" },
-            { name: "Razer Huntsman V2 Analog", price: 2750, oldPrice: 3250, rating: 4, reviewsCount: 195, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard4-1.jpg", images: ["../assets/images/products/keyboard4-1.jpg", "../assets/images/products/keyboard4-2.jpg", "../assets/images/products/keyboard4-3.jpg", "../assets/images/products/keyboard4-4.jpg"], specs: "Razer Analog Optical Switches<br>Adjustable Actuation<br>8000Hz HyperPolling Rate<br>Doubleshot PBT Keycaps<br>Magnetic Plush Leatherette Wrist Rest" },
-            { name: "Razer Huntsman Elite", price: 2250, oldPrice: 2750, rating: 4.5, reviewsCount: 68, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard13-1.jpg", images: ["../assets/images/products/keyboard13-1.jpg", "../assets/images/products/keyboard13-2.jpg", "../assets/images/products/keyboard13-3.jpg", "../assets/images/products/keyboard13-4.jpg"], specs: "Razer Opto-Mechanical Switches<br>1ms Response Time<br>Multi-Function Digital Dial<br>Underglow RGB Lighting<br>Magnetic Leatherette Wrist Rest" },
-            { name: "Razer BlackWidow V4 Pro", price: 4500, oldPrice: 5000, rating: 4, reviewsCount: 41, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard1-1.jpg", images: ["../assets/images/products/keyboard1-1.jpg", "../assets/images/products/keyboard1-2.jpg", "../assets/images/products/keyboard1-3.jpg", "../assets/images/products/keyboard1-4.jpg"], specs: "Razer Mechanical Switches<br>8000Hz HyperPolling Rate<br>Command Dial & 8 Macro Keys<br>Immersive Underglow RGB<br>Magnetic Plush Wrist Rest" },
-            { name: "Razer BlackWidow V4 75", price: 3750, oldPrice: 4250, rating: 5, reviewsCount: 32, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard3-1.jpg", images: ["../assets/images/products/keyboard3-1.jpg", "../assets/images/products/keyboard3-2.jpg", "../assets/images/products/keyboard3-3.jpg", "../assets/images/products/keyboard3-4.jpg"], specs: "Razer Tactile Switches (Hot-swappable)<br>Gasket Mounted with FR4 Plate<br>Tape-Enhanced PCB<br>8000Hz Polling Rate<br>Compact 75% Layout" },
-            { name: "Razer BlackWidow V3 TKL", price: 1850, oldPrice: 2350, rating: 5, reviewsCount: 195, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard11-1.jpg", images: ["../assets/images/products/keyboard11-1.jpg", "../assets/images/products/keyboard11-2.jpg", "../assets/images/products/keyboard11-3.jpg", "../assets/images/products/keyboard11-4.jpg"], specs: "Razer Mechanical Switches<br>Tenkeyless Form Factor<br>Aluminum Construction<br>Razer Chroma RGB<br>80 Million Keystroke Lifespan" },
-            { name: "ASUS ROG Claymore II Wireless", price: 2950, oldPrice: 3450, rating: 5, reviewsCount: 28, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard5-1.jpg", images: ["../assets/images/products/keyboard5-1.jpg", "../assets/images/products/keyboard5-2.jpg", "../assets/images/products/keyboard5-3.jpg", "../assets/images/products/keyboard5-4.jpg"], specs: "ROG RX Optical Mechanical Switches<br>Detachable Numpad (Left or Right)<br>1ms Response (Wired & 2.4GHz)<br>Fast Charge & 4000mAh Battery<br>Wireless Aura Sync RGB" },
-            { name: "ASUS ROG Falchion Wireless", price: 3500, oldPrice: 4000, rating: 5, reviewsCount: 114, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard10-1.jpg", images: ["../assets/images/products/keyboard10-1.jpg", "../assets/images/products/keyboard10-2.jpg", "../assets/images/products/keyboard10-3.jpg", "../assets/images/products/keyboard10-4.jpg"], specs: "Cherry MX RGB Switches<br>65% Keyboard Layout<br>Interactive Touch Panel<br>Up to 450 Hours Battery Life<br>Polycarbonate Keyboard Cover" },
-            { name: "ASUS ROG Falchion Ace", price: 1750, oldPrice: 2250, rating: 4, reviewsCount: 13, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard9-1.jpg", images: ["../assets/images/products/keyboard9-1.jpg", "../assets/images/products/keyboard9-2.jpg", "../assets/images/products/keyboard9-3.jpg", "../assets/images/products/keyboard9-4.jpg"], specs: "ROG NX Mechanical Switches<br>65% Layout Configuration<br>Dual USB-C Ports<br>Interactive Touch Panel<br>Sound-Dampening Foam" },
-            { name: "ASUS ROG Flare II", price: 2850, oldPrice: 3350, rating: 4, reviewsCount: 61, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard12-1.jpg", images: ["../assets/images/products/keyboard12-1.jpg", "../assets/images/products/keyboard12-2.jpg", "../assets/images/products/keyboard12-3.jpg", "../assets/images/products/keyboard12-4.jpg"], specs: "ROG NX Switches (Hot-swappable)<br>8000Hz Polling Rate<br>Sound-Dampening Foam<br>Metal Media Controls<br>Detachable Wrist Rest" },
-            { name: "Logitech G915", price: 3500, oldPrice: 4000, rating: 4, reviewsCount: 135, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard6-1.jpg", images: ["../assets/images/products/keyboard6-1.jpg", "../assets/images/products/keyboard6-2.jpg", "../assets/images/products/keyboard6-3.jpg", "../assets/images/products/keyboard6-4.jpg"], specs: "Low Profile GL Switches<br>LIGHTSPEED Pro-Grade Wireless (1ms)<br>Ultra-Thin Aluminum Alloy Design<br>5 Dedicated G-Keys for Macros<br>LIGHTSYNC RGB" },
-            { name: "Logitech G815", price: 2750, oldPrice: 3250, rating: 5, reviewsCount: 12, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard7-1.jpg", images: ["../assets/images/products/keyboard7-1.jpg", "../assets/images/products/keyboard7-2.jpg", "../assets/images/products/keyboard7-3.jpg", "../assets/images/products/keyboard7-4.jpg"], specs: "Low Profile GL Switches<br>Ultra-Thin Design<br>USB 2.0 Passthrough<br>5 Dedicated G-Keys<br>Dedicated Media Controls" },
-            { name: "HYTE Keeb TKL", price: 1999, oldPrice: 2499, rating: 5, reviewsCount: 56, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard8-1.jpg", images: ["../assets/images/products/keyboard8-1.jpg", "../assets/images/products/keyboard8-2.jpg", "../assets/images/products/keyboard8-3.jpg", "../assets/images/products/keyboard8-4.jpg"], specs: "Fluffy Linear Switches (Pre-lubed)<br>qRGB Lighting (50 Pixels)<br>Dual Magnetic Rollers<br>Polycarbonate Gasket Mount<br>Tenkeyless Form Factor" },
-            { name: "HyperX Alloy Rise 75", price: 3500, oldPrice: 4000, rating: 5, reviewsCount: 172, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard14-1.jpg", images: ["../assets/images/products/keyboard14-1.jpg", "../assets/images/products/keyboard14-2.jpg", "../assets/images/products/keyboard14-3.jpg", "../assets/images/products/keyboard14-4.jpg"], specs: "HyperX Linear Switches (Hot-swappable)<br>Gasket Mounted Design<br>Customizable Top Plate<br>8000Hz Polling Rate<br>PBT Doubleshot Keycaps" },
-            { name: "SteelSeries Apex Pro", price: 2999, oldPrice: 3499, rating: 5, reviewsCount: 145, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard15-1.jpg", images: ["../assets/images/products/keyboard15-1.jpg", "../assets/images/products/keyboard15-2.jpg", "../assets/images/products/keyboard15-3.jpg", "../assets/images/products/keyboard15-4.jpg"], specs: "OmniPoint Adjustable Magnetic Switches<br>0.7ms Response Time<br>OLED Smart Display<br>Aircraft-Grade Aluminum<br>Magnetic Wrist Rest" },
-            { name: "ASUS ROG Scope TKL", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 62, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard16-1.jpg", images: ["../assets/images/products/keyboard16-1.jpg", "../assets/images/products/keyboard16-2.jpg", "../assets/images/products/keyboard16-3.jpg", "../assets/images/products/keyboard16-4.jpg"], specs: "Cherry MX / ROG NX Switches<br>Extra-Wide Ctrl Key for FPS<br>Stealth Key for Privacy<br>Aluminum Faceplate<br>Tenkeyless Layout" },
-            { name: "ASUS ROG Falchion RX Low Profile", price: 5000, oldPrice: 5500, rating: 5, reviewsCount: 156, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard17-1.jpg", images: ["../assets/images/products/keyboard17-1.jpg", "../assets/images/products/keyboard17-2.jpg", "../assets/images/products/keyboard17-3.jpg", "../assets/images/products/keyboard17-4.jpg"], specs: "ROG RX Low-Profile Optical Switches<br>Tri-Mode Connection<br>Ultra-Slim 65% Layout<br>Interactive Touch Panel<br>Silicone Dampening" },
-            { name: "ASUS ROG Scope NX Wireless", price: 2500, oldPrice: 3000, rating: 4.5, reviewsCount: 213, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard18-1.jpg", images: ["../assets/images/products/keyboard18-1.jpg", "../assets/images/products/keyboard18-2.jpg", "../assets/images/products/keyboard18-3.jpg", "../assets/images/products/keyboard18-4.jpg"], specs: "ROG NX Switches<br>Tri-Mode (2.4GHz, Bluetooth, Wired)<br>Extra-Wide Ctrl Key<br>Magnetic Wrist Rest<br>PBT Doubleshot Keycaps" },
-            { name: "ASUS ROG Scope II 96", price: 5500, oldPrice: 6000, rating: 3.5, reviewsCount: 7, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard19-1.jpg", images: ["../assets/images/products/keyboard19-1.jpg", "../assets/images/products/keyboard19-2.jpg", "../assets/images/products/keyboard19-3.jpg", "../assets/images/products/keyboard19-4.jpg"], specs: "ROG NX Snow Switches (Hot-swappable)<br>96% Compact Layout<br>Sound-Dampening Foam<br>Multi-function Hotkeys<br>Tri-Mode Connection" },
-            { name: "ASUS ROG Azoth", price: 7500, oldPrice: 8000, rating: 3.5, reviewsCount: 212, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard20-1.jpg", images: ["../assets/images/products/keyboard20-1.jpg", "../assets/images/products/keyboard20-2.jpg", "../assets/images/products/keyboard20-3.jpg", "../assets/images/products/keyboard20-4.jpg"], specs: "ROG NX Switches (Hot-swappable)<br>2-Inch OLED Smart Display<br>Silicone Gasket Mount<br>Tri-Mode Connection<br>Mac OS Support" },
-            { name: "ASUS TUF K3", price: 850, oldPrice: 1350, rating: 4, reviewsCount: 184, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard21-1.jpg", images: ["../assets/images/products/keyboard21-1.jpg", "../assets/images/products/keyboard21-2.jpg", "../assets/images/products/keyboard21-3.jpg", "../assets/images/products/keyboard21-4.jpg"], specs: "Mechanical Switches<br>Aircraft-Grade Aluminum Alloy<br>Magnetic Wrist Rest<br>USB 2.0 Passthrough<br>Aura Sync RGB" },
-            { name: "Corsair K100", price: 4000, oldPrice: 4500, rating: 5, reviewsCount: 93, category: "keyboards", inStock: true, img: "../assets/images/products/keyboard22-1.jpg", images: ["../assets/images/products/keyboard22-1.jpg", "../assets/images/products/keyboard22-2.jpg", "../assets/images/products/keyboard22-3.jpg", "../assets/images/products/keyboard22-4.jpg"], specs: "Corsair OPX Optical Switches<br>8000Hz AXON Processing<br>iCUE Control Wheel<br>6 Elgato Macro Keys<br>Magnetic Leatherette Wrist Rest" },
-            { name: "Razer Huntsman V3 Pro TKL White", price: 4500, oldPrice: 5000, rating: 4.5, reviewsCount: 45, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard23-1.jpg", images: ["../assets/images/products/keyboard23-1.jpg", "../assets/images/products/keyboard23-2.jpg", "../assets/images/products/keyboard23-3.jpg", "../assets/images/products/keyboard23-4.jpg"], specs: "Analog Optical Switches Gen-2<br>Rapid Trigger Technology<br>Adjustable Actuation<br>White Edition Design<br>Tenkeyless Layout" },
-            { name: "Razer BlackWidow V4 x", price: 2500, oldPrice: 3000, rating: 4, reviewsCount: 201, category: "keyboards", inStock: false, img: "../assets/images/products/keyboard24-1.jpg", images: ["../assets/images/products/keyboard24-1.jpg", "../assets/images/products/keyboard24-2.jpg", "../assets/images/products/keyboard24-3.jpg", "../assets/images/products/keyboard24-4.jpg"], specs: "Razer Mechanical Switches<br>6 Dedicated Macro Keys<br>Multi-function Roller<br>Sound Dampening Foam<br>Chroma RGB Lighting" },
 
-            // --- الماوسات (Mouses) ---
-            { name: "Razer Basilisk V3", price: 1550, oldPrice: 2050, rating: 4.5, reviewsCount: 32, category: "mouses", inStock: false, img: "../assets/images/products/maous1.png", images: ["../assets/images/products/maous1.png", "../assets/images/products/maous1-2.png", "../assets/images/products/maous1-3.png", "../assets/images/products/maous1-4.png"], specs: "Focus+ 26K DPI Optical Sensor<br>11 Programmable Buttons<br>HyperScroll Tilt Wheel<br>Optical Mouse Switches Gen-2<br>11 Chroma RGB Zones" },
-            { name: "Razer Basilisk V3 White Edition", price: 1650, oldPrice: 2150, rating: 4, reviewsCount: 103, category: "mouses", inStock: false, img: "../assets/images/products/maous2.png", images: ["../assets/images/products/maous2.png", "../assets/images/products/maous2-2.png", "../assets/images/products/maous2-3.png", "../assets/images/products/maous2-4.png"], specs: "Focus+ 26K DPI Optical Sensor<br>White Edition Finish<br>HyperScroll Tilt Wheel<br>11 Programmable Buttons<br>Optical Switches Gen-2" },
-            { name: "Razer Basilisk V2", price: 999, oldPrice: 1499, rating: 4, reviewsCount: 97, category: "mouses", inStock: false, img: "../assets/images/products/maous3.png", images: ["../assets/images/products/maous3.png", "../assets/images/products/maous3-2.png", "../assets/images/products/maous3-3.png", "../assets/images/products/maous3-4.png"], specs: "Focus+ 20K DPI Sensor<br>11 Programmable Buttons<br>Customizable Scroll Wheel Resistance<br>Optical Mouse Switch<br>Speedflex Cable" },
-            { name: "Razer Basilisk Ultimate", price: 1350, oldPrice: 1850, rating: 3.5, reviewsCount: 94, category: "mouses", inStock: false, img: "../assets/images/products/maous4.png", images: ["../assets/images/products/maous4.png", "../assets/images/products/maous4-2.png", "../assets/images/products/maous4-3.png", "../assets/images/products/maous4-4.png"], specs: "Focus+ 20K DPI Sensor<br>HyperSpeed Wireless<br>14 Chroma RGB Zones<br>Customizable Scroll Resistance<br>Up to 100 Hours Battery" },
-            { name: "Razer Viper V2 Pro", price: 1550, oldPrice: 2050, rating: 5, reviewsCount: 73, category: "mouses", inStock: false, img: "../assets/images/products/maous5.png", images: ["../assets/images/products/maous5.png", "../assets/images/products/maous5-2.png", "../assets/images/products/maous5-3.png", "../assets/images/products/maous5-4.png"], specs: "Focus Pro 30K Optical Sensor<br>Ultra-Lightweight 58g<br>HyperSpeed Wireless<br>Optical Switches Gen-3<br>Up to 80 Hours Battery" },
-            { name: "ASUS ROG Chakram Wireless", price: 1950, oldPrice: 2450, rating: 3.5, reviewsCount: 17, category: "mouses", inStock: true, img: "../assets/images/products/maous6.png", images: ["../assets/images/products/maous6.png", "../assets/images/products/maous6-2.png", "../assets/images/products/maous6-3.png", "../assets/images/products/maous6-4.png"], specs: "16,000 DPI Optical Sensor<br>Programmable Joystick<br>Qi Wireless Charging<br>Tri-Mode Connection<br>Detachable Magnetic Covers" },
-            { name: "ASUS ROG Keris", price: 1350, oldPrice: 1850, rating: 5, reviewsCount: 123, category: "mouses", inStock: true, img: "../assets/images/products/maous7.png", images: ["../assets/images/products/maous7.png", "../assets/images/products/maous7-2.png", "../assets/images/products/maous7-3.png", "../assets/images/products/maous7-4.png"], specs: "16,000 DPI ROG Sensor<br>Lightweight 62g Design<br>ROG Micro Switches (Push-Fit)<br>ROG Paracord Cable<br>PBT L/R Buttons" },
-            { name: "ASUS TUF M3", price: 550, oldPrice: 1050, rating: 5, reviewsCount: 37, category: "mouses", inStock: true, img: "../assets/images/products/maous18.png", images: ["../assets/images/products/maous18.png", "../assets/images/products/maous18-2.png", "../assets/images/products/maous18-3.png", "../assets/images/products/maous18-4.png"], specs: "7000 DPI Optical Sensor<br>Lightweight 84g<br>7 Programmable Buttons<br>TUF Coating for Durability<br>Aura Sync RGB" },
-            { name: "ASUS TUF M3 Gen II", price: 600, oldPrice: 1100, rating: 5, reviewsCount: 26, category: "mouses", inStock: true, img: "../assets/images/products/maous9.png", images: ["../assets/images/products/maous9.png", "../assets/images/products/maous9-2.png", "../assets/images/products/maous9-3.png", "../assets/images/products/maous9-4.png"], specs: "8000 DPI Optical Sensor<br>Ultra-Lightweight 59g<br>IP56 Dust and Water Resistance<br>PTFE Feet<br>6 Programmable Buttons" },
-            { name: "SteelSeries Aerox 5", price: 1200, oldPrice: 1700, rating: 5, reviewsCount: 81, category: "mouses", inStock: true, img: "../assets/images/products/maous10.png", images: ["../assets/images/products/maous10.png", "../assets/images/products/maous10-2.png", "../assets/images/products/maous10-3.png", "../assets/images/products/maous10-4.png"], specs: "TrueMove Air Sensor (18,000 DPI)<br>Ultra-Lightweight 66g<br>AquaBarrier (IP54)<br>9 Programmable Buttons<br>Golden Micro IP54 Switches" },
-            { name: "SteelSeries Aerox 9", price: 1550, oldPrice: 2050, rating: 3.5, reviewsCount: 166, category: "mouses", inStock: true, img: "../assets/images/products/maous11.png", images: ["../assets/images/products/maous11.png", "../assets/images/products/maous11-2.png", "../assets/images/products/maous11-3.png", "../assets/images/products/maous11-4.png"], specs: "TrueMove Air Sensor (18,000 DPI)<br>Ultra-Lightweight 89g (MMO)<br>18 Programmable Buttons<br>Quantum 2.0 Wireless<br>AquaBarrier (IP54)" },
-            { name: "Logitech G502 Hero", price: 999, oldPrice: 1499, rating: 5, reviewsCount: 232, category: "mouses", inStock: false, img: "../assets/images/products/maous12.png", images: ["../assets/images/products/maous12.png", "../assets/images/products/maous12-2.png", "../assets/images/products/maous12-3.png", "../assets/images/products/maous12-4.png"], specs: "HERO 25K Sensor<br>11 Programmable Buttons<br>Adjustable Weight System<br>Hyper-Fast Scroll Wheel<br>LIGHTSYNC RGB" },
-            { name: "Corsair M75 Air Wireless", price: 1450, oldPrice: 1950, rating: 3.5, reviewsCount: 98, category: "mouses", inStock: false, img: "../assets/images/products/maous13.png", images: ["../assets/images/products/maous13.png", "../assets/images/products/maous13-2.png", "../assets/images/products/maous13-3.png", "../assets/images/products/maous13-4.png"], specs: "Marksman 26K DPI Sensor<br>Ultra-Lightweight 60g<br>Slipstream Wireless (Sub-1ms)<br>Optical Switches<br>Up to 100 Hours Battery" },
-            { name: "Logicool G703 Lightspeed", price: 999, oldPrice: 1499, rating: 5, reviewsCount: 55, category: "mouses", inStock: false, img: "../assets/images/products/maous43.png", images: ["../assets/images/products/maous43.png", "../assets/images/products/maous43-2.png", "../assets/images/products/maous43-3.png", "../assets/images/products/maous43-4.png"], specs: "HERO 25K Sensor<br>LIGHTSPEED Wireless<br>Ergonomic Design<br>Optional 10g Weight<br>Advanced Button Tensioning" },
-            { name: "Alienware 510M", price: 950, oldPrice: 1450, rating: 5, reviewsCount: 23, category: "mouses", inStock: false, img: "../assets/images/products/maous45.png", images: ["../assets/images/products/maous45.png", "../assets/images/products/maous45-2.png", "../assets/images/products/maous45-3.png", "../assets/images/products/maous45-4.png"], specs: "16,000 DPI Optical Sensor<br>10 Programmable Buttons<br>Custom Adjustable Scroll Wheel<br>AlienFX RGB Lighting<br>Ergonomic Design" },
-            { name: "Logitech G705", price: 1350, oldPrice: 1850, rating: 4, reviewsCount: 175, category: "mouses", inStock: false, img: "../assets/images/products/maous44.png", images: ["../assets/images/products/maous44.png", "../assets/images/products/maous44-2.png", "../assets/images/products/maous44-3.png", "../assets/images/products/maous44-4.png"], specs: "Gaming-Grade Sensor<br>Compact & Lightweight (85g)<br>LIGHTSPEED Wireless & Bluetooth<br>Soft Zone RGB<br>Designed for Smaller Hands" },
-            { name: "ASUS TUF M4 Air", price: 999, oldPrice: 1300, rating: 5, reviewsCount: 88, stockQty: 5, category: "mouses", inStock: true, isUsed: false, img: "../assets/images/products/maous14.png", images: ["../assets/images/products/maous14.png", "../assets/images/products/maous14-2.png", "../assets/images/products/maous14-3.png", "../assets/images/products/maous14-4.png"], specs: "16,000 DPI Optical Sensor<br>Ultra-Lightweight 47g<br>IPX6 Water Resistance<br>TUF Gaming Paracord<br>ASUS Antibacterial Guard" },
-            { name: "Dell MS900", price: 1500, oldPrice: 2000, rating: 4, reviewsCount: 203, category: "mouses", inStock: false, img: "../assets/images/products/maous15.png", images: ["../assets/images/products/maous15.png", "../assets/images/products/maous15-2.png", "../assets/images/products/maous15-3.png", "../assets/images/products/maous15-4.png"], specs: "Track-on-Glass Sensor<br>Multi-Device Connectivity<br>Ergonomic Premium Design<br>Rechargeable Battery<br>Customizable Buttons" },
-            { name: "Logitech G900", price: 1200, oldPrice: 1700, rating: 4.5, reviewsCount: 26, category: "mouses", inStock: false, img: "../assets/images/products/maous36.png", images: ["../assets/images/products/maous36.png", "../assets/images/products/maous36-2.png", "../assets/images/products/maous36-3.png", "../assets/images/products/maous36-4.png"], specs: "PMW3366 Optical Sensor<br>LIGHTSPEED Wireless<br>Ambidextrous Design<br>Customizable Button Layout<br>Hyper-Fast Scroll Wheel" },
-            { name: "Glorious Model D Wireless", price: 1200, oldPrice: 1700, rating: 3.5, reviewsCount: 65, category: "mouses", inStock: false, img: "../assets/images/products/maous38.png", images: ["../assets/images/products/maous38.png", "../assets/images/products/maous38-2.png", "../assets/images/products/maous38-3.png", "../assets/images/products/maous38-4.png"], specs: "BAMF Sensor (19,000 DPI)<br>Ergonomic Lightweight 69g<br>Lag-Free 2.4GHz Wireless<br>G-Skates PTFE Feet<br>Up to 71 Hours Battery" },
-            { name: "Glorious Model O2 Pro", price: 1350, oldPrice: 1850, rating: 3.5, reviewsCount: 31, category: "mouses", inStock: false, img: "../assets/images/products/maous39.png", images: ["../assets/images/products/maous39.png", "../assets/images/products/maous39-2.png", "../assets/images/products/maous39-3.png", "../assets/images/products/maous39-4.png"], specs: "BAMF 2.0 Sensor (26K DPI)<br>Ultra-Lightweight 57g<br>Optical Switches (100M Clicks)<br>1ms Wireless Polling<br>Frictionless PTFE Feet" },
-            { name: "Alienware M720", price: 1500, oldPrice: 2000, rating: 5, reviewsCount: 77, category: "mouses", inStock: false, img: "../assets/images/products/maous40.png", images: ["../assets/images/products/maous40.png", "../assets/images/products/maous40-2.png", "../assets/images/products/maous40-3.png", "../assets/images/products/maous40-4.png"], specs: "26,000 DPI Sensor<br>Tri-Mode Connectivity<br>8 Programmable Buttons<br>Magnetic Snap-On Charging<br>AlienFX RGB" },
-            { name: "Logitech G600", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 168, category: "mouses", inStock: false, img: "../assets/images/products/maous37.png", images: ["../assets/images/products/maous37.png", "../assets/images/products/maous37-2.png", "../assets/images/products/maous37-3.png", "../assets/images/products/maous37-4.png"], specs: "8200 DPI Laser Sensor<br>20 Programmable Buttons (MMO)<br>12-Button Thumb Panel<br>G-Shift Dual-Function<br>Custom-Color RGB" },
-            { name: "Glorious Model I2", price: 1450, oldPrice: 1950, rating: 3.5, reviewsCount: 99, category: "mouses", inStock: false, img: "../assets/images/products/maous41.png", images: ["../assets/images/products/maous41.png", "../assets/images/products/maous41-2.png", "../assets/images/products/maous41-3.png", "../assets/images/products/maous41-4.png"], specs: "BAMF 2.0 Sensor (26K DPI)<br>Ultra-Lightweight 75g<br>9 Programmable Buttons<br>Interchangeable Magnetic Buttons<br>Tri-Mode Connectivity" },
-            { name: "Razer Naga Trinity", price: 1350, oldPrice: 1850, rating: 4, reviewsCount: 100, category: "mouses", inStock: false, img: "../assets/images/products/maous42.png", images: ["../assets/images/products/maous42.png", "../assets/images/products/maous42-2.png", "../assets/images/products/maous42-3.png", "../assets/images/products/maous42-4.png"], specs: "5G 16,000 DPI Optical Sensor<br>3 Interchangeable Side Plates<br>Up to 19 Programmable Buttons<br>Razer Mechanical Switches<br>Ergonomic Right-Handed Design" },
-            { name: "Razer Cobra Pro", price: 2200, oldPrice: 2700, rating: 4.5, reviewsCount: 59, category: "mouses", inStock: false, img: "../assets/images/products/maous24.png", images: ["../assets/images/products/maous24.png", "../assets/images/products/maous24-2.png", "../assets/images/products/maous24-3.png", "../assets/images/products/maous24-4.png"], specs: "Focus Pro 30K Sensor<br>Customizable 11-Zone Chroma RGB<br>HyperSpeed Wireless<br>Optical Mouse Switches Gen-3<br>Wireless Charging Compatible" },
-            { name: "Glorious Model O", price: 1200, oldPrice: 1700, rating: 5, reviewsCount: 74, category: "mouses", inStock: false, img: "../assets/images/products/maous25.png", images: ["../assets/images/products/maous25.png", "../assets/images/products/maous25-2.png", "../assets/images/products/maous25-3.png", "../assets/images/products/maous25-4.png"], specs: "Pixart 3360 Sensor<br>Ambidextrous Lightweight 67g<br>Ascended Cord (Paracord)<br>Omron Switches<br>G-Skates PTFE Feet" },
-            { name: "Glorious Model O2", price: 1500, oldPrice: 2000, rating: 5, reviewsCount: 180, category: "mouses", inStock: false, img: "../assets/images/products/maous26.png", images: ["../assets/images/products/maous26.png", "../assets/images/products/maous26-2.png", "../assets/images/products/maous26-3.png", "../assets/images/products/maous26-4.png"], specs: "BAMF 2.0 Sensor (26K DPI)<br>Ultra-Lightweight 68g<br>Dual Wireless (2.4GHz / BT)<br>Redesigned Button Crisps<br>Up to 210 Hours Battery" },
-            { name: "SteelSeries Rival 5", price: 1350, oldPrice: 1850, rating: 5, reviewsCount: 24, category: "mouses", inStock: false, img: "../assets/images/products/maous27.png", images: ["../assets/images/products/maous27.png", "../assets/images/products/maous27-2.png", "../assets/images/products/maous27-3.png", "../assets/images/products/maous27-4.png"], specs: "TrueMove Air Sensor (18,000 DPI)<br>9 Programmable Buttons<br>Ergonomic 9-Button Layout<br>Golden Micro IP54 Switches<br>Brilliant PrismSync RGB" },
-            { name: "SteelSeries Rival 600", price: 1200, oldPrice: 1700, rating: 5, reviewsCount: 168, category: "mouses", inStock: false, img: "../assets/images/products/maous28.png", images: ["../assets/images/products/maous28.png", "../assets/images/products/maous28-2.png", "../assets/images/products/maous28-3.png", "../assets/images/products/maous28-4.png"], specs: "TrueMove3+ Dual Sensor System<br>Dedicated Depth Sensor<br>Customizable Weight (96g-128g)<br>Silicone Side Grips<br>Split-Trigger Mechanical Switches" },
-            { name: "Razer Mamba Elite", price: 950, oldPrice: 1450, rating: 4, reviewsCount: 142, category: "mouses", inStock: false, img: "../assets/images/products/maous29.png", images: ["../assets/images/products/maous29.png", "../assets/images/products/maous29-2.png", "../assets/images/products/maous29-3.png", "../assets/images/products/maous29-4.png"], specs: "5G 16,000 DPI Optical Sensor<br>Extended Razer Chroma Zones<br>9 Programmable Buttons<br>Razer Mechanical Switches<br>Advanced Ergonomics" },
-            { name: "Razer DeathAdder V2", price: 999, oldPrice: 1499, rating: 5, reviewsCount: 68, category: "mouses", inStock: false, img: "../assets/images/products/maous30.png", images: ["../assets/images/products/maous30.png", "../assets/images/products/maous30-2.png", "../assets/images/products/maous30-3.png", "../assets/images/products/maous30-4.png"], specs: "Focus+ 20K DPI Sensor<br>Optical Mouse Switches<br>Ergonomic 82g Design<br>Speedflex Cable<br>Instinctive Scroll Wheel" },
-            { name: "Razer DeathAdder V3 Wired", price: 1850, oldPrice: 2350, rating: 4, reviewsCount: 124, category: "mouses", inStock: false, img: "../assets/images/products/maous31.png", images: ["../assets/images/products/maous31.png", "../assets/images/products/maous31-2.png", "../assets/images/products/maous31-3.png", "../assets/images/products/maous31-4.png"], specs: "Focus Pro 30K Sensor<br>Ultra-Lightweight 59g<br>8000Hz HyperPolling<br>Optical Switches Gen-3<br>Refined Ergonomic Form" },
-            { name: "ASUS ROG Spatha X", price: 1500, oldPrice: 2000, rating: 5, reviewsCount: 75, category: "mouses", inStock: false, img: "../assets/images/products/maous32.png", images: ["../assets/images/products/maous32.png", "../assets/images/products/maous32-2.png", "../assets/images/products/maous32-3.png", "../assets/images/products/maous32-4.png"], specs: "19,000 DPI Optical Sensor<br>12 Programmable Buttons<br>Magnetic Charging Stand<br>Push-Fit Switch Sockets<br>Aura Sync RGB" },
-            { name: "Alienware M610M", price: 1350, oldPrice: 1850, rating: 5, reviewsCount: 182, category: "mouses", inStock: false, img: "../assets/images/products/maous33.png", images: ["../assets/images/products/maous33.png", "../assets/images/products/maous33-2.png", "../assets/images/products/maous33-3.png", "../assets/images/products/maous33-4.png"], specs: "16,000 DPI Sensor<br>Dual Mode (Wired/Wireless)<br>Custom Adjustable Scroll Wheel<br>7 Programmable Buttons<br>AlienFX RGB" },
-            { name: "ASUS ROG Impact III", price: 950, oldPrice: 1450, rating: 5, reviewsCount: 62, category: "mouses", inStock: true, img: "../assets/images/products/maous16.png", images: ["../assets/images/products/maous16.png", "../assets/images/products/maous16-2.png", "../assets/images/products/maous16-3.png", "../assets/images/products/maous16-4.png"], specs: "12,000 DPI Optical Sensor<br>Lightweight 59g<br>Push-Fit Switch Sockets<br>ROG Paracord<br>100% PTFE Feet" },
-            { name: "ASUS ROG Gladius III", price: 999, oldPrice: 1499, rating: 5, reviewsCount: 89, category: "mouses", inStock: true, img: "../assets/images/products/maous17.png", images: ["../assets/images/products/maous17.png", "../assets/images/products/maous17-2.png", "../assets/images/products/maous17-3.png", "../assets/images/products/maous17-4.png"], specs: "19,000 DPI Optical Sensor<br>Push-Fit Switch Socket II<br>ROG Micro Switches<br>ROG Paracord<br>Laser-Engraved ROG Aesthetic" },
-            { name: "ASUS ROG Gladius II Core", price: 800, oldPrice: 1300, rating: 3.5, reviewsCount: 202, category: "mouses", inStock: true, img: "../assets/images/products/maous19.png", images: ["../assets/images/products/maous19.png", "../assets/images/products/maous19-2.png", "../assets/images/products/maous19-3.png", "../assets/images/products/maous19-4.png"], specs: "6200 DPI Optical Sensor<br>Lightweight Ergonomic Design<br>Push-Fit Switch Sockets<br>Aura Sync RGB<br>Durable Non-Slip Side Grips" },
-            { name: "ASUS ROG Impact II Wireless", price: 1250, oldPrice: 1750, rating: 3.5, reviewsCount: 20, category: "mouses", inStock: true, img: "../assets/images/products/maous20.png", images: ["../assets/images/products/maous20.png", "../assets/images/products/maous20-2.png", "../assets/images/products/maous20-3.png", "../assets/images/products/maous20-4.png"], specs: "16,000 DPI Optical Sensor<br>2.4GHz Wireless<br>Push-Fit Switch Sockets<br>Pivoted Button Mechanism<br>Aura Sync RGB" },
-            { name: "ASUS ROG Impact II", price: 700, oldPrice: 1200, rating: 4, reviewsCount: 216, category: "mouses", inStock: true, img: "../assets/images/products/maous21.png", images: ["../assets/images/products/maous21.png", "../assets/images/products/maous21-2.png", "../assets/images/products/maous21-3.png", "../assets/images/products/maous21-4.png"], specs: "6200 DPI Optical Sensor<br>Lightweight 79g<br>Push-Fit Switch Sockets<br>Ambidextrous Design<br>Aura Sync RGB" },
-            { name: "ASUS ROG Gladius III Aimpoint", price: 2200, oldPrice: 2700, rating: 4, reviewsCount: 212, category: "mouses", inStock: false, img: "../assets/images/products/maous34.png", images: ["../assets/images/products/maous34.png", "../assets/images/products/maous34-2.png", "../assets/images/products/maous34-3.png", "../assets/images/products/maous34-4.png"], specs: "36,000 DPI AimPoint Sensor<br>Tri-Mode Connectivity<br>Push-Fit Switch Socket II<br>ROG SpeedNova Wireless<br>ROG Patterned Grip Tape" },
-            { name: "ASUS ROG Impact III Wireless", price: 1250, oldPrice: 1750, rating: 4.5, reviewsCount: 108, category: "mouses", inStock: true, img: "../assets/images/products/maous20.png", images: ["../assets/images/products/maous20.png", "../assets/images/products/maous20-2.png", "../assets/images/products/maous20-3.png", "../assets/images/products/maous20-4.png"], specs: "12,000 DPI Optical Sensor<br>2.4GHz Wireless Connectivity<br>Push-Fit Switch Sockets<br>ROG Paracord<br>100% PTFE Feet" },
-            { name: "ASUS ROG Harpe Ace Aim Lab", price: 2000, oldPrice: 2500, rating: 4.5, reviewsCount: 22, category: "mouses", inStock: false, img: "../assets/images/products/maous35.png", images: ["../assets/images/products/maous35.png", "../assets/images/products/maous35-2.png", "../assets/images/products/maous35-3.png", "../assets/images/products/maous35-4.png"], specs: "36,000 DPI AimPoint Sensor<br>Ultra-Lightweight 54g<br>Aim Lab Settings Optimizer<br>ROG SpeedNova Wireless<br>Bio-based Nylon Design" },
-            { name: "ASUS TUF M4 Wireless", price: 1250, oldPrice: 1750, rating: 4, reviewsCount: 239, category: "mouses", inStock: true, img: "../assets/images/products/maous22.png", images: ["../assets/images/products/maous22.png", "../assets/images/products/maous22-2.png", "../assets/images/products/maous22-3.png", "../assets/images/products/maous22-4.png"], specs: "12,000 DPI Optical Sensor<br>Dual Wireless (2.4GHz / BT)<br>PBT Top Cover<br>ASUS Antibacterial Guard<br>Uses AAA or AA Batteries" },
-            { name: "Razer Viper Ultimate", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 230, category: "mouses", inStock: true, img: "../assets/images/products/maous3.png", images: ["../assets/images/products/maous3.png", "../assets/images/products/maous3-2.png", "../assets/images/products/maous3-3.png", "../assets/images/products/maous3-4.png"], specs: "Focus+ 20K DPI Sensor<br>HyperSpeed Wireless<br>Lightweight 74g<br>Optical Mouse Switches<br>Includes Charging Dock" },
-            { name: "Razer Viper 8k hz", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 86, category: "mouses", inStock: false, img: "../assets/images/products/maous23.png", images: ["../assets/images/products/maous23.png", "../assets/images/products/maous23-2.png", "../assets/images/products/maous23-3.png", "../assets/images/products/maous23-4.png"], specs: "Focus+ 20K DPI Sensor<br>8000Hz HyperPolling<br>Optical Mouse Switches Gen-2<br>Ambidextrous 71g Design<br>Advanced On-board Memory" },
-
-            // --- السماعات (Headsets) ---
-            { name: "Razer BlackShark V2", price: 1500, oldPrice: 2000, rating: 4, reviewsCount: 173, category: "headsets", inStock: false, img: "../assets/images/products/headset3.png", images: ["../assets/images/products/headset3.png", "../assets/images/products/headset3-2.png", "../assets/images/products/headset3-3.png", "../assets/images/products/headset3-4.png"], specs: "Triforce Titanium 50mm Drivers<br>HyperClear Cardioid Mic<br>Advanced Passive Noise Cancellation<br>FlowKnit Memory Foam Ear Cushions<br>THX Spatial Audio" },
-            { name: "Razer Kraken X Lite", price: 999, oldPrice: 1499, rating: 5, reviewsCount: 107, category: "headsets", inStock: true, img: "../assets/images/products/headset4.png", images: ["../assets/images/products/headset4.png", "../assets/images/products/headset4-2.png", "../assets/images/products/headset4-3.png", "../assets/images/products/headset4-4.png"], specs: "Custom-Tuned 40mm Drivers<br>Ultra-Lightweight 230g<br>7.1 Surround Sound<br>Bendable Cardioid Microphone<br>Plush Memory Foam Cushions" },
-            { name: "Logitech G733", price: 4500, oldPrice: 5000, rating: 5, reviewsCount: 123, category: "headsets", inStock: true, img: "../assets/images/products/headset1.png", images: ["../assets/images/products/headset1.png", "../assets/images/products/headset1-2.png", "../assets/images/products/headset1-3.png", "../assets/images/products/headset1-4.png"], specs: "PRO-G 40mm Drivers<br>LIGHTSPEED Wireless (20m Range)<br>DTS Headphone:X 2.0 Surround<br>Blue VO!CE Mic Technology<br>Ultra-Lightweight 278g" },
-            { name: "SteelSeries Arctis Nova 3", price: 3500, oldPrice: 4000, rating: 4, reviewsCount: 73, category: "headsets", inStock: false, img: "../assets/images/products/headset5.png", images: ["../assets/images/products/headset5.png", "../assets/images/products/headset5-2.png", "../assets/images/products/headset5-3.png", "../assets/images/products/headset5-4.png"], specs: "High Fidelity Nova Acoustic System<br>ClearCast Gen 2 Noise-Cancelling Mic<br>Ultra-Lightweight PrismSync RGB<br>AirWeave Memory Foam<br>Multi-Platform USB-C" },
-            { name: "Corsair HS60 Haptic", price: 2500, oldPrice: 3000, rating: 4, reviewsCount: 69, category: "headsets", inStock: false, img: "../assets/images/products/headset6.png", images: ["../assets/images/products/headset6.png", "../assets/images/products/headset6-2.png", "../assets/images/products/headset6-3.png", "../assets/images/products/headset6-4.png"], specs: "Custom-Tuned 50mm Audio Drivers<br>Taptic Bass Feedback<br>Detachable Noise-Cancelling Mic<br>Plush Memory Foam Earcups<br>Durable Aluminum Construction" },
-            { name: "Astro A50 Gen 3", price: 4500, oldPrice: 5000, rating: 5, reviewsCount: 149, category: "headsets", inStock: true, img: "../assets/images/products/headset2.png", images: ["../assets/images/products/headset2.png", "../assets/images/products/headset2-2.png", "../assets/images/products/headset2-3.png", "../assets/images/products/headset2-4.png"], specs: "ASTRO Audio V2 Tuning<br>Dolby Audio Surround<br>5GHz Wireless Technology<br>Base Station Charging<br>Game:Voice Balance Control" },
-            // --- (Bundles / RAMs) الرامات المستعملة ---
-            { name: "CORSAIR VENGEANCE LPX 8GB 4266MHz CL19", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-corsair-4266.jpg", images: ["../assets/images/products/ram-corsair-4266.jpg"], specs: "السعة: 8GB (قطعة واحدة)<br>التردد: 4266MHz<br>التوقيت: CL19<br>اللون: أحمر - بهيت سينك<br>الحالة: مستعمل (USED)" },
-            { name: "KINGSTON FURY RENEGADE 16GB (2x8) 4000MHz", price: 5000, oldPrice: 5500, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-fury-4000.jpg", images: ["../assets/images/products/ram-fury-4000.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 4000MHz<br>التوقيت: CL19<br>اللون: أسود - بهيت سينك<br>الحالة: مستعمل (USED)" },
-            { name: "KINGSTON FURY BEAST RGB 32GB (2x16) 4000MHz", price: 9500, oldPrice: 10000, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-beast-4000.jpg", images: ["../assets/images/products/ram-beast-4000.jpg"], specs: "السعة: 32GB (طقم 2x16)<br>التردد: 4000MHz<br>التوقيت: CL18<br>الشكل: إضاءة RGB<br>الحالة: مستعمل (USED)" },
-            { name: "G.SKILL TRIDENT Z NEO 16GB (2x8) 3600MHz CL16", price: 5000, oldPrice: 5500, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-neo-3600-16.jpg", images: ["../assets/images/products/ram-neo-3600-16.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 3600MHz<br>التوقيت: CL16 (سريع جداً)<br>الشكل: فضي/أسود مع RGB<br>الحالة: مستعمل (USED)" },
-            { name: "G.SKILL TRIDENT Z NEO 16GB (2x8) 3600MHz CL18", price: 4850, oldPrice: 5350, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-neo-3600-18.jpg", images: ["../assets/images/products/ram-neo-3600-18.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 3600MHz<br>التوقيت: CL18<br>الشكل: فضي/أسود مع RGB<br>الحالة: مستعمل (USED)" },
-            { name: "G.SKILL TRIDENT Z RGB 16GB (2x8) 3600MHz CL19", price: 4850, oldPrice: 5350, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-trident-3600.jpg", images: ["../assets/images/products/ram-trident-3600.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 3600MHz<br>التوقيت: CL19<br>الشكل: رمادي/أسود مع RGB<br>الحالة: مستعمل (USED)" },
-            { name: "G.SKILL RIPJAWS V 32GB (4x8) 3600MHz", price: 8800, oldPrice: 9300, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-ripjaws-3600.jpg", images: ["../assets/images/products/ram-ripjaws-3600.jpg"], specs: "السعة: 32GB (طقم 4 قطع 4x8)<br>التردد: 3600MHz<br>التوقيت: CL18<br>اللون: أسود - بهيت سينك<br>الحالة: مستعمل (USED)" },
-            { name: "CORSAIR VENGEANCE LPX 8GB 3600MHz CL18", price: 2250, oldPrice: 2750, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-corsair-3600.jpg", images: ["../assets/images/products/ram-corsair-3600.jpg"], specs: "السعة: 8GB (قطعة واحدة)<br>التردد: 3600MHz<br>التوقيت: CL18<br>اللون: أسود - بهيت سينك<br>الحالة: مستعمل (USED)" },
-            { name: "KINGSTON FURY BEAST RGB 16GB (2x8) 3200MHz", price: 4600, oldPrice: 5100, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-beast-3200.jpg", images: ["../assets/images/products/ram-beast-3200.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 3200MHz<br>التوقيت: CL16<br>الشكل: أسود مع إضاءة RGB<br>الحالة: مستعمل (USED)" },
-            { name: "G.SKILL TRIDENT Z RGB 16GB (2x8) 3200MHz CL16", price: 4750, oldPrice: 5250, rating: 5, reviewsCount: 88, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/ram-trident-3200.jpg", images: ["../assets/images/products/ram-trident-3200.jpg"], specs: "السعة: 16GB (طقم 2x8)<br>التردد: 3200MHz<br>التوقيت: CL16<br>الشكل: رمادي/أسود مع RGB<br>الحالة: مستعمل (USED)" },
-            { name: "CORSAIR VENGEANCE 16GB", price: 8500, oldPrice: null, rating: 5, reviewsCount: 30, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-corsair-vengeance-16gb-ddr5.jpg", images: ["../assets/images/products/ram-corsair-vengeance-16gb-ddr5.jpg"], specs: "السعة: 16GB<br>النوع: DDR5<br>المميزات: أداء فائق وسرعة عالية" },
-            { name: "CORSAIR VENGEANCE LPX", price: 3000, oldPrice: null, rating: 5, reviewsCount: 45, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-corsair-vengeance-lpx.jpg", images: ["../assets/images/products/ram-corsair-vengeance-lpx.jpg"], specs: "النوع: DDR4<br>التردد: 3200MHz<br>المميزات: تصميم Low Profile بمشتت حراري" },
-            { name: "Crucial RAM 16GB DDR4 3200", price: 5000, oldPrice: null, rating: 5, reviewsCount: 60, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-crucial-16gb-3200.jpg", images: ["../assets/images/products/ram-crucial-16gb-3200.jpg"], specs: "السعة: 16GB<br>النوع: DDR4<br>التردد: 3200MHz" },
-            { name: "Crucial RAM 8GB DDR4 3200", price: 2500, oldPrice: null, rating: 5, reviewsCount: 40, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-crucial-8gb-3200.jpg", images: ["../assets/images/products/ram-crucial-8gb-3200.jpg"], specs: "السعة: 8GB<br>النوع: DDR4<br>التردد: 3200MHz" },
-            { name: "Kingston FURY Beast 16GB", price: 5000, oldPrice: null, rating: 5, reviewsCount: 75, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-kingston-fury-beast-16gb.jpg", images: ["../assets/images/products/ram-kingston-fury-beast-16gb.jpg"], specs: "السعة: 16GB<br>المميزات: مشتت حراري بتصميم احترافي" },
-            { name: "RAM 16GB DDR4 2666", price: 3600, oldPrice: null, rating: 4, reviewsCount: 22, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-16gb-2666.jpg", images: ["../assets/images/products/ram-16gb-2666.jpg"], specs: "السعة: 16GB<br>النوع: DDR4<br>التردد: 2666MHz" },
-            { name: "RAM 8GB DDR4 2400 Desktop", price: 2000, oldPrice: null, rating: 4, reviewsCount: 18, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-8gb-2400.jpg", images: ["../assets/images/products/ram-8gb-2400.jpg"], specs: "السعة: 8GB<br>النوع: DDR4<br>التردد: 2400MHz<br>التوافق: Desktop (أجهزة مكتبية)" },
-            { name: "TeamGroup Delta RGB DDR4", price: 3500, oldPrice: null, rating: 5, reviewsCount: 55, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/ram-teamgroup-delta-rgb.jpg", images: ["../assets/images/products/ram-teamgroup-delta-rgb.jpg"], specs: "النوع: DDR4<br>المميزات: إضاءة RGB رائعة وتصميم أنيق" },
-
-
-            // --- (Monitors - Used) شاشات مستعملة ---
-            { name: "HP V24VG58", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-hp-v24vg58.jpg", images: ["../assets/images/products/monitor-hp-v24vg58.jpg"], specs: "حجم الشاشة: 24 بوصة<br>نوع البنل: TN<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: قياسية<br>تردد الشاشة: 60Hz<br>المميزات: مخارج HDMI و VGA، تصميم عملي ومناسب للمكاتب" },
-            { name: "Dell P2419H8", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-dell-p2419h8.jpg", images: ["../assets/images/products/monitor-dell-p2419h8.jpg"], specs: "حجم الشاشة: 24 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: دقيقة الألوان<br>تردد الشاشة: 60Hz<br>المميزات: ألوان دقيقة، مخارج HDMI, DisplayPort, VGA, و 4 مخارج USB 3.0" },
-            { name: "Dell P24228", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-dell-p24228.jpg", images: ["../assets/images/products/monitor-dell-p24228.jpg"], specs: "حجم الشاشة: 24 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: ممتازة<br>تردد الشاشة: 60Hz<br>المميزات: تقنية حماية العين، مخارج HDMI, DisplayPort, VGA, و 4 مخارج USB 3.2" },
-            { name: "HP EliteDisplay E243", price: 2500, oldPrice: 3000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-hp-e243.jpg", images: ["../assets/images/products/monitor-hp-e243.jpg"], specs: "حجم الشاشة: 23.8 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: عالية الدقة<br>تردد الشاشة: 60Hz<br>المميزات: تصميم معدني فخم، مخارج HDMI, DisplayPort, VGA, و 3 مخارج USB 3.0" },
-            { name: "Dell P2719H", price: 3500, oldPrice: 4000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-dell-p2719h.jpg", images: ["../assets/images/products/monitor-dell-p2719h.jpg"], specs: "حجم الشاشة: 27 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: مساحة رؤية واسعة وألوان مريحة<br>تردد الشاشة: 60Hz<br>المميزات: مساحة عمل أوسع، مخارج HDMI, DisplayPort, VGA, و 4 مخارج USB 3.0" },
-            { name: "Dell P2425HE", price: 3250, oldPrice: 3750, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-dell-p2425he.jpg", images: ["../assets/images/products/monitor-dell-p2425he.jpg"], specs: "حجم الشاشة: 24 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: فائقة الدقة<br>تردد الشاشة: 100Hz<br>المميزات: معدل تحديث 100Hz سلس، مخرج USB-C (شحن 90W)، مخارج شبكة RJ45 و USB-A" },
-            { name: "Dell P2414Hb", price: 1500, oldPrice: 2000, rating: 5, reviewsCount: 88, category: "monitors", inStock: true, isUsed: true, img: "../assets/images/products/monitor-dell-p2414hb.jpg", images: ["../assets/images/products/monitor-dell-p2414hb.jpg"], specs: "حجم الشاشة: 24 بوصة<br>نوع البنل: IPS<br>جودة الشاشة: FHD (1080p)<br>مستوى الـ sRGB: جيدة جداً<br>تردد الشاشة: 60Hz<br>المميزات: قاعدة مرنة ومتعددة الاتجاهات، مخارج DisplayPort, DVI-D, VGA, و 4 مخارج USB 2.0" },
-
-            // --- (Monitors - Gaming) شاشات ألعاب ---
-
-            { name: "AOC 27G11ZE3", price: 8300, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-aoc-27g11ze3.avif", images: ["../assets/images/products/monitor-aoc-27g11ze3.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 260Hz<br>جودة الشاشة: FHD" },
-            { name: "AOC 27G40E", price: 7100, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-aoc-27g40e.png", images: ["../assets/images/products/monitor-aoc-27g40e.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 180Hz<br>جودة الشاشة: FHD" },
-            { name: "AOC C27G4", price: 9500, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-aoc-c27g4.avif", images: ["../assets/images/products/monitor-aoc-c27g4.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 180Hz<br>جودة الشاشة: FHD<br>التصميم: منحنية (Curved)" },
-            { name: "AOC C27G4Z", price: 8250, oldPrice: 9999, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-aoc-c27g4z.avif", images: ["../assets/images/products/monitor-aoc-c27g4z.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 300Hz<br>جودة الشاشة: FHD<br>التصميم: منحنية (Curved)" },
-            { name: "AOC 24G15ZND", price: 4999, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-aoc-24g15znd.avif", images: ["../assets/images/products/monitor-aoc-24g15znd.avif"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: VA<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "AOC 25G4SNE", price: 7500, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-aoc-25g4sne.avif", images: ["../assets/images/products/monitor-aoc-25g4sne.avif"], specs: "حجم الشاشة: 25 بوصة<br>تردد الشاشة: 300Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 1ms" },
-            { name: "AOC Q27G40ZE", price: 9000, oldPrice: 9500, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-aoc-q27g40ze.png", images: ["../assets/images/products/monitor-aoc-q27g40ze.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 260Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.3ms" },
-            { name: "Lenovo 27Q-10", price: 10000, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-lenovo-27q10.webp", images: ["../assets/images/products/monitor-lenovo-27q10.webp"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "Lenovo LEGION 24-10", price: 6000, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-lenovo-legion-24.avif", images: ["../assets/images/products/monitor-lenovo-legion-24.avif"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "Lenovo R27qe Gen2", price: 8499, oldPrice: 9000, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-lenovo-r27qe.avif", images: ["../assets/images/products/monitor-lenovo-r27qe.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 200Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI 272F X24", price: 7300, oldPrice: 7800, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-272f.png", images: ["../assets/images/products/monitor-msi-272f.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI 274QPF X32", price: 13500, oldPrice: 14000, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-274qpf-x32.png", images: ["../assets/images/products/monitor-msi-274qpf-x32.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 320Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI 275QF E21", price: 9000, oldPrice: 9500, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-msi-275qf.webp", images: ["../assets/images/products/monitor-msi-275qf.webp"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 210Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "VIEWSONIC VX2766 2K-8", price: 12000, oldPrice: 12500, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx2766.webp", images: ["../assets/images/products/monitor-viewsonic-vx2766.webp"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 340Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 1ms" },
-            { name: "AOC 27G50Z", price: 7000, oldPrice: 7600, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-aoc-27g50z.avif", images: ["../assets/images/products/monitor-aoc-27g50z.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 260Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.3ms" },
-            { name: "Lenovo Legion 27Q-11", price: 10199, oldPrice: 10499, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-lenovo-legion27q.avif", images: ["../assets/images/products/monitor-lenovo-legion27q.avif"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 300Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI MAG 272F X24", price: 8100, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-msi-mag272f.jpg", images: ["../assets/images/products/monitor-msi-mag272f.jpg"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: RAPID IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI MAG 274QPF E20", price: 8999, oldPrice: 9499, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-mag274qpf.jpg", images: ["../assets/images/products/monitor-msi-mag274qpf.jpg"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 200Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI MP273L E14", price: 5999, oldPrice: 6499, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-msi-mp273l.jpg", images: ["../assets/images/products/monitor-msi-mp273l.jpg"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 144Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 1ms" },
-            { name: "VIEWSONIC VX2428J", price: 7100, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx2428j-24.jpg", images: ["../assets/images/products/monitor-viewsonic-vx2428j-24.jpg"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 180Hz<br>نوع البنل: FAST IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "ViewSonic VX2723-2K-PRO", price: 7500, oldPrice: 9500, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx2723.webp", images: ["../assets/images/products/monitor-viewsonic-vx2723.webp"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 210Hz<br>نوع البنل: FAST IPS<br>جودة الشاشة: 2K" },
-            { name: "MSI 255F X24-25", price: 6299, oldPrice: 6999, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-255f.webp", images: ["../assets/images/products/monitor-msi-255f.webp"], specs: "حجم الشاشة: 25 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI 275QF E20", price: 8499, oldPrice: 8999, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-275qf-e20.png", images: ["../assets/images/products/monitor-msi-275qf-e20.png"], specs: "حجم الشاشة: 25 بوصة<br>تردد الشاشة: 200Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI 342CQRF E20-34", price: 14999, oldPrice: 15499, rating: 5, reviewsCount: 85, category: "monitors", inStock: true, isUsed: false, img: "../assets/images/products/monitor-msi-342cqrf.webp", images: ["../assets/images/products/monitor-msi-342cqrf.webp"], specs: "حجم الشاشة: 34 بوصة<br>تردد الشاشة: 200Hz<br>نوع البنل: IPS<br>جودة الشاشة: 4K<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI MAG 245F X24", price: 5799, oldPrice: 5999, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-msi-mag245f.avif", images: ["../assets/images/products/monitor-msi-mag245f.avif"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: RAPID IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 0.5ms" },
-            { name: "MSI MAG 274QF X24", price: 9500, oldPrice: 10499, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-msi-mag274qf-x24.jpg", images: ["../assets/images/products/monitor-msi-mag274qf-x24.jpg"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 210Hz<br>نوع البنل: IPS<br>جودة الشاشة: 2K<br>وقت الاستجابة: 0.5ms" },
-            { name: "ViewSonic VA24G25", price: 5300, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-va24g25.png", images: ["../assets/images/products/monitor-viewsonic-va24g25.png"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 144Hz<br>جودة الشاشة: FHD" },
-            { name: "ViewSonic VA27G25", price: 5700, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-va27g25.png", images: ["../assets/images/products/monitor-viewsonic-va27g25.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 144Hz<br>جودة الشاشة: FHD" },
-            { name: "ViewSonic VX24G10", price: 5000, oldPrice: 5750, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx24g10.webp", images: ["../assets/images/products/monitor-viewsonic-vx24g10.webp"], specs: "حجم الشاشة: 24 بوصة<br>تردد الشاشة: 240Hz<br>جودة الشاشة: FHD" },
-            { name: "ViewSonic VX2756-2K", price: 8300, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx2756.png", images: ["../assets/images/products/monitor-viewsonic-vx2756.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 180Hz<br>جودة الشاشة: 2K" },
-            { name: "ViewSonic VX27G10", price: 6750, oldPrice: 7800, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx27g10.png", images: ["../assets/images/products/monitor-viewsonic-vx27g10.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 240Hz<br>جودة الشاشة: FHD" },
-            { name: "ViewSonic VX27G81-2K", price: 10000, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-viewsonic-vx27g81.png", images: ["../assets/images/products/monitor-viewsonic-vx27g81.png"], specs: "حجم الشاشة: 27 بوصة<br>تردد الشاشة: 210Hz<br>جودة الشاشة: 2K" },
-            { name: "GIGABYTE GS25F2", price: 7800, oldPrice: null, rating: 5, reviewsCount: 85, category: "monitors", inStock: false, isUsed: false, img: "../assets/images/products/monitor-gigabyte-gs25f2.png", images: ["../assets/images/products/monitor-gigabyte-gs25f2.png"], specs: "حجم الشاشة: 24.5 بوصة<br>تردد الشاشة: 240Hz<br>نوع البنل: Super Speed IPS<br>جودة الشاشة: FHD<br>وقت الاستجابة: 1ms" },
-
-
-
-            // --- (PCs & Workstations) 14 كيسة ---
-            { name: "HP 600 G1 Desktop (i3 4th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-600-g1-desk-i3.jpg", images: ["../assets/images/products/hp-600-g1-desk-i3.jpg"], specs: "الموديل: HP 600 G1 (ديسك)<br>المعالج: Intel Core i3 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 600 G1 Desktop (i5 4th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-600-g1-desk-i5.jpg", images: ["../assets/images/products/hp-600-g1-desk-i5.jpg"], specs: "الموديل: HP 600 G1 (ديسك)<br>المعالج: Intel Core i5 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G1 Tower (i5 4th)", price: 3500, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-800-g1-tower-i5.jpg", images: ["../assets/images/products/hp-800-g1-tower-i5.jpg"], specs: "الموديل: HP 800 G1 (تاور)<br>المعالج: Intel Core i5 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G1 Tower (i7 4th)", price: 4500, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-800-g1-tower-i7.jpg", images: ["../assets/images/products/hp-800-g1-tower-i7.jpg"], specs: "الموديل: HP 800 G1 (تاور)<br>المعالج: Intel Core i7 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z230 Tower Workstation (i7 4th)", price: 4500, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z230-tower.jpg", images: ["../assets/images/products/hp-z230-tower.jpg"], specs: "الموديل: HP Z230 (تاور)<br>المعالج: Intel Core i7 (الجيل الرابع)<br>الرام: 4GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G2 Desktop (i5 6th)", price: 4500, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-800-g2-desk.jpg", images: ["../assets/images/products/hp-800-g2-desk.jpg"], specs: "الموديل: HP 800 G2 (ديسك)<br>المعالج: Intel Core i5 (الجيل السادس)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G2 Tower (i5 6th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-800-g2-tower.jpg", images: ["../assets/images/products/hp-800-g2-tower.jpg"], specs: "الموديل: HP 800 G2 (تاور)<br>المعالج: Intel Core i5 (الجيل السادس)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z240 Desktop (i5 7th)", price: 4300, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z240-desk.jpg", images: ["../assets/images/products/hp-z240-desk.jpg"], specs: "الموديل: HP Z240 (ديسك)<br>المعالج: Intel Core i5 (الجيل السابع)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z240 Tower (i5 7th)", price: 7700, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z240-tower-i5.jpg", images: ["../assets/images/products/hp-z240-tower-i5.jpg"], specs: "الموديل: HP Z240 (تاور)<br>المعالج: Intel Core i5 (الجيل السابع)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z240 Tower (i7 6th)", price: 8200, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z240-tower-i7.jpg", images: ["../assets/images/products/hp-z240-tower-i7.jpg"], specs: "الموديل: HP Z240 (تاور)<br>المعالج: Intel Core i7 (الجيل السادس)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G4 Desktop (i5 8th)", price: 0, rating: 5, reviewsCount: 88, category: "workstations", inStock: false, isUsed: true, img: "../assets/images/products/hp-800-g4-desk.jpg", images: ["../assets/images/products/hp-800-g4-desk.jpg"], specs: "الموديل: HP 800 G4 (ديسك)<br>المعالج: Intel Core i5 (الجيل الثامن)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP 800 G4 Tower (i5 8th)", price: 8300, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-800-g4-tower.jpg", images: ["../assets/images/products/hp-800-g4-tower.jpg"], specs: "الموديل: HP 800 G4 (تاور)<br>المعالج: Intel Core i5 (الجيل الثامن)<br>الرام: 8GB<br>الهارد: 500GB HDD<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z440 Tower Workstation", price: 6250, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z440-tower.jpg", images: ["../assets/images/products/hp-z440-tower.jpg"], specs: "الموديل: HP Z440 (تاور)<br>المعالج: خيارات متعددة (Mix Intel Xeon V3 / V4)<br>الباور سبلاي: متوفر بـ 525W أو 700W<br>الحالة: مستعمل (USED)" },
-            { name: "HP Z640 Tower Workstation", price: 12000, rating: 5, reviewsCount: 88, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hp-z640-tower.jpg", images: ["../assets/images/products/hp-z640-tower.jpg"], specs: "الموديل: HP Z640 (تاور)<br>المعالج: يدعم معالج واحد أو معالجين (Single / Dual Intel Xeon V3 / V4)<br>الباور سبلاي: 950W<br>الحالة: مستعمل (USED)" },
-            // --- الباور سبلاي (Power Supplies) ---
-            { name: "Thermaltake Toughpower GT 750W", price: 3900, oldPrice: null, rating: 5, reviewsCount: 15, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-thermaltake-toughpower-750w.jpg", images: ["../assets/images/products/psu-thermaltake-toughpower-750w.jpg"], specs: "القدرة: 750 واط<br>الشركة المصنعة: Thermaltake<br>الموديل: Toughpower GT" },
-            { name: "Thermaltake Toughpower GT 850W", price: 3500, oldPrice: null, rating: 5, reviewsCount: 22, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-thermaltake-toughpower-850w.jpg", images: ["../assets/images/products/psu-thermaltake-toughpower-850w.jpg"], specs: "القدرة: 850 واط<br>الشركة المصنعة: Thermaltake<br>الموديل: Toughpower GT" },
-            { name: "Thermaltake TR2 S 700W (80 PLUS)", price: 3400, oldPrice: null, rating: 4.5, reviewsCount: 30, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-thermaltake-tr2-s-700w.jpg", images: ["../assets/images/products/psu-thermaltake-tr2-s-700w.jpg"], specs: "القدرة: 700 واط<br>الشهادة: 80 PLUS<br>الشركة المصنعة: Thermaltake<br>الموديل: TR2 S" },
-            { name: "MSI MAG A650BNL 650W (80 PLUS Bronze)", price: 3000, oldPrice: null, rating: 5, reviewsCount: 45, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-msi-mag-a650bnl-650w.jpg", images: ["../assets/images/products/psu-msi-mag-a650bnl-650w.jpg"], specs: "القدرة: 650 واط<br>الشهادة: 80 PLUS Bronze<br>الشركة المصنعة: MSI<br>الموديل: MAG A650BNL" },
-            { name: "Thermaltake TR2 S 750W", price: 2500, oldPrice: null, rating: 4, reviewsCount: 18, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-thermaltake-tr2-s-750w.jpg", images: ["../assets/images/products/psu-thermaltake-tr2-s-750w.jpg"], specs: "القدرة: 750 واط<br>الشركة المصنعة: Thermaltake<br>الموديل: TR2 S" },
-            { name: "Thermaltake TR2 S 600W (80 PLUS)", price: 3500, oldPrice: null, rating: 4.5, reviewsCount: 25, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/psu-thermaltake-tr2-s-600w.jpg", images: ["../assets/images/products/psu-thermaltake-tr2-s-600w.jpg"], specs: "القدرة: 600 واط<br>الشهادة: 80 PLUS<br>الشركة المصنعة: Thermaltake<br>الموديل: TR2 S" },
-            // --- الكيسات (Cases) ---
-            { name: "ANTEC VCX 300 5XFAN ARGB", price: 1750, oldPrice: null, rating: 5, reviewsCount: 15, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-antec-vcx-300.jpg", images: ["../assets/images/products/case-antec-vcx-300.jpg"], specs: "الماركة: ANTEC<br>الموديل: VCX 300<br>المراوح: 5 مراوح ARGB" },
-            { name: "ANTEC VCX 310 4XFAN ARGB", price: 1750, oldPrice: null, rating: 5, reviewsCount: 22, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-antec-vcx-310.jpg", images: ["../assets/images/products/case-antec-vcx-310.jpg"], specs: "الماركة: ANTEC<br>الموديل: VCX 310<br>المراوح: 4 مراوح ARGB" },
-            { name: "PHANTOM AROURA Pro", price: 1650, oldPrice: null, rating: 4.5, reviewsCount: 30, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-phantom-aroura-pro.jpg", images: ["../assets/images/products/case-phantom-aroura-pro.jpg"], specs: "الماركة: PHANTOM<br>الموديل: AROURA Pro<br>النوع: Mid Tower" },
-            { name: "RAVAL Crystel 4XFAN ARGB", price: 2300, oldPrice: null, rating: 5, reviewsCount: 45, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/case-raval-crystel.jpg", images: ["../assets/images/products/case-raval-crystel.jpg"], specs: "الماركة: RAVAL<br>الموديل: Crystel<br>المراوح: 4 مراوح ARGB" },
-            { name: "RAVAL Digital 5XFAN ARGB", price: 2000, oldPrice: null, rating: 4, reviewsCount: 18, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/case-raval-digital.jpg", images: ["../assets/images/products/case-raval-digital.jpg"], specs: "الماركة: RAVAL<br>الموديل: Digital<br>المراوح: 5 مراوح ARGB" },
-            { name: "RAVAL MEGA 6XFAN ARGB", price: 2500, oldPrice: null, rating: 4.5, reviewsCount: 25, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-raval-mega.jpg", images: ["../assets/images/products/case-raval-mega.jpg"], specs: "الماركة: RAVAL<br>الموديل: MEGA<br>المراوح: 6 مراوح ARGB" },
-            { name: "RAVAL MEGA MAX 7XFAN", price: 2900, oldPrice: null, rating: 5, reviewsCount: 38, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/case-raval-mega-max.jpg", images: ["../assets/images/products/case-raval-mega-max.jpg"], specs: "الماركة: RAVAL<br>الموديل: MEGA MAX<br>المراوح: 7 مراوح تبريد" },
-            { name: "RAVAL Mega Prime 7XFAN", price: 2700, oldPrice: null, rating: 5, reviewsCount: 52, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/case-raval-mega-prime.jpg", images: ["../assets/images/products/case-raval-mega-prime.jpg"], specs: "الماركة: RAVAL<br>الموديل: Mega Prime<br>المراوح: 7 مراوح تبريد" },
-            { name: "RAVAL MEGA PRO X 8XFAN", price: 3500, oldPrice: null, rating: 5, reviewsCount: 60, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-raval-mega-pro-x.jpg", images: ["../assets/images/products/case-raval-mega-pro-x.jpg"], specs: "الماركة: RAVAL<br>الموديل: MEGA PRO X<br>المراوح: 8 مراوح تبريد" },
-            { name: "RAVAL WAVES 4XFAN ARGB", price: 2200, oldPrice: null, rating: 4.5, reviewsCount: 28, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/case-raval-waves.jpg", images: ["../assets/images/products/case-raval-waves.jpg"], specs: "الماركة: RAVAL<br>الموديل: WAVES<br>المراوح: 4 مراوح ARGB" },
-            // --- التبريد والمراوح (Cooling & Fans) ---
-            { name: "Cooler Thermaltake ALL-IN-ONE", price: 3600, oldPrice: null, rating: 5, reviewsCount: 20, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/cooler-thermaltake-aio.jpg", images: ["../assets/images/products/cooler-thermaltake-aio.jpg"], specs: "النوع: تبريد مائي (Liquid Cooling)<br>الماركة: Thermaltake<br>المميزات: إضاءة ARGB وأداء فائق" },
-            { name: "Digital CPU Cooler", price: 1100, oldPrice: null, rating: 4.5, reviewsCount: 15, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/cooler-digital.jpg", images: ["../assets/images/products/cooler-digital.jpg"], specs: "النوع: تبريد هوائي (Air Cooler)<br>المميزات: شاشة ديجيتال لعرض الحرارة" },
-            { name: "RAVAL HF-500 CPU Cooler", price: 700, oldPrice: null, rating: 5, reviewsCount: 28, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/cooler-raval-hf500.jpg", images: ["../assets/images/products/cooler-raval-hf500.jpg"], specs: "النوع: تبريد هوائي (Air Cooler)<br>الماركة: RAVAL<br>الموديل: HF-500" },
-            // --- كروت الشاشة (VGA / Graphics Cards) ---
-            { name: "ASUS RTX 2070 SUPER", price: 11500, oldPrice: null, rating: 5, reviewsCount: 15, category: "pcs", inStock: true, isUsed: false, img: "../assets/images/products/vga-asus-rtx-2070-super.jpg", images: ["../assets/images/products/vga-asus-rtx-2070-super.jpg"], specs: "الموديل: ASUS RTX 2070 SUPER<br>النوع: كارت شاشة" },
-            { name: "RTX 3060 12G-USED-3", price: 14800, oldPrice: null, rating: 4.5, reviewsCount: 22, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/vga-rtx-3060-12g.jpg", images: ["../assets/images/products/vga-rtx-3060-12g.jpg"], specs: "الموديل: RTX 3060<br>الذاكرة: 12GB<br>الحالة: مستعمل" },
-            { name: "RTX 3070 8G-USED-3", price: 14500, oldPrice: null, rating: 5, reviewsCount: 18, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-3070-8g.jpg", images: ["../assets/images/products/vga-rtx-3070-8g.jpg"], specs: "الموديل: RTX 3070<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "RX 5600 XT 6GB-USED-3", price: 11300, oldPrice: null, rating: 4, reviewsCount: 12, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rx-5600-xt.jpg", images: ["../assets/images/products/vga-rx-5600-xt.jpg"], specs: "الموديل: RX 5600 XT<br>الذاكرة: 6GB<br>الحالة: مستعمل" },
-            { name: "RX 5700 XT SAPPHIRE", price: 11800, oldPrice: null, rating: 4.5, reviewsCount: 30, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rx-5700-xt.jpg", images: ["../assets/images/products/vga-rx-5700-xt.jpg"], specs: "الموديل: SAPPHIRE RX 5700 XT<br>الحالة: مستعمل" },
-            { name: "SAPPHIRE Radeon RX NITRO+", price: 5100, oldPrice: null, rating: 4, reviewsCount: 25, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-sapphire-rx-1.jpg", images: ["../assets/images/products/vga-sapphire-rx-1.jpg"], specs: "الموديل: SAPPHIRE Radeon RX<br>الحالة: مستعمل" },
-            { name: "SAPPHIRE Radeon RX PULSE", price: 4800, oldPrice: 5000, rating: 4, reviewsCount: 19, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-sapphire-rx-2.jpg", images: ["../assets/images/products/vga-sapphire-rx-2.jpg"], specs: "الموديل: SAPPHIRE Radeon RX<br>الحالة: مستعمل" },
-            { name: "ZOTAC GAMING RTX 5060 Ti", price: 35400, oldPrice: null, rating: 5, reviewsCount: 42, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/vga-zotac-rtx-5060ti.jpg", images: ["../assets/images/products/vga-zotac-rtx-5060ti.jpg"], specs: "الموديل: ZOTAC GAMING RTX 5060 Ti<br>الحالة: جديد" },
-            { name: "Gigabyte GTX 1060 3GB-USED", price: 5400, oldPrice: null, rating: 4, reviewsCount: 14, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1060-3gb-1.jpg", images: ["../assets/images/products/vga-gtx-1060-3gb-1.jpg"], specs: "الموديل: Gigabyte GTX 1060<br>الذاكرة: 3GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "ASUS GTX 1060 3GB-USED", price: 4500, oldPrice: null, rating: 4, reviewsCount: 11, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1060-3gb-2.jpg", images: ["../assets/images/products/vga-gtx-1060-3gb-2.jpg"], specs: "الموديل: ASUS GTX 1060<br>الذاكرة: 3GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "GTX 1060 6GB-USED-3", price: 6000, oldPrice: null, rating: 4.5, reviewsCount: 21, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1060-6gb.jpg", images: ["../assets/images/products/vga-gtx-1060-6gb.jpg"], specs: "الموديل: GTX 1060<br>الذاكرة: 6GB<br>الحالة: مستعمل" },
-            { name: "Gigabyte GTX 1660 SUPER 6GB", price: 11200, oldPrice: null, rating: 5, reviewsCount: 35, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1660-super-1.jpg", images: ["../assets/images/products/vga-gtx-1660-super-1.jpg"], specs: "الموديل: Gigabyte GTX 1660 SUPER<br>الذاكرة: 6GB<br>الحالة: مستعمل" },
-            { name: "MSI GTX 1660 SUPER 6GB", price: 7500, oldPrice: null, rating: 5, reviewsCount: 28, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/vga-gtx-1660-super-2.jpg", images: ["../assets/images/products/vga-gtx-1660-super-2.jpg"], specs: "الموديل: MSI GTX 1660 SUPER<br>الذاكرة: 6GB<br>الحالة: مستعمل" },
-            { name: "GTX 960 4GB-USED-3 Months", price: 3700, oldPrice: null, rating: 3.5, reviewsCount: 8, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-960-4gb.jpg", images: ["../assets/images/products/vga-gtx-960-4gb.jpg"], specs: "الموديل: GTX 960<br>الذاكرة: 4GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "GTX-1070Ti-8GB-Used-3", price: 7500, oldPrice: null, rating: 4.5, reviewsCount: 16, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1070ti.jpg", images: ["../assets/images/products/vga-gtx-1070ti.jpg"], specs: "الموديل: GTX 1070 Ti<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "GTX-1650-4GB-Used-3 Months", price: 5900, oldPrice: null, rating: 4, reviewsCount: 24, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-gtx-1650-4gb.jpg", images: ["../assets/images/products/vga-gtx-1650-4gb.jpg"], specs: "الموديل: GTX 1650<br>الذاكرة: 4GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "PNY 5060 8GB-NEW-12", price: 21200, oldPrice: null, rating: 5, reviewsCount: 10, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/vga-pny-rtx-5060.jpg", images: ["../assets/images/products/vga-pny-rtx-5060.jpg"], specs: "الموديل: PNY RTX 5060<br>الذاكرة: 8GB<br>الحالة: جديد" },
-            { name: "RTX 2060 6GB-USED-3 Months", price: 8500, oldPrice: null, rating: 4.5, reviewsCount: 17, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2060-6gb.jpg", images: ["../assets/images/products/vga-rtx-2060-6gb.jpg"], specs: "الموديل: RTX 2060<br>الذاكرة: 6GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "MSI RTX 2060 SUPER 8GB", price: 11300, oldPrice: null, rating: 5, reviewsCount: 26, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2060-super-1.jpg", images: ["../assets/images/products/vga-rtx-2060-super-1.jpg"], specs: "الموديل: MSI RTX 2060 SUPER<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "ZOTAC RTX 2060 SUPER 8GB", price: 9500, oldPrice: null, rating: 4.5, reviewsCount: 20, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2060-super-2.jpg", images: ["../assets/images/products/vga-rtx-2060-super-2.jpg"], specs: "الموديل: ZOTAC RTX 2060 SUPER<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "Gigabyte RTX 2070 8GB", price: 11300, oldPrice: null, rating: 5, reviewsCount: 15, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2070-8gb-1.jpg", images: ["../assets/images/products/vga-rtx-2070-8gb-1.jpg"], specs: "الموديل: Gigabyte RTX 2070<br>الذاكرة: 8GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "ASUS RTX 2070 8GB", price: 11800, oldPrice: null, rating: 5, reviewsCount: 31, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/vga-rtx-2070-8gb-2.jpg", images: ["../assets/images/products/vga-rtx-2070-8gb-2.jpg"], specs: "الموديل: ASUS RTX 2070<br>الذاكرة: 8GB<br>الحالة: مستعمل (3 شهور)" },
-            { name: "RTX 2070 SUPER 8GB-USED", price: 11000, oldPrice: null, rating: 5, reviewsCount: 22, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2070-super-2.jpg", images: ["../assets/images/products/vga-rtx-2070-super-2.jpg"], specs: "الموديل: RTX 2070 SUPER<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "RTX 2080 8GB-USED-3", price: 13600, oldPrice: null, rating: 5, reviewsCount: 40, category: "pcs", inStock: false, isUsed: true, img: "../assets/images/products/vga-rtx-2080-8gb.jpg", images: ["../assets/images/products/vga-rtx-2080-8gb.jpg"], specs: "الموديل: RTX 2080<br>الذاكرة: 8GB<br>الحالة: مستعمل" },
-            { name: "RTX 5050 8GB-NEW-12", price: 16000, oldPrice: null, rating: 5, reviewsCount: 5, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/vga-rtx-5050.jpg", images: ["../assets/images/products/vga-rtx-5050.jpg"], specs: "الموديل: RTX 5050<br>الذاكرة: 8GB<br>الحالة: جديد" },
-            { name: "RTX 5060 8GB-NEW-12", price: 19500, oldPrice: null, rating: 5, reviewsCount: 8, category: "pcs", inStock: false, isUsed: false, img: "../assets/images/products/vga-rtx-5060.jpg", images: ["../assets/images/products/vga-rtx-5060.jpg"], specs: "الموديل: RTX 5060<br>الذاكرة: 8GB<br>الحالة: جديد" },
-            // --- اللوحات الأم (Motherboards) ---
-            { name: "Gigabyte B760M Gaming X", price: 6500, oldPrice: null, rating: 5, reviewsCount: 20, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-b760m-gaming-x.jpg", images: ["../assets/images/products/mb-gigabyte-b760m-gaming-x.jpg"], specs: "الموديل: Gigabyte B760M Gaming X<br>النوع: لوحة أم (Motherboard)" },
-            { name: "ASUS PRIME B450M-K", price: 3500, oldPrice: null, rating: 4.5, reviewsCount: 15, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-asus-prime-b450m-k.jpg", images: ["../assets/images/products/mb-asus-prime-b450m-k.jpg"], specs: "الموديل: ASUS PRIME B450M-K<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE A520M K V2", price: 3600, oldPrice: null, rating: 4, reviewsCount: 10, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-gigabyte-a520m-k-v2.jpg", images: ["../assets/images/products/mb-gigabyte-a520m-k-v2.jpg"], specs: "الموديل: GIGABYTE A520M K V2<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE B450M DS3H", price: 3900, oldPrice: null, rating: 4.5, reviewsCount: 22, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-gigabyte-b450m-ds3h.jpg", images: ["../assets/images/products/mb-gigabyte-b450m-ds3h.jpg"], specs: "الموديل: GIGABYTE B450M DS3H<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE B760M E", price: 5900, oldPrice: null, rating: 5, reviewsCount: 18, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-gigabyte-b760m-e.jpg", images: ["../assets/images/products/mb-gigabyte-b760m-e.jpg"], specs: "الموديل: GIGABYTE B760M E<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE B760M POWER", price: 5900, oldPrice: null, rating: 5, reviewsCount: 25, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-gigabyte-b760m-power.jpg", images: ["../assets/images/products/mb-gigabyte-b760m-power.jpg"], specs: "الموديل: GIGABYTE B760M POWER<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE B660M D", price: 5900, oldPrice: null, rating: 4.5, reviewsCount: 12, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-b660m-d.jpg", images: ["../assets/images/products/mb-gigabyte-b660m-d.jpg"], specs: "الموديل: GIGABYTE B660M D<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE H510M S2", price: 3000, oldPrice: null, rating: 4, reviewsCount: 30, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-h510m-s2.jpg", images: ["../assets/images/products/mb-gigabyte-h510m-s2.jpg"], specs: "الموديل: GIGABYTE H510M S2<br>النوع: لوحة أم (Motherboard)" },
-
-            { name: "GIGABYTE H610M K DDR4", price: 4200, oldPrice: null, rating: 4.5, reviewsCount: 16, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-h610m-k-ddr4.jpg", images: ["../assets/images/products/mb-gigabyte-h610m-k-ddr4.jpg"], specs: "الموديل: GIGABYTE H610M K DDR4<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE H610M S2 DDR4", price: 5100, oldPrice: null, rating: 4.5, reviewsCount: 24, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-gigabyte-h610m-s2-ddr4.jpg", images: ["../assets/images/products/mb-gigabyte-h610m-s2-ddr4.jpg"], specs: "الموديل: GIGABYTE H610M S2 DDR4<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE Z370 HD3", price: 2500, oldPrice: null, rating: 4, reviewsCount: 8, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-z370-hd3.jpg", images: ["../assets/images/products/mb-gigabyte-z370-hd3.jpg"], specs: "الموديل: GIGABYTE Z370 HD3<br>النوع: لوحة أم (Motherboard)" },
-            { name: "MSI A520M-A PRO", price: 4300, oldPrice: null, rating: 4.5, reviewsCount: 19, category: "bundles", inStock: false, isUsed: false, img: "../assets/images/products/mb-msi-a520m-a-pro.jpg", images: ["../assets/images/products/mb-msi-a520m-a-pro.jpg"], specs: "الموديل: MSI A520M-A PRO<br>النوع: لوحة أم (Motherboard)" },
-            { name: "MSI B450M-A PRO MAX II", price: 4100, oldPrice: null, rating: 5, reviewsCount: 35, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-msi-b450m-a-pro.jpg", images: ["../assets/images/products/mb-msi-b450m-a-pro.jpg"], specs: "الموديل: MSI B450M-A PRO MAX II<br>النوع: لوحة أم (Motherboard)" },
-            { name: "MSI PRO H610M-S DDR4", price: 4200, oldPrice: null, rating: 4.5, reviewsCount: 22, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-msi-h610m-s-ddr4.jpg", images: ["../assets/images/products/mb-msi-h610m-s-ddr4.jpg"], specs: "الموديل: MSI PRO H610M-S DDR4<br>النوع: لوحة أم (Motherboard)" },
-            { name: "GIGABYTE H810M S2H", price: 4800, oldPrice: null, rating: 3.5, reviewsCount: 14, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/mb-gigabyte-h810m-s2h.jpg", images: ["../assets/images/products/mb-gigabyte-h810m-s2h.jpg"], specs: "الموديل: GIGABYTE H810M S2H<br>النوع: لوحة أم (Motherboard)" },
-            // --- المعالجات (Processors / CPUs) ---
-            // أولاً: معالجات AMD الجديدة
-            { name: "AMD Ryzen 5 3600 (Box)", price: 5200, oldPrice: null, rating: 4.5, reviewsCount: 30, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-3600-box.jpg", images: ["../assets/images/products/cpu-amd-r5-3600-box.jpg"], specs: "الموديل: AMD Ryzen 5 3600<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 3600 (Tray)", price: 4500, oldPrice: null, rating: 4.5, reviewsCount: 42, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-3600-tray.jpg", images: ["../assets/images/products/cpu-amd-r5-3600-tray.jpg"], specs: "الموديل: AMD Ryzen 5 3600<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 5500 (Box)", price: 5900, oldPrice: null, rating: 4.5, reviewsCount: 25, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-5500-box.jpg", images: ["../assets/images/products/cpu-amd-r5-5500-box.jpg"], specs: "الموديل: AMD Ryzen 5 5500<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 5500 (Tray)", price: 5400, oldPrice: null, rating: 4.5, reviewsCount: 18, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-5500-tray.jpg", images: ["../assets/images/products/cpu-amd-r5-5500-tray.jpg"], specs: "الموديل: AMD Ryzen 5 5500<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 5600X", price: 7800, oldPrice: null, rating: 5, reviewsCount: 55, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-5600x.jpg", images: ["../assets/images/products/cpu-amd-r5-5600x.jpg"], specs: "الموديل: AMD Ryzen 5 5600X<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 7400F", price: 8900, oldPrice: null, rating: 5, reviewsCount: 12, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-7400f.jpg", images: ["../assets/images/products/cpu-amd-r5-7400f.jpg"], specs: "الموديل: AMD Ryzen 5 7400F<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 7500F", price: 8300, oldPrice: null, rating: 5, reviewsCount: 34, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-7500f.jpg", images: ["../assets/images/products/cpu-amd-r5-7500f.jpg"], specs: "الموديل: AMD Ryzen 5 7500F<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 5 8400", price: 7800, oldPrice: null, rating: 4.5, reviewsCount: 8, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r5-8400.jpg", images: ["../assets/images/products/cpu-amd-r5-8400.jpg"], specs: "الموديل: AMD Ryzen 5 8400<br>النوع: معالج (Processor)" },
-            { name: "AMD Ryzen 7 5700X", price: 8900, oldPrice: null, rating: 5, reviewsCount: 40, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-amd-r7-5700x.jpg", images: ["../assets/images/products/cpu-amd-r7-5700x.jpg"], specs: "الموديل: AMD Ryzen 7 5700X<br>النوع: معالج (Processor)" },
-
-            // ثانياً: معالجات Intel الجديدة
-            { name: "Intel Core i3-10100F", price: 2400, oldPrice: null, rating: 4, reviewsCount: 60, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-i3-10100f.jpg", images: ["../assets/images/products/cpu-intel-i3-10100f.jpg"], specs: "الموديل: Intel Core i3-10100F<br>النوع: معالج (Processor)" },
-            { name: "Intel Core i5-11400F", price: 5900, oldPrice: null, rating: 4.5, reviewsCount: 35, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-i5-11400f.jpg", images: ["../assets/images/products/cpu-intel-i5-11400f.jpg"], specs: "الموديل: Intel Core i5-11400F<br>النوع: معالج (Processor)" },
-            { name: "Intel Core i5-12400F (Box)", price: 8900, oldPrice: null, rating: 5, reviewsCount: 80, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-i5-12400f-box.jpg", images: ["../assets/images/products/cpu-intel-i5-12400f-box.jpg"], specs: "الموديل: Intel Core i5-12400F<br>النوع: معالج (Processor)" },
-            { name: "Intel Core i5-12400F (Tray)", price: 8300, oldPrice: null, rating: 5, reviewsCount: 45, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-i5-12400f-tray.jpg", images: ["../assets/images/products/cpu-intel-i5-12400f-tray.jpg"], specs: "الموديل: Intel Core i5-12400F<br>النوع: معالج (Processor)" },
-            { name: "Intel Core i5-14400F", price: 10600, oldPrice: null, rating: 5, reviewsCount: 15, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-i5-14400f.jpg", images: ["../assets/images/products/cpu-intel-i5-14400f.jpg"], specs: "الموديل: Intel Core i5-14400F<br>النوع: معالج (Processor)" },
-            { name: "Intel Core Ultra 5 225 (Box)", price: 11300, oldPrice: null, rating: 5, reviewsCount: 10, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-ultra-5-225-box.jpg", images: ["../assets/images/products/cpu-intel-ultra-5-225-box.jpg"], specs: "الموديل: Intel Core Ultra 5 225<br>النوع: معالج (Processor)" },
-            { name: "Intel Core Ultra 5 225 (Tray)", price: 8900, oldPrice: null, rating: 5, reviewsCount: 22, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-ultra-5-225-tray.jpg", images: ["../assets/images/products/cpu-intel-ultra-5-225-tray.jpg"], specs: "الموديل: Intel Core Ultra 5 225<br>النوع: معالج (Processor)" },
-            { name: "Intel Core Ultra 7 265KF", price: 17200, oldPrice: null, rating: 5, reviewsCount: 5, category: "bundles", inStock: true, isUsed: false, img: "../assets/images/products/cpu-intel-ultra-7-265kf.jpg", images: ["../assets/images/products/cpu-intel-ultra-7-265kf.jpg"], specs: "الموديل: Intel Core Ultra 7 265KF<br>النوع: معالج (Processor)" },
-
-            // ثالثاً: معالجات Intel المستعملة
-            { name: "Intel Core i5-4690K (Used)", price: 1000, oldPrice: null, rating: 4, reviewsCount: 10, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-4690k-used.jpg", images: ["../assets/images/products/cpu-intel-i5-4690k-used.jpg"], specs: "الموديل: Intel Core i5-4690K<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-4700 (Used)", price: 1500, oldPrice: null, rating: 4, reviewsCount: 15, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-4700-used.jpg", images: ["../assets/images/products/cpu-intel-i7-4700-used.jpg"], specs: "الموديل: Intel Core i7-4700<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-6500 (Used)", price: 1250, oldPrice: null, rating: 4, reviewsCount: 20, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-6500-used.jpg", images: ["../assets/images/products/cpu-intel-i5-6500-used.jpg"], specs: "الموديل: Intel Core i5-6500<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-6600 (Used)", price: 1300, oldPrice: null, rating: 4, reviewsCount: 18, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-6600-used.jpg", images: ["../assets/images/products/cpu-intel-i5-6600-used.jpg"], specs: "الموديل: Intel Core i5-6600<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-6700 (Used)", price: 2500, oldPrice: null, rating: 4.5, reviewsCount: 25, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-6700-used.jpg", images: ["../assets/images/products/cpu-intel-i7-6700-used.jpg"], specs: "الموديل: Intel Core i7-6700<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-6700K (Used)", price: 2750, oldPrice: null, rating: 4.5, reviewsCount: 30, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-6700k-used.jpg", images: ["../assets/images/products/cpu-intel-i7-6700k-used.jpg"], specs: "الموديل: Intel Core i7-6700K<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-7600K (Used)", price: 1950, oldPrice: null, rating: 4, reviewsCount: 12, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-7600k-used.jpg", images: ["../assets/images/products/cpu-intel-i5-7600k-used.jpg"], specs: "الموديل: Intel Core i5-7600K<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-7700 (Used)", price: 2750, oldPrice: null, rating: 4.5, reviewsCount: 28, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-7700-used.jpg", images: ["../assets/images/products/cpu-intel-i7-7700-used.jpg"], specs: "الموديل: Intel Core i7-7700<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-8400 (Used)", price: 2100, oldPrice: null, rating: 4.5, reviewsCount: 40, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-8400-used.jpg", images: ["../assets/images/products/cpu-intel-i5-8400-used.jpg"], specs: "الموديل: Intel Core i5-8400<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-8600K (Used)", price: 2500, oldPrice: null, rating: 4.5, reviewsCount: 35, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-8600k-used.jpg", images: ["../assets/images/products/cpu-intel-i5-8600k-used.jpg"], specs: "الموديل: Intel Core i5-8600K<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-8700 (Used)", price: 3000, oldPrice: null, rating: 4.5, reviewsCount: 22, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-8700-used.jpg", images: ["../assets/images/products/cpu-intel-i7-8700-used.jpg"], specs: "الموديل: Intel Core i7-8700<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-9400F (Used)", price: 2250, oldPrice: null, rating: 4.5, reviewsCount: 50, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-9400f-used.jpg", images: ["../assets/images/products/cpu-intel-i5-9400f-used.jpg"], specs: "الموديل: Intel Core i5-9400F<br>الحالة: مستعمل" },
-            { name: "Intel Core i5-9600K (Used)", price: 2750, oldPrice: null, rating: 4.5, reviewsCount: 26, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i5-9600k-used.jpg", images: ["../assets/images/products/cpu-intel-i5-9600k-used.jpg"], specs: "الموديل: Intel Core i5-9600K<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-9700 (Used)", price: 3700, oldPrice: null, rating: 4.5, reviewsCount: 18, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-9700-used.jpg", images: ["../assets/images/products/cpu-intel-i7-9700-used.jpg"], specs: "الموديل: Intel Core i7-9700<br>الحالة: مستعمل" },
-            { name: "Intel Core i7-9700K (Used)", price: 4200, oldPrice: null, rating: 5, reviewsCount: 24, category: "bundles", inStock: true, isUsed: true, img: "../assets/images/products/cpu-intel-i7-9700k-used.jpg", images: ["../assets/images/products/cpu-intel-i7-9700k-used.jpg"], specs: "الموديل: Intel Core i7-9700K<br>الحالة: مستعمل" },
-            // --- مزودات الطاقة (Power Supplies / PSUs) ---
-            { name: "EVGA 850 B2", price: 3250, oldPrice: null, rating: 5, reviewsCount: 15, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-evga-850-b2.jpg", images: ["../assets/images/products/psu-evga-850-b2.jpg"], specs: "الماركة: EVGA<br>الكفاءة: 80 PLUS BRONZE<br>النوع: SEMI MODULAR<br>الحالة: مستعمل" },
-            { name: "EVGA 750 BQ", price: 3000, oldPrice: null, rating: 4.5, reviewsCount: 22, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-evga-750-bq.jpg", images: ["../assets/images/products/psu-evga-750-bq.jpg"], specs: "الماركة: EVGA<br>الكفاءة: 80 PLUS BRONZE<br>النوع: SEMI MODULAR<br>الحالة: مستعمل" },
-            { name: "CORSAIR VS450", price: 1750, oldPrice: null, rating: 4, reviewsCount: 18, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-corsair-vs450.jpg", images: ["../assets/images/products/psu-corsair-vs450.jpg"], specs: "الماركة: CORSAIR<br>الكفاءة: 80 PLUS SILVER<br>النوع: NO MODULAR<br>الحالة: مستعمل" },
-            { name: "CORSAIR VS650 #1", price: 2750, oldPrice: null, rating: 4.5, reviewsCount: 25, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-corsair-vs650-1.jpg", images: ["../assets/images/products/psu-corsair-vs650-1.jpg"], specs: "الماركة: CORSAIR<br>الكفاءة: 80 PLUS SILVER<br>النوع: NO MODULAR<br>الحالة: مستعمل" },
-            { name: "CORSAIR TX650", price: 3000, oldPrice: null, rating: 5, reviewsCount: 30, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-corsair-tx650.jpg", images: ["../assets/images/products/psu-corsair-tx650.jpg"], specs: "الماركة: CORSAIR<br>الكفاءة: 80 PLUS GOLD<br>النوع: SEMI MODULAR<br>الحالة: مستعمل" },
-            { name: "CORSAIR RM750", price: 3500, oldPrice: null, rating: 5, reviewsCount: 42, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-corsair-rm750.jpg", images: ["../assets/images/products/psu-corsair-rm750.jpg"], specs: "الماركة: CORSAIR<br>الكفاءة: 80 PLUS GOLD<br>النوع: FULLY MODULAR<br>الحالة: مستعمل" },
-            { name: "SEASONIC X-850", price: 3750, oldPrice: null, rating: 5, reviewsCount: 20, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-seasonic-x850.jpg", images: ["../assets/images/products/psu-seasonic-x850.jpg"], specs: "الماركة: SEASONIC<br>الكفاءة: 80 PLUS GOLD<br>النوع: FULLY MODULAR<br>الحالة: مستعمل" },
-            { name: "GAMEMAX RGB-850", price: 3200, oldPrice: null, rating: 4.5, reviewsCount: 35, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-gamemax-rgb850.jpg", images: ["../assets/images/products/psu-gamemax-rgb850.jpg"], specs: "الماركة: GAMEMAX<br>الكفاءة: 80 PLUS GOLD<br>النوع: FULLY MODULAR<br>ملاحظات: مروحة RGB، كامل بالكرتونة<br>الحالة: مستعمل" },
-            { name: "GAMEMAX GE-700", price: 1750, oldPrice: null, rating: 4, reviewsCount: 12, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-gamemax-ge700.jpg", images: ["../assets/images/products/psu-gamemax-ge700.jpg"], specs: "الماركة: GAMEMAX<br>الكفاءة: 80 PLUS BRONZE<br>النوع: NO MODULAR<br>الحالة: مستعمل" },
-            { name: "COOLER MASTER SILENT PRO 800W", price: 3000, oldPrice: null, rating: 4.5, reviewsCount: 16, category: "pcs", inStock: true, isUsed: true, img: "../assets/images/products/psu-coolermaster-silentpro.jpg", images: ["../assets/images/products/psu-coolermaster-silentpro.jpg"], specs: "الماركة: COOLER MASTER<br>الكفاءة: 80 PLUS GOLD<br>النوع: SEMI MODULAR<br>الحالة: مستعمل" },
-            // --- قسم اللابتوبات (Laptops - SOON & No Price - 79 Items) ---
-            { name: "1867 I7 10TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-1867-1.jpg", images: ["../assets/images/products/laptop-1867-1.jpg"], specs: "الموديل: 1867<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "1867 I7 10TH 16G 1TB", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-1867-2.jpg", images: ["../assets/images/products/laptop-1867-2.jpg"], specs: "الموديل: 1867<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 1TB<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "1867 I7 10TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-1867-3.jpg", images: ["../assets/images/products/laptop-1867-3.jpg"], specs: "الموديل: 1867<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "1867 I5 10TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-1867-4.jpg", images: ["../assets/images/products/laptop-1867-4.jpg"], specs: "الموديل: 1867<br>المعالج: I5 - 10TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 3520 I7 7TH HQ 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-3520-5.jpg", images: ["../assets/images/products/laptop-dell-3520-5.jpg"], specs: "الموديل: DELL 3520<br>المعالج: I7 - 7TH HQ<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: NV M620<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 5491 I5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-5491-6.jpg", images: ["../assets/images/products/laptop-dell-5491-6.jpg"], specs: "الموديل: DELL 5491<br>المعالج: I5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: NV X130<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 5500 (BOX) i5 8TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-5500-box-7.jpg", images: ["../assets/images/products/laptop-dell-5500-box-7.jpg"], specs: "الموديل: DELL 5500 (BOX)<br>المعالج: i5 - 8TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 5510 I7 10TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-5510-8.jpg", images: ["../assets/images/products/laptop-dell-5510-8.jpg"], specs: "الموديل: DELL 5510<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 5540 I5 4TH 4G 128", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-5540-9.jpg", images: ["../assets/images/products/laptop-dell-5540-9.jpg"], specs: "الموديل: DELL 5540<br>المعالج: I5 - 4TH<br>الرام: 4GB<br>الهارد: 128<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7390 2*1 I5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7390-21-10.jpg", images: ["../assets/images/products/laptop-dell-7390-21-10.jpg"], specs: "الموديل: DELL 7390 2*1<br>المعالج: I5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7400 i5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7400-11.jpg", images: ["../assets/images/products/laptop-dell-7400-11.jpg"], specs: "الموديل: DELL 7400<br>المعالج: i5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7470 I7 6TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7470-12.jpg", images: ["../assets/images/products/laptop-dell-7470-12.jpg"], specs: "الموديل: DELL 7470<br>المعالج: I7 - 6TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7490 i5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7490-13.jpg", images: ["../assets/images/products/laptop-dell-7490-13.jpg"], specs: "الموديل: DELL 7490<br>المعالج: i5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7510 I7 6TH HQ 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7510-14.jpg", images: ["../assets/images/products/laptop-dell-7510-14.jpg"], specs: "الموديل: DELL 7510<br>المعالج: I7 - 6TH HQ<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: AMD 2GB<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7520 i5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7520-15.jpg", images: ["../assets/images/products/laptop-dell-7520-15.jpg"], specs: "الموديل: DELL 7520<br>المعالج: i5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7520 TOUCH I7 6TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7520--touch-16.jpg", images: ["../assets/images/products/laptop-dell-7520--touch-16.jpg"], specs: "الموديل: DELL 7520  TOUCH<br>المعالج: I7 - 6TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: NV 4GB<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7560 I7 11TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7560-17.jpg", images: ["../assets/images/products/laptop-dell-7560-17.jpg"], specs: "الموديل: DELL 7560<br>المعالج: I7 - 11TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: NV4GB<br>الحالة: قريباً (SOON)" },
-            { name: "DELL 7710 i7 6HQ 16G 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-7710-18.jpg", images: ["../assets/images/products/laptop-dell-7710-18.jpg"], specs: "الموديل: DELL 7710<br>المعالج: i7 - 6HQ<br>الرام: 16GB<br>الهارد: 1TB HDD<br>الجرافيك: N.V 4GB M3000M<br>الحالة: قريباً (SOON)" },
-            { name: "DELL INSPIRON 3567 I3 7TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-inspiron-3567-19.jpg", images: ["../assets/images/products/laptop-dell-inspiron-3567-19.jpg"], specs: "الموديل: DELL INSPIRON 3567<br>المعالج: I3 - 7TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "DELL VESTOR 5510 I7 11TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-dell-vestor-5510-20.jpg", images: ["../assets/images/products/laptop-dell-vestor-5510-20.jpg"], specs: "الموديل: DELL VESTOR 5510<br>المعالج: I7 - 11TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G7 I5 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp--840-g7-21.jpg", images: ["../assets/images/products/laptop-hp--840-g7-21.jpg"], specs: "الموديل: HP  840 G7<br>المعالج: I5 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 440 G3 I5 6TH 8G 128", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-440-g3-22.jpg", images: ["../assets/images/products/laptop-hp-440-g3-22.jpg"], specs: "الموديل: HP 440 G3<br>المعالج: I5 - 6TH<br>الرام: 8GB<br>الهارد: 128<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 450 G5 i5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-450-g5-23.jpg", images: ["../assets/images/products/laptop-hp-450-g5-23.jpg"], specs: "الموديل: HP 450 G5<br>المعالج: i5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "HP 640 G4 I5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-640-g4-24.jpg", images: ["../assets/images/products/laptop-hp-640-g4-24.jpg"], specs: "الموديل: HP 640 G4<br>المعالج: I5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 640 G5 I5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-640-g5-25.jpg", images: ["../assets/images/products/laptop-hp-640-g5-25.jpg"], specs: "الموديل: HP 640 G5<br>المعالج: I5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 640 G8 I5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-640-g8-26.jpg", images: ["../assets/images/products/laptop-hp-640-g8-26.jpg"], specs: "الموديل: HP 640 G8<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 640 G8 I5 11TH 8G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-640-g8-27.jpg", images: ["../assets/images/products/laptop-hp-640-g8-27.jpg"], specs: "الموديل: HP 640 G8<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 640 G9 I5 12TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-640-g9-28.jpg", images: ["../assets/images/products/laptop-hp-640-g9-28.jpg"], specs: "الموديل: HP 640 G9<br>المعالج: I5 - 12TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 645 G10 TOUCH R5 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-645-g10-touch-29.jpg", images: ["../assets/images/products/laptop-hp-645-g10-touch-29.jpg"], specs: "الموديل: HP 645 G10 TOUCH<br>المعالج: R5 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 645 G10 TOUCH R5 nan 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-645-g10-touch-30.jpg", images: ["../assets/images/products/laptop-hp-645-g10-touch-30.jpg"], specs: "الموديل: HP 645 G10 TOUCH<br>المعالج: R5 - nan<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 645 G11 TOUCH R5 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-645-g11-touch-31.jpg", images: ["../assets/images/products/laptop-hp-645-g11-touch-31.jpg"], specs: "الموديل: HP 645 G11 TOUCH<br>المعالج: R5 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 650 G8 i5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-650-g8-32.jpg", images: ["../assets/images/products/laptop-hp-650-g8-32.jpg"], specs: "الموديل: HP 650 G8<br>المعالج: i5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "HP 650 G9 I5 12TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-650-g9-33.jpg", images: ["../assets/images/products/laptop-hp-650-g9-33.jpg"], specs: "الموديل: HP 650 G9<br>المعالج: I5 - 12TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 745 G6 R5 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-745-g6-34.jpg", images: ["../assets/images/products/laptop-hp-745-g6-34.jpg"], specs: "الموديل: HP 745 G6<br>المعالج: R5 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 745 G6 R7 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-745-g6-35.jpg", images: ["../assets/images/products/laptop-hp-745-g6-35.jpg"], specs: "الموديل: HP 745 G6<br>المعالج: R7 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G11 TOUCH ULTRA 5 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-840-g11-touch-36.jpg", images: ["../assets/images/products/laptop-hp-840-g11-touch-36.jpg"], specs: "الموديل: HP 840 G11 TOUCH<br>المعالج: ULTRA 5 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G3 I5 6TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-840-g3-37.jpg", images: ["../assets/images/products/laptop-hp-840-g3-37.jpg"], specs: "الموديل: HP 840 G3<br>المعالج: I5 - 6TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G4 I5 7TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-840-g4-38.jpg", images: ["../assets/images/products/laptop-hp-840-g4-38.jpg"], specs: "الموديل: HP 840 G4<br>المعالج: I5 - 7TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G5 i5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-840-g5-39.jpg", images: ["../assets/images/products/laptop-hp-840-g5-39.jpg"], specs: "الموديل: HP 840 G5<br>المعالج: i5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "HP 840 G7 I7 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-840-g7-40.jpg", images: ["../assets/images/products/laptop-hp-840-g7-40.jpg"], specs: "الموديل: HP 840 G7<br>المعالج: I7 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G11 R7 nan 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g11-41.jpg", images: ["../assets/images/products/laptop-hp-845-g11-41.jpg"], specs: "الموديل: HP 845 G11<br>المعالج: R7 - nan<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G7 R7 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g7-42.jpg", images: ["../assets/images/products/laptop-hp-845-g7-42.jpg"], specs: "الموديل: HP 845 G7<br>المعالج: R7 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G7 R5 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g7-43.jpg", images: ["../assets/images/products/laptop-hp-845-g7-43.jpg"], specs: "الموديل: HP 845 G7<br>المعالج: R5 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G7 TOUCH R5 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g7-touch-44.jpg", images: ["../assets/images/products/laptop-hp-845-g7-touch-44.jpg"], specs: "الموديل: HP 845 G7 TOUCH<br>المعالج: R5 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G8 R5 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g8-45.jpg", images: ["../assets/images/products/laptop-hp-845-g8-45.jpg"], specs: "الموديل: HP 845 G8<br>المعالج: R5 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G9 R7 6850 nan 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g9-46.jpg", images: ["../assets/images/products/laptop-hp-845-g9-46.jpg"], specs: "الموديل: HP 845 G9<br>المعالج: R7 6850 - nan<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G9 R7 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g9-47.jpg", images: ["../assets/images/products/laptop-hp-845-g9-47.jpg"], specs: "الموديل: HP 845 G9<br>المعالج: R7 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 845 G9 TOUCH R5 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-845-g9-touch-48.jpg", images: ["../assets/images/products/laptop-hp-845-g9-touch-48.jpg"], specs: "الموديل: HP 845 G9 TOUCH<br>المعالج: R5 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G5  TOUCH I5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g5--touch-49.jpg", images: ["../assets/images/products/laptop-hp-850-g5--touch-49.jpg"], specs: "الموديل: HP 850 G5  TOUCH<br>المعالج: I5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G7 I5 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g7-50.jpg", images: ["../assets/images/products/laptop-hp-850-g7-50.jpg"], specs: "الموديل: HP 850 G7<br>المعالج: I5 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G7 I7 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g7-51.jpg", images: ["../assets/images/products/laptop-hp-850-g7-51.jpg"], specs: "الموديل: HP 850 G7<br>المعالج: I7 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G7  TOUCH I5 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g7--touch-52.jpg", images: ["../assets/images/products/laptop-hp-850-g7--touch-52.jpg"], specs: "الموديل: HP 850 G7  TOUCH<br>المعالج: I5 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G8 I5 11TH 8G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g8-53.jpg", images: ["../assets/images/products/laptop-hp-850-g8-53.jpg"], specs: "الموديل: HP 850 G8<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G8 I7 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g8-54.jpg", images: ["../assets/images/products/laptop-hp-850-g8-54.jpg"], specs: "الموديل: HP 850 G8<br>المعالج: I7 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP 850 G8 TOUCH I5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-850-g8-touch-55.jpg", images: ["../assets/images/products/laptop-hp-850-g8-touch-55.jpg"], specs: "الموديل: HP 850 G8 TOUCH<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP MT 44 R3 nan 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-mt-44-56.jpg", images: ["../assets/images/products/laptop-hp-mt-44-56.jpg"], specs: "الموديل: HP MT 44<br>المعالج: R3 - nan<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "HP ZBOOK 15 STUDIO G5 XEON - 32G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-zbook-15-studio-g5-57.jpg", images: ["../assets/images/products/laptop-hp-zbook-15-studio-g5-57.jpg"], specs: "الموديل: HP ZBOOK 15 STUDIO G5<br>المعالج: XEON - -<br>الرام: 32GB<br>الهارد: 512<br>الجرافيك: N.V 4GB<br>الحالة: قريباً (SOON)" },
-            { name: "HP ZBOOK 15 STUDIO G7 i7 10TH 32G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-zbook-15-studio-g7-58.jpg", images: ["../assets/images/products/laptop-hp-zbook-15-studio-g7-58.jpg"], specs: "الموديل: HP ZBOOK 15 STUDIO G7<br>المعالج: i7 - 10TH<br>الرام: 32GB<br>الهارد: 512<br>الجرافيك: N.V 4GB<br>الحالة: قريباً (SOON)" },
-            { name: "HP ZBOOK 17 G5 i7 8TH 32G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-zbook-17-g5-59.jpg", images: ["../assets/images/products/laptop-hp-zbook-17-g5-59.jpg"], specs: "الموديل: HP ZBOOK 17 G5<br>المعالج: i7 - 8TH<br>الرام: 32GB<br>الهارد: 512<br>الجرافيك: N.V 6GB<br>الحالة: قريباً (SOON)" },
-            { name: "HP ZBOOK FURY 15 G7 XEON - 32G 1TB", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-hp-zbook-fury-15-g7-60.jpg", images: ["../assets/images/products/laptop-hp-zbook-fury-15-g7-60.jpg"], specs: "الموديل: HP ZBOOK FURY 15 G7<br>المعالج: XEON - -<br>الرام: 32GB<br>الهارد: 1TB<br>الجرافيك: N.V 4GB T2000<br>الحالة: قريباً (SOON)" },
-            { name: "LENOVO T480 i7 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-lenovo-t480-61.jpg", images: ["../assets/images/products/laptop-lenovo-t480-61.jpg"], specs: "الموديل: LENOVO T480<br>المعالج: i7 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "LENOVO T490 i5 8TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-lenovo-t490-62.jpg", images: ["../assets/images/products/laptop-lenovo-t490-62.jpg"], specs: "الموديل: LENOVO T490<br>المعالج: i5 - 8TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "LG 15ZB970 GB70 ML I7 6TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-lg-15zb970-gb70-ml-63.jpg", images: ["../assets/images/products/laptop-lg-15zb970-gb70-ml-63.jpg"], specs: "الموديل: LG 15ZB970 GB70 ML<br>المعالج: I7 - 6TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "mac 1708 i5 2017 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-mac-1708-64.jpg", images: ["../assets/images/products/laptop-mac-1708-64.jpg"], specs: "الموديل: mac 1708<br>المعالج: i5 - 2017<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "mac 1708 i7 2017 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-mac-1708-65.jpg", images: ["../assets/images/products/laptop-mac-1708-65.jpg"], specs: "الموديل: mac 1708<br>المعالج: i7 - 2017<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "MICRO SOFT 1769 I7 8TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-micro-soft-1769-66.jpg", images: ["../assets/images/products/laptop-micro-soft-1769-66.jpg"], specs: "الموديل: MICRO SOFT 1769<br>المعالج: I7 - 8TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "MICRO SOFT 1769 I7 7TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-micro-soft-1769-67.jpg", images: ["../assets/images/products/laptop-micro-soft-1769-67.jpg"], specs: "الموديل: MICRO SOFT 1769<br>المعالج: I7 - 7TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "MICRO SOFT 1872 I7 10TH 32G 1TB", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-micro-soft-1872-68.jpg", images: ["../assets/images/products/laptop-micro-soft-1872-68.jpg"], specs: "الموديل: MICRO SOFT 1872<br>المعالج: I7 - 10TH<br>الرام: 32GB<br>الهارد: 1TB<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "MICRO SOFT 1873 R5 nan 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-micro-soft-1873-69.jpg", images: ["../assets/images/products/laptop-micro-soft-1873-69.jpg"], specs: "الموديل: MICRO SOFT 1873<br>المعالج: R5 - nan<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: 2 GB<br>الحالة: قريباً (SOON)" },
-            { name: "MICRO SOFT 1979 I7 12TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-micro-soft-1979-70.jpg", images: ["../assets/images/products/laptop-micro-soft-1979-70.jpg"], specs: "الموديل: MICRO SOFT 1979<br>المعالج: I7 - 12TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK  STUDIO G3 I7 6TH 16G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook--studio-g3-71.jpg", images: ["../assets/images/products/laptop-zbook--studio-g3-71.jpg"], specs: "الموديل: ZBOOK  STUDIO G3<br>المعالج: I7 - 6TH<br>الرام: 16GB<br>الهارد: 512<br>الجرافيك: NV4GB<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK 14 U G4 I7 7TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-14-u-g4-72.jpg", images: ["../assets/images/products/laptop-zbook-14-u-g4-72.jpg"], specs: "الموديل: ZBOOK 14 U G4<br>المعالج: I7 - 7TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: AMD 2GB<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK 17 G7 I7 10TH 62G 512", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-17-g7-73.jpg", images: ["../assets/images/products/laptop-zbook-17-g7-73.jpg"], specs: "الموديل: ZBOOK 17 G7<br>المعالج: I7 - 10TH<br>الرام: 62GB<br>الهارد: 512<br>الجرافيك: RTX 3000<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIER FLY 14 G7 I5 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fier-fly-14-g7-74.jpg", images: ["../assets/images/products/laptop-zbook-fier-fly-14-g7-74.jpg"], specs: "الموديل: ZBOOK FIER FLY 14 G7<br>المعالج: I5 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: INTEL<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIRE FLY 14 G7 TOUCH I7 10TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-75.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-75.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G7  TOUCH<br>المعالج: I7 - 10TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIRE FLY 14 G7 TOUCH I7 10TH 32G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-76.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-76.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G7  TOUCH<br>المعالج: I7 - 10TH<br>الرام: 32GB<br>الهارد: 256<br>الجرافيك: NV4GB<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIRE FLY 14 G7 TOUCH I7 10TH 16G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-77.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g7-touch-77.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G7  TOUCH<br>المعالج: I7 - 10TH<br>الرام: 16GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIRE FLY 14 G8 I7 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g8-78.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g8-78.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G8<br>المعالج: I7 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "ZBOOK FIRE FLY 14 G8 I5 11TH 8G 256", price: 0, oldPrice: null, rating: 5, reviewsCount: 10, category: "laptops", inStock: false, isUsed: true, img: "../assets/images/products/laptop-zbook-fire-fly-14-g8-79.jpg", images: ["../assets/images/products/laptop-zbook-fire-fly-14-g8-79.jpg"], specs: "الموديل: ZBOOK FIRE FLY 14 G8<br>المعالج: I5 - 11TH<br>الرام: 8GB<br>الهارد: 256<br>الجرافيك: Intel<br>الحالة: قريباً (SOON)" },
-            { name: "Seagate 7200RPM HDD", price: 750, oldPrice: null, rating: 5, reviewsCount: 10, category: "workstations", inStock: true, isUsed: true, img: "../assets/images/products/hdd-seagate-7200.jpg", images: ["../assets/images/products/hdd-seagate-7200.jpg"], specs: "Type: Seagate 7200 RPM HDD<br>Condition: Used (Excellent)<br>Warranty: 1 Month<br>Bonus: Pre-loaded Games<br>Health & Performance: 100%" },
-            { name: "DisplayPort Cable", price: 150, oldPrice: null, rating: 5, reviewsCount: 15, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-displayport.jpg", images: ["../assets/images/products/cable-displayport.jpg"], specs: "Type: High-Quality DisplayPort<br>Usage: High Refresh Rate connection<br>Condition: New" },
-            { name: "HDMI Cable", price: 100, oldPrice: null, rating: 4.5, reviewsCount: 20, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-hdmi.jpg", images: ["../assets/images/products/cable-hdmi.jpg"], specs: "Type: High-Speed HDMI<br>Support: High-Resolution Audio & Video<br>Condition: New" },
-            { name: "VGA Cable", price: 100, oldPrice: null, rating: 4, reviewsCount: 12, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-vga.jpg", images: ["../assets/images/products/cable-vga.jpg"], specs: "Type: Standard VGA for Monitors & PCs<br>Condition: New" },
-            { name: "Original Power Cable", price: 1150, oldPrice: null, rating: 5, reviewsCount: 8, category: "workstations", inStock: true, isUsed: false, img: "../assets/images/products/cable-power-original.jpg", images: ["../assets/images/products/cable-power-original.jpg"], specs: "Type: Heavy-Duty Original Power Cable<br>Condition: New" },
-            //hard draive
-            { name: "Western Digital (WD) Black 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-1tb.jpg", images: ["../assets/images/products/hdd-wd-black-1tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-1tb.jpg", images: ["../assets/images/products/hdd-wd-blue-1tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-1tb.jpg", images: ["../assets/images/products/hdd-wd-red-1tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 500GB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-500gb.jpg", images: ["../assets/images/products/hdd-wd-blue-500gb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 500GB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 500GB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-500gb.jpg", images: ["../assets/images/products/hdd-wd-black-500gb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 500GB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-2tb.jpg", images: ["../assets/images/products/hdd-wd-blue-2tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-2tb.jpg", images: ["../assets/images/products/hdd-wd-black-2tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-2tb.jpg", images: ["../assets/images/products/hdd-wd-red-2tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 3TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-3tb.jpg", images: ["../assets/images/products/hdd-wd-blue-3tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 3TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 3TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-3tb.jpg", images: ["../assets/images/products/hdd-wd-red-3tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 3TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 3TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-3tb.jpg", images: ["../assets/images/products/hdd-wd-black-3tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 3TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-4tb.jpg", images: ["../assets/images/products/hdd-wd-blue-4tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-4tb.jpg", images: ["../assets/images/products/hdd-wd-black-4tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-4tb.jpg", images: ["../assets/images/products/hdd-wd-red-4tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Blue 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-blue-6tb.jpg", images: ["../assets/images/products/hdd-wd-blue-6tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Blue<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-6tb.jpg", images: ["../assets/images/products/hdd-wd-black-6tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-6tb.jpg", images: ["../assets/images/products/hdd-wd-red-6tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Black 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-black-8tb.jpg", images: ["../assets/images/products/hdd-wd-black-8tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Black<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Red 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-red-8tb.jpg", images: ["../assets/images/products/hdd-wd-red-8tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Red<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Gold 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-gold-8tb.jpg", images: ["../assets/images/products/hdd-wd-gold-8tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Gold<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Western Digital (WD) Gold 10TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-wd-gold-10tb.jpg", images: ["../assets/images/products/hdd-wd-gold-10tb.jpg"], specs: "Brand: Western Digital<br>Series: WD Gold<br>Capacity: 10TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 500GB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-500gb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-500gb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 500GB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-1tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-1tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate FireCuda 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-firecuda-1tb.jpg", images: ["../assets/images/products/hdd-seagate-firecuda-1tb.jpg"], specs: "Brand: Seagate<br>Series: FireCuda<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 1TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-1tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-1tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 1TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-2tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-2tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-2tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-2tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate SkyHawk 2TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-skyhawk-2tb.jpg", images: ["../assets/images/products/hdd-seagate-skyhawk-2tb.jpg"], specs: "Brand: Seagate<br>Series: SkyHawk<br>Capacity: 2TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 3TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-3tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-3tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 3TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 3TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-3tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-3tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 3TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-4tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-4tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-4tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-4tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 4TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-4tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-4tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 4TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-6tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-6tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-6tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-6tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 6TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-6tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-6tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 6TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Barracuda 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-barracuda-8tb.jpg", images: ["../assets/images/products/hdd-seagate-barracuda-8tb.jpg"], specs: "Brand: Seagate<br>Series: Barracuda<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-8tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-8tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 8TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-8tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-8tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 8TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 10TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-10tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-10tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 10TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 10TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-10tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-10tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 10TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate SkyHawk 10TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-skyhawk-10tb.jpg", images: ["../assets/images/products/hdd-seagate-skyhawk-10tb.jpg"], specs: "Brand: Seagate<br>Series: SkyHawk<br>Capacity: 10TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 12TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-12tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-12tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 12TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 12TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-12tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-12tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 12TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 14TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-14tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-14tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 14TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 14TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-14tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-14tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 14TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 16TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-16tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-16tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 16TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 16TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-16tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-16tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 16TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 18TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-18tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-18tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 18TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate IronWolf 18TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-ironwolf-18tb.jpg", images: ["../assets/images/products/hdd-seagate-ironwolf-18tb.jpg"], specs: "Brand: Seagate<br>Series: IronWolf<br>Capacity: 18TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" },
-            { name: "Seagate Exos 20TB HDD", price: 0, oldPrice: null, rating: 5, reviewsCount: 0, category: "workstations", inStock: false, isUsed: false, img: "../assets/images/products/hdd-seagate-exos-20tb.jpg", images: ["../assets/images/products/hdd-seagate-exos-20tb.jpg"], specs: "Brand: Seagate<br>Series: Exos<br>Capacity: 20TB<br>Type: Internal Hard Drive<br>Health & Performance: 100%<br>Warranty: 1 Month<br>Bonus: Free Games" }
-
-        ];
+        /* ===== زر الثيم ===== */
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) { }
+        });
 
         const CATEGORY_LABELS = {
             keyboards: "Keyboards", mouses: "Mouses", headsets: "Headsets",
-            laptops: "Laptops", desktops: "Desktop PCs", accessories: "Accessories",
+            laptops: "Laptops", pcs: "PCs", desktops: "Desktop PCs", accessories: "Accessories",
             monitors: "Monitors", bundles: "PC Bundles", workstations: "Workstations"
         };
         function labelFor(category) { return CATEGORY_LABELS[category] || category; }
@@ -1619,7 +1377,7 @@
         `;
             }
 
-            // التقييم: يعرض بس لو rating موجودة فعليًا (مش بيانات وهمية)
+            // التقييم: يعرض بس لو rating موجودة فعليًا
             let ratingHtml = '';
             if (p.rating) {
                 const stars = '★'.repeat(Math.round(p.rating)) + '☆'.repeat(5 - Math.round(p.rating));
@@ -1714,7 +1472,7 @@
                 document.getElementById('addToCartMain').addEventListener('click', () => {
                     if (typeof addToCart !== 'function') {
                         console.warn('addToCart() مش معرّفة — لسه محتاجين محتوى cart.js عشان نربطها');
-                        showToast(`تم إضافة "<strong>${p.name}</strong>" إلى السلة بنجاح`);
+                        if (typeof showToast === 'function') showToast(`تم إضافة "<strong>${p.name}</strong>" إلى السلة بنجاح`);
                         return;
                     }
                     if (addToCart.length >= 3) addToCart(p.name, p.price, qty);
@@ -1746,6 +1504,11 @@
         }
 
         (function init() {
+            if (typeof productsDB === 'undefined') {
+                console.error('productsDB مش متحملة - اتأكد من ملف ../assets/js/products-data.js');
+                renderNotFound();
+                return;
+            }
             const params = new URLSearchParams(window.location.search);
             const name = params.get('name');
             if (!name) { renderNotFound(); return; }
