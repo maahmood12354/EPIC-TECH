@@ -9,7 +9,7 @@
     <meta name="description"
         content="تصفح جميع أقسام متجر EPIC TECH واكتشف أفضل تجميعات الكمبيوتر، كيبوردات الجيمنج، الشاشات، وأحدث قطع الهاردوير.">
     <meta name="keywords" content="أقسام المنتجات, تجميعات بي سي, كيبوردات ميكانيكال, هاردوير, ماوس جيمنج, EPIC TECH">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- أكواد السوشيال ميديا -->
     <meta property="og:title" content="أقسام المنتجات | EPIC TECH">
     <meta property="og:description" content="تصفح جميع أقسام الهاردوير وإكسسوارات الجيمنج المتاحة في متجرنا.">
@@ -224,6 +224,102 @@
             .product-info p {
                 font-size: 13px;
             }
+        }
+
+        /* تنسيق قسم السوشيال ميديا في الفوتر */
+        .footer-social-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer-social-container h3 {
+            color: #fff;
+            /* لون الخط */
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .social-icons-neon {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            /* المسافة بين الأيقونات */
+        }
+
+        /* تنسيق الأيقونات الأساسي (الدوائر) */
+        .neon-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ألوان الخلفية لكل تطبيق (بدون تأثير نيون في الحالة العادية) */
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .whatsapp {
+            background-color: #25d366;
+        }
+
+        .tiktok {
+            background-color: #000000;
+        }
+
+        /* --- تأثير النيون المضيء عند الـ Hover --- */
+
+        /* تأثير الفيسبوك (أزرق) */
+        .facebook:hover {
+            box-shadow: 0 0 15px #3b5998,
+                0 0 30px #3b5998,
+                0 0 45px #3b5998;
+            transform: scale(1.1);
+            /* بيكبر سنة لما تقف عليه */
+        }
+
+        /* تأثير الواتساب (أخضر) */
+        .whatsapp:hover {
+            box-shadow: 0 0 15px #25d366,
+                0 0 30px #25d366,
+                0 0 45px #25d366;
+            transform: scale(1.1);
+        }
+
+        /* تأثير التيك توك (أبيض مع تأثير خفيف أزرق وأحمر) */
+        .tiktok:hover {
+            box-shadow: -2px -2px 15px #00f2fe,
+                2px 2px 15px #fe0979,
+                0 0 30px #ffffff;
+            transform: scale(1.1);
+        }
+
+
+        /* تنسيق حقوق الملكية */
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            /* خط خفيف شفاف يفصل الفوتر */
+            color: #a0a0a0;
+            /* لون رمادي فاتح مريح للعين */
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            width: 100%;
+        }
+
+        .footer-bottom p {
+            margin: 0;
         }
     </style>
 </head>
@@ -473,9 +569,36 @@
                     </li>
                 </ul>
             </div>
+            <div class="footer-social-container">
+                <h3>Subscribe us</h3>
+                <div class="social-icons-neon">
+                    <!-- رابط الفيسبوك -->
+                    <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank"
+                        class="neon-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <!-- رابط الواتساب -->
+                    <a href="https://wa.me/201017229055" target="_blank" class="neon-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                    <!-- رابط التيك توك -->
+                    <a href="https://www.tiktok.com/@epictechet" target="_blank" class="neon-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 EPIC TECH. All rights reserved.</p>
+        </div>
 
         </div>
     </footer>
+
+
     <!-- زر التواصل العائم -->
     <div class="fab-container">
         <input type="checkbox" id="menu-toggle" class="menu-toggle">
@@ -1049,6 +1172,39 @@
             }
         }
     </script>
+    <div class="fab-container">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="main-fab" aria-label="فتح قائمة التواصل">
+            <span class="fab-icon-plus"><img src="../assets/images/headset.png" alt=""></span>
+            <span class="fab-icon-close">×</span>
+        </label>
+        <div class="fab-sub-buttons">
+            <a href="https://www.facebook.com/profile.php?id=61569196895343" target="_blank" rel="noopener noreferrer"
+                class="fab-btn facebook-btn" title="فيسبوك">
+                <img src="../assets/images/Facebook.webp" alt="Facebook">
+            </a>
+            <a href="https://wa.me/201017229055" target="_blank" rel="noopener noreferrer" class="fab-btn whatsapp-btn"
+                title="واتساب">
+                <img src="../assets/images/WhatsApp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.tiktok.com/@epictechet" target="_blank" rel="noopener noreferrer"
+                class="fab-btn tiktok-btn" title="تيك توك">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff">
+                    <path
+                        d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z" />
+                </svg>
+            </a>
+            <button type="button" class="fab-btn scrolltop-btn" title="ارجع لفوق"
+                onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                    <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="toastContainer"></div>
 
 </body>
 
