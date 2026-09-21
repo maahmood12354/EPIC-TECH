@@ -295,6 +295,7 @@
             font-weight: bold;
             /* تدرج الـ 3 ألوان الفخم (أزرق - بنفسجي - زهري) */
             background: linear-gradient(to right, #38bdf8, #a855f7, #ec4899) !important;
+            background-clip: text !important;
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
             color: transparent !important;
@@ -843,158 +844,204 @@
         .footer-bottom p {
             margin: 0;
         }
+
+
         /* ===== زر الثيم ===== */
-.theme-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-}
-.theme-btn svg {
-    stroke: #ffffff;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .8));
-    transition: transform .4s ease;
-}
-.theme-btn:hover svg { transform: rotate(25deg) scale(1.1); }
-.theme-btn .icon-moon { display: none; }
-html[data-theme="light"] .theme-btn .icon-sun  { display: none; }
-html[data-theme="light"] .theme-btn .icon-moon { display: block; }
+        .theme-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
 
-/* ===== الوضع النهاري (أبيض هادي) ===== */
-html[data-theme="light"] {
-    --l-text: #1e293b;
-    --l-muted: #475569;
-    --l-accent: #0369a1;
-    --l-card: #f8fafc;
-    --l-border: rgba(15, 23, 42, .12);
-}
+        .theme-btn svg {
+            stroke: #ffffff;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, .8));
+            transition: transform .4s ease;
+        }
 
-html[data-theme="light"] body {
-    background: radial-gradient(circle at 50% 15%, #f3f5f8, #e9edf2 60%, #dde3ea) !important;
-    background-color: #e9edf2 !important;
-    background-attachment: fixed !important;
-    color: var(--l-text) !important;
-}
+        .theme-btn:hover svg {
+            transform: rotate(25deg) scale(1.1);
+        }
 
-/* النصوص */
-html[data-theme="light"] :is(h1, h2, h3, h4, h5, h6, p, li, label, small, strong,
-    .nav-link, .quick-cat-btn, .category-card h3, .product-info p, .product-info span,
-    .stat-text, .section-title, .main-section-title, .view-all-btn, .add-to-cart-btn,
-    .breadcrumb, .breadcrumb a, .breadcrumb span.current,
-    .product-hero-info h1, .section-label, .price-old, .rating-row .count,
-    .trust-badge .title, .trust-badge .sub, .tab-btn, .qty-btn, #qtyValue, .color-btn,
-    .specs-panel h3, .specs-list li, .related-section h2,
-    .not-found-box h2, .not-found-box p,
-    .site-footer a:not(.neon-icon)):not(.stock-badge):not(#cartBadge):not(.stock-pill):not(.save-badge):not(.category-pill) {
-    color: var(--l-text) !important;
-    text-shadow: none !important;
-}
-html[data-theme="light"] .nav-link.active,
-html[data-theme="light"] .breadcrumb a:hover { color: var(--l-accent) !important; }
-html[data-theme="light"] :is(.price-old, .rating-row .count, .trust-badge .sub,
-    .breadcrumb, .site-footer p) { color: var(--l-muted) !important; }
+        .theme-btn .icon-moon {
+            display: none;
+        }
 
-/* الهيدر */
-html[data-theme="light"] .main-header {
-    background: rgba(255, 255, 255, .7) !important;
-    border: 1px solid var(--l-border) !important;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(15, 23, 42, .08) !important;
-}
-html[data-theme="light"] .main-header svg,
-html[data-theme="light"] .theme-btn svg {
-    stroke: #0f172a !important;
-    filter: drop-shadow(0 0 3px rgba(3, 105, 161, .3)) !important;
-}
-html[data-theme="light"] .search-input {
-    background: rgba(15, 23, 42, .06) !important;
-    border-color: var(--l-border) !important;
-    color: var(--l-text) !important;
-}
+        html[data-theme="light"] .theme-btn .icon-sun {
+            display: none;
+        }
 
-/* الكروت (عامة + صفحة المنتج) */
-html[data-theme="light"] :is(.product-card, .category-card, .feature-card, .stat-card,
-    .main-category-banner, .quick-cat-btn, .product-hero-gallery, .product-hero-info,
-    .price-box, .trust-badge, .tabs-row, .specs-panel, .not-found-box) {
-    background: var(--l-card) !important;
-    border: 1px solid var(--l-border) !important;
-    box-shadow: 0 4px 18px rgba(15, 23, 42, .08) !important;
-}
-html[data-theme="light"] .product-hero-img {
-    background: #ffffff !important;
-}
-html[data-theme="light"] .product-hero-img img {
-    filter: drop-shadow(0 4px 12px rgba(15, 23, 42, .18));
-}
-html[data-theme="light"] .specs-list li:nth-child(even) { background: rgba(15, 23, 42, .03); }
-html[data-theme="light"] .specs-list li,
-html[data-theme="light"] .specs-panel h3 { border-bottom-color: var(--l-border) !important; }
+        html[data-theme="light"] .theme-btn .icon-moon {
+            display: block;
+        }
 
-/* الصور المصغرة */
-html[data-theme="light"] .thumb-btn {
-    background: #ffffff;
-    border-color: var(--l-border);
-}
-html[data-theme="light"] .thumb-btn.active::after { background: #ffffff; }
+        /* ===== الوضع النهاري (أبيض هادي) ===== */
+        html[data-theme="light"] {
+            --l-text: #1e293b;
+            --l-muted: #475569;
+            --l-accent: #0369a1;
+            --l-card: #f8fafc;
+            --l-border: rgba(15, 23, 42, .12);
+        }
 
-/* التابات */
-html[data-theme="light"] .tab-btn.active {
-    background: rgba(3, 105, 161, .12);
-    color: var(--l-accent) !important;
-}
+        html[data-theme="light"] body {
+            background: radial-gradient(circle at 50% 15%, #f3f5f8, #e9edf2 60%, #dde3ea) !important;
+            background-color: #e9edf2 !important;
+            background-attachment: fixed !important;
+            color: var(--l-text) !important;
+        }
 
-/* الأزرار */
-html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn, .color-btn) {
-    background: rgba(3, 105, 161, .08) !important;
-    border: 1px solid rgba(3, 105, 161, .45) !important;
-}
-html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn):hover {
-    background: rgba(3, 105, 161, .18) !important;
-}
-html[data-theme="light"] .color-btn.active {
-    background: var(--l-accent) !important;
-    border-color: var(--l-accent) !important;
-    color: #fff !important;
-}
-html[data-theme="light"] .add-to-cart-main-btn {
-    background: #ffffff !important;
-    color: var(--l-text) !important;
-    border: 1px solid #a23b7a !important;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, .1);
-}
-html[data-theme="light"] .add-to-cart-main-btn:hover {
-    background: #a23b7a !important;
-    color: #ffffff !important;
-}
+        /* كل النصوص تبقى غامقة (الاستثناءات جوا :where عشان ماتزودش الأولوية) */
+        html[data-theme="light"] :is(h1, h2, h3, h4, h5, h6, p, li, label, small, strong,
+            .nav-link, .product-info p, .product-info span, .section-title, .view-all-btn,
+            .add-to-cart-btn, .breadcrumb, .breadcrumb a, .breadcrumb span.current,
+            .section-label, .price-old, .rating-row .count, .trust-badge .title,
+            .trust-badge .sub, .tab-btn, .qty-btn, #qtyValue, .color-btn,
+            .not-found-box p):where(:not(.stock-badge, #cartBadge, .stock-pill, .save-badge, .category-pill)) {
+            color: var(--l-text) !important;
+            text-shadow: none !important;
+        }
 
-/* شارات الحالة */
-html[data-theme="light"] :is(.stock-badge.in-stock, .stock-pill.stock-in, .save-badge) {
-    color: #047857 !important;
-    background: rgba(16, 185, 129, .15) !important;
-    border: 1px solid rgba(16, 185, 129, .5) !important;
-}
-html[data-theme="light"] .stock-pill.stock-out,
-html[data-theme="light"] .out-of-stock-note {
-    color: #b91c1c !important;
-    background: rgba(239, 68, 68, .1) !important;
-    border: 1px solid rgba(239, 68, 68, .4) !important;
-}
+        html[data-theme="light"] .site-footer a:not(.neon-icon) {
+            color: var(--l-text) !important;
+        }
 
-/* الفوتر */
-html[data-theme="light"] .site-footer {
-    background: #dde3ea !important;
-    border-top: 1px solid var(--l-border) !important;
-}
-html[data-theme="light"] .footer-social-container h3 { color: var(--l-text) !important; }
-html[data-theme="light"] .footer-bottom {
-    color: var(--l-muted) !important;
-    border-top-color: var(--l-border) !important;
-}
+        html[data-theme="light"] .nav-link.active,
+        html[data-theme="light"] .breadcrumb a:hover {
+            color: var(--l-accent) !important;
+        }
+
+        html[data-theme="light"] :is(.price-old, .rating-row .count, .trust-badge .sub, .breadcrumb, .site-footer p) {
+            color: var(--l-muted) !important;
+        }
+
+        html[data-theme="light"] .rating-row {
+            color: #d97706;
+        }
+
+        /* الهيدر */
+        html[data-theme="light"] .main-header {
+            background: rgba(255, 255, 255, .7) !important;
+            border: 1px solid var(--l-border) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, .08) !important;
+        }
+
+        html[data-theme="light"] .main-header svg,
+        html[data-theme="light"] .theme-btn svg {
+            stroke: #0f172a !important;
+            filter: drop-shadow(0 0 3px rgba(3, 105, 161, .3)) !important;
+        }
+
+        html[data-theme="light"] .search-input {
+            background: rgba(15, 23, 42, .06) !important;
+            border-color: var(--l-border) !important;
+            color: var(--l-text) !important;
+        }
+
+        /* الكروت */
+        html[data-theme="light"] :is(.product-card, .product-hero-gallery, .product-hero-info,
+            .price-box, .trust-badge, .tabs-row, .specs-panel, .not-found-box) {
+            background: var(--l-card) !important;
+            border: 1px solid var(--l-border) !important;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, .08) !important;
+        }
+
+        html[data-theme="light"] .product-hero-img {
+            background: #ffffff !important;
+        }
+
+        html[data-theme="light"] .product-hero-img img {
+            filter: drop-shadow(0 4px 12px rgba(15, 23, 42, .18));
+        }
+
+        html[data-theme="light"] .specs-list li:nth-child(even) {
+            background: rgba(15, 23, 42, .03);
+        }
+
+        html[data-theme="light"] .specs-list li,
+        html[data-theme="light"] .specs-panel h3 {
+            border-bottom-color: var(--l-border) !important;
+        }
+
+        /* الصور المصغرة */
+        html[data-theme="light"] .thumb-btn {
+            background: #ffffff;
+            border-color: var(--l-border);
+        }
+
+        html[data-theme="light"] .thumb-btn.active::after {
+            background: #ffffff;
+        }
+
+        /* الأزرار */
+        html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn, .color-btn) {
+            background: rgba(3, 105, 161, .08) !important;
+            border: 1px solid rgba(3, 105, 161, .45) !important;
+        }
+
+        html[data-theme="light"] :is(.add-to-cart-btn, .view-all-btn, .qty-btn):hover {
+            background: rgba(3, 105, 161, .18) !important;
+        }
+
+        /* التابات واللون النشط (لازم يجوا بعد قاعدة النصوص) */
+        html[data-theme="light"] .tab-btn.active {
+            background: rgba(3, 105, 161, .12) !important;
+            color: var(--l-accent) !important;
+        }
+
+        html[data-theme="light"] .color-btn.active {
+            background: var(--l-accent) !important;
+            border-color: var(--l-accent) !important;
+            color: #ffffff !important;
+        }
+
+        html[data-theme="light"] .add-to-cart-main-btn {
+            background: #ffffff !important;
+            color: var(--l-text) !important;
+            border: 1px solid #a23b7a !important;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, .1);
+        }
+
+        html[data-theme="light"] .add-to-cart-main-btn:hover {
+            background: #a23b7a !important;
+            color: #ffffff !important;
+        }
+
+        /* شارات الحالة */
+        html[data-theme="light"] :is(.stock-badge.in-stock, .stock-pill.stock-in, .save-badge) {
+            color: #047857 !important;
+            background: rgba(16, 185, 129, .15) !important;
+            border: 1px solid rgba(16, 185, 129, .5) !important;
+        }
+
+        html[data-theme="light"] .stock-pill.stock-out,
+        html[data-theme="light"] .out-of-stock-note {
+            color: #b91c1c !important;
+            background: rgba(239, 68, 68, .1) !important;
+            border: 1px solid rgba(239, 68, 68, .4) !important;
+        }
+
+        /* الفوتر */
+        html[data-theme="light"] .site-footer {
+            background: #dde3ea !important;
+            border-top: 1px solid var(--l-border) !important;
+        }
+
+        html[data-theme="light"] .footer-social-container h3 {
+            color: var(--l-text) !important;
+        }
+
+        html[data-theme="light"] .footer-bottom {
+            color: var(--l-muted) !important;
+            border-top-color: var(--l-border) !important;
+        }
     </style>
 </head>
 
@@ -1025,18 +1072,15 @@ html[data-theme="light"] .footer-bottom {
                     </svg>
                 </button>
                 <!-- خانة البحث -->
-                <!-- خانة البحث بعد التعديل -->
                 <input type="text" id="searchInput" class="search-input" placeholder="Search..."
                     aria-label="ابحث عن منتج" onkeypress="handleHomeSearch(event)">
             </div>
-        </div> <!-- القفلة المظبوطة اهي -->
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        </div>
 
         <nav class="nav-links" aria-label="الأقسام الرئيسية">
             <a href="../index.html" class="nav-link">Home</a>
             <a href="category.html?cat=laptops" class="nav-link">Laptops</a>
-            <a href="category.html?cat=desktops" class="nav-link">PCs</a>
+            <a href="category.html?cat=pcs" class="nav-link">PCs</a>
             <a href="category.html?cat=accessories" class="nav-link">Accessories</a>
             <a href="category.html?cat=monitors" class="nav-link">Monitors</a>
             <a href="category.html?cat=bundles" class="nav-link">Bundles</a>
@@ -1050,7 +1094,6 @@ html[data-theme="light"] .footer-bottom {
             <!-- زر السلة بالعداد (شكل نيون فخم) -->
             <a href="cart.html" class="cart-btn"
                 style="position: relative; text-decoration: none; font-size: 22px; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
-                <!-- رسمة نيون سلة تسوق بيضاء ومضيئة -->
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round"
                     style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
@@ -1061,13 +1104,31 @@ html[data-theme="light"] .footer-bottom {
                 <span id="cartBadge"
                     style="position: absolute; top: -4px; right: -6px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
             </a>
-            
 
-
+            <!-- زر الثيم -->
+            <button id="themeToggle" class="theme-btn" type="button" aria-label="تغيير الثيم" title="نهاري / ليلي">
+                <!-- شمس (بتظهر في الوضع الليلي) -->
+                <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- قمر (بيظهر في الوضع النهاري) -->
+                <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
 
         </div>
     </header>
-
     <div class="hero-logo-container">
         <h1 class="neon-logo" style="font-size: 40px;">EPIC TECH</h1>
     </div>
@@ -1302,7 +1363,7 @@ html[data-theme="light"] .footer-bottom {
             { name: "Razer Viper V2 Pro", price: 1550, oldPrice: 2050, rating: 5, reviewsCount: 73, category: "mouses", inStock: false, img: "../assets/images/products/maous5.png", images: ["../assets/images/products/maous5.png", "../assets/images/products/maous5-2.png", "../assets/images/products/maous5-3.png", "../assets/images/products/maous5-4.png"], specs: "Focus Pro 30K Optical Sensor<br>Ultra-Lightweight 58g<br>HyperSpeed Wireless<br>Optical Switches Gen-3<br>Up to 80 Hours Battery" },
             { name: "ASUS ROG Chakram Wireless", price: 1950, oldPrice: 2450, rating: 3.5, reviewsCount: 17, category: "mouses", inStock: false, img: "../assets/images/products/maous6.png", images: ["../assets/images/products/maous6.png", "../assets/images/products/maous6-2.png", "../assets/images/products/maous6-3.png", "../assets/images/products/maous6-4.png"], specs: "16,000 DPI Optical Sensor<br>Programmable Joystick<br>Qi Wireless Charging<br>Tri-Mode Connection<br>Detachable Magnetic Covers" },
             { name: "ASUS ROG Keris", price: 1350, oldPrice: 1850, rating: 5, reviewsCount: 123, category: "mouses", inStock: false, img: "../assets/images/products/maous7.png", images: ["../assets/images/products/maous7.png", "../assets/images/products/maous7-2.png", "../assets/images/products/maous7-3.png", "../assets/images/products/maous7-4.png"], specs: "16,000 DPI ROG Sensor<br>Lightweight 62g Design<br>ROG Micro Switches (Push-Fit)<br>ROG Paracord Cable<br>PBT L/R Buttons" },
-            { name: "ASUS TUF M3", price: 550, oldPrice: 1050, rating: 5, reviewsCount: 37, category: "mouses", inStock: false, img: "../assets/images/products/maous18.png", images: ["../assets/images/products/maous18.png", "../assets/images/products/maous18-2.png", "../assets/images/products/maous18-3.png", "../assets/images/products/maous18-4.png"], specs: "7000 DPI Optical Sensor<br>Lightweight 84g<br>7 Programmable Buttons<br>TUF Coating for Durability<br>Aura Sync RGB" }, 
+            { name: "ASUS TUF M3", price: 550, oldPrice: 1050, rating: 5, reviewsCount: 37, category: "mouses", inStock: false, img: "../assets/images/products/maous18.png", images: ["../assets/images/products/maous18.png", "../assets/images/products/maous18-2.png", "../assets/images/products/maous18-3.png", "../assets/images/products/maous18-4.png"], specs: "7000 DPI Optical Sensor<br>Lightweight 84g<br>7 Programmable Buttons<br>TUF Coating for Durability<br>Aura Sync RGB" },
             { name: "ASUS TUF M3 Gen II", price: 600, oldPrice: 1100, rating: 5, reviewsCount: 26, category: "mouses", inStock: false, img: "../assets/images/products/maous9.png", images: ["../assets/images/products/maous9.png", "../assets/images/products/maous9-2.png", "../assets/images/products/maous9-3.png", "../assets/images/products/maous9-4.png"], specs: "8000 DPI Optical Sensor<br>Ultra-Lightweight 59g<br>IP56 Dust and Water Resistance<br>PTFE Feet<br>6 Programmable Buttons" },
             { name: "SteelSeries Aerox 5", price: 1200, oldPrice: 1700, rating: 5, reviewsCount: 81, category: "mouses", inStock: true, img: "../assets/images/products/maous10.png", images: ["../assets/images/products/maous10.png", "../assets/images/products/maous10-2.png", "../assets/images/products/maous10-3.png", "../assets/images/products/maous10-4.png"], specs: "TrueMove Air Sensor (18,000 DPI)<br>Ultra-Lightweight 66g<br>AquaBarrier (IP54)<br>9 Programmable Buttons<br>Golden Micro IP54 Switches" },
             { name: "SteelSeries Aerox 9", price: 1550, oldPrice: 2050, rating: 3.5, reviewsCount: 166, category: "mouses", inStock: true, img: "../assets/images/products/maous11.png", images: ["../assets/images/products/maous11.png", "../assets/images/products/maous11-2.png", "../assets/images/products/maous11-3.png", "../assets/images/products/maous11-4.png"], specs: "TrueMove Air Sensor (18,000 DPI)<br>Ultra-Lightweight 89g (MMO)<br>18 Programmable Buttons<br>Quantum 2.0 Wireless<br>AquaBarrier (IP54)" },
@@ -1339,7 +1400,7 @@ html[data-theme="light"] .footer-bottom {
             { name: "ASUS ROG Impact III Wireless", price: 1250, oldPrice: 1750, rating: 4.5, reviewsCount: 108, category: "mouses", inStock: false, img: "../assets/images/products/maous20.png", images: ["../assets/images/products/maous20.png", "../assets/images/products/maous20-2.png", "../assets/images/products/maous20-3.png", "../assets/images/products/maous20-4.png"], specs: "12,000 DPI Optical Sensor<br>2.4GHz Wireless Connectivity<br>Push-Fit Switch Sockets<br>ROG Paracord<br>100% PTFE Feet" },
             { name: "ASUS ROG Harpe Ace Aim Lab", price: 2000, oldPrice: 2500, rating: 4.5, reviewsCount: 22, category: "mouses", inStock: false, img: "../assets/images/products/maous35.png", images: ["../assets/images/products/maous35.png", "../assets/images/products/maous35-2.png", "../assets/images/products/maous35-3.png", "../assets/images/products/maous35-4.png"], specs: "36,000 DPI AimPoint Sensor<br>Ultra-Lightweight 54g<br>Aim Lab Settings Optimizer<br>ROG SpeedNova Wireless<br>Bio-based Nylon Design" },
             { name: "ASUS TUF M4 Wireless", price: 1250, oldPrice: 1750, rating: 4, reviewsCount: 239, category: "mouses", inStock: false, img: "../assets/images/products/maous22.png", images: ["../assets/images/products/maous22.png", "../assets/images/products/maous22-2.png", "../assets/images/products/maous22-3.png", "../assets/images/products/maous22-4.png"], specs: "12,000 DPI Optical Sensor<br>Dual Wireless (2.4GHz / BT)<br>PBT Top Cover<br>ASUS Antibacterial Guard<br>Uses AAA or AA Batteries" },
-            { name: "Razer Viper Ultimate", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 230, category: "mouses", inStock: false, img: "../assets/images/products/maous3.png", images: ["../assets/images/products/maous3.png", "../assets/images/products/maous3-2.png", "../assets/images/products/maous3-3.png", "../assets/images/products/maous3-4.png"], specs: "Focus+ 20K DPI Sensor<br>HyperSpeed Wireless<br>Lightweight 74g<br>Optical Mouse Switches<br>Includes Charging Dock" },
+            { name: "Razer Basilisk Ultimate", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 230, category: "mouses", inStock: false, img: "../assets/images/products/maous3.png", images: ["../assets/images/products/maous3.png", "../assets/images/products/maous3-2.png", "../assets/images/products/maous3-3.png", "../assets/images/products/maous3-4.png"], specs: "Focus+ 20K DPI Sensor<br>HyperSpeed Wireless<br>Lightweight 74g<br>Optical Mouse Switches<br>Includes Charging Dock" },
             { name: "Razer Viper 8k hz", price: 1250, oldPrice: 1750, rating: 5, reviewsCount: 86, category: "mouses", inStock: false, img: "../assets/images/products/maous23.png", images: ["../assets/images/products/maous23.png", "../assets/images/products/maous23-2.png", "../assets/images/products/maous23-3.png", "../assets/images/products/maous23-4.png"], specs: "Focus+ 20K DPI Sensor<br>8000Hz HyperPolling<br>Optical Mouse Switches Gen-2<br>Ambidextrous 71g Design<br>Advanced On-board Memory" },
 
             // --- السماعات (Headsets) ---
@@ -1935,6 +1996,12 @@ html[data-theme="light"] .footer-bottom {
             const name = btn.dataset.name;
             const price = Number(btn.dataset.price);
             if (typeof addToCart === 'function') addToCart(name, price);
+        });
+        /* ===== زر الثيم ===== */
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) { }
         });
 
     </script>

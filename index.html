@@ -917,46 +917,118 @@
         /* ===== القسم المتحرك =====
            لإخفاء منتج مش متاح: خلي inStock: false
            لإضافة منتج جديد: ضيف سطر جديد في products */
+        /* ===== القسم المتحرك (6 أقسام بمنتجاتهم بشكل عشوائي وتلقائي) ===== */
         const SHOWCASE = [
             {
                 cat: 'keyboards', title: 'Keyboards', banner: 'assets/images/keyboard-main.jpg',
                 products: [
+                    { name: "HYTE Keeb TKL", price: 1999, inStock: true, img: 'keyboard8-1.jpg' },
                     { name: 'Razer Huntsman V2 Analog', price: 2750, img: 'keyboard4-1.jpg', inStock: true },
                     { name: 'Razer BlackWidow V4 Pro', price: 4500, img: 'keyboard1-1.jpg', inStock: true },
-                    { name: 'razer blackwidow v4 75', price: 3750, img: 'keyboard3-1.jpg', inStock: true },
+                    { name: 'Razer BlackWidow V4 75', price: 3750, img: 'keyboard3-1.jpg', inStock: true },
                     { name: 'ASUS ROG Claymore II Wireless', price: 2950, img: 'keyboard5-1.jpg', inStock: true },
                     { name: 'ASUS ROG Falchion Wireless', price: 3500, img: 'keyboard10-1.jpg', inStock: true },
-                    { name: 'Logitech G915', price: 3500, img: 'keyboard6-1.jpg', inStock: true },
-                    { name: 'Logitech G815', price: 2750, img: 'keyboard7-1.jpg', inStock: true },
-                    { name: 'HYTE Keeb TKL', price: 1999, img: 'keyboard8-1.jpg', inStock: true }
+                    { name: 'ASUS ROG Falchion Ace', price: 1750, img: 'keyboard9-1.jpg', inStock: true },
+                    { name: 'Logitech G915', price: 3500, img: 'keyboard6-1.jpg', inStock: true }
                 ]
             },
             {
                 cat: 'mouses', title: 'Mouses', banner: 'assets/images/mouse-main.jpg',
                 products: [
-                    { name: 'ASUS ROG Chakram Wireless', price: 1950, img: 'maous6.png', inStock: true },
-                    { name: 'ASUS ROG Keris', price: 1350, img: 'maous7.png', inStock: true },
-                    { name: 'ASUS TUF M3', price: 550, img: 'maous18.png', inStock: true },
                     { name: 'SteelSeries Aerox 5', price: 1200, img: 'maous10.png', inStock: true },
                     { name: 'SteelSeries Aerox 9', price: 1550, img: 'maous11.png', inStock: true },
-                    { name: 'ASUS TUF M4 Air', price: 999, img: 'maous14.png', inStock: true },
-                    { name: 'ASUS ROG Impact III', price: 950, img: 'maous16.png', inStock: true },
-                    { name: 'ASUS ROG Gladius III', price: 999, img: 'maous17.png', inStock: true }
+                    { name: 'ASUS ROG Chakram Wireless', price: 1950, img: 'maous6.png', inStock: false },
+                    { name: 'ASUS ROG Keris', price: 1350, img: 'maous7.png', inStock: false },
+                    { name: 'ASUS TUF M3', price: 550, img: 'maous18.png', inStock: false },
+                    { name: 'ASUS TUF M3 Gen II', price: 600, img: 'maous9.png', inStock: false },
+                    { name: 'Logitech G502 Hero', price: 999, img: 'maous12.png', inStock: false },
+                    { name: 'Corsair M75 Air Wireless', price: 1450, img: 'maous13.png', inStock: false }
                 ]
             },
             {
-                cat: 'headsets', title: 'Headsets', banner: 'assets/images/headset-main.jpg',
+                cat: 'laptops', title: 'Laptops', banner: 'assets/images/laptop.png',
                 products: [
-                    { name: 'Logitech G733', price: 4500, img: 'headset1.png', inStock: true },
-                    { name: 'Astro A50 Gen 3', price: 4500, img: 'headset2.png', inStock: true },
-                    { name: 'Razer Kraken X Lite', price: 999, img: 'headset4.png', inStock: true }
+                    { name: '1867 I7 10TH 16G 512', price: 0, img: 'laptop-1867-1.jpg', inStock: false },
+                    { name: '1867 I7 10TH 16G 1TB', price: 0, img: 'laptop-1867-2.jpg', inStock: false },
+                    { name: 'DELL 3520 I7 7TH HQ 16G 256', price: 0, img: 'laptop-dell-3520-5.jpg', inStock: false },
+                    { name: 'DELL 5491 I5 8TH 8G 256', price: 0, img: 'laptop-dell-5491-6.jpg', inStock: false },
+                    { name: 'DELL 5510 I7 10TH 16G 256', price: 0, img: 'laptop-dell-5510-8.jpg', inStock: false },
+                    { name: 'DELL 7390 2*1 I5 8TH 8G 256', price: 0, img: 'laptop-dell-7390-21-10.jpg', inStock: false },
+                    { name: 'HP 840 G7 I5 10TH 8G 256', price: 0, img: 'laptop-hp--840-g7-21.jpg', inStock: false },
+                    { name: 'HP 640 G8 I5 11TH 8G 256', price: 0, img: 'laptop-hp-640-g8-26.jpg', inStock: false }
+                ]
+            },
+            {
+                cat: 'pcs', title: 'PCs', banner: 'assets/images/desktop.png',
+                products: [
+                    { name: 'Thermaltake Toughpower GT 750W', price: 3900, img: 'psu-thermaltake-toughpower-750w.jpg', inStock: true },
+                    { name: 'Thermaltake Toughpower GT 850W', price: 3500, img: 'psu-thermaltake-toughpower-850w.jpg', inStock: true },
+                    { name: 'MSI MAG A650BNL 650W (80 PLUS Bronze)', price: 3000, img: 'psu-msi-mag-a650bnl-650w.jpg', inStock: true },
+                    { name: 'ASUS RTX 2070 SUPER', price: 11500, img: 'vga-asus-rtx-2070-super.jpg', inStock: true },
+                    { name: 'RTX 3060 12G-USED-3', price: 14800, img: 'vga-rtx-3060-12g.jpg', inStock: true },
+                    { name: 'RAVAL Crystel 4XFAN ARGB', price: 2300, img: 'case-raval-crystel.jpg', inStock: true },
+                    { name: 'Cooler Thermaltake ALL-IN-ONE', price: 3600, img: 'cooler-thermaltake-aio.jpg', inStock: true },
+                    { name: 'Digital CPU Cooler', price: 1100, img: 'cooler-digital.jpg', inStock: true }
+                ]
+            },
+            {
+                cat: 'monitors', title: 'Monitors', banner: 'assets/images/monitor.png',
+                products: [
+                    { name: 'HP V24VG58', price: 2500, img: 'monitor-hp-v24vg58.jpg', inStock: true },
+                    { name: 'Dell P2419H8', price: 2500, img: 'monitor-dell-p2419h8.jpg', inStock: true },
+                    { name: 'Dell P2719H', price: 3500, img: 'monitor-dell-p2719h.jpg', inStock: true },
+                    { name: 'AOC C27G4Z', price: 8250, img: 'monitor-aoc-c27g4z.avif', inStock: true },
+                    { name: 'AOC Q27G40ZE', price: 9000, img: 'monitor-aoc-q27g40ze.png', inStock: true },
+                    { name: 'Lenovo R27qe Gen2', price: 8499, img: 'monitor-lenovo-r27qe.avif', inStock: true },
+                    { name: 'MSI 272F X24', price: 7300, img: 'monitor-msi-272f.png', inStock: true },
+                    { name: 'MSI 274QPF X32', price: 13500, img: 'monitor-msi-274qpf-x32.png', inStock: true }
+                ]
+            },
+            {
+                cat: 'workstations', title: 'Workstations', banner: 'assets/images/workstation.png',
+                products: [
+                    { name: 'HP 800 G1 Tower (i5 4th)', price: 3500, img: 'hp-800-g1-tower-i5.jpg', inStock: true },
+                    { name: 'HP 800 G1 Tower (i7 4th)', price: 4500, img: 'hp-800-g1-tower-i7.jpg', inStock: true },
+                    { name: 'HP Z230 Tower Workstation (i7 4th)', price: 4500, img: 'hp-z230-tower.jpg', inStock: true },
+                    { name: 'HP 800 G2 Desktop (i5 6th)', price: 4500, img: 'hp-800-g2-desk.jpg', inStock: true },
+                    { name: 'HP Z240 Desktop (i5 7th)', price: 4300, img: 'hp-z240-desk.jpg', inStock: true },
+                    { name: 'HP Z240 Tower (i5 7th)', price: 7700, img: 'hp-z240-tower-i5.jpg', inStock: true },
+                    { name: 'HP Z440 Tower Workstation', price: 6250, img: 'hp-z440-tower.jpg', inStock: true },
+                    { name: 'HP Z640 Tower Workstation', price: 12000, img: 'hp-z640-tower.jpg', inStock: true }
+                ]
+            },
+            {
+                cat: 'bundles', title: 'PC Bundles', banner: 'assets/images/components.png',
+                products: [
+                    { name: 'CORSAIR VENGEANCE LPX 8GB 4266MHz CL19', price: 2500, img: 'ram-corsair-4266.jpg', inStock: true },
+                    { name: 'KINGSTON FURY RENEGADE 16GB (2x8) 4000MHz', price: 5000, img: 'ram-fury-4000.jpg', inStock: true },
+                    { name: 'CORSAIR VENGEANCE LPX 8GB 3600MHz CL18', price: 2250, img: 'ram-corsair-3600.jpg', inStock: true },
+                    { name: 'Gigabyte B760M Gaming X', price: 6500, img: 'mb-gigabyte-b760m-gaming-x.jpg', inStock: true },
+                    { name: 'ASUS PRIME B450M-K', price: 3500, img: 'mb-asus-prime-b450m-k.jpg', inStock: true },
+                    { name: 'GIGABYTE B660M D', price: 5900, img: 'mb-gigabyte-b660m-d.jpg', inStock: true },
+                    { name: 'GIGABYTE H510M S2', price: 3000, img: 'mb-gigabyte-h510m-s2.jpg', inStock: true },
+                    { name: 'MSI B450M-A PRO MAX II', price: 4100, img: 'mb-msi-b450m-a-pro.jpg', inStock: true }
+                ]
+            },
+            {
+                cat: 'monitors', title: 'Monitors', banner: 'assets/images/monitor.png',
+                products: [
+                    { name: 'HP V24VG58', price: 2500, img: 'monitor-hp-v24vg58.jpg', inStock: true },
+                    { name: 'Dell P2419H8', price: 2500, img: 'monitor-dell-p2419h8.jpg', inStock: true },
+                    { name: 'Dell P2719H', price: 3500, img: 'monitor-dell-p2719h.jpg', inStock: true },
+                    { name: 'AOC C27G4Z', price: 8250, img: 'monitor-aoc-c27g4z.avif', inStock: true },
+                    { name: 'AOC Q27G40ZE', price: 9000, img: 'monitor-aoc-q27g40ze.png', inStock: true },
+                    { name: 'Lenovo R27qe Gen2', price: 8499, img: 'monitor-lenovo-r27qe.avif', inStock: true },
+                    { name: 'MSI 272F X24', price: 7300, img: 'monitor-msi-272f.png', inStock: true },
+                    { name: 'MSI 274QPF X32', price: 13500, img: 'monitor-msi-274qpf-x32.png', inStock: true }
                 ]
             }
         ];
 
+
         (function initShowcase() {
-            const INTERVAL = 6000;   // مدة كل قسم بالمللي ثانية
-            const FADE = 450;        // مدة الانتقال
+            const INTERVAL = 3000;   // مدة الانتقال بالمللي ثانية (كل 3 ثواني)
+            const FADE = 450;        // مدة تأثير التلاشي والانتقال
             const section = document.getElementById('dynamicShowcase');
             const grid = document.getElementById('showcaseGrid');
             const dots = document.getElementById('showcaseDots');
@@ -964,7 +1036,8 @@
             const title = document.getElementById('showcaseTitle');
             const viewAll = document.getElementById('showcaseViewAll');
 
-            // بس الأقسام اللي فيها منتجات متاحة، والمنتجات المتاحة بس
+            if (!section || !grid) return;
+
             const groups = SHOWCASE
                 .map(g => ({ ...g, products: g.products.filter(p => p.inStock) }))
                 .filter(g => g.products.length);
@@ -1013,12 +1086,24 @@
                 }, FADE);
             }
 
-            function next() { show((index + 1) % groups.length); }
-            function start() { if (groups.length > 1 && !timer) timer = setInterval(next, INTERVAL); }
-            function stop() { clearInterval(timer); timer = null; }
+            function next() {
+                show((index + 1) % groups.length);
+            }
 
-            // النقط تحت القسم
+            function start() {
+                if (groups.length > 1 && !timer) {
+                    timer = setInterval(next, INTERVAL);
+                }
+            }
+
+            function stop() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            // بناء النقط المتحركة تحت القسم
             if (groups.length > 1) {
+                dots.innerHTML = '';
                 groups.forEach((g, k) => {
                     const b = document.createElement('button');
                     b.type = 'button';
@@ -1028,17 +1113,15 @@
                 });
             }
 
-            // يقف التبديل لما الماوس فوق القسم أو المستخدم لمسه
+            // التحكم في التوقف مؤقتاً عند الوقوف بالماوس أو لمس الشاشة
             section.addEventListener('mouseenter', stop);
             section.addEventListener('mouseleave', start);
             section.addEventListener('touchstart', stop, { passive: true });
             section.addEventListener('touchend', () => { stop(); setTimeout(start, 4000); }, { passive: true });
-
-            // يقف لو التبويب مش ظاهر
             document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
 
             render(0);
-            start();
+            start(); // تشغيل التقليب التلقائي فور تحميل الصفحة
         })();
     </script>
 
