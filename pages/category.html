@@ -4,6 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- تحديد الثيم قبل التحميل عشان مفيش وميض -->
+    <script>
+        try {
+            document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
     <title>أقسام المنتجات | EPIC TECH</title>
 
     <meta name="description"
@@ -321,6 +330,147 @@
         .footer-bottom p {
             margin: 0;
         }
+
+        /* ===== زر الثيم ===== */
+        .theme-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .theme-btn svg {
+            stroke: #ffffff;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, .8));
+            transition: transform .4s ease;
+        }
+        .theme-btn:hover svg { transform: rotate(25deg) scale(1.1); }
+        .theme-btn .icon-moon { display: none; }
+        html[data-theme="light"] .theme-btn .icon-sun  { display: none; }
+        html[data-theme="light"] .theme-btn .icon-moon { display: block; }
+
+        /* ===== قسم "اكتشف أقسام تانية" المتحرك ===== */
+        #otherCatsShowcase #otherCatsGrid,
+        #otherCatsShowcase #otherCatsTitle,
+        #otherCatsShowcase #otherCatsViewAll {
+            transition: opacity .45s ease, transform .45s ease;
+        }
+        #otherCatsShowcase.is-switching #otherCatsGrid,
+        #otherCatsShowcase.is-switching #otherCatsTitle,
+        #otherCatsShowcase.is-switching #otherCatsViewAll {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .showcase-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .showcase-dots button {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            background: rgba(255, 255, 255, .3);
+            transition: .3s;
+        }
+        .showcase-dots button.active {
+            background: #38bdf8;
+            box-shadow: 0 0 8px rgba(56, 189, 248, .9);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* ===== الوضع النهاري (أبيض هادي) ===== */
+        html[data-theme="light"] {
+            --l-text: #1e293b;
+            --l-muted: #475569;
+            --l-accent: #0369a1;
+            --l-card: #f8fafc;
+            --l-border: rgba(15, 23, 42, .12);
+        }
+        html[data-theme="light"] body {
+            background: radial-gradient(circle at 50% 15%, #f3f5f8, #e9edf2 60%, #dde3ea) !important;
+            background-color: #e9edf2 !important;
+            background-attachment: fixed !important;
+            color: var(--l-text) !important;
+        }
+        html[data-theme="light"] :is(p, li, label, small, strong, span,
+            .footer-bottom, .footer-social-container h3, .site-footer p
+        ):where(:not(.stock-badge, #cartBadge)) {
+            color: var(--l-text) !important;
+            text-shadow: none !important;
+        }
+        html[data-theme="light"] nav a { color: var(--l-muted) !important; }
+        html[data-theme="light"] nav a[style*="38bdf8"] { color: var(--l-accent) !important; }
+        html[data-theme="light"] .neon-logo {
+            color: #0f172a !important;
+            text-shadow: 0 0 14px rgba(3, 105, 161, .35) !important;
+        }
+        html[data-theme="light"] .main-header {
+            background: rgba(255, 255, 255, .7) !important;
+            border: 1px solid var(--l-border) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, .08) !important;
+        }
+        html[data-theme="light"] .main-header svg,
+        html[data-theme="light"] .theme-btn svg {
+            stroke: #0f172a !important;
+            filter: drop-shadow(0 0 3px rgba(3, 105, 161, .3)) !important;
+        }
+        html[data-theme="light"] #searchInput {
+            background: rgba(15, 23, 42, .06) !important;
+            border-color: var(--l-border) !important;
+            color: var(--l-text) !important;
+        }
+        html[data-theme="light"] .product-card {
+            background: var(--l-card) !important;
+            border: 1px solid var(--l-border) !important;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, .08) !important;
+        }
+        html[data-theme="light"] .neon-cart-btn {
+            background: rgba(3, 105, 161, .08) !important;
+            border: 1px solid rgba(3, 105, 161, .45) !important;
+            color: var(--l-text) !important;
+        }
+        html[data-theme="light"] .neon-cart-btn:hover {
+            background: #a23b7a !important;
+            color: #ffffff !important;
+        }
+        html[data-theme="light"] .product-card button:disabled {
+            background: rgba(15, 23, 42, .05) !important;
+            color: #94a3b8 !important;
+            border-color: var(--l-border) !important;
+        }
+        html[data-theme="light"] .stock-badge.in-stock {
+            color: #047857 !important;
+            background: rgba(16, 185, 129, .15) !important;
+            border: 1px solid rgba(16, 185, 129, .5) !important;
+        }
+        html[data-theme="light"] .stock-badge.out-of-stock {
+            color: #b91c1c !important;
+            background: rgba(239, 68, 68, .1) !important;
+            border: 1px solid rgba(239, 68, 68, .4) !important;
+        }
+        html[data-theme="light"] .showcase-dots button { background: rgba(15, 23, 42, .25); }
+        html[data-theme="light"] .showcase-dots button.active { background: var(--l-accent); box-shadow: none; }
+        html[data-theme="light"] .site-footer {
+            background: #dde3ea !important;
+            border-top: 1px solid var(--l-border) !important;
+        }
+        html[data-theme="light"] .footer-bottom {
+            border-top-color: var(--l-border) !important;
+        }
+        html[data-theme="light"] .site-footer a:not(.neon-icon) {
+            color: var(--l-text) !important;
+        }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -394,6 +544,28 @@
                     style="position: absolute; top: -4px; right: -6px; background: #38bdf8; color: #04121d; font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(56, 189, 248, 0.8); z-index: 10;">0</span>
             </a>
 
+            <!-- زر الثيم -->
+            <button id="themeToggle" class="theme-btn" type="button" aria-label="تغيير الثيم" title="نهاري / ليلي">
+                <!-- شمس (بتظهر في الوضع الليلي) -->
+                <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- قمر (بيظهر في الوضع النهاري) -->
+                <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
         </div>
     </header>
 
@@ -403,6 +575,8 @@
     </div>
 
     <main style="width: 95%; max-width: 1500px; margin: 0 auto; padding: 20px;">
+
+
 
         <!-- 1. المنتجات المتاحة -->
         <section class="category-showcase"
@@ -1079,6 +1253,7 @@
                 p.name.toLowerCase().includes(query) ||
                 (p.specs && p.specs.toLowerCase().includes(query))
             );
+            currentProductsList.sort((a, b) => a.name.localeCompare(b.name));
         } else {
             // لو العميل داخل قسم عادي
             const activeCat = cat || 'keyboards';
@@ -1087,6 +1262,7 @@
             currentProductsList = (activeCat === 'accessories')
                 ? productsDB.filter(p => p.category === 'keyboards' || p.category === 'mouses' || p.category === 'headsets')
                 : productsDB.filter(p => p.category === activeCat);
+            currentProductsList.sort((a, b) => a.name.localeCompare(b.name));
         }
         const availableContainer = document.getElementById('available-products');
         const outOfStockContainer = document.getElementById('out-of-stock-products');
@@ -1149,6 +1325,113 @@
 
         renderProducts(currentProductsList);
 
+        /* ===== زر الثيم ===== */
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) { }
+        });
+
+        /* ===== قسم "اكتشف أقسام تانية" المتحرك =====
+           بيسحب المنتجات المتاحة من productsDB لأي قسم غير القسم الحالي،
+           وبيبدل بين الأقسام دي كل شوية بترتيب عشوائي */
+        (function initOtherCategoriesShowcase() {
+            if (searchQuery) return; // مش بيظهر وقت نتيجة بحث
+
+            const CAT_LABELS = {
+                keyboards: 'Keyboards', mouses: 'Mouses', headsets: 'Headsets',
+                laptops: 'Laptops', pcs: 'PCs', accessories: 'Accessories',
+                monitors: 'Monitors', bundles: 'PC Bundles', workstations: 'Workstations'
+            };
+            const activeShowcaseCat = cat || 'keyboards';
+            const INTERVAL = 6000, FADE = 450, PICK_COUNT = 8;
+
+            const section = document.getElementById('otherCatsShowcase');
+            const grid = document.getElementById('otherCatsGrid');
+            const dots = document.getElementById('otherCatsDots');
+            const titleEl = document.getElementById('otherCatsTitle');
+            const viewAllEl = document.getElementById('otherCatsViewAll');
+            if (!section) return;
+
+            const shuffle = arr => {
+                const r = arr.slice();
+                for (let i = r.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [r[i], r[j]] = [r[j], r[i]];
+                }
+                return r;
+            };
+
+            const otherCats = Object.keys(CAT_LABELS).filter(c => c !== activeShowcaseCat);
+            const groups = shuffle(
+                otherCats
+                    .map(c => ({ cat: c, label: CAT_LABELS[c], pool: productsDB.filter(p => p.category === c && p.inStock) }))
+                    .filter(g => g.pool.length)
+            );
+
+            if (!groups.length) { section.style.display = 'none'; return; }
+
+            const fmt = n => Number(n).toLocaleString('en-US');
+            const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+            let index = 0, timer = null, switching = false;
+
+            function render(i) {
+                const g = groups[i];
+                titleEl.textContent = `🔄 اكتشف قسم ${g.label}`;
+                viewAllEl.href = `category.html?cat=${g.cat}`;
+
+                const picks = shuffle(g.pool).slice(0, PICK_COUNT);
+                grid.innerHTML = picks.map(p => `
+                    <a href="product.html?name=${encodeURIComponent(p.name)}" style="text-decoration:none;color:inherit;display:block;width:100%;">
+                        <div class="product-card" style="width:100%;">
+                            <span class="stock-badge in-stock">In Stock</span>
+                            <div class="img-container">
+                                <img src="${p.img}" class="product-img" alt="${esc(p.name)}" onerror="this.src='../assets/images/keyboard-main.jpg'">
+                            </div>
+                            <div class="product-info">
+                                <p>${esc(p.name)}</p>
+                                <span>${fmt(p.price)} EGP</span>
+                                <button onclick="event.preventDefault(); addToCart('${esc(p.name)}', ${p.price})" class="neon-cart-btn">ADD TO CART 🛒</button>
+                            </div>
+                        </div>
+                    </a>`).join('');
+
+                dots.querySelectorAll('button').forEach((d, k) => d.classList.toggle('active', k === i));
+            }
+
+            function show(i) {
+                if (switching || i === index) return;
+                switching = true;
+                section.classList.add('is-switching');
+                setTimeout(() => {
+                    index = i;
+                    render(i);
+                    section.classList.remove('is-switching');
+                    switching = false;
+                }, FADE);
+            }
+
+            function next() { show((index + 1) % groups.length); }
+            function start() { if (groups.length > 1 && !timer) timer = setInterval(next, INTERVAL); }
+            function stop() { clearInterval(timer); timer = null; }
+
+            if (groups.length > 1) {
+                groups.forEach((g, k) => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.setAttribute('aria-label', g.label);
+                    b.addEventListener('click', () => { stop(); show(k); start(); });
+                    dots.appendChild(b);
+                });
+            }
+
+            section.addEventListener('mouseenter', stop);
+            section.addEventListener('mouseleave', start);
+            document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+            render(0);
+            start();
+        })();
 
 
         function handleSearch(event) {
@@ -1162,6 +1445,7 @@
                         p.name.toLowerCase().includes(query) ||
                         (p.specs && p.specs.toLowerCase().includes(query))
                     );
+                    searchResult.sort((a, b) => a.name.localeCompare(b.name));
 
                     renderProducts(searchResult);
                     document.getElementById('category-main-title').innerText = "نتائج البحث: " + query;
