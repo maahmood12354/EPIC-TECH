@@ -919,7 +919,7 @@
            لإضافة منتج جديد: ضيف سطر جديد في products */
         /* ===== القسم المتحرك (6 أقسام بمنتجاتهم بشكل عشوائي وتلقائي) ===== */
         const SHOWCASE = [
-      {
+            {
                 cat: 'accessories', title: 'Accessories & Headsets', banner: 'assets/images/accessory.png',
                 products: [
                     { name: 'HYTE Keeb TKL', price: 1999, img: 'keyboard8-1.jpg', inStock: true },
@@ -958,7 +958,7 @@
                     { name: 'Digital CPU Cooler', price: 1100, img: 'cooler-digital.jpg', inStock: true }
                 ]
             },
-      
+
             {
                 cat: 'workstations', title: 'Workstations', banner: 'assets/images/workstation.png',
                 products: [
@@ -1091,8 +1091,23 @@
             // التحكم في التوقف مؤقتاً عند الوقوف بالماوس أو لمس الشاشة
             section.addEventListener('mouseenter', stop);
             section.addEventListener('mouseleave', start);
-            section.addEventListener('touchstart', stop, { passive: true });
-            section.addEventListener('touchend', () => { stop(); setTimeout(start, 4000); }, { passive: true });
+
+            // على الموبايل: منفرق بين لمسة سكرول (تمرير الصفحة) ولمسة حقيقية على القسم
+            // عشان السكرول العادي مايوقفش التقليب التلقائي زي ما كان بيحصل قبل كده
+            let touchStartY = 0, touchMoved = false;
+            section.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchMoved = false;
+            }, { passive: true });
+            section.addEventListener('touchmove', (e) => {
+                if (Math.abs(e.touches[0].clientY - touchStartY) > 10) touchMoved = true;
+            }, { passive: true });
+            section.addEventListener('touchend', () => {
+                if (touchMoved) return; // كان سكرول، سيب التقليب شغال عادي
+                stop();
+                setTimeout(start, 4000);
+            }, { passive: true });
+
             document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
 
             render(0);
