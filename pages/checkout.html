@@ -8,6 +8,9 @@
     <link rel="icon" href="../assets/images/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script>
+        try { if (localStorage.getItem('epic_theme') === 'light') document.documentElement.classList.add('light-mode'); } catch (e) { }
+    </script>
 </head>
 <style>
     body {
@@ -46,7 +49,9 @@
     }
 
     /* 4. التنبيه بتاع الشحن - وهج وردي هادي */
-    #boraq-note {
+    #boraq-note,
+    #uber-note,
+    #reserve-note {
         color: #ec4899 !important;
         text-shadow: 0 0 4px rgba(236, 72, 153, 0.5) !important;
     }
@@ -55,6 +60,55 @@
     #checkout-form input,
     #checkout-form textarea {
         color: #ffffff !important;
+        text-shadow: none !important;
+    }
+
+    /* ===== الوضع النهاري ===== */
+    #themeBtn { background: transparent; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; }
+    #themeBtn .icon-sun { display: none; }
+    html.light-mode #themeBtn .icon-sun { display: block; }
+    html.light-mode #themeBtn .icon-moon { display: none; }
+
+    html.light-mode body {
+        background: radial-gradient(circle at 50% 20%, rgba(186, 230, 253, 0.6), rgba(241, 245, 249, 0.95) 60%, #e2e8f0) !important;
+        background-color: #f1f5f9 !important;
+        color: #0f172a;
+    }
+    html.light-mode .main-header { background: rgba(255, 255, 255, 0.85) !important; }
+    html.light-mode .main-header svg { stroke: #0f172a !important; filter: none !important; }
+    html.light-mode .main-header .search-input { color: #0f172a !important; background: rgba(15, 23, 42, 0.06) !important; border-color: rgba(15, 23, 42, 0.2) !important; }
+    html.light-mode main > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(15, 23, 42, 0.12) !important; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12) !important; }
+    html.light-mode #checkout-form div[style*="rgba(255,255,255,0.02)"] { background: rgba(15, 23, 42, 0.04) !important; border-color: rgba(15, 23, 42, 0.12) !important; }
+    html.light-mode #checkout-form label { color: #0f172a !important; text-shadow: none !important; }
+    html.light-mode #checkout-form label span { color: #7c3aed !important; text-shadow: none !important; }
+    html.light-mode main h2 { color: #7e22ce !important; text-shadow: none !important; }
+    html.light-mode #boraq-note,
+    html.light-mode #uber-note,
+    html.light-mode #reserve-note { color: #be185d !important; text-shadow: none !important; }
+    html.light-mode #checkout-form input,
+    html.light-mode #checkout-form textarea { color: #0f172a !important; background: #ffffff !important; border-color: rgba(15, 23, 42, 0.3) !important; }
+    html.light-mode #checkout-form a { color: #0369a1 !important; }
+    /* ===== الوضع النهاري: قلب الكلام الأبيض والمربعات ===== */
+    html.light-mode .neon-logo { color: #0f172a !important; -webkit-text-fill-color: #0f172a !important; background: none !important; text-shadow: 0 0 8px rgba(124, 58, 237, 0.45) !important; }
+    html.light-mode .nav-links a { color: #334155 !important; }
+    html.light-mode .nav-links a[href*="accessories"] { color: #0369a1 !important; }
+    html.light-mode .main-header [style*="color: #fff"],
+    html.light-mode .main-header [style*="color:#fff"],
+    html.light-mode main [style*="color: #fff"]:not(.neon-cart-btn),
+    html.light-mode main [style*="color:#fff"]:not(.neon-cart-btn),
+    html.light-mode main [style*="color: #ccc"],
+    html.light-mode main [style*="color: #aaa"],
+    html.light-mode main [style*="color: #f8fafc"] { color: #0f172a !important; text-shadow: none !important; }
+    html.light-mode main [style*="rgba(255, 255, 255, 0.03)"],
+    html.light-mode main [style*="rgba(255,255,255,0.03)"],
+    html.light-mode main [style*="rgba(255, 255, 255, 0.02)"],
+    html.light-mode main [style*="rgba(255,255,255,0.02)"] { background: rgba(255, 255, 255, 0.92) !important; border-color: rgba(15, 23, 42, 0.15) !important; }
+    html.light-mode ::placeholder { color: #64748b !important; opacity: 1; }
+    html.light-mode .neon-cart-btn { color: #ffffff !important; }
+
+    /* ===== الوضع النهاري: أي كلام لسه أبيض أو فاتح يتقلب غامق (بأقل أولوية، والألوان الخاصة بتفضل زي ما هي) ===== */
+    html.light-mode :where(:is(.main-header, main, .hero-logo-container) *:not(.neon-cart-btn):not(.neon-cart-btn *):not(svg *):not(#cartBadge)) {
+        color: #0f172a !important;
         text-shadow: none !important;
     }
 </style>
@@ -105,6 +159,28 @@
         <!-- الجزء الأيمن (السلة بالعداد وزر الثيم) -->
         <div class="header-right"
             style="display: flex; align-items: center; gap: 25px; flex-shrink: 0; margin-left: 10px;">
+            <!-- زر الوضع النهاري / الليلي -->
+            <button id="themeBtn" type="button" onclick="toggleTheme()" aria-label="تبديل الوضع">
+                <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+
             <!-- زر السلة بالعداد (شكل نيون فخم) -->
             <a href="cart.html" class="cart-btn"
                 style="position: relative; text-decoration: none; font-size: 22px; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
@@ -168,6 +244,32 @@
                         style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; outline: none;"></textarea>
                 </div>
 
+                <!-- نوع الطلب: شراء عادي أو حجز -->
+                <div
+                    style="margin-bottom: 22px; background: rgba(255,255,255,0.02); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                    <label
+                        style="display: block; margin-bottom: 12px; color: #38bdf8; font-weight: bold; font-size: 15px;">نوع
+                        الطلب:</label>
+                    <div style="margin-bottom: 12px;">
+                        <input type="radio" id="type-normal" name="ordertype" value="شراء عادي" checked
+                            onchange="updateOrderType()">
+                        <label for="type-normal" style="cursor: pointer; font-size: 14px;"> شراء عادي</label>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <input type="radio" id="type-reserve" name="ordertype" value="حجز المنتج"
+                            onchange="updateOrderType()">
+                        <label for="type-reserve" style="cursor: pointer; font-size: 14px;"> حجز المنتج (يُدفع 200 ج.م
+                            من ثمن المنتج) - <span style="color: #38bdf8; font-weight: bold;">الحجز لمدة يومين</span></label>
+                    </div>
+                    <p id="reserve-note"
+                        style="color: #f87171; font-size: 12px; margin-top: 8px; line-height: 1.5; display: none;">
+                        ⚠️ شروط الحجز:<br>
+                        - يتم دفع 200 ج.م من ثمن المنتج لتأكيد الحجز، والباقي يُسدد عند الاستلام.<br>
+                        - مدة الحجز يومان فقط.<br>
+                        - مبلغ الحجز غير قابل للاسترداد نهائياً إلا في حالة موافقة الإدارة.
+                    </p>
+                </div>
+
                 <div
                     style="margin-bottom: 22px; background: rgba(255,255,255,0.02); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
                     <label
@@ -192,6 +294,20 @@
                         - الشحن قابل للزيادة حسب المكان.<br>
                         - الشحن على مسؤولية العميل.<br>
                         - المندوب لا يسلم لباب المنزل بل لأقرب نقطة التقاء.
+                    </p>
+                    <div style="margin-top: 14px; margin-bottom: 8px;">
+                        <input type="radio" id="ship-uber" name="shipping" value="شحن أوبر" required
+                            onchange="updateShippingInfo()">
+                        <label for="ship-uber" style="cursor: pointer; font-size: 14px;"> شحن أوبر (القاهرة والجيزة فقط)
+                            - <span style="color: #4ade80; font-weight: bold;">الدفع مقدم</span></label>
+                    </div>
+                    <!-- تفاصيل وملاحظات شحن أوبر -->
+                    <p id="uber-note"
+                        style="color: #f87171; font-size: 12px; margin-top: 8px; line-height: 1.5; display: none;">
+                        ⚠️ تنبيه شحن أوبر:<br>
+                        - الشحن داخل القاهرة والجيزة فقط.<br>
+                        - يتم دفع قيمة المنتج كاملة قبل طلب الرحلة.<br>
+                        - يتم محاسبة كابتن أوبر فقط على ثمن التوصيل.
                     </p>
                 </div>
 
@@ -227,9 +343,21 @@
 
     <script src="../assets/js/main.js"></script>
     <script>
+        function toggleTheme() {
+            const isLight = document.documentElement.classList.toggle('light-mode');
+            try { localStorage.setItem('epic_theme', isLight ? 'light' : 'dark'); } catch (e) { }
+        }
+
         function updateShippingInfo() {
             const isBoraq = document.getElementById('ship-boraq').checked;
+            const isUber = document.getElementById('ship-uber').checked;
             document.getElementById('boraq-note').style.display = isBoraq ? 'block' : 'none';
+            document.getElementById('uber-note').style.display = isUber ? 'block' : 'none';
+        }
+
+        function updateOrderType() {
+            const isReserve = document.getElementById('type-reserve').checked;
+            document.getElementById('reserve-note').style.display = isReserve ? 'block' : 'none';
         }
 
         function showThankYouModal(customerName, callback) {
@@ -272,6 +400,8 @@
                 return;
             }
             const shippingMethod = shippingRadio.value;
+            const orderType = document.querySelector('input[name="ordertype"]:checked').value;
+            const isReserve = orderType === 'حجز المنتج';
 
             let cart = JSON.parse(localStorage.getItem('epic_cart')) || JSON.parse(localStorage.getItem('cart')) || [];
             if (cart.length === 0) {
@@ -290,6 +420,10 @@
                     `*الهاتف:* ${phone}%0A` +
                     `*هاتف احتياطي:* ${altPhone || 'لا يوجد'}%0A` +
                     `*العنوان:* ${address}%0A` +
+                    `*نوع الطلب:* ${orderType}%0A` +
+                    (isReserve
+                        ? `*مبلغ الحجز:* 200 EGP (من ثمن المنتج) - الحجز لمدة يومين - غير قابل للاسترداد إلا بموافقة الإدارة%0A`
+                        : '') +
                     `*طريقة الشحن:* ${shippingMethod}%0A` +
                     `*المنتجات:*%0A${cartDetails}%0A` +
                     `*إجمالي المنتجات:* ${totalPrice} EGP%0A` +
